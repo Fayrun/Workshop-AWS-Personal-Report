@@ -335,8 +335,9 @@ Nếu `SubscriptionArn` là 1 chuỗi ARN thật (không phải `PendingConfirma
    ```
 3. Chạy toàn bộ unit test:
    ```powershell
-   pytest test_*_unit.py -v --tb=short --color=yes
+   pytest -v --tb=short --color=yes
    ```
+   > ⚠️ **Lưu ý:** **Không** gõ `pytest test_*_unit.py` — PowerShell (khác với bash trên Linux) **không tự expand ký tự `*`** khi gọi chương trình ngoài, nên pytest sẽ nhận nguyên văn chuỗi `test_*_unit.py` làm tên file, không tìm thấy và báo lỗi `file or directory not found`. Chỉ cần chạy `pytest` không kèm tên file — pytest tự động quét mọi file khớp `test_*.py`/`*_test.py` trong thư mục hiện tại (bao gồm `test_auth_service_unit.py`, `test_validators_unit.py`).
 4. Đợi chạy xong, chụp toàn bộ terminal — đặc biệt dòng cuối cùng dạng `60 passed in 3.45s`
 
 #### `codebuild-prebuild-test-phase.png`
@@ -346,6 +347,8 @@ Nếu `SubscriptionArn` là 1 chuỗi ARN thật (không phải `PendingConfirma
 3. Cuộn tới phần **Build logs** (hoặc click nút **View entire log**)
 4. Dùng `Ctrl+F` tìm chữ `pytest` hoặc `passed` trong log
 5. Chụp đoạn log hiển thị dòng chạy `pytest test_*_unit.py` và kết quả `passed`
+
+> **Vì sao lệnh trong CodeBuild dùng được `test_*_unit.py` mà local PowerShell không được:** `buildspec.yml` chạy trên container Linux của CodeBuild, dùng shell `bash` — bash **tự expand** ký tự `*` thành danh sách file thật trước khi truyền cho `pytest`, khác với PowerShell trên Windows.
 
 **Lấy build ID nhanh bằng CLI (nếu muốn xác nhận trước):**
 ```powershell
