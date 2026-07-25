@@ -14,7 +14,6 @@ Xin chúc mừng! Bạn đã hoàn thành việc triển khai và kiểm thử h
 - Deploy FastAPI application lên Lambda với Docker container
 - Sử dụng API Gateway làm HTTP endpoint public
 - Tận dụng CloudFront CDN cho static assets và API caching
-- Thiết kế kiến trúc 3 tầng (Presentation → Application → Data)
 
 #### 2. **Xác thực & Phân quyền**
 - Tích hợp Cognito User Pool để quản lý người dùng
@@ -59,7 +58,7 @@ Xin chúc mừng! Bạn đã hoàn thành việc triển khai và kiểm thử h
 
 ## Tổng chi phí
 
-### Chi phí thực tế đã phát sinh (trong suốt thời gian workshop)
+### Chi phí ước tính (giả định mức sử dụng trong thời gian workshop)
 
 Giả sử workshop chạy trong **7 ngày** với mức độ test vừa phải:
 
@@ -80,6 +79,8 @@ Giả sử workshop chạy trong **7 ngày** với mức độ test vừa phải
 | EventBridge | 2016 events (every 5min × 7 days) | Free | Free |
 | CloudWatch Logs | 0.5 GB ingested | $0.25 | $1.00 |
 | **TOTAL** | | **~$1.37** | **~$4.71** |
+
+> **Lưu ý:** Bảng trên là **số liệu ước tính** dựa trên giả định mức sử dụng, chưa phải số liệu thật lấy từ AWS Cost Explorer/Billing (do cần quyền root/billing access để xem). Sẽ cập nhật số liệu thật khi có quyền truy cập, kèm ảnh chụp Cost Explorer để đối chiếu.
 
 **Ghi chú:**
 - Chi phí workshop: **Dưới $2** (rất thấp)

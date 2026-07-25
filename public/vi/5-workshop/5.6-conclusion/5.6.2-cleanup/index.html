@@ -15,21 +15,21 @@
     <title>Dọn dẹp tài nguyên :: Báo cáo thực tập</title>
 
     
-    <link href="/css/nucleus.css?1784976127" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1784976127" rel="stylesheet">
-    <link href="/css/hybrid.css?1784976127" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1784976127" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1784976127" rel="stylesheet">
-    <link href="/css/auto-complete.css?1784976127" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1784976127" rel="stylesheet">
-    <link href="/css/theme.css?1784976127" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1784976127" rel="stylesheet">
+    <link href="/css/nucleus.css?1784979269" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1784979269" rel="stylesheet">
+    <link href="/css/hybrid.css?1784979269" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1784979269" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1784979269" rel="stylesheet">
+    <link href="/css/auto-complete.css?1784979269" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1784979269" rel="stylesheet">
+    <link href="/css/theme.css?1784979269" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1784979269" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1784976127" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1784979269" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1784976127"></script>
+    <script src="/js/jquery-3.3.1.min.js?1784979269"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -59,14 +59,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1784976127"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1784976127"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1784979269"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1784979269"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1784976127"></script>
+<script type="text/javascript" src="/js/search.js?1784979269"></script>
  
   </div>
 
@@ -1237,7 +1237,14 @@
             <i class="fas fa-language fa-fw"></i>
             <div class="select-style">
               <select id="select-language" onchange="location = this.value;">
-                         
+                       
+                <option
+                  id="en"
+                  value="http://localhost:1313/5-workshop/5.6-conclusion/5.6.2-cleanup/"
+                >
+                  English
+                </option>
+                            
                 <option
                   id="vi"
                   value="http://localhost:1313/vi/5-workshop/5.6-conclusion/5.6.2-cleanup/"
@@ -1356,7 +1363,7 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#cảnh-báo-quan-trọng---đọc-trước-khi-xóa"><strong>CẢNH BÁO:</strong> Quan trọng - Đọc trước khi xóa</a></li>
+        <li><a href="#lưu-ý-trước-khi-xóa">Lưu ý trước khi xóa</a></li>
         <li><a href="#quy-trình-dọn-dẹp---thứ-tự-xóa-tài-nguyên">Quy trình dọn dẹp - Thứ tự xóa tài nguyên</a></li>
         <li><a href="#ví-dụ-xóa-tài-nguyên-bằng-aws-cli">Ví dụ: Xóa tài nguyên bằng AWS CLI</a></li>
       </ul>
@@ -1395,17 +1402,12 @@
 
 
 
-	<h3 id="cảnh-báo-quan-trọng---đọc-trước-khi-xóa"><strong>CẢNH BÁO:</strong> Quan trọng - Đọc trước khi xóa</h3>
+	<h3 id="lưu-ý-trước-khi-xóa">Lưu ý trước khi xóa</h3>
+<p>Việc xóa tài nguyên trong hướng dẫn này là <strong>không thể hoàn tác</strong>: toàn bộ dữ liệu (hồ sơ người dùng, tài liệu đã tải lên, log hệ thống) sẽ mất vĩnh viễn, vì workshop không thiết lập cơ chế backup hay snapshot nào. Nếu cần giữ lại dữ liệu, hãy làm trước khi xóa:</p>
 <ul>
-<li><strong>MẤT Dữ LIỆU:</strong> Xóa tài nguyên sẽ <strong>MẤT HẾT Dữ LIỆU</strong> (hồ sơ người dùng, tài liệu, logs)</li>
-<li><strong>KHÔNG THỂ PHỤC HỒI:</strong> Không có backup/snapshot được tạo trong workshop này</li>
-<li>Nếu muốn giữ lại dữ liệu:
-<ul>
-<li>Export bảng DynamoDB trước khi xóa</li>
-<li>Tải các object trên S3 (tài liệu + avatar)</li>
-<li>Export CloudWatch logs nếu cần phân tích thêm</li>
-</ul>
-</li>
+<li>Export bảng DynamoDB</li>
+<li>Tải về các file trên S3 (tài liệu và avatar người dùng)</li>
+<li>Export CloudWatch logs nếu sau này cần phân tích lại</li>
 </ul>
 <hr>
 <h3 id="quy-trình-dọn-dẹp---thứ-tự-xóa-tài-nguyên">Quy trình dọn dẹp - Thứ tự xóa tài nguyên</h3>
@@ -2672,19 +2674,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1784976127"></script>
-    <script src="/js/perfect-scrollbar.min.js?1784976127"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1784976127"></script>
-    <script src="/js/jquery.sticky.js?1784976127"></script>
-    <script src="/js/featherlight.min.js?1784976127"></script>
-    <script src="/js/highlight.pack.js?1784976127"></script>
+    <script src="/js/clipboard.min.js?1784979269"></script>
+    <script src="/js/perfect-scrollbar.min.js?1784979269"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1784979269"></script>
+    <script src="/js/jquery.sticky.js?1784979269"></script>
+    <script src="/js/featherlight.min.js?1784979269"></script>
+    <script src="/js/highlight.pack.js?1784979269"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1784976127"></script>
-    <script src="/js/learn.js?1784976127"></script>
-    <script src="/js/hugo-learn.js?1784976127"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1784979269"></script>
+    <script src="/js/learn.js?1784979269"></script>
+    <script src="/js/hugo-learn.js?1784979269"></script>
 
-    <link href="/mermaid/mermaid.css?1784976127" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1784976127"></script>
+    <link href="/mermaid/mermaid.css?1784979269" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1784979269"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

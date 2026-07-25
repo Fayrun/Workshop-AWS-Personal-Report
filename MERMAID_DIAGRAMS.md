@@ -243,13 +243,13 @@ sequenceDiagram
 
 **⚠️ Ưu tiên generate lại 6 ảnh dưới đây — code Mermaid đã được sửa ngày 24/07/2026, ảnh cũ đang hiển thị sai thông tin trên website:**
 
-- [ ] `architecture-diagram.png` ⚠️ ĐÃ SỬA — đang dùng live ở 5.1.3, sai bucket + sai model, cần generate lại ngay
+- [x] `architecture-diagram.png` ✅ ĐÃ THAY (25/07/2026) — đã thay bằng ảnh export từ `ArchitectureDiagram.drawio` (Layer 2), dùng icon AWS thật, đã verify qua DevTools Network
 - [ ] `auth-flow.png` ⚠️ ĐÃ SỬA — chưa nhúng vào content, sửa lại toàn bộ luồng login
 - [ ] `rag-flow.png` ⚠️ ĐÃ SỬA — chưa nhúng vào content, sửa endpoint + model
 - [ ] `eventbridge-cleanup.png` — không đổi, đã đúng, có thể generate/dùng bất kỳ lúc nào
 - [ ] `lambda-modules.png` ⚠️ ĐÃ SỬA — đang dùng live ở 5.1.3, thêm module co_rag.py
 - [ ] `cicd-pipeline.png` — không đổi, đã đúng
-- [ ] `three-tier-architecture.png` — không đổi, đã đúng
+- [x] `three-tier-architecture.png` ✅ ĐÃ XÓA (25/07/2026) — mục "Kiến trúc 3 tầng" đã bỏ khỏi 5.1.3, file ảnh đã xóa
 - [ ] `storage-structure.png` ⚠️ ĐÃ SỬA — đang dùng live ở 5.1.3, sai cấu trúc S3 + DynamoDB, cần generate lại ngay
 - [ ] `rag-pipeline-simple.png` ⚠️ ĐÃ SỬA — chưa nhúng vào content, sửa model
 - [ ] `cleanup-resources-flow.png` ⚠️ ĐÃ SỬA — đang dùng live ở 5.6.2, thêm Phase 4 (Alarms/SNS)
