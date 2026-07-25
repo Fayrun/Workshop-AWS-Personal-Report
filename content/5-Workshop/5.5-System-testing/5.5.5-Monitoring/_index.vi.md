@@ -59,3 +59,29 @@ Phần này hướng dẫn cách theo dõi sức khỏe hệ thống SmartDocAI 
 **Lưu ý:** Thay `<1h ago>` bằng timestamp thực tế theo định dạng: `$(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%S)`
 
 ---
+
+### 4. CloudWatch Alarms & SNS Alerting
+
+> Bổ sung ngày 23/07/2026: chủ động phát hiện lỗi/hiệu năng bất thường qua 4 CloudWatch Alarm + SNS Topic, thay vì chỉ chờ user report hoặc tự tra log thủ công.
+
+**SNS Topic:** `arn:aws:sns:us-east-1:623035187993:smartdocai-alerts` — gửi email cảnh báo tới địa chỉ đã đăng ký mỗi khi 1 trong 4 Alarm bên dưới chuyển sang trạng thái `ALARM`.
+
+| Alarm Name | Metric | Ngưỡng | Ý nghĩa |
+|-----------|--------|--------|---------|
+| `smartdocai-lambda-errors` | Lambda `Errors` | > 5 lỗi / 5 phút | Backend đang lỗi bất thường |
+| `smartdocai-lambda-duration` | Lambda `Duration` | > 25000ms / 5 phút | Gần chạm timeout 30s (rủi ro user gặp lỗi) |
+| `smartdocai-lambda-throttles` | Lambda `Throttles` | ≥ 1 lần / 5 phút | Vượt concurrency limit, cần tăng reserved concurrency |
+| `smartdocai-apigateway-5xx` | API Gateway `5xxError` | > 5 lỗi / 5 phút | Lỗi server phía API Gateway/Lambda integration |
+
+<img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/cloudwatch-alarms-status.png" width="90%" style="max-width:900px">
+
+**Xác nhận email đã confirm nhận cảnh báo từ SNS:**
+
+<img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/sns-subscription-confirmed.png" width="90%" style="max-width:900px">
+
+**Verify bằng CLI:**
+```powershell
+aws cloudwatch describe-alarms --alarm-name-prefix smartdocai --region us-east-1 --query "MetricAlarms[].{Name:AlarmName,State:StateValue}" --output table
+```
+
+---

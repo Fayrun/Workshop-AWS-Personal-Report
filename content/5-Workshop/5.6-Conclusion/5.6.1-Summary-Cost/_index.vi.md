@@ -39,6 +39,7 @@ Xin chúc mừng! Bạn đã hoàn thành việc triển khai và testing hệ t
 - CloudWatch Logs + Insights cho application monitoring
 - Lambda metrics (invocations, duration, errors, throttles)
 - Real-time log tailing và query
+- **CloudWatch Alarms (4 alarms) + SNS Topic Alerting** (bổ sung 23/07/2026) — chủ động phát hiện lỗi/hiệu năng bất thường (Lambda Errors, Duration, Throttles, API Gateway 5xx) và gửi email cảnh báo qua SNS, thay vì chờ user report
 
 #### 6. **Security Best Practices**
 - Input validation (phone, DOB, fullname với XSS prevention)

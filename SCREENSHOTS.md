@@ -216,9 +216,9 @@ Không cần làm thêm — đã đủ 4/4 ảnh: `registration-success.png`, `e
 
 **Lưu vào:** `static/images/5-Workshop/5.5-System-testing/5.5.3-Security/`
 
-Đã có 1/4 ảnh (Phúc: `xss-input-blocked.png`). Còn thiếu 3 ảnh sau:
+Đã có 4/4 ảnh: `xss-input-blocked.png` (Phúc), `cors-preflight-headers.png`, `csrf-state-in-url.png`, `csrf-attack-blocked.png` (Phúc, đã có file — chưa nhúng vào content).
 
-#### `cors-preflight-headers.png`
+#### `cors-preflight-headers.png` ✅ Đã có ảnh (Phúc) — chưa nhúng vào content
 **Nội dung cần thể hiện:** Request OPTIONS (preflight) trả về đúng CORS header cho domain CloudFront.
 
 **Các bước:**
@@ -274,7 +274,7 @@ Không cần làm thêm — đã đủ 2/2 ảnh.
 
 Đã có: `cloudwatch-logs-insights-query.png`, 4 ảnh `lambda-metrics-dashboard-*.jpg` (Phúc). Còn thiếu 3 ảnh sau:
 
-#### `cloudwatch-tail-logs-realtime.png`
+#### `cloudwatch-tail-logs-realtime.png` ✅ Đã có ảnh (Phúc) — chưa nhúng vào content
 **Nội dung cần thể hiện:** Log Lambda hiện theo thời gian thực khi có request tới.
 
 **Các bước:**
@@ -290,7 +290,7 @@ Không cần làm thêm — đã đủ 2/2 ảnh.
 4. Quay lại terminal 1, đợi vài giây sẽ thấy dòng log mới xuất hiện tự động
 5. Chụp terminal 1 khi đang hiển thị 10-15 dòng log (nhấn `Ctrl+C` để dừng lệnh tail sau khi chụp xong)
 
-#### `cloudwatch-alarms-status.png`
+#### `cloudwatch-alarms-status.png` ✅ Đã có ảnh + đã nhúng vào `5.5.5-Monitoring/_index.vi.md` (mục 4)
 **Nội dung cần thể hiện:** 4 CloudWatch Alarm đã tạo, đang ở trạng thái theo dõi.
 
 **Các bước:**
@@ -304,7 +304,7 @@ Không cần làm thêm — đã đủ 2/2 ảnh.
 aws cloudwatch describe-alarms --alarm-name-prefix smartdocai --region us-east-1 --query "MetricAlarms[].{Name:AlarmName,State:StateValue}" --output table
 ```
 
-#### `sns-subscription-confirmed.png`
+#### `sns-subscription-confirmed.png` ✅ Đã có ảnh + đã nhúng vào `5.5.5-Monitoring/_index.vi.md` (mục 4)
 **Nội dung cần thể hiện:** Email đã confirm nhận cảnh báo từ SNS topic.
 
 **Các bước:**
@@ -319,7 +319,7 @@ aws sns list-subscriptions-by-topic --topic-arn arn:aws:sns:us-east-1:6230351879
 ```
 Nếu `SubscriptionArn` là 1 chuỗi ARN thật (không phải `PendingConfirmation`) nghĩa là đã confirm, có thể chụp thẳng output CLI này thay cho ảnh Console.
 
-### 3.6. 5.5.6 — CI/CD Automated Testing
+### 3.6. 5.5.6 — CI/CD Automated Testing ✅ Đã có 2/2 ảnh (Phúc) — chưa nhúng vào content
 
 **Lưu vào:** `static/images/5-Workshop/5.5-System-testing/5.5.6-CICD/`
 
@@ -441,13 +441,13 @@ Phần này thuần văn bản, không cần screenshot minh họa.
 | 5.1.4 | 5 | ✅ 5 (`s3-buckets-list.png`, `dynamodb-table-encryption.png`, `cognito-user-pool-providers.png`, `codepipeline-2-pipelines.png`, 2.4 dùng tham chiếu) | 0 | Trung bình — **Hoàn thành** |
 | 5.5.1 | 4 | ✅ 4 | 0 | Cao — **Hoàn thành** |
 | 5.5.2 | 4 | ✅ 4 (rag-modes-comparison dùng bảng số liệu, không ảnh) | 0 | Cao — **Hoàn thành** |
-| 5.5.3 | 4 (2 mới cho CSRF) | ✅ 1 | 3 (2 ảnh CSRF mới) | Cao |
+| 5.5.3 | 4 (2 mới cho CSRF) | ✅ 4 | 0 | Cao — **Hoàn thành** (đã có ảnh, chưa nhúng vào content) |
 | 5.5.4 | 2 | ✅ 2 | 0 | Trung bình — **Hoàn thành** |
-| 5.5.5 | 5 (2 mới cho Alarms/SNS) | ✅ 2 | 3 (`cloudwatch-tail-logs-realtime`, `cloudwatch-alarms-status`, `sns-subscription-confirmed`) | **Rất cao** |
-| 5.5.6 | 2 | 0 | 2 | Trung bình |
+| 5.5.5 | 5 (2 mới cho Alarms/SNS) | ✅ 5 | 0 | **Hoàn thành** (2/3 ảnh mới đã nhúng vào content, `cloudwatch-tail-logs-realtime` còn chờ nhúng) |
+| 5.5.6 | 2 | ✅ 2 | 0 | Trung bình — **Hoàn thành** (đã có ảnh, chưa nhúng vào content) |
 | 5.6.1 | 1 | 0 | 1 | Thấp |
 | 5.6.2 | 3 | 🚫 Bỏ, không làm | 0 | — (đã quyết định bỏ cho lần nộp này) |
-| **TỔNG** | **29 ảnh** (32 − 3 đã bỏ) | **20** | **9** | |
+| **TỔNG** | **29 ảnh** (32 − 3 đã bỏ) | **28** | **1** (`billing-cost-explorer.png` ở 5.6.1) | |
 
 > ⚠️ **Lưu ý:** 6 ảnh vừa đánh dấu ✅ ở 5.1.3/5.1.4 đã tồn tại file trong `static/images/` nhưng **chưa được nhúng `<img>` vào file `_index.vi.md`** tương ứng — cần bổ sung thẻ `<img>` để hiển thị trên trang Hugo (xem mục 6 bên dưới).
 
