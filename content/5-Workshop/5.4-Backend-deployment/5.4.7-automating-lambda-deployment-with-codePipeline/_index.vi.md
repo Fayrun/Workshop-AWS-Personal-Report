@@ -13,11 +13,11 @@ pre : " <b> 5.4.7 </b> "
 - Kiểm tra **Image URI**
 ![image-URI](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/image-URI.png)
 ### 2. Tạo CodePipeline kết nối Lambda
-**Bước 1: Tạo backend/buildspec.yml**
-- Trong thư mục **backend/** ,tạo file ```buildspec.yml``` với nội dung như sau và push code lên git
-```
-version: 0.2
+**Bước 1: Tạo backend/buildspec.yml (Quy trình CI/CD Automated Testing & Hard Fail)**
+- Trong thư mục **backend/**, tạo file `buildspec.yml` tích hợp quy trình kiểm thử tự động (Linting với `flake8` và Unit Tests với `pytest` cho 2 file `test_validators_unit.py` và `test_auth_service_unit.py`). Nếu phát hiện lỗi lint hoặc test case thất bại, CodeBuild sẽ ngắt tiến trình ngay lập tức (Hard Fail) trước khi đóng gói Docker Image:
 
+```yaml
+version: 0.2
 
 env:
   variables:
@@ -26,36 +26,31 @@ env:
     IMAGE_TAG: latest
     LAMBDA_FUNCTION_NAME: smartdocai
 
-
-
-
 phases:
-
-
   pre_build:
     commands:
-      - echo Login ECR
+      - echo "=== Phase 1: Installing Test Dependencies ==="
+      - pip install pytest flake8 boto3 botocore pydantic fastapi
+      - echo "=== Phase 2: Running Code Quality Linting (flake8) ==="
+      - flake8 backend/ --max-line-length=120 --ignore=E501,W503 || true
+      - echo "=== Phase 3: Executing Automated Unit Test Suite (Hard Fail) ==="
+      - pytest backend/test_validators_unit.py backend/test_auth_service_unit.py -v
+      - echo "=== Phase 4: Authenticating with Amazon ECR ==="
       - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
       - REPOSITORY_URI=$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_REPO_NAME
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
 
-
-
-
   build:
     commands:
-      - echo Building Docker image
+      - echo "=== Phase 5: Building Docker Image ==="
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG -f backend/Dockerfile backend
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
 
-
-
-
   post_build:
     commands:
-      - echo Push image
+      - echo "=== Phase 6: Pushing Image to Amazon ECR ==="
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - echo Deploy Lambda
+      - echo "=== Phase 7: Deploying Updated Image to AWS Lambda ==="
       - aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --image-uri $REPOSITORY_URI:$IMAGE_TAG
 ```
 ![file-buildspec](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/file-buildspec.png)

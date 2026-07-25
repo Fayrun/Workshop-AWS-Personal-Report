@@ -27,7 +27,7 @@ Fetch root resource ID (`/`) of API:
 ### 3. Create Cognito Authorizer (Protect API with JWT Token)
 ![image15.png](/images/5-Workshop/5.4-Backend-deployment/5.4.5-creating-API-gateway/image15.png)
 
-### 4. Create Proxy Resource `{proxy+}` and Method `ANY`
+### 4. Create Proxy Resource  and Method 
 
 
 

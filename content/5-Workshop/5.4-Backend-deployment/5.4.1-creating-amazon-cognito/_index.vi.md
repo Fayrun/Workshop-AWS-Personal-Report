@@ -6,7 +6,7 @@ chapter : false
 pre : " <b> 5.4.1 </b> "
 ---
 
-### 1. Tạo User Pool & Liên kết Domain
+### Tạo User Pool & Liên kết Domain
 
 Định nghĩa biến cấu hình bằng PowerShell:
 

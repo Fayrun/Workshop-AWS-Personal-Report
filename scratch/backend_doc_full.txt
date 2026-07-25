@@ -1,0 +1,449 @@
+5.4. Triển khai Backend
+5.4.1. Tạo Amazon Cognito
+1. Tạo User Pool & Liên kết Domain
+Định nghĩa biến cấu hình bằng PowerShell:
+
+Chạy lệnh tạo User Pool:
+
+Kết quả:
+
+
+Liên kết Domain cho Hosted UI:
+Sử dụng tên domain bạn chọn (Ví dụ: smartdocai-fayrun2026):
+User-pool-id lấy trên aws cognito:
+
+
+
+
+5.4.3. Tạo Amazon S3
+1. Khai báo Tên Bucket và Region
+
+2. Chạy lệnh Tạo S3 Bucket
+
+3. Cấu hình CORS (Cho phép Frontend Tải tài liệu trực tiếp)
+3.1. Định nghĩa cấu hình CORS bằng Biến PowerShell:
+
+3.2. Chạy lệnh áp dụng CORS policy:
+
+4. Cấu hình Phân Quyền IAM Role cho AWS Lambda
+Đảm bảo IAM Role chạy Lambda Function (ví dụ: smartdocai-lambda-role) được đính kèm Policy truy cập S3.
+Chạy lệnh gán quyền AmazonS3FullAccess cho Lambda Role:
+
+
+Kết quả:
+
+Cấu Trúc Thư Mục S3
+
+
+
+5.4.2.6. Tạo API Gateway (REST API)
+1. Khai Báo Biến PowerShell
+
+2. Lệnh Tạo REST API Mới
+
+Lấy Resource ID gốc (/) của API:
+
+ 
+3. Tạo Cognito Authorizer (Bảo vệ API bằng JWT Token)
+
+
+4. Tạo Proxy Resource {proxy+} và Method ANY
+4.1. Tạo Resource {proxy+}:
+
+4.2. Gán Method ANY với Cognito Authorizer:
+
+
+5. Tích Hợp API Gateway với AWS Lambda (AWS_PROXY Integration)
+
+6. Cấp Quyền cho API Gateway Invoke Lambda Function
+
+7. Deploy API Gateway lên Stage “prod”
+
+Kết quả: 
+8. Cấu Hình CORS trên API Gateway
+Để trình duyệt không bị chặn CORS khi thực hiện yêu cầu Preflight Request (OPTIONS), chạy thêm lệnh tạo method OPTIONS:
+
+
+
+
+
+
+
+
+	
+
+5.4.2.Tạo Amazon DynamoDB
+1.Xác định các đối tượng có trong mô hình dữ liệu
+Trong SmartDocAI, DynamoDB được áp dụng cho 3 thành phần chính : 
+Bảng 1 : Bảng Quản lý hồ sơ người dùng ( smartdocai-user-profiles )
+Partition Key (PK): user_id (String) - Tương ứng với sub (UUID) do AWS Cognito sinh ra.
+Attributes:
+email (String): Địa chỉ email.
+fullname (String): Họ và tên đầy đủ.
+phone (String): Số điện thoại (chuẩn E.164: +84...).
+dob (String): Ngày sinh (YYYY-MM-DD).
+avatar (String, Optional): Chuỗi Base64 (nếu ảnh < 300KB).
+avatar_url (String, Optional): Đường dẫn S3 URL (nếu ảnh > 300KB).
+subscription_plan (String): Gói dịch vụ (free / pro).
+document_quota (Number): Giới hạn số tài liệu (Mặc định: 50).
+documents_used (Number): Số tài liệu đã tải lên.
+user_preferences (Map): Cấu hình ngôn ngữ, giao diện ({ language: "vi", theme: "dark" }).
+created_at (Number): Timestamp khởi tạo (Unix timestamp).
+updated_at (Number): Timestamp cập nhật cuối cùng.
+Bảng 2: Bảng SmartDoc-Documents
+Partition Key (PK): user_id (String) - Đảm bảo phân quyền tài liệu theo người dùng (Multi-tenancy).
+Sort Key (SK): doc_id (String) - Mã định danh UUID của tài liệu.
+Attributes: filename, s3_key, page_count, chunk_count, file_size, status (PROCESSED/FAILED), created_at.
+Bảng 3: Bảng SmartDoc-ChatSessions
+Partition Key (PK): user_id (String).
+Sort Key (SK): timestamp (Number) hoặc message_id (String).
+Attributes: role (user/assistant), message, sources (List JSON), created_at.
+2.Khởi tạo tài nguyên DynamoDB trên AWS ( thông qua AWS CLI )
+2.1.Mở Terminal/ PowerShell trên máy local có AWS CLI đã cấu hình
+
+2.2.Tạo bảng smartdocai-user-profiles
+
+2.3.Tạo bảng SmartDoc-Documents
+
+2.4.Tạo bảng smartdocai-chat-history
+
+Kết quả : 
+
+3.Cấu hình phân quyền IAM ROLE cho AWS Lambda
+Mở Terminal/ PowerShell trên máy local có AWS CLI đã cấu hình
+
+5.4.3.Tạo kho chứa Docker Image (  AWS ECR )
+1.Cài đặt Docker Desktop 
+1.1.Yêu cầu
+Hệ điều hành: Windows 10 (64-bit: Home, Pro, Enterprise từ Build 19041 trở lên) hoặc Windows 11.
+Bật Ảo hóa Phần cứng (Hardware Virtualization Enabled): Đã bật Intel VT-x hoặc AMD-V trong BIOS/UEFI.
+RAM: Tối thiểu 4 GB (Khuyên dùng 8 GB – 16 GB).
+Dung lượng đĩa trống: Tối thiểu 10 GB.
+1.2.Kích hoạt tính năng WSL 2 ( WINDOWS SUBSYSTEM FOR LINUX 2)
+Docker Desktop trên Windows tận dụng WSL 2 Engine để đạt hiệu năng xử lý container Linux gốc tối ưu
+1.2.1.Mở PowerShell với quyền Quản trị viên ( Run as Administrator)
+
+1.2.2.Chạy câu lệnh kích hoạt tính năng WSL và Virtual Machine Platform
+
+1.2.3.Khởi động lại máy tính 
+1.2.4.Mở lại PowerShell (Admin) và đặt WSL 2 làm phiên bản mặc định
+
+1.3.Tải và cài đặt Docker Desktop bản chính thức 
+1.3.1.Truy cập trang chủ của Docker 
+https://www.docker.com/products/docker-desktop/
+
+1.3.2.Nhấn nút Download for Windows để tải về tập tin Docker Desktop Installer.exe
+1.3.3. Mở tập tin .exe vừa tải về để tiến hành cài đặt:
+Tích chọn "Use WSL 2 instead of Hyper-V (recommended)" (Dùng WSL 2 thay vì Hyper-V).
+Tích chọn "Add shortcut to desktop" (Tạo lối tắt trên màn hình chính).
+Nhấn Ok và chờ quá trình giải nén tập tin hoàn tất.
+1.3.4. Nhấn Close and restart để áp dụng thay đổi hệ thống.
+1.4. Khởi chạy và cấu hình Docker Desktop lần đầu
+1.4.1.Mở ứng dụng Docker Desktop 
+
+1.4.2. Chọn Accept để đồng ý với các điều khoản dịch vụ (Subscription Service Agreement).
+1.4.3. Tại giao diện chính Docker Desktop, chọn biểu tượng Settings (Bánh răng) ➔ Mục General:
+- Đảm bảo ô Use the WSL 2 based engine đã được tích chọn.
+
+1.4.4. Quan sát góc dưới bên trái giao diện: Biểu tượng Docker hiển thị màu xanh lá kèm dòng chữ Engine Running là Docker đã sẵn sàng hoạt động.
+
+2.Viết và tối ưu Docker File 
+
+3.Khởi tạo Reponsitory trên Amazon ERC ( thông qua AWS CLI )
+Mở PowerShell và thực hiện lệnh 
+
+4.Đăng nhập  Docker CLI vào Amazon ECR ( AUTHENTICATION )
+Do Amazon ECR yêu cầu xác thực bảo mậtToken (có hiệu lực trong 12 giờ), ta dùng lệnh lấy mật khẩu tạm thời từ AWS ECR truyền trực tiếp vào Docker Login
+
+Kết quả : Login Success là coi như thành công
+5.Build Docker Image và push lên Amazon ECR
+5.1. Build Docker Image
+Nhập câu lệnh này trong Terminal 
+
+5.2. Push Docker Image lên ECR Repository
+
+6.Đồng bộ Docker Image với AWS Lambda
+Mở terminal và nhập lệnh CLI để có thể đồng bộ
+
+Kết quả : 
+5.4.4.Triển khai AWS Lambda Engine
+1.Lập trình Backend Mangum Handler và cấu hình 
+1.1.Cấu hình đường dẫn lưu trữ tạm trong backend/config.py
+Môi trường AWS Lambda là Stateless và chỉ cho phép ghi dữ liệu tạm vào thư mục /tmp
+
+1.2. Tạo Mangum Handler trong backend/app_api.py
+Sử dụng thư viện Mangum để chuyển đổi các HTTP Request từ AWS API Gateway sang ASGI Format của FastAPI
+
+2.Chuẩn bị DOCKERFILE cho AWS Lambda
+Tạo file backend/Dockerfile tối ưu siêu nhẹ (~1.0 GB), không chứa PyTorch hay Weights nặng
+
+3.Tạo IAM ROLE và phân quyền cho AWS Lambda
+Lambda cần có quyền tương tác với S3, DynamoDB, Bedrock và CloudWatch
+3.1. Tạo Trust Policy (trust-policy.json):
+
+3.2. Chạy lệnh AWS CLI tạo Role và gán các Managed Policy
+
+4.Bình đóng gói và push Docker Image lên Amazon ECR
+
+5.Khởi tạo hàm AWS Lambda Function
+1.Mở Terminal hoặc PowerShell 
+
+2.Khởi tạo hàm Lambda Function thông qua AWS CLI
+2.1.Tạo hàm Lambda từ ECR Container Image
+Hàm này là Backend Core xử lý toàn bộ logic API và AI RAG
+
+Sau đó cấu hình đầy đủ 7 Biến Môi Trường
+
+Cấp quyền cho API Gateway để gọi hàm Lambda này
+
+2.2.Tạo hàm Lambda từ file Zip mã nguồn
+Hàm này được dùng làm Cognito Trigger (Pre Sign-up) để dọn dẹp user chưa verify email
+
+Sau đó phải Cấp quyền cho Cognito User Pool gọi hàm Lambda này
+
+Kết quả : 
+
+
+5.1.5.Đặc tả giao diện và chức năng hệ thống
+1.Giao diện Đăng nhập
+
+1.1.Tổng quan giao diện
+Chức năng cho phép người dùng đã có tài khoản thực hiện xác thực identity để truy cập vào hệ thống SmartDocAI. Hệ thống hỗ trợ 2 phương thức xác thực chính:
+Đăng nhập truyền thống (Native Authentication): Sử dụng Email và Mật khẩu.
+Đăng nhập đơn (SSO - Social Login): Sử dụng tài khoản Google thông qua AWS Cognito Hosted UI (OAuth2 / OIDC).
+1.2. Thiết kế bố cục và thành phần giao diện
+
+1.3. Quy tắc kiểm thử đầu vào của dữ liệu
+
+1.4. Cơ chế Xử lý Ngoại lệ và An toàn Hệ thống
+Cơ chế Tự động Tra cứu Username (Automatic Username Resolution):
+Trong trường hợp người dùng tạo tài khoản ban đầu bằng Google OAuth, Cognito sẽ sinh một username nội bộ dạng Google_10293847....
+Khi người dùng cố gắng đăng nhập thủ công bằng ô nhập Email/Mật khẩu (sau khi đã thiết lập mật khẩu native), Cognito sẽ ném lỗi UserNotFoundException vì username nội bộ không phải là địa chỉ email.
+Hệ thống được trang bị cơ chế tự động: Ngay khi bắt được lỗi UserNotFoundException, Redux Thunk sẽ gọi API /api/auth/resolve-login-username để tra cứu username thật gắn với email đó và thực hiện tự động thử lại (retry) mà không yêu cầu người dùng thao tác lại.
+Lưu trữ Session & Token An toàn:
+JWT Tokens và thông tin phiên (id_token, access_token, refresh_token, auth_user) được lưu trữ tại sessionStorage, giúp tự động xóa session khi người dùng đóng tab trình duyệt, tránh rủi ro đe dọa an toàn thông tin trên máy tính công cộng.
+Phản hồi Trạng thái & Vô hiệu hóa Spam Form:
+Nút "Đăng nhập" lập tức chuyển sang trạng thái disabled và bật Spinner khi đang trao đổi dữ liệu với AWS Cognito, giúp phòng tránh việc người dùng nhấp đúp hoặc gửi nhiều request trùng lặp.
+
+2.Giao diện Đăng ký
+Thiết kế dạng 2 bước trên cùng 1 giao diện
+Bước 1 ( Register ) : Nhập thông tin cá nhân và mật khẩu
+
+Bước 2 : ( Confirm OTP ) :Nhập mã xác thực 6 chữ số gửi tự động qua Email để kích hoạt tài khoản.
+
+2.1.Tổng quan giao diện
+Giao diện Đăng ký tài khoản (/register) đóng vai trò là điểm tiếp nhận thông tin người dùng mới vào hệ thống SmartdocAI. Giao diện được thiết kế theo phong cách giao diện tối (Dark Mode) hiện đại, trực quan, tuân thủ các quy chuẩn UX/UI nhằm tối ưu hóa trải nghiệm người dùng.
+2.2.Thiết kế bố cục và thành phần giao diện
+1. Giao diện Bước 1: Nhập thông tin đăng ký 
+
+2.Giao diện Bước 2 : Xác thực mã OTP
+
+2.3.Quy tắc kiểm thử đầu vào của dữ liệu
+
+2.4. Xử lý các trường hợp đặc biệt & An toàn dữ liệu
+Cơ chế Account Linking (PreSignUp Lambda): Khi người dùng từng đăng ký tài khoản Native qua Email/Mật khẩu nhưng sau đó đăng nhập bằng nút Google OAuth, hàm PreSignUp Trigger sẽ chủ động liên kết Google Provider vào User ID hiện có thay vì tạo User mới. Cơ chế này tránh phân mảnh tài khoản và đảm bảo không bị mất dữ liệu tài liệu cá nhân lưu trữ trên Amazon S3 / DynamoDB.
+Tự động Khởi tạo Profile (DynamoDB ensure_user_profile): Trong trường hợp người dùng lần đầu truy cập qua Google, backend API tự động khởi tạo hồ sơ chuẩn với user_id chính là sub từ Cognito JWT, đặt password_set = false để đánh dấu tài khoản chưa thiết lập mật khẩu native.
+Vô hiệu hóa đa lần nhấn (Debounce & Loading state): Nút bấm sẽ chuyển sang trạng thái disabled kèm biểu tượng quay (Spinning Loader) trong khi đợt request API đang thực thi, loại bỏ rủi ro gửi trùng lặp yêu cầu (Spam requests).
+
+3.Giao diện Trang chủ
+
+3.1.Tổng quan giao diện
+Trang chủ hay Không gian làm việc chính (/app) là trung tâm điều khiển của hệ thống SmartdocAI. Màn hình này tích hợp toàn bộ quy trình làm việc với tài liệu: từ khâu tải lên, cài đặt thông số phân đoạn, tùy chỉnh các chiến lược tìm kiếm RAG (Standard, Hybrid, Self-RAG, Co-RAG) cho đến việc thực hiện hỏi đáp thông minh và truy xuất nguồn trích dẫn.
+Đường dẫn ứng dụng: /app (Yêu cầu xác thực tài khoản qua ProtectedRoute).
+Phong cách Thiết kế: Giao diện tối/sáng (Dark/Light Mode) tương tác linh hoạt, bố cục 2 cột (2-Column Responsive Layout) tối ưu cho việc tra cứu tài liệu song song với giao tiếp AI.
+Tối ưu trải nghiệm (UX): Đạt tính tương thích cao trên thiết bị di động với cơ chế Sidebar trượt (Mobile Drawer Overlay) mở bằng nút Hamburger Menu.
+3.2.Thiết kế bố cục và thành phần giao diện
+Bố cục Trang chủ được chia thành 2 khu vực chức năng chính: Thanh Điều hướng & Quản lý Tài liệu (Sidebar - Trái) và Khu vực Trò chuyện & Hỏi đáp AI (Chat Area - Phải).
+3.3.Các thành phần chính trong giao diện trang chủ
+3.3.1Thanh Điều hướng & Quản lý Tài liệu (SmartSidebar)
+
+Giao diện Header và logo
+Mô tả chức năng : Hiển thị tên thương hiệu "SmartDocAI", nút Thu gọn/Mở rộng Sidebar (Collapse), nút Chuyển đổi giao diện Sáng/Tối.
+
+Giao diện trạng thái hệ thống
+
+Mô tả chức năng : Hiển thị đèn báo xanh/đỏ thể hiện kết nối tới dịch vụ AI (Cloud LLM / Bedrock).
+Giao diện thống kê KPI
+
+Trước khi đăng tải file
+
+Sau khi đăng tải file
+
+Mô tả chức năng : Thẻ hiển thị các chỉ số tổng quan: Số file đã tải lên, Tổng số trang (totalPages), Tổng số đoạn văn bản (totalChunks).
+
+Giao diện cấu hình phân đoạn
+
+Mô tả chức năng : Điều chỉnh thanh trượt: Chunk Size (kích thước đoạn văn bản, mặc định 500-1000 tokens) và Chunk Overlap (độ chồng lấp, mặc định 100-200 tokens).
+Giao diện khu vực tải file 
+
+
+Trước khi tải file
+
+Sau khi tải file
+
+Mô tả chức năng : Khung Kéo & Thả (Drag & Drop) hoặc bấm chọn file. Hỗ trợ định dạng PDF, DOCX với kích thước tối đa quy định.
+Giao diện danh sách tài liệu
+
+Trước khi xử lí tài liệu
+
+Sau khi xử lí tài liệu
+
+Mô tả chức năng : Hiển thị danh sách các tài liệu đã xử lý thành công, kèm thông tin định dạng, số trang và nút Xóa từng tài liệu.
+
+
+Giao diện các nút thao tác
+
+Mô tả chức năng : Xóa toàn bộ lịch sử của các đoạn hội thoại và xóa toàn bộ tài liệu đã đăng tải lên hệ thống
+Giao diện lịch sử hội thoại
+
+Trước khi người dùng chưa đặt câu hỏi
+
+
+Sau khi người dùng đặt câu hỏi
+
+Mô tả chức năng : Liệt kê các phiên thảo luận trước đó, cho phép chọn phiên làm việc hoặc xóa lịch sử chat.
+
+3.3.2Khu vực Trò chuyện & Hỏi đáp AI (ChatArea)
+Giao diện khi người dùng chưa sử dụng
+
+Mô tả chức năng : Hiển thị khi chưa có cuộc hội thoại nào. Hướng dẫn 3 bước sử dụng: 1. Tải tài liệu → 2. Hệ thống xử lý → 3. Đặt câu hỏi.
+Giao diện khi người dùng đã tiến hành đặt câu hỏi
+
+Mô tả chức năng : Khung hiển thị chuỗi câu hỏi (User) và câu trả lời (SmartDocAI).
+Giao diện trích dẫn nguồn
+
+Mô tả chức năng : Khối hiển thị dưới mỗi câu trả lời AI, chỉ rõ nguồn tài liệu tham khảo (Tên file, Trang số bao nhiêu, và đoạn nội dung gốc tương ứng).
+Giao diện bảng tìm kiếm nâng cao
+
+Mô tả chức năng : Panel mở rộng (Expander) cho phép cấu hình các thuật toán RAG: Lọc file, Hybrid Search, Re-ranking, Self-RAG, Co-RAG.
+Giao diện thanh nhập câu hỏi
+
+Mô tả chức năng : Khung nhập liệu đa dòng (Textarea tự động co giãn theo văn bản), nút Gửi tin nhắn (SendIcon).
+
+
+3.3.Quy tắc và tùy chỉnh chiến lược tìm kiếm 
+
+Bảng điều khiển SearchSettings cho phép người dùng linh hoạt bật/tắt các công nghệ RAG nâng cao theo từng bài toán tìm kiếm
+
+3.4.Xử lí trạng thái và ngoại lệ trên trang chủ 
+Chưa có tài liệu được chọn/tải lên: Khung chat hiển thị màn hình chào mừng WelcomeHero với các gợi ý từng bước. Nút kích hoạt các chế độ RAG nâng cao trong SearchSettings tự động chuyển sang trạng thái disabled.
+Quá trình xử lý file bị lỗi (File Corrupted / Format Mismatch): Hệ thống lập tức bắn thông báo Toast cảnh báo lỗi, giữ nguyên giao diện không làm đứt quãng trải nghiệm.
+Phân quyền & Cách ly dữ liệu (Per-User Isolation): Mọi tài liệu và lịch sử chat đều gắn liền với user_id (Cognito sub). Người dùng A không thể xem hoặc truy vấn tài liệu của Người dùng B trên S3/Vector Index.
+4.Giao diện Thông tin cá nhân
+4.1. TỔNG QUAN GIAO DIỆN
+
+Giao diện thay đổi thông tin người dung
+
+Giao diện đổi mật khẩu
+Giao diện Thông tin cá nhân (Profile Settings) cho phép người dùng xem và cập nhật hồ sơ cá nhân trong hệ thống SmartDocAI:
+Phong cách thiết kế: Theo chuẩn Dark Mode với bảng màu xám/xanh tím đậm chủ đạo (Deep Dark Theme), giao diện dạng Card viền mỏng hiện đại.
+Thanh điều hướng Tab (Tab Bar):
+Tab Thông tin cá nhân (Active): Giao diện cập nhật hình ảnh đại diện và các thông tin hồ sơ.
+Tab Bảo mật: Giao diện dành cho các thiết lập bảo mật và đổi mật khẩu tài khoản.
+Cấu trúc 2 Card chính:
+Card bên trái (Ảnh đại diện): Hiển thị avatar người dùng (chữ cái đầu hoặc ảnh upload), hỗ trợ kéo-thả hoặc click chọn ảnh cập nhật (JPG, PNG, WEBP, tối đa 5MB).
+Card bên phải (Thông tin cá nhân/ Bảo mật): Tùy thuộc vào Tab được chọn, sẽ hiển thị Form quản lý các trường thông tin (Họ tên, Email, Số điện thoại, Ngày sinh) hoặc Form cập nhật mật khẩu đăng nhập.
+
+
+
+4.2. THIẾT KẾ BỐ CỤC VÀ THÀNH PHẦN GIAO DIỆN (UI SPECIFICATION)
+
+4.3. QUY TẮC KIỂM THỬ ĐẦU VÀO CỦA DỮ LIỆU (VALIDATION RULES MATRIX)
+
+4.4. XỬ LÝ CÁC TRƯỜNG HỢP ĐẶC BIỆT & AN TOÀN DỮ LIỆU
+Xử lý linh hoạt cờ password_set: Đảm bảo người dùng đăng nhập qua Google OAuth lần đầu không bị chặn bởi ô "Mật khẩu hiện tại", cho phép tạo mật khẩu native dễ dàng để từ đó về sau có thể đăng nhập bằng cả 2 phương thức.
+Kiểm soát file ảnh đầu vào: Tự động chặn các file không phải định dạng ảnh hoặc có dung lượng gốc lớn hơn 5MB trước khi thực hiện nén.
+Đồng bộ giao diện tức thì (Reactive UI Sync): Khi ảnh đại diện hoặc Họ tên thay đổi ở trang Profile, Redux Store lập tức cập nhật state chung, giúp thông tin ở Thanh Sidebar và Header thay đổi đồng bộ ngay lập tức mà không cần F5 reload trang.
+
+STT | Thư mục (Prefix) | Loại tệp | Mô tả & Chức năng
+1 | uploads/{user_id}/ | .pdf, .docx | Lưu trữ file tài liệu gốc mà người dùng tải lên từ Frontend qua Presigned URL.
+2 | vectorstore/{user_id}/
+smartdoc_index/ | index.faiss, index.pkl | Lưu chỉ mục Vector DB FAISS đã chuyển đổi từ tài liệu của người dùng, dùng cho RAG search.
+3 | processed_files/ | {user_id}.json | Lưu thông tin quản lý file (tên file, số trang, số chunks, s3_key) để hiển thị danh sách ở Frontend.
+4 | chat_history/ | {user_id}.json | Lưu toàn bộ lịch sử hỏi đáp, câu trả lời AI và nguồn trích dẫn (sources) per-user.
+5 | avatars/{user_id}/ | .jpg, .png | Lưu ảnh đại diện của user khi dung lượng ảnh > 300KB (nếu < 300KB sẽ lưu base64 ở DynamoDB).
+6 | metadata/ | search_config.json | Lưu cài đặt RAG chung (chunk_size, chunk_overlap, trạng thái Reranker/Self-RAG/Co-RAG).
+STT | Tên thành phần | Loại Component | Mô tả / Quy cách hiển thị
+1 | Tiêu đề Form | <h2>, <p> | Thể hiện tiêu đề "Đăng nhập" cùng liên kết "Đăng ký ngay!" chuyển sang trang /register.
+2 | Email | Input (Email) | Ô nhập Email cá nhân. Tích hợp Icon Mail ở góc trái.
+3 | Mật khẩu | Input (Password) | Ô nhập Mật khẩu. Tích hợp Icon Lock ở góc trái và Nút ẩn/hiện mật khẩu (Icon Eye/EyeOff) ở góc phải.
+4 | Nút "Đăng nhập" | Button | Nút hành động chính (Primary Button). Hiển thị trạng thái xoay (Spinner) "Đang đăng nhập..." khi request đang được xử lý.
+5 | Đường phân cách | Divider | Dòng chữ "hoặc tiếp tục với" ngăn cách 2 phương thức đăng nhập.
+6 | Nút "Đăng nhập bằng Google" | Button (Social) | Nút bấm chứa biểu tượng chính thức của Google SVG, tạo hiệu ứng chuyển sáng (Shimmer hover effect). Khi click sẽ chuyển hướng tới Cognito Hosted UI.
+Trường dữ liệu | Quy tắc kiểm tra (Validation Rules) | Thông báo lỗi hiển thị
+Email | - Không được để trống.
+- Phải khớp với định dạng Email chuẩn (user@domain.com). | - "Vui lòng nhập email."
+- "Email không hợp lệ."
+Mật khẩu | Không được để trống. | "Vui lòng nhập mật khẩu."
+STT | Tên thành phần | Loại Component | Mô tả / Quy cách hiển thị
+1 | Tiêu đề Form | <h2>, <p> | Thể hiện tiêu đề "Tạo tài khoản" cùng đường dẫn liên kết "Đăng nhập" nếu đã có tài khoản.
+2 | Họ và tên | Input (Text) | Nhập tên đầy đủ của người dùng. Tích hợp Icon User.
+3 | Email | Input (Email) | Nhập địa chỉ Email cá nhân (dùng làm Username xác thực Cognito). Tích hợp Icon Mail.
+4 | Điện thoại | Input (Tel) | Nhập số điện thoại liên hệ. Tích hợp Icon Phone. Hiển thị cùng dòng với Ngày sinh trên màn hình Desktop.
+5 | Ngày sinh | Input (Date) | Chọn ngày tháng năm sinh. Tích hợp Icon Calendar.
+6 | Mật khẩu | Input (Password) | Nhập mật khẩu. Tích hợp Icon Lock và Nút ẩn/hiện mật khẩu (Icon Eye/EyeOff).
+7 | Xác nhận mật khẩu | Input (Password) | Nhập lại mật khẩu để kiểm tra trùng khớp. Tích hợp Nút ẩn/hiện mật khẩu.
+8 | Nút "Tạo tài khoản" | Button | Nút hành động chính (Primary Button). Khi bấm sẽ hiển thị hiệu ứng Loading Spin nếu đang gửi request.
+STT | Tên thành phần | Loại Component | Mô tả / Quy cách hiển thị
+1 | Thông báo Email | <p> | Hiển thị địa chỉ Email vừa đăng ký (tô nổi bật bằng màu Blue) để nhắc người dùng kiểm tra hộp thư.
+2 | Mã xác thực (OTP) | Input (Text) | Ô nhập mã 6 chữ số, ký tự được căn giữa (Center-align), định dạng phông chữ to rõ (tracking-widest).
+3 | Nút "Kích hoạt tài khoản" | Button | Gửi mã OTP lên Cognito/Backend API để hoàn tất xác thực.
+4 | Nút "Quay lại đăng ký" | Button (Text) | Cho phép chuyển về Bước 1 nếu người dùng muốn sửa lại thông tin hoặc Email.
+Trường dữ liệu | Quy tắc kiểm tra (Validation Rules) | Thông báo lỗi hiển thị
+Họ và tên | Không được để trống hoặc chỉ chứa khoảng trắng. | "Vui lòng nhập họ tên."
+Email | - Không được để trống.
+- Phải đúng định dạng Email (name@domain.com). | - "Vui lòng nhập email."
+- "Email không hợp lệ."
+Số điện thoại | - Không được để trống.
+- Phải chứa từ 9 đến 11 chữ số. | - "Vui lòng nhập số điện thoại."
+- "Số điện thoại không hợp lệ."
+Ngày sinh | - Không được để trống.
+- Năm sinh phải trong khoảng 1900 đến Năm hiện tại.
+- Không được chọn ngày ở tương lai. | - "Vui lòng chọn ngày sinh."
+- "Năm sinh phải từ 1900 đến [Năm hiện tại]."
+- "Ngày sinh không được ở tương lai."
+Mật khẩu | - Không được để trống.
+- Độ dài tối thiểu 6 ký tự. | - "Vui lòng nhập mật khẩu."
+- "Mật khẩu phải từ 6 ký tự."
+Xác nhận mật khẩu | Giá trị phải trùng khớp hoàn toàn với ô Mật khẩu. | "Mật khẩu không khớp."
+Mã xác thực (OTP) | Không được để trống khi nhấn Kích hoạt. | "Vui lòng nhập mã xác thực."
+Chiến lược / Tính năng | Cơ chế hoạt động | Trường hợp sử dụng tối ưu
+Lọc tài liệu (File Filter) | Giới hạn không gian tìm kiếm Vector trong phạm vi một hoặc nhiều tập tin cụ thể do người dùng tick chọn. | Tìm kiếm dữ liệu trong đúng 1 báo cáo/hợp đồng chỉ định mà không bị lẫn sang tài liệu khác.
+Hybrid Search | Kết hợp Vector Search (Bedrock Titan Embeddings V2 60%) và Keyword Search (Thuật toán BM25 40%). | Khi câu hỏi chứa các thuật ngữ chuyên ngành, mã định danh, số hợp đồng hoặc từ khóa chính xác.
+Re-ranking | Sử dụng mô hình Cross-Encoder (ms-marco-MiniLM-L-12-v2) để xếp hạng lại Top-K đoạn văn bản có độ liên quan cao nhất. | Loại bỏ các kết quả nhiễu, tăng độ chính xác thông tin truyền vào prompt cho LLM.
+Self-RAG | Quy trình AI tự phản hồi & đánh giá gồm 3 bước: Query Rewriting (Viết lại câu hỏi), Relevance Filtering (Lọc độ liên quan), Answer Grading (Chấm điểm câu trả lời). | Dùng cho các câu hỏi phức tạp, yêu cầu AI tự sửa lại câu hỏi nếu thông tin tìm kiếm ban đầu không đủ.
+Co-RAG (Multi-Agent) | Kiến trúc đa tác tử hợp lực: Semantic Agent (Vector), Keyword Agent (BM25), Conceptual Agent (LLM Concept). Gộp kết quả theo các chiến lược: voting, union, intersection. | Yêu cầu mức độ tổng hợp tri thức chuyên sâu từ nhiều khía cạnh khác nhau trong tài liệu.
+STT | Tên thành phần | Loại Component | Mô tả / Quy cách hiển thị
+1 | Nút Quay lại | Button / Link | Text ← Quay lại, nằm ở góc trên bên trái, dùng để quay lại màn hình Chat / Dashboard
+2 | Header User Info | Avatar & Text | Hiển thị avatar tròn chứa chữ cái đầu (N) kèm Họ tên (nam) và Email (namnp6567@gmail.com) ở góc trên
+3 | Tab Bar | Navigation Tabs | Gồm 2 tab: Thông tin cá nhân (mặc định được chọn) và Bảo mật
+4 | Title Card Ảnh đại diện | Heading 3 | Dòng chữ Ảnh đại diện nằm ở trên cùng của Card bên trái
+5 | Vùng hiển thị Avatar | Circle Avatar | Khung hình tròn màu xanh hiển thị chữ cái đầu tên người dùng (VD: N) hoặc hình ảnh đại diện đã upload thành công
+6 | Khung Kéo & Thả ảnh | Dropzone Container | Khung viền nét đứt (Dashed border) với dòng hướng dẫn: "Kéo & thả ảnh vào đây hoặc click để chọn - JPG, PNG, WEBP - tối đa 5MB"
+7 | Nút Đổi ảnh | Secondary Button | Nút viền mỏng kèm icon máy ảnh và chữ Đổi ảnh, cho phép mở cửa sổ chọn tập tin từ máy tính
+8 | Title Card Thông tin | Heading 3 & Subtitle | Tiêu đề Thông tin cá nhân kèm dòng mô tả phụ "Cập nhật thông tin hiển thị của tài khoản bạn" ở đầu Card bên phải (khi ở Tab Thông tin)
+9 | Trường HỌ VÀ TÊN | Input Textbox | Label: HỌ VÀ TÊN, hiển thị giá trị họ tên hiện tại (VD: nam), cho phép nhập từ 2 - 100 ký tự
+10 | Trường EMAIL | Input Textbox | Label: EMAIL, hiển thị email tài khoản hiện tại (VD: namnp6567@gmail.com)
+11 | Trường SỐ ĐIỆN THOẠI | Input Textbox | Label: SỐ ĐIỆN THOẠI, hiển thị số điện thoại (VD: +84973251414), tự động chuẩn hóa dạng E.164
+12 | Trường NGÀY SINH | Datepicker Input | Label: NGÀY SINH, chứa icon lịch hiển thị ngày sinh (VD: 09/01/2001), hỗ trợ chọn ngày/tháng/năm
+13 | Nút Lưu thay đổi | Primary Button | Nút bấm màu xanh lam nổi bật với icon đĩa lưu và chữ Lưu thay đổi, gửi request cập nhật dữ liệu về Backend
+14 | Title Card Bảo mật | Heading 3 & Subtitle | Tiêu đề Bảo mật kèm dòng mô tả phụ "Thay đổi mật khẩu đăng nhập của bạn" ở đầu Card bên phải (khi ở Tab Bảo mật)
+15 | Trường MẬT KHẨU HIỆN TẠI | Input Password | Label: MẬT KHẨU HIỆN TẠI, hiển thị dưới dạng ẩn ký tự, tích hợp Nút ẩn/hiện mật khẩu (Icon Eye/EyeOff) ở góc phải
+16 | Trường MẬT KHẨU MỚI | Input Password | Label: MẬT KHẨU MỚI, có placeholder "Tối thiểu 6 ký tự", tích hợp Nút ẩn/hiện mật khẩu (Icon Eye/EyeOff)
+17 | Trường XÁC NHẬN MẬT KHẨU MỚI | Input Password | Label: XÁC NHẬN MẬT KHẨU MỚI, có placeholder "Nhập lại mật khẩu mới", tích hợp Nút ẩn/hiện mật khẩu (Icon Eye/EyeOff)
+18 | Dòng cảnh báo | Text | Hiển thị dòng chú thích: "Mật khẩu mới sẽ được áp dụng cho tất cả thiết bị đăng nhập tiếp theo."
+19 | Nút Cập nhật mật khẩu | Primary Button | Nút bấm màu xanh lam nổi bật với icon đĩa lưu và chữ Cập nhật mật khẩu để gửi request thay đổi mật khẩu
+Trường dữ liệu | Quy tắc kiểm tra (Validation Rules) | Thông báo lỗi hiển thị
+Họ và tên | Bắt buộc nhập, không được để trống | "Họ tên không được để trống"
+Họ và tên | Độ dài từ 2 đến 100 ký tự, không chứa ký tự đặc biệt nguy hiểm hoặc mã HTML/Script (chống XSS) | "Tên người dùng phải từ 2-100 ký tự, không chứa ký tự đặc biệt"
+Email | Bắt buộc nhập, không được để trống | "Email không được để trống"
+Email | Đảm bảo đúng định dạng RFC 5322 Email chuẩn (user@domain.com) | "Email không hợp lệ"
+Số điện thoại | Bắt buộc nhập, không được để trống | "Số điện thoại không được để trống"
+Số điện thoại | Chấp nhận định dạng Việt Nam (0901234567) hoặc chuẩn quốc tế E.164 (+84901234567), độ dài 10 - 15 chữ số | "Số điện thoại không hợp lệ"
+Ngày sinh | Bắt buộc nhập, không được để trống | "Ngày sinh không được để trống"
+Ngày sinh | Đúng định dạng YYYY-MM-DD, năm sinh trong khoảng từ năm 1900 đến năm hiện tại | "Ngày sinh phải theo định dạng YYYY-MM-DD, năm từ 1900 đến 2026"
+Ảnh đại diện | Định dạng file phải là ảnh: JPG, PNG, WEBP | "Định dạng tập tin ảnh không hỗ trợ. Chỉ chấp nhận JPG, PNG, WEBP"
+Ảnh đại diện | Kích thước file tối đa không vượt quá 5 MB | "Ảnh quá lớn (...MB), tối đa 5MB"
+Mật khẩu hiện tại | Bắt buộc nhập, không được để trống (nếu tài khoản đã set mật khẩu native) | "Vui lòng nhập mật khẩu hiện tại"
+Mật khẩu mới | Bắt buộc nhập, độ dài tối thiểu 6 ký tự | "Mật khẩu mới phải từ 6 ký tự trở lên"
+Xác nhận mật khẩu mới | Bắt buộc nhập, giá trị phải trùng khớp hoàn toàn với ô Mật khẩu mới | "Mật khẩu xác nhận không khớp"

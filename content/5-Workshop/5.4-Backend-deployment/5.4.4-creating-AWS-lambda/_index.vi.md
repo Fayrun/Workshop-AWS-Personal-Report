@@ -6,9 +6,9 @@ chapter : false
 pre : " <b> 5.4.4 </b> "
 ---
 
-### 1.Cài đặt Docker Desktop
+### 1. Cài đặt Docker Desktop
 
-#### 1.1.Yêu cầu
+#### 1.1. Yêu cầu
 
 Hệ điều hành: Windows 10 (64-bit: Home, Pro, Enterprise từ Build 19041 trở lên) hoặc Windows 11.
 
@@ -18,33 +18,32 @@ RAM: Tối thiểu 4 GB (Khuyên dùng 8 GB – 16 GB).
 
 Dung lượng đĩa trống: Tối thiểu 10 GB.
 
-#### 1.2.Kích hoạt tính năng WSL 2 ( WINDOWS SUBSYSTEM FOR LINUX 2)
+#### 1.2. Kích hoạt tính năng WSL 2 ( WINDOWS SUBSYSTEM FOR LINUX 2)
 
 Docker Desktop trên Windows tận dụng WSL 2 Engine để đạt hiệu năng xử lý container Linux gốc tối ưu
 
-##### 1.2.1.Mở PowerShell với quyền Quản trị viên ( Run as Administrator)
+##### 1.2.1. Mở PowerShell với quyền Quản trị viên ( Run as Administrator)
 
 
 ![image29.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image29.png)
 
 
-##### 1.2.2.Chạy câu lệnh kích hoạt tính năng WSL và Virtual Machine Platform
+##### 1.2.2. Chạy câu lệnh kích hoạt tính năng WSL và Virtual Machine Platform
 
 
 ![image30.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image30.png)
 
 
-##### 1.2.3.Khởi động lại máy tính
+##### 1.2.3. Khởi động lại máy tính
 
-##### 1.2.4.Mở lại PowerShell (Admin) và đặt WSL 2 làm phiên bản mặc định
+##### 1.2.4. Mở lại PowerShell (Admin) và đặt WSL 2 làm phiên bản mặc định
 
 
 ![image31.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image31.png)
 
 
-#### 1.3.Tải và cài đặt Docker Desktop bản chính thức
-
-##### 1.3.1.Truy cập trang chủ của Docker
+#### 1.3. Tải và cài đặt Docker Desktop bản chính thức
+##### 1.3.1. Truy cập trang chủ của Docker
 
 https://www.docker.com/products/docker-desktop/
 
@@ -52,7 +51,7 @@ https://www.docker.com/products/docker-desktop/
 ![image32.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image32.png)
 
 
-##### 1.3.2.Nhấn nút Download for Windows để tải về tập tin Docker Desktop Installer.exe
+##### 1.3.2. Nhấn nút Download for Windows để tải về tập tin Docker Desktop Installer.exe
 
 ##### 1.3.3. Mở tập tin .exe vừa tải về để tiến hành cài đặt:
 
@@ -66,7 +65,7 @@ Nhấn Ok và chờ quá trình giải nén tập tin hoàn tất.
 
 #### 1.4. Khởi chạy và cấu hình Docker Desktop lần đầu
 
-##### 1.4.1.Mở ứng dụng Docker Desktop
+##### 1.4.1. Mở ứng dụng Docker Desktop
 
 
 ![image33.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image33.png)
@@ -88,13 +87,13 @@ Nhấn Ok và chờ quá trình giải nén tập tin hoàn tất.
 ![image35.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image35.png)
 
 
-### 2.Viết và tối ưu Docker File
+### 2. Viết và tối ưu Docker File
 
 
 ![image36.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image36.png)
 
 
-### 3.Khởi tạo Reponsitory trên Amazon ERC ( thông qua AWS CLI )
+### 3. Khởi tạo Reponsitory trên Amazon ERC ( thông qua AWS CLI )
 
 Mở PowerShell và thực hiện lệnh
 
@@ -102,7 +101,7 @@ Mở PowerShell và thực hiện lệnh
 ![image37.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image37.png)
 
 
-### 4.Đăng nhập Docker CLI vào Amazon ECR ( AUTHENTICATION )
+### 4. Đăng nhập Docker CLI vào Amazon ECR ( AUTHENTICATION )
 
 Do Amazon ECR yêu cầu xác thực bảo mậtToken (có hiệu lực trong 12 giờ), ta dùng lệnh lấy mật khẩu tạm thời từ AWS ECR truyền trực tiếp vào Docker Login
 
@@ -112,7 +111,7 @@ Do Amazon ECR yêu cầu xác thực bảo mậtToken (có hiệu lực trong 12
 
 Kết quả : Login Success là coi như thành công
 
-### 5.Build Docker Image và push lên Amazon ECR
+### 5. Build Docker Image và push lên Amazon ECR
 
 #### 5.1. Build Docker Image
 
@@ -128,7 +127,7 @@ Nhập câu lệnh này trong Terminal
 ![image40.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image40.png)
 
 
-### 6.Đồng bộ Docker Image với AWS Lambda
+### 6. Đồng bộ Docker Image với AWS Lambda
 
 Mở terminal và nhập lệnh CLI để có thể đồng bộ
 
@@ -142,9 +141,9 @@ Kết quả :
 ![image42.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image42.png)
 
 
-### 1.Lập trình Backend Mangum Handler và cấu hình
+####  6.1. Lập trình Backend Mangum Handler và cấu hình
 
-#### 1.1.Cấu hình đường dẫn lưu trữ tạm trong backend/config.py
+#### 6.1.1. Cấu hình đường dẫn lưu trữ tạm trong backend/config.py
 
 Môi trường AWS Lambda là Stateless và chỉ cho phép ghi dữ liệu tạm vào thư mục /tmp
 
@@ -152,7 +151,7 @@ Môi trường AWS Lambda là Stateless và chỉ cho phép ghi dữ liệu tạ
 ![image43.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image43.png)
 
 
-#### 1.2. Tạo Mangum Handler trong backend/app_api.py
+#### 6.1.2. Tạo Mangum Handler trong backend/app_api.py
 
 Sử dụng thư viện Mangum để chuyển đổi các HTTP Request từ AWS API Gateway sang ASGI Format của FastAPI
 
@@ -160,47 +159,40 @@ Sử dụng thư viện Mangum để chuyển đổi các HTTP Request từ AWS 
 ![image44.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image44.png)
 
 
-### 2.Chuẩn bị DOCKERFILE cho AWS Lambda
 
-Tạo file backend/Dockerfile tối ưu siêu nhẹ (~1.0 GB), không chứa PyTorch hay Weights nặng
-
-
-![image45.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image45.png)
-
-
-### 3.Tạo IAM ROLE và phân quyền cho AWS Lambda
+#### 6.2. Tạo IAM ROLE và phân quyền cho AWS Lambda
 
 Lambda cần có quyền tương tác với S3, DynamoDB, Bedrock và CloudWatch
 
-#### 3.1. Tạo Trust Policy (trust-policy.json):
+##### 6.2.1. Tạo Trust Policy (trust-policy.json):
 
 
 ![image46.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image46.png)
 
 
-#### 3.2. Chạy lệnh AWS CLI tạo Role và gán các Managed Policy
+##### 6.2.2. Chạy lệnh AWS CLI tạo Role và gán các Managed Policy
 
 
 ![image47.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image47.png)
 
 
-### 4.Bình đóng gói và push Docker Image lên Amazon ECR
+#### 6.4. Bình đóng gói và push Docker Image lên Amazon ECR
 
 
 ![image48.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image48.png)
 
 
-### 5.Khởi tạo hàm AWS Lambda Function
+### 7. Khởi tạo hàm AWS Lambda Function
 
-### 1.Mở Terminal hoặc PowerShell
+#### 7.1. Mở Terminal hoặc PowerShell
 
 
 ![image49.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image49.png)
 
 
-### 2.Khởi tạo hàm Lambda Function thông qua AWS CLI
+#### 7.2. Khởi tạo hàm Lambda Function thông qua AWS CLI
 
-#### 2.1.Tạo hàm Lambda từ ECR Container Image
+##### 7.2.1. Tạo hàm Lambda từ ECR Container Image
 
 Hàm này là Backend Core xử lý toàn bộ logic API và AI RAG
 
@@ -220,7 +212,7 @@ Cấp quyền cho API Gateway để gọi hàm Lambda này
 ![image52.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image52.png)
 
 
-#### 2.2.Tạo hàm Lambda từ file Zip mã nguồn
+##### 7.2.2. Tạo hàm Lambda từ file Zip mã nguồn
 
 Hàm này được dùng làm Cognito Trigger (Pre Sign-up) để dọn dẹp user chưa verify email
 
@@ -238,4 +230,37 @@ Kết quả :
 
 
 ![image55.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image55.png)
+
+
+---
+
+### 8. Cấu hình Amazon EventBridge Rule tự động dọn dẹp tài khoản rác 
+
+Để tự động dọn dẹp các tài khoản rác tạo ra quá 5 phút mà người dùng chưa xác minh mã OTP email trong Cognito:
+
+- **Tạo EventBridge Rule (`smartdocai-cleanup-unconfirmed`)**: Thiết lập lịch trình kích hoạt định kỳ 5 phút/lần (`rate(5 minutes)`).
+- **Target Event Payload**: Cấu hình gửi JSON payload với thuộc tính `"source": "aws.events"` tới AWS Lambda `smartdocai`.
+- **Cơ chế xử lý**: Khi nhận event từ EventBridge, Lambda Handler trong `app_api.py` phát hiện `"source": "aws.events"` và kích hoạt hàm `cleanup_unconfirmed_users()`. Hàm này quét Cognito User Pool và thực thi `admin_delete_user` đối với các tài khoản ở trạng thái `UNCONFIRMED` có thời gian khởi tạo vượt quá 5 phút.
+
+```bash
+# 1. Tạo EventBridge Rule chạy định kỳ 5 phút
+aws events put-rule \
+    --name smartdocai-cleanup-unconfirmed \
+    --schedule-expression "rate(5 minutes)" \
+    --state ENABLED
+
+# 2. Cấp quyền cho EventBridge kích hoạt AWS Lambda
+aws lambda add-permission \
+    --function-name smartdocai \
+    --statement-id EventBridgeCleanupPermission \
+    --action lambda:InvokeFunction \
+    --principal events.amazonaws.com \
+    --source-arn arn:aws:events:us-east-1:ACCOUNT_ID:rule/smartdocai-cleanup-unconfirmed
+
+# 3. Gán Lambda Function làm Target với JSON Payload {"source": "aws.events"}
+aws events put-targets \
+    --rule smartdocai-cleanup-unconfirmed \
+    --targets "Id"="1","Arn"="arn:aws:lambda:us-east-1:ACCOUNT_ID:function:smartdocai","Input"="{\"source\": \"aws.events\"}"
+```
+
 

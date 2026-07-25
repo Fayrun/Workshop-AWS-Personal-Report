@@ -41,10 +41,8 @@ backend/                               # Thư mục gốc của backend
 ├── cors.json                          # Cấu hình CORS S3 Bucket cho Frontend upload
 ├── requirements.txt                   # Danh sách các thư viện Python phụ thuộc
 │
-├── test_auth_api.py                   # Unit & Integration Tests cho API xác thực
-├── test_profile_api.py                # Unit Tests cho API quản lý Profile
-├── test_edge_cases.py                 # Tests xử lý các trường hợp ngoại lệ & multi-tenancy
-└── test_validators.py                 # Tests cho các hàm validate dữ liệu đầu vào
+├── test_auth_service_unit.py          # Unit Tests cho AuthService & Mocks (Cognito/DynamoDB)
+└── test_validators_unit.py            # Unit Tests cho Validation (Phone, DOB, Fullname, Edge Cases)
 ```
 
 ---
@@ -185,7 +183,15 @@ Chứa mã nguồn của **AWS Cognito Custom Lambda Trigger**.
     5. Cập nhật mã nguồn Lambda Function (`aws lambda update-function-code`).
 
 - **`buildspec.yml`**:
-  - Tệp cấu hình cho **AWS CodeBuild** nằm trong pipeline CI/CD tự động. Tự động thực hiện login ECR, build Docker image, push image và ra lệnh Lambda cập nhật image mới mỗi khi có code commit mới trên GitHub.
+  - Tệp cấu hình cho **AWS CodeBuild** nằm trong pipeline CI/CD tự động. Tự động đăng nhập ECR, cài đặt test dependencies (`pytest`, `flake8`), kiểm tra linting (`flake8`), thực thi tự động toàn bộ Unit Tests (`pytest test_*_unit.py`) với cơ chế Hard Fail (ngắt pipeline nếu test lỗi), build Docker image, push image lên ECR và ra lệnh Lambda cập nhật image mới mỗi khi push lên nhánh main.
+
+- **`cors.json`**:
+  - Tệp cấu hình CORS S3 Bucket giới hạn truy cập theo danh sách `AllowedOrigins` (CloudFront distribution `https://dutf3c70nnjzl.cloudfront.net` và local dev `localhost:5173`/`5174`), nâng cao tính bảo mật dữ liệu lưu trữ.
+
+- **`test_validators_unit.py` & `test_auth_service_unit.py`**:
+  - Bộ Unit Tests tự động hoàn chỉnh chạy trong CI/CD pipeline:
+    - `test_validators_unit.py`: Kiểm thử validation số điện thoại chuẩn Việt Nam (09x/03x/07x/08x/05x), định dạng ngày sinh YYYY-MM-DD (năm 1900-2026), họ tên Unicode/lọc XSS, và các boundary edge cases.
+    - `test_auth_service_unit.py`: Kiểm thử AuthService sử dụng Mocks cho AWS Cognito SDK (`boto3.client('cognito-idp')`) và DynamoDB SDK (`boto3.resource('dynamodb')`).
 
 - **`run.py`**:
   - Trợ lý chạy ứng dụng ở môi trường Local Development. Tự động kiểm tra cài đặt thư viện Python, tải các file JS offline cho React UI (Babel, React DOM) và tự động mở trình duyệt web tại `http://127.0.0.1:8000`.
@@ -232,3 +238,4 @@ graph TD
 | **Amazon DynamoDB** | Cơ sở dữ liệu NoSQL lưu trữ hồ sơ chi tiết người dùng (Profile, Họ tên, SĐT, Ngày sinh, Avatar). |
 | **Amazon ECR** | Repository lưu trữ Docker Container Images của Backend phục vụ triển khai lên AWS Lambda. |
 | **AWS API Gateway** | Cổng giao tiếp RESTful API public đóng vai trò làm Proxy trỏ tới AWS Lambda function. |
+| **Amazon EventBridge** | Dịch vụ định thời (Cron rule 5 phút/lần) tự động kích hoạt Lambda để dọn dẹp các tài khoản rác chưa xác thực email (`cleanup_unconfirmed_users`). |

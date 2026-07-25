@@ -27,7 +27,7 @@ Lấy Resource ID gốc (/) của API:
 ### 3. Tạo Cognito Authorizer (Bảo vệ API bằng JWT Token)
 ![image15.png](/images/5-Workshop/5.4-Backend-deployment/5.4.5-creating-API-gateway/image15.png)
 
-### 4. Tạo Proxy Resource {proxy+} và Method ANY
+### 4. Tạo Proxy Resource và Method
 
 
 

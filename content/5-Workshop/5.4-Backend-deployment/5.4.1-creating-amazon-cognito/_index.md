@@ -6,7 +6,7 @@ chapter : false
 pre : " <b> 5.4.1 </b> "
 ---
 
-### 1. Create User Pool & Bind Domain
+### Create User Pool & Bind Domain
 
 Define configuration variables using PowerShell:
 
