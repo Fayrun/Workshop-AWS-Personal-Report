@@ -8,9 +8,9 @@ pre : " <b> 5.6.2 </b> "
 
 ### **CẢNH BÁO:** Quan trọng - Đọc trước khi xóa
 
-- **[NO] MẤT DỮ LIỆU:** Xóa tài nguyên sẽ **MẤT HẾT DỮ LIỆU** (hồ sơ người dùng, tài liệu, logs)
-- **[NO] KHÔNG THỂ PHỤC HỒI:** Không có backup/snapshot được tạo trong workshop này
-- **[YES]** Nếu muốn giữ lại dữ liệu:
+- **MẤT Dữ LIỆU:** Xóa tài nguyên sẽ **MẤT HẾT Dữ LIỆU** (hồ sơ người dùng, tài liệu, logs)
+- **KHÔNG THỂ PHỤC HỒI:** Không có backup/snapshot được tạo trong workshop này
+- Nếu muốn giữ lại dữ liệu:
   - Export bảng DynamoDB trước khi xóa
   - Tải các object trên S3 (tài liệu + avatar)
   - Export CloudWatch logs nếu cần phân tích thêm
@@ -30,7 +30,7 @@ pre : " <b> 5.6.2 </b> "
 | **Giai đoạn 1: Dừng traffic** | EventBridge, CloudFront, API Gateway | Tắt rule → Tắt CloudFront (⏱️ chờ 30 phút) → Xóa API Gateway | ~35 phút |
 | **Giai đoạn 2: Gỡ compute** | CodePipeline, CodeBuild, Lambda, ECR | Xóa CI/CD pipeline → Xóa Lambda function → Xóa Docker image | ~5 phút |
 | **Giai đoạn 3: Xóa dữ liệu** | S3 Buckets (2), DynamoDB, Cognito, IAM | Làm rỗng S3 → Xóa bucket → Xóa dữ liệu user → Xóa quyền | ~5 phút |
-| **Giai đoạn 4: Giám sát (mới 23/07)** | CloudWatch Alarms, SNS Topic | Xóa 4 alarms → Xóa SNS topic + subscription | ~2 phút |
+| **Giai đoạn 4: Giám sát** | CloudWatch Alarms, SNS Topic | Xóa 4 alarms → Xóa SNS topic + subscription | ~2 phút |
 
 **Tổng thời gian:** ~47 phút (chủ yếu chờ CloudFront disable)
 
@@ -87,7 +87,7 @@ aws dynamodb delete-table --table-name smartdocai-user-profiles --region us-east
 aws cognito-idp delete-user-pool --user-pool-id us-east-1_3oq5wIiuu --region us-east-1
 ```
 
-**7. Xóa CloudWatch Alarms + SNS Topic (mới 23/07):**
+**7. Xóa CloudWatch Alarms + SNS Topic:**
 ```powershell
 # Xóa 4 alarms
 aws cloudwatch delete-alarms --alarm-names smartdocai-lambda-errors smartdocai-lambda-duration smartdocai-lambda-throttles smartdocai-apigateway-5xx --region us-east-1
@@ -102,7 +102,7 @@ aws sns delete-topic --topic-arn arn:aws:sns:us-east-1:623035187993:smartdocai-a
 
 ## Kiểm tra xác nhận đã dọn dẹp xong
 
-**Checklist:**
+**Danh sách kiểm tra:**
 
 ```powershell
 # 1. EventBridge
@@ -153,21 +153,21 @@ aws iam list-roles | Select-String "smartdocai"
 ## Ước tính chi phí sau khi dọn dẹp
 
 **Các khoản phí còn lại (nếu có):**
-- CloudFront distribution (nếu chưa xóa): ~$0.01/day
-- CloudWatch Logs (nếu chưa xóa): ~$0.001/day per GB stored
-- S3 Glacier transitions (nếu có lifecycle policy): Varies
+- CloudFront distribution (nếu chưa xóa): ~$0.01/ngày
+- CloudWatch Logs (nếu chưa xóa): ~$0.001/ngày mỗi GB lưu trữ
+- S3 Glacier transitions (nếu có lifecycle policy): Tùy thuộc
 
-**Zero charges sau khi cleanup hoàn tất:**
-- **[OK]** Lambda: Deleted (no more invocations)
-- **[OK]** API Gateway: Deleted (no more requests)
-- **[OK]** S3: Deleted (no more storage)
-- **[OK]** DynamoDB: Deleted (no more read/write capacity)
-- **[OK]** Bedrock: Pay-per-use (no idle cost)
-- **[OK]** ECR: Deleted (no more image storage)
-- **[OK]** CodePipeline: Deleted (no active pipeline)
-- **[OK]** CodeBuild: Deleted (no more builds)
+**Không phát sinh chi phí sau khi dọn dẹp hoàn tất:**
+- Lambda: Đã xóa (không còn invocation)
+- API Gateway: Đã xóa (không còn request)
+- S3: Đã xóa (không còn lưu trữ)
+- DynamoDB: Đã xóa (không còn read/write capacity)
+- Bedrock: Tính phí theo mức dùng (không tốn phí khi rảnh)
+- ECR: Đã xóa (không còn lưu trữ image)
+- CodePipeline: Đã xóa (không còn pipeline hoạt động)
+- CodeBuild: Đã xóa (không còn build)
 
-**Check final bill after 24-48h:**
+**Kiểm tra hóa đơn cuối cùng sau 24-48 giờ:**
 ```powershell
 # View current month billing
 aws ce get-cost-and-usage `
@@ -179,11 +179,11 @@ aws ce get-cost-and-usage `
 
 ---
 
-## Troubleshooting Common Issues
+## Xử lý sự cố thường gặp
 
-### Issue 1: "Cannot delete S3 bucket - not empty"
+### Sự cố 1: "Cannot delete S3 bucket - not empty"
 
-**Solution:**
+**Cách xử lý:**
 ```powershell
 # Force empty bucket (including versioned objects)
 aws s3api delete-objects `
@@ -194,9 +194,9 @@ aws s3api delete-objects `
 aws s3api delete-bucket --bucket smartdocai-storage-623035187993 --region us-east-1
 ```
 
-### Issue 2: "Cannot delete IAM role - policy still attached"
+### Sự cố 2: "Cannot delete IAM role - policy still attached"
 
-**Solution:**
+**Cách xử lý:**
 ```powershell
 # List attached policies
 aws iam list-attached-role-policies --role-name smartdocai-lambda-role
@@ -214,16 +214,16 @@ aws iam delete-role-policy --role-name smartdocai-lambda-role --policy-name poli
 aws iam delete-role --role-name smartdocai-lambda-role
 ```
 
-### Issue 3: "CloudFront distribution still deploying"
+### Sự cố 3: "CloudFront distribution still deploying"
 
-**Solution:**
+**Cách xử lý:**
 - Đợi 5-10 phút cho distribution status = "Deployed"
 - Không thể disable khi status = "In Progress"
 - Sau khi disabled, đợi thêm 15-30 phút mới có thể delete
 
-### Issue 4: "EventBridge rule has targets"
+### Sự cố 4: "EventBridge rule has targets"
 
-**Solution:**
+**Cách xử lý:**
 ```powershell
 # Remove targets first
 aws events remove-targets `

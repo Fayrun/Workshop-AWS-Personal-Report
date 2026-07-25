@@ -41,7 +41,7 @@ Phần này kiểm tra luồng nghiệp vụ cốt lõi của SmartDocAI: tải 
 - **Method được phép:** GET, PUT, POST, DELETE, HEAD
 - **Max Age:** 3600 giây
 
-**So sánh hiệu năng giữa các chế độ RAG (đo thật trên production, ngày 24/07/2026):**
+**So sánh hiệu năng giữa các chế độ RAG (đo thật trên production):**
 
 Test với cùng 1 câu hỏi trên tài liệu 3 file/94 trang/143 chunks đã upload sẵn:
 

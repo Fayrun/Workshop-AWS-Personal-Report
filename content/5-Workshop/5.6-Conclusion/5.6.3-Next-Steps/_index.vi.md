@@ -9,17 +9,13 @@ pre : " <b> 5.6.3 </b> "
 Workshop đã hoàn thành mục tiêu triển khai và kiểm thử SmartDocAI ở quy mô demo/thực tập. Phần này liệt kê các hạng mục nên cân nhắc bổ sung nếu muốn đưa hệ thống lên môi trường production thực sự với traffic lớn hơn.
 
 ### 1. Các cân nhắc khi triển khai Production
-- ~~Bật mã hóa S3/DynamoDB (KMS)~~ — **Đã triển khai một phần:** DynamoDB đã bật SSE-KMS; S3 giữ SSE-S3 mặc định (đã tự động mã hóa từ 2023, đủ dùng ở quy mô hiện tại)
 - Triển khai Lambda trong VPC kèm NAT Gateway
 - Thêm API Gateway resource policy (IP whitelist) cho các endpoint quản trị
 - Triển khai rate limiting theo từng user (khuyến nghị dùng AWS WAF)
 - Bật Cognito MFA
-- ~~Thêm OAuth state parameter (chống CSRF)~~ — **Đã triển khai** (23/07/2026)
-- ~~Setup CloudWatch alarms (tỉ lệ lỗi, độ trễ)~~ — **Đã triển khai** (23/07/2026)
 - Triển khai blue/green deployment cho Lambda
 
 ### 2. Tối ưu chi phí
-- ~~Dùng S3 Intelligent-Tiering cho dữ liệu ít truy cập~~ — **Đã triển khai** (23/07/2026)
 - Triển khai DynamoDB auto-scaling (reserved capacity)
 - Thêm CloudFront caching cho API response (ở những endpoint phù hợp)
 - Lambda SnapStart (giảm cold start còn ~100ms) — *lưu ý: hiện chỉ hỗ trợ Java/.NET, chưa hỗ trợ Python*
@@ -54,12 +50,12 @@ Workshop đã hoàn thành mục tiêu triển khai và kiểm thử SmartDocAI 
 
 ---
 
-## Feedback & Contact
+## Góp ý & Liên hệ
 
-Nếu có câu hỏi hoặc feedback về workshop này, vui lòng liên hệ:
+Nếu có câu hỏi hoặc góp ý về workshop này, vui lòng liên hệ:
 
 - **Email:** 12345levan@gmail.com
 - **GitHub:** [@TakunKenjo](https://github.com/TakunKenjo)
-- **Workshop Repository:** [Workshop-AWS-Group-Report](https://github.com/TakunKenjo/Workshop-AWS-Group-Report)
+- **Kho mã nguồn Workshop:** [Workshop-AWS-Group-Report](https://github.com/TakunKenjo/Workshop-AWS-Group-Report)
 
 **Cảm ơn bạn đã hoàn thành workshop SmartDocAI!**

@@ -10,9 +10,9 @@ Phần này kiểm tra quy trình tích hợp unit test vào pipeline CI/CD củ
 
 ### 1. Bộ test Pytest
 
-**Test Files:**
+**Các file test:**
 - `backend/test_validators_unit.py` → **50+ tests** (phone, DOB, fullname validation)
-- `backend/test_auth_service_unit.py` → **10+ tests** (helper functions, edge cases)
+- `backend/test_auth_service_unit.py` → **10+ tests** (hàm hỗ trợ, trường hợp biên)
 
 **Bảng lệnh Pytest:**
 
@@ -47,10 +47,10 @@ Phần này kiểm tra quy trình tích hợp unit test vào pipeline CI/CD củ
 | | `aws lambda update-function-code --function-name smartdocai --image-uri $ECR_REPO_URI:latest` | Deploy lên Lambda | FAIL toàn bộ build |
 
 **Điểm nổi bật của pipeline:**
-- **[YES]** Test chạy ở `pre_build` → chặn deploy nếu test fail
-- **[YES]** Flake8 với `--exit-zero` → không fail build vì lỗi style
-- **[YES]** Pytest `--strict-markers` → fail nếu dùng marker chưa khai báo
-- **[YES]** `--tb=short` → traceback ngắn gọn, debug nhanh hơn
+- Test chạy ở `pre_build` → chặn deploy nếu test fail
+- Flake8 với `--exit-zero` → không fail build vì lỗi style
+- Pytest `--strict-markers` → fail nếu dùng marker chưa khai báo
+- `--tb=short` → traceback ngắn gọn, debug nhanh hơn
 
 ---
 

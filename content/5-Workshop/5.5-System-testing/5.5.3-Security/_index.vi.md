@@ -8,7 +8,7 @@ pre : " <b> 5.5.3 </b> "
 
 Phần này kiểm tra các cơ chế bảo vệ hệ thống: validate dữ liệu đầu vào (chống XSS), giới hạn CORS, xác thực JWT, và rà soát lại checklist bảo mật tổng thể của hệ thống so với khuyến nghị production.
 
-### 1. Kiểm thử Input Validation
+### 1. Kiểm thử tính hợp lệ dữ liệu đầu vào
 
 **Bảng quy tắc kiểm tra dữ liệu đầu vào:**
 
@@ -58,9 +58,9 @@ def validate_jwt(token: str) -> dict:
 ```
 
 **Ghi chú về CORS:**
-- **[YES]** Đã fix: bỏ wildcard CORS `*`
-- **[YES]** Chỉ cho phép 3 origin: CloudFront + localhost:5173 + localhost:5174
-- **[NOTE]** Production: nên bỏ các origin localhost trước khi deploy thật
+- Đã fix: bỏ wildcard CORS `*`
+- Chỉ cho phép 3 origin: CloudFront + localhost:5173 + localhost:5174
+- Production: nên bỏ các origin localhost trước khi deploy thật
 
 ---
 
@@ -104,8 +104,8 @@ Tham khảo: `SECURITY_CONSIDERATIONS.md`
 | **Validate đầu vào** | **Đã triển khai** | Validator cho phone, DOB, fullname |
 | **Chống XSS** | **Đã triển khai** | Chặn thẻ `<script>` trong fullname |
 | **Giới hạn CORS** | **Đã fix** | Đã bỏ wildcard |
-| **CSRF protection (OAuth state)** | **Đã triển khai** (23/07/2026) | Xem mục 3 phía trên |
-| **Mã hóa DynamoDB (KMS)** | **Đã triển khai** (23/07/2026) | SSE-KMS, key `alias/aws/dynamodb` |
+| **CSRF protection (OAuth state)** | **Đã triển khai** | Xem mục 3 phía trên |
+| **Mã hóa DynamoDB (KMS)** | **Đã triển khai** | SSE-KMS, key `alias/aws/dynamodb` |
 | **Chỉ dùng HTTPS** | **Bắt buộc** | TLS 1.2+ trên CloudFront/API Gateway |
 | **SQL injection** | **Không áp dụng** | Không dùng SQL database (DynamoDB) |
 | **Rate limiting** | **Chưa triển khai** | Cognito đã có throttling/lockout built-in miễn phí; AWS WAF (~$5-10/tháng) chưa tương xứng với quy mô demo/thực tập hiện tại — khuyến nghị bổ sung khi lên production với traffic lớn hơn |

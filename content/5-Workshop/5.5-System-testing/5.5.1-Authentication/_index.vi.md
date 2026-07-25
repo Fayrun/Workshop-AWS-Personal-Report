@@ -32,12 +32,12 @@ Phần này kiểm tra toàn bộ luồng xác thực người dùng của Smart
 | **EVENTBRIDGE CLEANUP** |
 | 5.1 | Auto-delete unconfirmed users | Wait >5 minutes after registration | User deleted from Cognito<br/>CloudWatch log: "Deleted user X" | PASS |
 
-**Validation Rules:**
-- **Email:** Standard format (user@domain.com)
-- **Password:** Min 8 chars, uppercase, lowercase, number, special char
-- **Phone:** Vietnam format (0901234567) or E.164 (+84901234567)
-- **DOB:** YYYY-MM-DD, range 1900-2026
-- **Fullname:** 2-100 chars, no `<script>` tags
+**Quy tắc validate dữ liệu:**
+- **Email:** Định dạng chuẩn (user@domain.com)
+- **Password:** Tối thiểu 8 ký tự, có chữ hoa, chữ thường, số, ký tự đặc biệt
+- **Phone:** Định dạng Việt Nam (0901234567) hoặc E.164 (+84901234567)
+- **DOB:** YYYY-MM-DD, trong khoảng 1900-2026
+- **Fullname:** 2-100 ký tự, không chứa thẻ `<script>`
 
 **API Endpoint:** `POST https://d60866voq5.execute-api.us-east-1.amazonaws.com/prod/auth/{action}`
 
@@ -48,7 +48,7 @@ Phần này kiểm tra toàn bộ luồng xác thực người dùng của Smart
 }
 ```
 
-**Notes:**
+**Ghi chú:**
 - Confirmation code expire sau 24 giờ
 - Nếu không confirm trong 5 phút, EventBridge rule tự động xóa user
 

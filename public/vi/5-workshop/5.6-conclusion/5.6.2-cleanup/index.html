@@ -1,175 +1,2717 @@
-<!doctype html><html lang=vi class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.164.0"><meta name=description content><meta name=author content="thienlh@thienlu.com"><link rel=icon href=/images/favicon.png type=image/png><title>Dọn dẹp tài nguyên :: Báo cáo thực tập</title><link href=/css/nucleus.css?1784962155 rel=stylesheet><link href=/css/fontawesome-all.min.css?1784962155 rel=stylesheet><link href=/css/hybrid.css?1784962155 rel=stylesheet><link href=/css/featherlight.min.css?1784962155 rel=stylesheet><link href=/css/perfect-scrollbar.min.css?1784962155 rel=stylesheet><link href=/css/auto-complete.css?1784962155 rel=stylesheet><link href=/css/atom-one-dark-reasonable.css?1784962155 rel=stylesheet><link href=/css/theme.css?1784962155 rel=stylesheet><link href=/css/hugo-theme.css?1784962155 rel=stylesheet><link href=/css/theme-workshop.css?1784962155 rel=stylesheet><script src=/js/jquery-3.3.1.min.js?1784962155></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/vi/5-workshop/5.6-conclusion/5.6.2-cleanup/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><a id=logo href=/><svg id="Layer_1" data-name="Layer 1" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff}.cls-2{fill:#fff;fill-rule:evenodd}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09 10.85a4.7 4.7.0 00.19 1.48 7.73 7.73.0 00.54 1.19.77.77.0 01.12.38.64.64.0 01-.32.49l-1 .7a.83.83.0 01-.44.15.69.69.0 01-.49-.23 3.8 3.8.0 01-.6-.77q-.25-.42-.51-1a6.14 6.14.0 01-4.89 2.3 4.54 4.54.0 01-3.32-1.19 4.27 4.27.0 01-1.22-3.2 4.28 4.28.0 011.46-3.4A6.06 6.06.0 017.69 6.46a12.47 12.47.0 011.76.13q.92.13 1.91.36V5.73a3.65 3.65.0 00-.79-2.66A3.81 3.81.0 007.86 2.3a7.71 7.71.0 00-1.79.22 12.78 12.78.0 00-1.79.57 4.55 4.55.0 01-.58.22h-.26q-.35.0-.35-.52V2a1.09 1.09.0 01.12-.58 1.2 1.2.0 01.47-.35A10.88 10.88.0 015.77.32 10.19 10.19.0 018.36.0a6 6 0 014.35 1.35 5.49 5.49.0 011.38 4.09zM7.34 13.38a5.36 5.36.0 001.72-.31A3.63 3.63.0 0010.63 12 2.62 2.62.0 0011.19 11a5.63 5.63.0 00.16-1.44v-.7a14.35 14.35.0 00-1.53-.28 12.37 12.37.0 00-1.56-.1 3.84 3.84.0 00-2.47.67A2.34 2.34.0 005 11a2.35 2.35.0 00.61 1.76A2.4 2.4.0 007.34 13.38zm13.35 1.8a1 1 0 01-.64-.16 1.3 1.3.0 01-.35-.65L15.81 1.51a3 3 0 01-.15-.67.36.36.0 01.41-.41H17.7a1 1 0 01.65.16 1.4 1.4.0 01.33.65l2.79 11 2.59-11A1.17 1.17.0 0124.39.6a1.1 1.1.0 01.67-.16H26.4a1.1 1.1.0 01.67.16 1.17 1.17.0 01.32.65L30 12.39 32.88 1.25A1.39 1.39.0 0133.22.6a1 1 0 01.65-.16h1.54a.36.36.0 01.41.41 1.36 1.36.0 010 .26 3.64 3.64.0 01-.12.41l-4 12.86a1.3 1.3.0 01-.35.65 1 1 0 01-.64.16H29.25a1 1 0 01-.67-.17 1.26 1.26.0 01-.32-.67L25.67 3.64l-2.56 10.7a1.26 1.26.0 01-.32.67 1 1 0 01-.67.17zm21.36.44a11.28 11.28.0 01-2.56-.29 7.44 7.44.0 01-1.92-.67 1 1 0 01-.61-.93v-.84q0-.52.38-.52a.9.9.0 01.31.06l.42.17a8.77 8.77.0 001.83.58 9.78 9.78.0 002 .2 4.48 4.48.0 002.43-.55 1.76 1.76.0 00.86-1.57 1.61 1.61.0 00-.45-1.16A4.29 4.29.0 0043 9.22l-2.41-.76A5.15 5.15.0 0138 6.78a3.94 3.94.0 01-.83-2.41 3.7 3.7.0 01.45-1.85 4.47 4.47.0 011.19-1.37 5.27 5.27.0 011.7-.86A7.4 7.4.0 0142.6.0a8.87 8.87.0 011.12.07q.57.07 1.08.19t.95.26a4.27 4.27.0 01.7.29 1.59 1.59.0 01.49.41.94.94.0 01.15.55v.79q0 .52-.38.52a1.76 1.76.0 01-.64-.2 7.74 7.74.0 00-3.2-.64 4.37 4.37.0 00-2.21.47 1.6 1.6.0 00-.79 1.48 1.58 1.58.0 00.49 1.18 4.94 4.94.0 001.83.92L44.55 7a5.08 5.08.0 012.57 1.6A3.76 3.76.0 0147.9 11a4.21 4.21.0 01-.44 1.93 4.4 4.4.0 01-1.21 1.47 5.43 5.43.0 01-1.85.93A8.25 8.25.0 0142.05 15.62z"/><path class="cls-2" d="M45.19 23.81C39.72 27.85 31.78 30 25 30A36.64 36.64.0 01.22 20.57c-.51-.46-.06-1.09.56-.74A49.78 49.78.0 0025.53 26.4 49.23 49.23.0 0044.4 22.53C45.32 22.14 46.1 23.14 45.19 23.81z"/><path class="cls-2" d="M47.47 21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74 3.13-2.2 8.27-1.57 8.86-.83s-.16 5.89-3.09 8.35c-.45.38-.88.18-.68-.32C46.69 25.8 48.17 22.11 47.47 21.21z"/></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
-<input data-search-input id=search-by type=search placeholder=Search...>
-<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/js/lunr.min.js?1784962155></script><script type=text/javascript src=/js/auto-complete.js?1784962155></script><script type=text/javascript>var baseurl="https://workshop-sample.awsfcaj.com//vi"</script><script type=text/javascript src=/js/search.js?1784962155></script></div><div class=highlightable><ul class=topics><li data-nav-id=/vi/1-worklog/ title="Nhật ký công việc" class=dd-item><a href=/vi/1-worklog/><b>1. </b>Nhật ký công việc
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/1-worklog/1.1-week1/ title="Worklog Tuần 1" class=dd-item><a href=/vi/1-worklog/1.1-week1/><b>1.1. </b>Worklog Tuần 1
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.2-week2/ title="Worklog Tuần 2" class=dd-item><a href=/vi/1-worklog/1.2-week2/><b>1.2. </b>Worklog Tuần 2
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.3-week3/ title="Worklog Tuần 3" class=dd-item><a href=/vi/1-worklog/1.3-week3/><b>1.3. </b>Worklog Tuần 3
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.4-week4/ title="Worklog Tuần 4" class=dd-item><a href=/vi/1-worklog/1.4-week4/><b>1.4. </b>Worklog Tuần 4
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.5-week5/ title="Worklog Tuần 5" class=dd-item><a href=/vi/1-worklog/1.5-week5/><b>1.5. </b>Worklog Tuần 5
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.6-week6/ title="Worklog Tuần 6" class=dd-item><a href=/vi/1-worklog/1.6-week6/><b>1.6. </b>Worklog Tuần 6
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.7-week7/ title="Worklog Tuần 7" class=dd-item><a href=/vi/1-worklog/1.7-week7/><b>1.7. </b>Worklog Tuần 7
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.8-week8/ title="Worklog Tuần 8" class=dd-item><a href=/vi/1-worklog/1.8-week8/><b>1.8. </b>Worklog Tuần 8
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.9-week9/ title="Worklog Tuần 9" class=dd-item><a href=/vi/1-worklog/1.9-week9/><b>1.9. </b>Worklog Tuần 9
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.10-week10/ title="Worklog Tuần 10" class=dd-item><a href=/vi/1-worklog/1.10-week10/><b>1.10. </b>Worklog Tuần 10
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.11-week11/ title="Worklog Tuần 11" class=dd-item><a href=/vi/1-worklog/1.11-week11/><b>1.11. </b>Worklog Tuần 11
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/1-worklog/1.12-week12/ title="Worklog Tuần 12" class=dd-item><a href=/vi/1-worklog/1.12-week12/><b>1.12 </b>Worklog Tuần 12
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/vi/2-proposal/ title="Bản đề xuất" class=dd-item><a href=/vi/2-proposal/><b>2. </b>Bản đề xuất
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/3-blogsposted/ title="Các bài blogs đã đăng" class=dd-item><a href=/vi/3-blogsposted/><b>3. </b>Các bài blogs đã đăng
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/3-blogsposted/3.1-blog1/ title="Blog 1" class=dd-item><a href=/vi/3-blogsposted/3.1-blog1/><b>3.1. </b>Blog 1
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/3-blogsposted/3.2-blog2/ title="Blog 2" class=dd-item><a href=/vi/3-blogsposted/3.2-blog2/><b>3.2. </b>Blog 2
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/3-blogsposted/3.3-blog3/ title="Blog 3" class=dd-item><a href=/vi/3-blogsposted/3.3-blog3/><b>3.3. </b>Blog 3
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/vi/4-eventparticipated/ title="Các events đã tham gia" class=dd-item><a href=/vi/4-eventparticipated/><b>4. </b>Các events đã tham gia
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/4-eventparticipated/4.1-event1/ title="Event 1" class=dd-item><a href=/vi/4-eventparticipated/4.1-event1/><b>4.1. </b>Event 1
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/4-eventparticipated/4.2-event2/ title="Event 2" class=dd-item><a href=/vi/4-eventparticipated/4.2-event2/><b>4.2. </b>Event 2
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/vi/5-workshop/ title=Workshop class="dd-item
-parent"><a href=/vi/5-workshop/><b>5. </b>Workshop
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/5-workshop/5.1-workshop-overview/ title="Giới thiệu" class=dd-item><a href=/vi/5-workshop/5.1-workshop-overview/><b>5.1. </b>Giới thiệu
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/5-workshop/5.1-workshop-overview/5.1.1--frontend-architecture/ title="Kiến trúc Frontend" class=dd-item><a href=/vi/5-workshop/5.1-workshop-overview/5.1.1--frontend-architecture/><b>5.1.1 </b>Kiến trúc Frontend
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.1-workshop-overview/5.1.2--backend-architecture/ title="Kiến trúc Backend" class=dd-item><a href=/vi/5-workshop/5.1-workshop-overview/5.1.2--backend-architecture/><b>5.1.2 </b>Kiến trúc Backend
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.1-workshop-overview/5.1.3--overall-aws-architecture/ title="Kiến trúc tổng thể trên AWS" class=dd-item><a href=/vi/5-workshop/5.1-workshop-overview/5.1.3--overall-aws-architecture/><b>5.1.3 </b>Kiến trúc tổng thể trên AWS
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.1-workshop-overview/5.1.4--aws-services-used/ title="Các dịch vụ AWS được sử dụng" class=dd-item><a href=/vi/5-workshop/5.1-workshop-overview/5.1.4--aws-services-used/><b>5.1.4 </b>Các dịch vụ AWS được sử dụng
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.1-workshop-overview/5.1.5--ui-function/ title="Đặc tả giao diện và chức năng hệ thống" class=dd-item><a href=/vi/5-workshop/5.1-workshop-overview/5.1.5--ui-function/><b>5.1.5 </b>Đặc tả giao diện và chức năng hệ thống
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/vi/5-workshop/5.2-prerequiste/ title="Chuẩn bị" class=dd-item><a href=/vi/5-workshop/5.2-prerequiste/><b>5.2. </b>Chuẩn bị
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/5-workshop/5.2-prerequiste/5.2.1-source-code-preparation/ title="Chuẩn bị source code" class=dd-item><a href=/vi/5-workshop/5.2-prerequiste/5.2.1-source-code-preparation/><b>5.2.1. </b>Chuẩn bị source code
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.2-prerequiste/5.2.2-aws-account-preparation/ title="Chuẩn bị tài khoản AWS" class=dd-item><a href=/vi/5-workshop/5.2-prerequiste/5.2.2-aws-account-preparation/><b>5.2.2. </b>Chuẩn bị tài khoản AWS
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.2-prerequiste/5.2.3-creating-an-iam-user/ title="Tạo IAM User" class=dd-item><a href=/vi/5-workshop/5.2-prerequiste/5.2.3-creating-an-iam-user/><b>5.2.3. </b>Tạo IAM User
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/vi/5-workshop/5.3-frontend-deployment/ title="Triển khai Frontend" class=dd-item><a href=/vi/5-workshop/5.3-frontend-deployment/><b>5.3. </b>Triển khai Frontend
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/5-workshop/5.3-frontend-deployment/5.3.1-create-s3-bucket/ title="Tạo S3 Bucket và tải dữ liệu" class=dd-item><a href=/vi/5-workshop/5.3-frontend-deployment/5.3.1-create-s3-bucket/><b>5.3.1. </b>Tạo S3 Bucket và tải dữ liệu
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.3-frontend-deployment/5.3.2-enable-static-web-hosting/ title="Bật Static Website Hosting" class=dd-item><a href=/vi/5-workshop/5.3-frontend-deployment/5.3.2-enable-static-web-hosting/><b>5.3.2 </b>Bật Static Website Hosting
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.3-frontend-deployment/5.3.3-config-block-public-access-settings/ title="Cấu hình Block Public Access" class=dd-item><a href=/vi/5-workshop/5.3-frontend-deployment/5.3.3-config-block-public-access-settings/><b>5.3.3. </b>Cấu hình Block Public Access
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.3-frontend-deployment/5.3.4-config-bucket-policy-public-object-access/ title="Cấu hình Bucket Policy/Public Object" class=dd-item><a href=/vi/5-workshop/5.3-frontend-deployment/5.3.4-config-bucket-policy-public-object-access/><b>5.3.4. </b>Cấu hình Bucket Policy/Public Object
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.3-frontend-deployment/5.3.5-website-verification/ title="Kiểm tra Website" class=dd-item><a href=/vi/5-workshop/5.3-frontend-deployment/5.3.5-website-verification/><b>5.3.5. </b>Kiểm tra Website
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.3-frontend-deployment/5.3.6-accelerating-website-performance-with-cloudfront/ title="Tăng tốc Website với CloudFront" class=dd-item><a href=/vi/5-workshop/5.3-frontend-deployment/5.3.6-accelerating-website-performance-with-cloudfront/><b>5.3.6. </b>Tăng tốc Website với CloudFront
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.3-frontend-deployment/5.3.7-codepipeline-to-s3-frontend/ title="Tự động triển khai bằng CodePipeline (GitHub → S3)" class=dd-item><a href=/vi/5-workshop/5.3-frontend-deployment/5.3.7-codepipeline-to-s3-frontend/><b>5.3.7. </b>Tự động triển khai bằng CodePipeline (GitHub → S3)
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/vi/5-workshop/5.4-backend-deployment/ title="Triển khai Backend" class=dd-item><a href=/vi/5-workshop/5.4-backend-deployment/><b>5.4. </b>Triển khai Backend
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/5-workshop/5.4-backend-deployment/5.4.1-creating-amazon-cognito/ title="Tạo Amazon Cognito" class=dd-item><a href=/vi/5-workshop/5.4-backend-deployment/5.4.1-creating-amazon-cognito/><b>5.4.1 </b>Tạo Amazon Cognito
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.4-backend-deployment/5.4.2-creating-amazon-dynamodb/ title="Tạo Amazon DynamoDB" class=dd-item><a href=/vi/5-workshop/5.4-backend-deployment/5.4.2-creating-amazon-dynamodb/><b>5.4.2 </b>Tạo Amazon DynamoDB
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.4-backend-deployment/5.4.3-creating-amazon-s3-for-document-storage/ title="Tạo Amazon S3 lưu trữ tài liệu" class=dd-item><a href=/vi/5-workshop/5.4-backend-deployment/5.4.3-creating-amazon-s3-for-document-storage/><b>5.4.3 </b>Tạo Amazon S3 lưu trữ tài liệu
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.4-backend-deployment/5.4.4-creating-aws-lambda/ title="Triển khai AWS Lambda Engine" class=dd-item><a href=/vi/5-workshop/5.4-backend-deployment/5.4.4-creating-aws-lambda/><b>5.4.4 </b>Triển khai AWS Lambda Engine
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.4-backend-deployment/5.4.5-creating-api-gateway/ title="Tạo API Gateway" class=dd-item><a href=/vi/5-workshop/5.4-backend-deployment/5.4.5-creating-api-gateway/><b>5.4.5 </b>Tạo API Gateway
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.4-backend-deployment/5.4.6-implementing-frontend-api-gateway-integration/ title="Viết Frontend gọi API Gateway" class=dd-item><a href=/vi/5-workshop/5.4-backend-deployment/5.4.6-implementing-frontend-api-gateway-integration/><b>5.4.6 </b>Viết Frontend gọi API Gateway
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.4-backend-deployment/5.4.7-automating-lambda-deployment-with-codepipeline/ title="Tự động triển khai Lambda bằng CodePipeline" class=dd-item><a href=/vi/5-workshop/5.4-backend-deployment/5.4.7-automating-lambda-deployment-with-codepipeline/><b>5.4.7 </b>Tự động triển khai Lambda bằng CodePipeline
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/vi/5-workshop/5.5-system-testing/ title="Kiểm thử hệ thống" class=dd-item><a href=/vi/5-workshop/5.5-system-testing/><b>5.5 </b>Kiểm thử hệ thống
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/5-workshop/5.5-system-testing/5.5.1-authentication/ title="Kiểm thử xác thực" class=dd-item><a href=/vi/5-workshop/5.5-system-testing/5.5.1-authentication/><b>5.5.1 </b>Kiểm thử xác thực
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.5-system-testing/5.5.2-document-rag/ title="Kiểm thử tải lên tài liệu & RAG" class=dd-item><a href=/vi/5-workshop/5.5-system-testing/5.5.2-document-rag/><b>5.5.2 </b>Kiểm thử tải lên tài liệu & RAG
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.5-system-testing/5.5.3-security/ title="Kiểm thử bảo mật" class=dd-item><a href=/vi/5-workshop/5.5-system-testing/5.5.3-security/><b>5.5.3 </b>Kiểm thử bảo mật
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.5-system-testing/5.5.4-profile/ title="Kiểm thử hồ sơ cá nhân" class=dd-item><a href=/vi/5-workshop/5.5-system-testing/5.5.4-profile/><b>5.5.4 </b>Kiểm thử hồ sơ cá nhân
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.5-system-testing/5.5.5-monitoring/ title="Giám sát & Nhật ký hệ thống" class=dd-item><a href=/vi/5-workshop/5.5-system-testing/5.5.5-monitoring/><b>5.5.5 </b>Giám sát & Nhật ký hệ thống
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.5-system-testing/5.5.6-cicd/ title="Kiểm thử tự động CI/CD" class=dd-item><a href=/vi/5-workshop/5.5-system-testing/5.5.6-cicd/><b>5.5.6 </b>Kiểm thử tự động CI/CD
-<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/vi/5-workshop/5.6-conclusion/ title="Tổng kết" class="dd-item
-parent"><a href=/vi/5-workshop/5.6-conclusion/><b>5.6. </b>Tổng kết
-<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/vi/5-workshop/5.6-conclusion/5.6.1-summary-cost/ title="Tổng kết Workshop & Chi phí" class=dd-item><a href=/vi/5-workshop/5.6-conclusion/5.6.1-summary-cost/><b>5.6.1 </b>Tổng kết Workshop & Chi phí
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.6-conclusion/5.6.2-cleanup/ title="Dọn dẹp tài nguyên" class="dd-item
-active"><a href=/vi/5-workshop/5.6-conclusion/5.6.2-cleanup/><b>5.6.2 </b>Dọn dẹp tài nguyên
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/5-workshop/5.6-conclusion/5.6.3-next-steps/ title="Bước tiếp theo & Tài liệu tham khảo" class=dd-item><a href=/vi/5-workshop/5.6-conclusion/5.6.3-next-steps/><b>5.6.3 </b>Bước tiếp theo & Tài liệu tham khảo
-<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li><li data-nav-id=/vi/6-self-evaluation/ title="Tự đánh giá" class=dd-item><a href=/vi/6-self-evaluation/><b>6. </b>Tự đánh giá
-<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/vi/7-feedback/ title="Chia sẻ, đóng góp ý kiến" class=dd-item><a href=/vi/7-feedback/><b>7. </b>Chia sẻ, đóng góp ý kiến
-<i class="fas fa-check read-icon"></i></a></li></ul><section id=shortcuts><h3>More</h3><ul><li><a class=padding href=http://awsstudygroup.com><i class='fab fa-aws'></i> AWS Study Group - Blog</a></li><li><a class=padding href=https://www.facebook.com/groups/awsstudygroupfcj><i class='fab fa-facebook'></i> AWS Study Group - Nhóm FB</a></li></ul></section><section id=prefooter><hr><ul><li><a class=padding><i class="fas fa-language fa-fw"></i><div class=select-style><select id=select-language onchange="location=this.value"><option id=vi value=https://workshop-sample.awsfcaj.com/vi/5-workshop/5.6-conclusion/5.6.2-cleanup/ selected>Tiếng Việt</option></select>
-<svg id="Capa_1" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg></div></a></li><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer><left><br><br><b>Last Updated</b><br><i><font color=orange>25-07-2026</font>
-</i></left><left><br><br><b>Team</b><br><i><a href=https://www.facebook.com/groups/660548818043427 style=color:orange>First Cloud AI Journey</a>
-</i></left><script async defer src=https://buttons.github.io/buttons.js></script></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i>
-</a></span><span id=toc-menu><i class="fas fa-list-alt"></i></span>
-<span class=links><a href=/vi/>Báo cáo thực tập</a> > <a href=/vi/5-workshop/>Workshop</a> > <a href=/vi/5-workshop/5.6-conclusion/>Tổng kết</a> > Dọn dẹp tài nguyên</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><ul><li><a href=#cảnh-báo-quan-trọng---đọc-trước-khi-xóa><strong>CẢNH BÁO:</strong> Quan trọng - Đọc trước khi xóa</a></li><li><a href=#quy-trình-dọn-dẹp---thứ-tự-xóa-tài-nguyên>Quy trình dọn dẹp - Thứ tự xóa tài nguyên</a></li><li><a href=#ví-dụ-xóa-tài-nguyên-bằng-aws-cli>Ví dụ: Xóa tài nguyên bằng AWS CLI</a></li></ul></li><li><a href=#kiểm-tra-xác-nhận-đã-dọn-dẹp-xong>Kiểm tra xác nhận đã dọn dẹp xong</a></li><li><a href=#ước-tính-chi-phí-sau-khi-dọn-dẹp>Ước tính chi phí sau khi dọn dẹp</a></li><li><a href=#troubleshooting-common-issues>Troubleshooting Common Issues</a><ul><li><a href=#issue-1-cannot-delete-s3-bucket---not-empty>Issue 1: &ldquo;Cannot delete S3 bucket - not empty&rdquo;</a></li><li><a href=#issue-2-cannot-delete-iam-role---policy-still-attached>Issue 2: &ldquo;Cannot delete IAM role - policy still attached&rdquo;</a></li><li><a href=#issue-3-cloudfront-distribution-still-deploying>Issue 3: &ldquo;CloudFront distribution still deploying&rdquo;</a></li><li><a href=#issue-4-eventbridge-rule-has-targets>Issue 4: &ldquo;EventBridge rule has targets&rdquo;</a></li></ul></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Dọn dẹp tài nguyên</h1><h3 id=cảnh-báo-quan-trọng---đọc-trước-khi-xóa><strong>CẢNH BÁO:</strong> Quan trọng - Đọc trước khi xóa</h3><ul><li><strong>[NO] MẤT DỮ LIỆU:</strong> Xóa tài nguyên sẽ <strong>MẤT HẾT DỮ LIỆU</strong> (hồ sơ người dùng, tài liệu, logs)</li><li><strong>[NO] KHÔNG THỂ PHỤC HỒI:</strong> Không có backup/snapshot được tạo trong workshop này</li><li><strong>[YES]</strong> Nếu muốn giữ lại dữ liệu:<ul><li>Export bảng DynamoDB trước khi xóa</li><li>Tải các object trên S3 (tài liệu + avatar)</li><li>Export CloudWatch logs nếu cần phân tích thêm</li></ul></li></ul><hr><h3 id=quy-trình-dọn-dẹp---thứ-tự-xóa-tài-nguyên>Quy trình dọn dẹp - Thứ tự xóa tài nguyên</h3><p><strong>Sơ đồ:</strong> 3 giai đoạn dọn dẹp (Dừng traffic → Gỡ compute → Xóa dữ liệu)</p><img src=/images/5-Workshop/5.6-Conclusion/cleanup-resources-flow.png width=75% style=max-width:1e3px><p><strong>Tóm tắt các giai đoạn:</strong></p><table><thead><tr><th>Giai đoạn</th><th>Tài nguyên</th><th>Hành động chính</th><th>Thời gian</th></tr></thead><tbody><tr><td><strong>Giai đoạn 1: Dừng traffic</strong></td><td>EventBridge, CloudFront, API Gateway</td><td>Tắt rule → Tắt CloudFront (⏱️ chờ 30 phút) → Xóa API Gateway</td><td>~35 phút</td></tr><tr><td><strong>Giai đoạn 2: Gỡ compute</strong></td><td>CodePipeline, CodeBuild, Lambda, ECR</td><td>Xóa CI/CD pipeline → Xóa Lambda function → Xóa Docker image</td><td>~5 phút</td></tr><tr><td><strong>Giai đoạn 3: Xóa dữ liệu</strong></td><td>S3 Buckets (2), DynamoDB, Cognito, IAM</td><td>Làm rỗng S3 → Xóa bucket → Xóa dữ liệu user → Xóa quyền</td><td>~5 phút</td></tr><tr><td><strong>Giai đoạn 4: Giám sát (mới 23/07)</strong></td><td>CloudWatch Alarms, SNS Topic</td><td>Xóa 4 alarms → Xóa SNS topic + subscription</td><td>~2 phút</td></tr></tbody></table><p><strong>Tổng thời gian:</strong> ~47 phút (chủ yếu chờ CloudFront disable)</p><blockquote><p><strong>Lưu ý:</strong> Lifecycle rule S3 Intelligent-Tiering và cấu hình SSE-KMS trên DynamoDB <strong>không cần xóa riêng</strong> — chúng tự động biến mất khi xóa hẳn bucket/table ở Giai đoạn 3.</p></blockquote><hr><h3 id=ví-dụ-xóa-tài-nguyên-bằng-aws-cli>Ví dụ: Xóa tài nguyên bằng AWS CLI</h3><p><strong>1. Xóa EventBridge Rule:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span><span style=color:#75715e># Disable rule</span>
-</span></span><span style=display:flex><span>aws events disable-rule --name smartdocai-cleanup-unconfirmed --region us-east-<span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Remove Lambda target</span>
-</span></span><span style=display:flex><span>aws events remove-targets --rule smartdocai-cleanup-unconfirmed --ids <span style=color:#e6db74>&#34;1&#34;</span> --region us-east-<span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Delete rule</span>
-</span></span><span style=display:flex><span>aws events delete-rule --name smartdocai-cleanup-unconfirmed --region us-east-<span style=color:#ae81ff>1</span>
-</span></span></code></pre></div><p><strong>2. Xóa CloudFront (cần chờ 30+ phút):</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span>$distId = <span style=color:#e6db74>&#34;E1234ABCD5678&#34;</span>  <span style=color:#75715e># Replace with your distribution ID</span>
-</span></span><span style=display:flex><span>aws cloudfront get-distribution-config --id $distId --output json &gt; dist-config.json
-</span></span><span style=display:flex><span><span style=color:#75715e># Edit dist-config.json: Set &#34;Enabled&#34;: false</span>
-</span></span><span style=display:flex><span>aws cloudfront update-distribution --id $distId --if<span style=color:#f92672>-match</span> &lt;ETag&gt; --distribution-config file<span style=color:#960050;background-color:#1e0010>:</span>//dist-config.json
-</span></span><span style=display:flex><span><span style=color:#75715e># Wait until status = Disabled (check console every 5 min)</span>
-</span></span><span style=display:flex><span>aws cloudfront delete-distribution --id $distId --if<span style=color:#f92672>-match</span> &lt;new-ETag&gt;
-</span></span></code></pre></div><p><strong>3. Làm rỗng & xóa S3 Bucket:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span>$bucket = <span style=color:#e6db74>&#34;smartdocai-storage-623035187993&#34;</span>
-</span></span><span style=display:flex><span>aws s3 rm s3<span style=color:#960050;background-color:#1e0010>:</span>//$bucket --recursive --region us-east-<span style=color:#ae81ff>1</span>  <span style=color:#75715e># Empty bucket</span>
-</span></span><span style=display:flex><span>aws s3api delete-bucket --bucket $bucket --region us-east-<span style=color:#ae81ff>1</span>  <span style=color:#75715e># Delete bucket</span>
-</span></span></code></pre></div><p><strong>4. Xóa Lambda Function:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span>aws lambda delete-function --function-name smartdocai --region us-east-<span style=color:#ae81ff>1</span>
-</span></span></code></pre></div><p><strong>5. Xóa bảng DynamoDB (có backup):</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span><span style=color:#75715e># Optional: Backup first</span>
-</span></span><span style=display:flex><span>aws dynamodb scan --table-name smartdocai-user-profiles --region us-east-<span style=color:#ae81ff>1</span> &gt; backup.json
-</span></span><span style=display:flex><span><span style=color:#75715e># Delete table</span>
-</span></span><span style=display:flex><span>aws dynamodb delete-table --table-name smartdocai-user-profiles --region us-east-<span style=color:#ae81ff>1</span>
-</span></span></code></pre></div><p><strong>6. Xóa Cognito User Pool:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span>aws cognito-idp delete-user-pool --user-pool-id us-east-1_3oq5wIiuu --region us-east-<span style=color:#ae81ff>1</span>
-</span></span></code></pre></div><p><strong>7. Xóa CloudWatch Alarms + SNS Topic (mới 23/07):</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span><span style=color:#75715e># Xóa 4 alarms</span>
-</span></span><span style=display:flex><span>aws cloudwatch delete-alarms --alarm-names smartdocai-lambda-errors smartdocai-lambda-duration smartdocai-lambda-throttles smartdocai-apigateway-5xx --region us-east-<span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Xóa SNS topic (tự động xóa luôn các subscription đính kèm)</span>
-</span></span><span style=display:flex><span>aws sns delete-topic --topic-arn arn<span style=color:#960050;background-color:#1e0010>:</span>aws<span style=color:#960050;background-color:#1e0010>:</span>sns<span style=color:#960050;background-color:#1e0010>:</span>us-east-<span style=color:#ae81ff>1</span><span style=color:#960050;background-color:#1e0010>:</span><span style=color:#ae81ff>623035187993</span><span style=color:#960050;background-color:#1e0010>:</span>smartdocai-alerts --region us-east-<span style=color:#ae81ff>1</span>
-</span></span></code></pre></div><p><strong>Toàn bộ danh sách lệnh:</strong> Tham khảo AWS Documentation hoặc file <code>CLEANUP_GUIDE.md</code> trong source code</p><hr><h2 id=kiểm-tra-xác-nhận-đã-dọn-dẹp-xong>Kiểm tra xác nhận đã dọn dẹp xong</h2><p><strong>Checklist:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span><span style=color:#75715e># 1. EventBridge</span>
-</span></span><span style=display:flex><span>aws events list-rules --region us-east-<span style=color:#ae81ff>1</span> | Select-String <span style=color:#e6db74>&#34;smartdocai&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Expected: No results</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 2. CloudFront</span>
-</span></span><span style=display:flex><span>aws cloudfront list-distributions --query <span style=color:#e6db74>&#34;DistributionList.Items[?contains(Comment, &#39;smartdocai&#39;)]&#34;</span> --output table
-</span></span><span style=display:flex><span><span style=color:#75715e># Expected: Empty</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 3. API Gateway</span>
-</span></span><span style=display:flex><span>aws apigateway get-rest-apis --region us-east-<span style=color:#ae81ff>1</span> | Select-String <span style=color:#e6db74>&#34;smartdocai&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Expected: No results</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 4. Lambda</span>
-</span></span><span style=display:flex><span>aws lambda list-functions --region us-east-<span style=color:#ae81ff>1</span> | Select-String <span style=color:#e6db74>&#34;smartdocai&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Expected: No results</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 5. ECR</span>
-</span></span><span style=display:flex><span>aws ecr describe-repositories --region us-east-<span style=color:#ae81ff>1</span> | Select-String <span style=color:#e6db74>&#34;smartdocai&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Expected: No results</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 6. S3</span>
-</span></span><span style=display:flex><span>aws s3 ls | Select-String <span style=color:#e6db74>&#34;smartdocai&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Expected: No results</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 7. DynamoDB</span>
-</span></span><span style=display:flex><span>aws dynamodb list-tables --region us-east-<span style=color:#ae81ff>1</span> | Select-String <span style=color:#e6db74>&#34;smartdocai&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Expected: No results</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 8. Cognito</span>
-</span></span><span style=display:flex><span>aws cognito-idp list-user-pools --max-results <span style=color:#ae81ff>60</span> --region us-east-<span style=color:#ae81ff>1</span> | Select-String <span style=color:#e6db74>&#34;smartdocai&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Expected: No results</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 9. CloudWatch Logs</span>
-</span></span><span style=display:flex><span>aws logs describe-log-groups --region us-east-<span style=color:#ae81ff>1</span> | Select-String <span style=color:#e6db74>&#34;smartdocai&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Expected: No results</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 10. IAM Roles</span>
-</span></span><span style=display:flex><span>aws iam list-roles | Select-String <span style=color:#e6db74>&#34;smartdocai&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Expected: No results</span>
-</span></span></code></pre></div><p><strong>Trạng thái cuối cùng mong đợi:</strong> Tất cả các lệnh trên trả về kết quả rỗng/không tìm thấy</p><hr><h2 id=ước-tính-chi-phí-sau-khi-dọn-dẹp>Ước tính chi phí sau khi dọn dẹp</h2><p><strong>Các khoản phí còn lại (nếu có):</strong></p><ul><li>CloudFront distribution (nếu chưa xóa): ~$0.01/day</li><li>CloudWatch Logs (nếu chưa xóa): ~$0.001/day per GB stored</li><li>S3 Glacier transitions (nếu có lifecycle policy): Varies</li></ul><p><strong>Zero charges sau khi cleanup hoàn tất:</strong></p><ul><li><strong>[OK]</strong> Lambda: Deleted (no more invocations)</li><li><strong>[OK]</strong> API Gateway: Deleted (no more requests)</li><li><strong>[OK]</strong> S3: Deleted (no more storage)</li><li><strong>[OK]</strong> DynamoDB: Deleted (no more read/write capacity)</li><li><strong>[OK]</strong> Bedrock: Pay-per-use (no idle cost)</li><li><strong>[OK]</strong> ECR: Deleted (no more image storage)</li><li><strong>[OK]</strong> CodePipeline: Deleted (no active pipeline)</li><li><strong>[OK]</strong> CodeBuild: Deleted (no more builds)</li></ul><p><strong>Check final bill after 24-48h:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span><span style=color:#75715e># View current month billing</span>
-</span></span><span style=display:flex><span>aws ce get-cost<span style=color:#f92672>-and</span>-usage `
-</span></span><span style=display:flex><span>  --time-period Start=$(Get-Date -Format yyyy-MM-<span style=color:#ae81ff>01</span>),<span style=color:#66d9ef>End</span>=$(Get-Date -Format yyyy-MM-dd) `
-</span></span><span style=display:flex><span>  --granularity MONTHLY `
-</span></span><span style=display:flex><span>  --metrics BlendedCost `
-</span></span><span style=display:flex><span>  --region us-east-<span style=color:#ae81ff>1</span>
-</span></span></code></pre></div><hr><h2 id=troubleshooting-common-issues>Troubleshooting Common Issues</h2><h3 id=issue-1-cannot-delete-s3-bucket---not-empty>Issue 1: &ldquo;Cannot delete S3 bucket - not empty&rdquo;</h3><p><strong>Solution:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span><span style=color:#75715e># Force empty bucket (including versioned objects)</span>
-</span></span><span style=display:flex><span>aws s3api delete-objects `
-</span></span><span style=display:flex><span>  --bucket smartdocai-storage-<span style=color:#ae81ff>623035187993</span> `
-</span></span><span style=display:flex><span>  --delete <span style=color:#e6db74>&#34;</span>$(aws s3api list-object-versions --bucket smartdocai-storage-<span style=color:#ae81ff>623035187993</span> --query <span style=color:#e6db74>&#39;{Objects: Versions[].{Key:Key,VersionId:VersionId}}&#39;</span> --output json)<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Then delete bucket</span>
-</span></span><span style=display:flex><span>aws s3api delete-bucket --bucket smartdocai-storage-<span style=color:#ae81ff>623035187993</span> --region us-east-<span style=color:#ae81ff>1</span>
-</span></span></code></pre></div><h3 id=issue-2-cannot-delete-iam-role---policy-still-attached>Issue 2: &ldquo;Cannot delete IAM role - policy still attached&rdquo;</h3><p><strong>Solution:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span><span style=color:#75715e># List attached policies</span>
-</span></span><span style=display:flex><span>aws iam list-attached-role-policies --role-name smartdocai-lambda-role
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Detach each policy</span>
-</span></span><span style=display:flex><span>aws iam detach-role-policy `
-</span></span><span style=display:flex><span>  --role-name smartdocai-lambda-role `
-</span></span><span style=display:flex><span>  --policy-arn arn<span style=color:#960050;background-color:#1e0010>:</span>aws<span style=color:#960050;background-color:#1e0010>:</span>iam::aws<span style=color:#960050;background-color:#1e0010>:</span>policy/service-role/AWSLambdaBasicExecutionRole
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Delete inline policies (nếu có)</span>
-</span></span><span style=display:flex><span>aws iam list-role-policies --role-name smartdocai-lambda-role
-</span></span><span style=display:flex><span>aws iam delete-role-policy --role-name smartdocai-lambda-role --policy-name policy-name
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Then delete role</span>
-</span></span><span style=display:flex><span>aws iam delete-role --role-name smartdocai-lambda-role
-</span></span></code></pre></div><h3 id=issue-3-cloudfront-distribution-still-deploying>Issue 3: &ldquo;CloudFront distribution still deploying&rdquo;</h3><p><strong>Solution:</strong></p><ul><li>Đợi 5-10 phút cho distribution status = &ldquo;Deployed&rdquo;</li><li>Không thể disable khi status = &ldquo;In Progress&rdquo;</li><li>Sau khi disabled, đợi thêm 15-30 phút mới có thể delete</li></ul><h3 id=issue-4-eventbridge-rule-has-targets>Issue 4: &ldquo;EventBridge rule has targets&rdquo;</h3><p><strong>Solution:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-powershell data-lang=powershell><span style=display:flex><span><span style=color:#75715e># Remove targets first</span>
-</span></span><span style=display:flex><span>aws events remove-targets `
-</span></span><span style=display:flex><span>  --rule smartdocai-cleanup-unconfirmed `
-</span></span><span style=display:flex><span>  --ids <span style=color:#e6db74>&#34;1&#34;</span> `
-</span></span><span style=display:flex><span>  --region us-east-<span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Then delete rule</span>
-</span></span><span style=display:flex><span>aws events delete-rule --name smartdocai-cleanup-unconfirmed --region us-east-<span style=color:#ae81ff>1</span>
-</span></span></code></pre></div><hr><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=/vi/5-workshop/5.6-conclusion/5.6.1-summary-cost/ title="Tổng kết Workshop & Chi phí"><i class="fa fa-chevron-left"></i></a>
-<a class="nav nav-next" href=/vi/5-workshop/5.6-conclusion/5.6.3-next-steps/ title="Bước tiếp theo & Tài liệu tham khảo" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1e3px;overflow:scroll;position:absolute;top:-1e3px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/js/clipboard.min.js?1784962155></script><script src=/js/perfect-scrollbar.min.js?1784962155></script><script src=/js/perfect-scrollbar.jquery.min.js?1784962155></script><script src=/js/jquery.sticky.js?1784962155></script><script src=/js/featherlight.min.js?1784962155></script><script src=/js/highlight.pack.js?1784962155></script><script>hljs.initHighlightingOnLoad()</script><script src=/js/modernizr.custom-3.6.0.js?1784962155></script><script src=/js/learn.js?1784962155></script><script src=/js/hugo-learn.js?1784962155></script><link href=/mermaid/mermaid.css?1784962155 rel=stylesheet><script src=/mermaid/mermaid.js?1784962155></script><script>mermaid.initialize({startOnLoad:!0})</script><script>(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,(e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date),(i=t.createElement(n),a=t.getElementsByTagName(n)[0]),i.async=1,i.src=s,a.parentNode.insertBefore(i,a)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-158079754-2","auto"),ga("send","pageview")</script></body></html>
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.164.0">
+    <meta
+  name="description"
+  content=""
+/>
+<meta name="author" content="thienlh@thienlu.com" />
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Dọn dẹp tài nguyên :: Báo cáo thực tập</title>
+
+    
+    <link href="/css/nucleus.css?1784976127" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1784976127" rel="stylesheet">
+    <link href="/css/hybrid.css?1784976127" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1784976127" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1784976127" rel="stylesheet">
+    <link href="/css/auto-complete.css?1784976127" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1784976127" rel="stylesheet">
+    <link href="/css/theme.css?1784976127" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1784976127" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1784976127" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1784976127"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+
+  </head>
+  <body class="" data-url="/vi/5-workshop/5.6-conclusion/5.6.2-cleanup/">
+    <nav
+  id="sidebar"
+  class="showVisitedLinks"
+>
+   
+  <div id="header-wrapper">
+    <div id="header"><a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#fff;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+</div>
+     <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1784976127"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1784976127"></script>
+<script type="text/javascript">
+    
+        var baseurl = "http:\/\/localhost:1313\/\/vi";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1784976127"></script>
+ 
+  </div>
+
+  <div class="highlightable">
+    <ul class="topics">
+               
+<li
+  data-nav-id="/vi/1-worklog/"
+  title="Nhật ký công việc"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/">
+     <b> 1. </b> Nhật ký công việc 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/vi/1-worklog/1.1-week1/"
+  title="Worklog Tuần 1"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/1.1-week1/">
+     <b> 1.1. </b> Worklog Tuần 1 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/1-worklog/1.2-week2/"
+  title="Worklog Tuần 2"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/1.2-week2/">
+     <b> 1.2. </b> Worklog Tuần 2 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/1-worklog/1.3-week3/"
+  title="Worklog Tuần 3"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/1.3-week3/">
+     <b> 1.3. </b> Worklog Tuần 3 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/1-worklog/1.4-week4/"
+  title="Worklog Tuần 4"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/1.4-week4/">
+     <b> 1.4. </b> Worklog Tuần 4 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/1-worklog/1.5-week5/"
+  title="Worklog Tuần 5"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/1.5-week5/">
+     <b> 1.5. </b> Worklog Tuần 5 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/1-worklog/1.6-week6/"
+  title="Worklog Tuần 6"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/1.6-week6/">
+     <b> 1.6. </b> Worklog Tuần 6 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/1-worklog/1.7-week7/"
+  title="Worklog Tuần 7"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/1.7-week7/">
+     <b> 1.7. </b> Worklog Tuần 7 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/1-worklog/1.8-week8/"
+  title="Worklog Tuần 8"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/1.8-week8/">
+     <b> 1.8. </b> Worklog Tuần 8 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/1-worklog/1.9-week9/"
+  title="Worklog Tuần 9"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/1.9-week9/">
+     <b> 1.9. </b> Worklog Tuần 9 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/1-worklog/1.10-week10/"
+  title="Worklog Tuần 10"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/1.10-week10/">
+     <b> 1.10. </b> Worklog Tuần 10 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/1-worklog/1.11-week11/"
+  title="Worklog Tuần 11"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/1.11-week11/">
+     <b> 1.11. </b> Worklog Tuần 11 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/1-worklog/1.12-week12/"
+  title="Worklog Tuần 12"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/1-worklog/1.12-week12/">
+     <b> 1.12 </b> Worklog Tuần 12 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+           
+<li
+  data-nav-id="/vi/2-proposal/"
+  title="Bản đề xuất"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/2-proposal/">
+     <b> 2. </b> Bản đề xuất 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+           
+<li
+  data-nav-id="/vi/3-blogsposted/"
+  title="Các bài blogs đã đăng"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/3-blogsposted/">
+     <b> 3. </b> Các bài blogs đã đăng 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/vi/3-blogsposted/3.1-blog1/"
+  title="Blog 1"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/3-blogsposted/3.1-blog1/">
+     <b> 3.1. </b> Blog 1 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/3-blogsposted/3.2-blog2/"
+  title="Blog 2"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/3-blogsposted/3.2-blog2/">
+     <b> 3.2. </b> Blog 2 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/3-blogsposted/3.3-blog3/"
+  title="Blog 3"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/3-blogsposted/3.3-blog3/">
+     <b> 3.3. </b> Blog 3 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+           
+<li
+  data-nav-id="/vi/4-eventparticipated/"
+  title="Các events đã tham gia"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/4-eventparticipated/">
+     <b> 4. </b> Các events đã tham gia 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/vi/4-eventparticipated/4.1-event1/"
+  title="Event 1"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/4-eventparticipated/4.1-event1/">
+     <b> 4.1. </b> Event 1 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/4-eventparticipated/4.2-event2/"
+  title="Event 2"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/4-eventparticipated/4.2-event2/">
+     <b> 4.2. </b> Event 2 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+           
+<li
+  data-nav-id="/vi/5-workshop/"
+  title="Workshop"
+  class="dd-item 
+        parent
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/">
+     <b> 5. </b> Workshop 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/vi/5-workshop/5.1-workshop-overview/"
+  title="Giới thiệu"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.1-workshop-overview/">
+     <b> 5.1. </b> Giới thiệu 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/vi/5-workshop/5.1-workshop-overview/5.1.1--frontend-architecture/"
+  title="Kiến trúc Frontend"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.1-workshop-overview/5.1.1--frontend-architecture/">
+     <b> 5.1.1 </b> Kiến trúc Frontend 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.1-workshop-overview/5.1.2--backend-architecture/"
+  title="Kiến trúc Backend"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.1-workshop-overview/5.1.2--backend-architecture/">
+     <b> 5.1.2 </b> Kiến trúc Backend 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.1-workshop-overview/5.1.3--overall-aws-architecture/"
+  title="Kiến trúc tổng thể trên AWS"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.1-workshop-overview/5.1.3--overall-aws-architecture/">
+     <b> 5.1.3 </b> Kiến trúc tổng thể trên AWS 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.1-workshop-overview/5.1.4--aws-services-used/"
+  title="Các dịch vụ AWS được sử dụng"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.1-workshop-overview/5.1.4--aws-services-used/">
+     <b> 5.1.4 </b> Các dịch vụ AWS được sử dụng 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.1-workshop-overview/5.1.5--ui-function/"
+  title="Đặc tả giao diện và chức năng hệ thống"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.1-workshop-overview/5.1.5--ui-function/">
+     <b> 5.1.5 </b> Đặc tả giao diện và chức năng hệ thống 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.2-prerequiste/"
+  title="Chuẩn bị"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.2-prerequiste/">
+     <b> 5.2. </b> Chuẩn bị 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/vi/5-workshop/5.2-prerequiste/5.2.1-source-code-preparation/"
+  title="Chuẩn bị source code"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.2-prerequiste/5.2.1-source-code-preparation/">
+     <b> 5.2.1. </b> Chuẩn bị source code 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.2-prerequiste/5.2.2-aws-account-preparation/"
+  title="Chuẩn bị tài khoản AWS"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.2-prerequiste/5.2.2-aws-account-preparation/">
+     <b> 5.2.2. </b> Chuẩn bị tài khoản AWS 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.2-prerequiste/5.2.3-creating-an-iam-user/"
+  title="Tạo IAM User"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.2-prerequiste/5.2.3-creating-an-iam-user/">
+     <b> 5.2.3. </b> Tạo IAM User 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.3-frontend-deployment/"
+  title="Triển khai Frontend"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.3-frontend-deployment/">
+     <b> 5.3. </b> Triển khai Frontend 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/vi/5-workshop/5.3-frontend-deployment/5.3.1-create-s3-bucket/"
+  title="Tạo S3 Bucket và tải dữ liệu"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.3-frontend-deployment/5.3.1-create-s3-bucket/">
+     <b> 5.3.1. </b> Tạo S3 Bucket và tải dữ liệu 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.3-frontend-deployment/5.3.2-enable-static-web-hosting/"
+  title="Bật Static Website Hosting"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.3-frontend-deployment/5.3.2-enable-static-web-hosting/">
+     <b> 5.3.2 </b> Bật Static Website Hosting 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.3-frontend-deployment/5.3.3-config-block-public-access-settings/"
+  title="Cấu hình Block Public Access"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.3-frontend-deployment/5.3.3-config-block-public-access-settings/">
+     <b> 5.3.3. </b> Cấu hình Block Public Access 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.3-frontend-deployment/5.3.4-config-bucket-policy-public-object-access/"
+  title="Cấu hình Bucket Policy/Public Object"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.3-frontend-deployment/5.3.4-config-bucket-policy-public-object-access/">
+     <b> 5.3.4. </b> Cấu hình Bucket Policy/Public Object 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.3-frontend-deployment/5.3.5-website-verification/"
+  title="Kiểm tra Website"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.3-frontend-deployment/5.3.5-website-verification/">
+     <b> 5.3.5. </b> Kiểm tra Website 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.3-frontend-deployment/5.3.6-accelerating-website-performance-with-cloudfront/"
+  title="Tăng tốc Website với CloudFront"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.3-frontend-deployment/5.3.6-accelerating-website-performance-with-cloudfront/">
+     <b> 5.3.6. </b> Tăng tốc Website với CloudFront 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.3-frontend-deployment/5.3.7-codepipeline-to-s3-frontend/"
+  title="Tự động triển khai bằng CodePipeline (GitHub → S3)"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.3-frontend-deployment/5.3.7-codepipeline-to-s3-frontend/">
+     <b> 5.3.7. </b> Tự động triển khai bằng CodePipeline (GitHub → S3) 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.4-backend-deployment/"
+  title="Triển khai Backend"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.4-backend-deployment/">
+     <b> 5.4. </b> Triển khai Backend 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/vi/5-workshop/5.4-backend-deployment/5.4.1-creating-amazon-cognito/"
+  title="Tạo Amazon Cognito"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.4-backend-deployment/5.4.1-creating-amazon-cognito/">
+     <b> 5.4.1 </b> Tạo Amazon Cognito 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.4-backend-deployment/5.4.2-creating-amazon-dynamodb/"
+  title="Tạo Amazon DynamoDB"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.4-backend-deployment/5.4.2-creating-amazon-dynamodb/">
+     <b> 5.4.2 </b> Tạo Amazon DynamoDB 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.4-backend-deployment/5.4.3-creating-amazon-s3-for-document-storage/"
+  title="Tạo Amazon S3 lưu trữ tài liệu"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.4-backend-deployment/5.4.3-creating-amazon-s3-for-document-storage/">
+     <b> 5.4.3 </b> Tạo Amazon S3 lưu trữ tài liệu 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.4-backend-deployment/5.4.4-creating-aws-lambda/"
+  title="Triển khai AWS Lambda Engine"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.4-backend-deployment/5.4.4-creating-aws-lambda/">
+     <b> 5.4.4 </b> Triển khai AWS Lambda Engine 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.4-backend-deployment/5.4.5-creating-api-gateway/"
+  title="Tạo API Gateway"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.4-backend-deployment/5.4.5-creating-api-gateway/">
+     <b> 5.4.5 </b> Tạo API Gateway 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.4-backend-deployment/5.4.6-implementing-frontend-api-gateway-integration/"
+  title="Viết Frontend gọi API Gateway"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.4-backend-deployment/5.4.6-implementing-frontend-api-gateway-integration/">
+     <b> 5.4.6 </b> Viết Frontend gọi API Gateway 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.4-backend-deployment/5.4.7-automating-lambda-deployment-with-codepipeline/"
+  title="Tự động triển khai Lambda bằng CodePipeline"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.4-backend-deployment/5.4.7-automating-lambda-deployment-with-codepipeline/">
+     <b> 5.4.7 </b> Tự động triển khai Lambda bằng CodePipeline 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.5-system-testing/"
+  title="Kiểm thử hệ thống"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.5-system-testing/">
+     <b> 5.5 </b> Kiểm thử hệ thống 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/vi/5-workshop/5.5-system-testing/5.5.1-authentication/"
+  title="Kiểm thử xác thực"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.5-system-testing/5.5.1-authentication/">
+     <b> 5.5.1 </b> Kiểm thử xác thực 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.5-system-testing/5.5.2-document-rag/"
+  title="Kiểm thử tải lên tài liệu &amp; RAG"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.5-system-testing/5.5.2-document-rag/">
+     <b> 5.5.2 </b> Kiểm thử tải lên tài liệu &amp; RAG 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.5-system-testing/5.5.3-security/"
+  title="Kiểm thử bảo mật"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.5-system-testing/5.5.3-security/">
+     <b> 5.5.3 </b> Kiểm thử bảo mật 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.5-system-testing/5.5.4-profile/"
+  title="Kiểm thử hồ sơ cá nhân"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.5-system-testing/5.5.4-profile/">
+     <b> 5.5.4 </b> Kiểm thử hồ sơ cá nhân 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.5-system-testing/5.5.5-monitoring/"
+  title="Giám sát &amp; Nhật ký hệ thống"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.5-system-testing/5.5.5-monitoring/">
+     <b> 5.5.5 </b> Giám sát &amp; Nhật ký hệ thống 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.5-system-testing/5.5.6-cicd/"
+  title="Kiểm thử tự động CI/CD"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.5-system-testing/5.5.6-cicd/">
+     <b> 5.5.6 </b> Kiểm thử tự động CI/CD 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.6-conclusion/"
+  title="Tổng kết"
+  class="dd-item 
+        parent
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.6-conclusion/">
+     <b> 5.6. </b> Tổng kết 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+  <ul>
+          
+            
+<li
+  data-nav-id="/vi/5-workshop/5.6-conclusion/5.6.1-summary-cost/"
+  title="Tổng kết Workshop &amp; Chi phí"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.6-conclusion/5.6.1-summary-cost/">
+     <b> 5.6.1 </b> Tổng kết Workshop &amp; Chi phí 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.6-conclusion/5.6.2-cleanup/"
+  title="Dọn dẹp tài nguyên"
+  class="dd-item 
+        
+        active
+        
+        "
+>
+  <a href="/vi/5-workshop/5.6-conclusion/5.6.2-cleanup/">
+     <b> 5.6.2 </b> Dọn dẹp tài nguyên 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+            
+<li
+  data-nav-id="/vi/5-workshop/5.6-conclusion/5.6.3-next-steps/"
+  title="Bước tiếp theo &amp; Tài liệu tham khảo"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/5-workshop/5.6-conclusion/5.6.3-next-steps/">
+     <b> 5.6.3 </b> Bước tiếp theo &amp; Tài liệu tham khảo 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+     
+  </ul>
+  
+</li>
+     
+  </ul>
+  
+</li>
+           
+<li
+  data-nav-id="/vi/6-self-evaluation/"
+  title="Tự đánh giá"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/6-self-evaluation/">
+     <b> 6. </b> Tự đánh giá 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+           
+<li
+  data-nav-id="/vi/7-feedback/"
+  title="Chia sẻ, đóng góp ý kiến"
+  class="dd-item 
+        
+        
+        
+        "
+>
+  <a href="/vi/7-feedback/">
+     <b> 7. </b> Chia sẻ, đóng góp ý kiến 
+    <i class="fas fa-check read-icon"></i>
+    
+  </a>
+   
+</li>
+    
+    </ul>
+
+     
+    <section id="shortcuts">
+      <h3>
+        More
+      </h3>
+      <ul>
+        
+        <li>
+          <a class="padding" href="http://awsstudygroup.com"
+            ><i class='fab fa-aws'></i> AWS Study Group - Blog</a
+          >
+        </li>
+        
+        <li>
+          <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"
+            ><i class='fab fa-facebook'></i> AWS Study Group - Nhóm FB</a
+          >
+        </li>
+        
+      </ul>
+    </section>
+     
+    <section id="prefooter">
+      <hr />
+      <ul>
+        
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+            <div class="select-style">
+              <select id="select-language" onchange="location = this.value;">
+                         
+                <option
+                  id="vi"
+                  value="http://localhost:1313/vi/5-workshop/5.6-conclusion/5.6.2-cleanup/"
+                  selected
+                >
+                  Tiếng Việt
+                </option>
+                   
+              </select>
+              <svg
+                version="1.1"
+                id="Capa_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                width="255px"
+                height="255px"
+                viewBox="0 0 255 255"
+                style="enable-background: new 0 0 255 255"
+                xml:space="preserve"
+              >
+                <g>
+                  <g id="arrow-drop-down">
+                    <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </a>
+        </li>
+         
+        <li>
+          <a class="padding" href="#" data-clear-history-toggle=""
+            ><i class="fas fa-history fa-fw"></i> Clear History</a
+          >
+        </li>
+        
+      </ul>
+    </section>
+    
+    <section id="footer"><left>
+    <br>
+    <br>
+    <b> Last Updated </b> <br>
+    <i>
+        <font color=orange>25-07-2026</font>
+    </i>
+</left>
+<left>
+    <br>
+    <br>
+    <b> Team </b> <br>
+    <i>
+        <a href="https://www.facebook.com/groups/660548818043427" style="color:orange">First Cloud AI Journey</a>
+    </i>
+</left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script></section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/vi/'>Báo cáo thực tập</a> > <a href='/vi/5-workshop/'>Workshop</a> > <a href='/vi/5-workshop/5.6-conclusion/'>Tổng kết</a> > Dọn dẹp tài nguyên
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+  <div class="wrapper"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#cảnh-báo-quan-trọng---đọc-trước-khi-xóa"><strong>CẢNH BÁO:</strong> Quan trọng - Đọc trước khi xóa</a></li>
+        <li><a href="#quy-trình-dọn-dẹp---thứ-tự-xóa-tài-nguyên">Quy trình dọn dẹp - Thứ tự xóa tài nguyên</a></li>
+        <li><a href="#ví-dụ-xóa-tài-nguyên-bằng-aws-cli">Ví dụ: Xóa tài nguyên bằng AWS CLI</a></li>
+      </ul>
+    </li>
+    <li><a href="#kiểm-tra-xác-nhận-đã-dọn-dẹp-xong">Kiểm tra xác nhận đã dọn dẹp xong</a></li>
+    <li><a href="#ước-tính-chi-phí-sau-khi-dọn-dẹp">Ước tính chi phí sau khi dọn dẹp</a></li>
+    <li><a href="#xử-lý-sự-cố-thường-gặp">Xử lý sự cố thường gặp</a>
+      <ul>
+        <li><a href="#sự-cố-1-cannot-delete-s3-bucket---not-empty">Sự cố 1: &ldquo;Cannot delete S3 bucket - not empty&rdquo;</a></li>
+        <li><a href="#sự-cố-2-cannot-delete-iam-role---policy-still-attached">Sự cố 2: &ldquo;Cannot delete IAM role - policy still attached&rdquo;</a></li>
+        <li><a href="#sự-cố-3-cloudfront-distribution-still-deploying">Sự cố 3: &ldquo;CloudFront distribution still deploying&rdquo;</a></li>
+        <li><a href="#sự-cố-4-eventbridge-rule-has-targets">Sự cố 4: &ldquo;EventBridge rule has targets&rdquo;</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Dọn dẹp tài nguyên
+            </h1>
+          
+
+        
+
+
+
+	<h3 id="cảnh-báo-quan-trọng---đọc-trước-khi-xóa"><strong>CẢNH BÁO:</strong> Quan trọng - Đọc trước khi xóa</h3>
+<ul>
+<li><strong>MẤT Dữ LIỆU:</strong> Xóa tài nguyên sẽ <strong>MẤT HẾT Dữ LIỆU</strong> (hồ sơ người dùng, tài liệu, logs)</li>
+<li><strong>KHÔNG THỂ PHỤC HỒI:</strong> Không có backup/snapshot được tạo trong workshop này</li>
+<li>Nếu muốn giữ lại dữ liệu:
+<ul>
+<li>Export bảng DynamoDB trước khi xóa</li>
+<li>Tải các object trên S3 (tài liệu + avatar)</li>
+<li>Export CloudWatch logs nếu cần phân tích thêm</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="quy-trình-dọn-dẹp---thứ-tự-xóa-tài-nguyên">Quy trình dọn dẹp - Thứ tự xóa tài nguyên</h3>
+<p><strong>Sơ đồ:</strong> 3 giai đoạn dọn dẹp (Dừng traffic → Gỡ compute → Xóa dữ liệu)</p>
+<img src="/images/5-Workshop/5.6-Conclusion/cleanup-resources-flow.png" width="75%" style="max-width:1000px">
+<p><strong>Tóm tắt các giai đoạn:</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>Giai đoạn</th>
+					<th>Tài nguyên</th>
+					<th>Hành động chính</th>
+					<th>Thời gian</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Giai đoạn 1: Dừng traffic</strong></td>
+					<td>EventBridge, CloudFront, API Gateway</td>
+					<td>Tắt rule → Tắt CloudFront (⏱️ chờ 30 phút) → Xóa API Gateway</td>
+					<td>~35 phút</td>
+			</tr>
+			<tr>
+					<td><strong>Giai đoạn 2: Gỡ compute</strong></td>
+					<td>CodePipeline, CodeBuild, Lambda, ECR</td>
+					<td>Xóa CI/CD pipeline → Xóa Lambda function → Xóa Docker image</td>
+					<td>~5 phút</td>
+			</tr>
+			<tr>
+					<td><strong>Giai đoạn 3: Xóa dữ liệu</strong></td>
+					<td>S3 Buckets (2), DynamoDB, Cognito, IAM</td>
+					<td>Làm rỗng S3 → Xóa bucket → Xóa dữ liệu user → Xóa quyền</td>
+					<td>~5 phút</td>
+			</tr>
+			<tr>
+					<td><strong>Giai đoạn 4: Giám sát</strong></td>
+					<td>CloudWatch Alarms, SNS Topic</td>
+					<td>Xóa 4 alarms → Xóa SNS topic + subscription</td>
+					<td>~2 phút</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>Tổng thời gian:</strong> ~47 phút (chủ yếu chờ CloudFront disable)</p>
+<blockquote>
+<p><strong>Lưu ý:</strong> Lifecycle rule S3 Intelligent-Tiering và cấu hình SSE-KMS trên DynamoDB <strong>không cần xóa riêng</strong> — chúng tự động biến mất khi xóa hẳn bucket/table ở Giai đoạn 3.</p>
+</blockquote>
+<hr>
+<h3 id="ví-dụ-xóa-tài-nguyên-bằng-aws-cli">Ví dụ: Xóa tài nguyên bằng AWS CLI</h3>
+<p><strong>1. Xóa EventBridge Rule:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Disable rule</span>
+</span></span><span style="display:flex;"><span>aws events disable-rule --name smartdocai-cleanup-unconfirmed --region us-east-<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Remove Lambda target</span>
+</span></span><span style="display:flex;"><span>aws events remove-targets --rule smartdocai-cleanup-unconfirmed --ids <span style="color:#e6db74">&#34;1&#34;</span> --region us-east-<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Delete rule</span>
+</span></span><span style="display:flex;"><span>aws events delete-rule --name smartdocai-cleanup-unconfirmed --region us-east-<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p><strong>2. Xóa CloudFront (cần chờ 30+ phút):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$distId = <span style="color:#e6db74">&#34;E1234ABCD5678&#34;</span>  <span style="color:#75715e"># Replace with your distribution ID</span>
+</span></span><span style="display:flex;"><span>aws cloudfront get-distribution-config --id $distId --output json &gt; dist-config.json
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Edit dist-config.json: Set &#34;Enabled&#34;: false</span>
+</span></span><span style="display:flex;"><span>aws cloudfront update-distribution --id $distId --if<span style="color:#f92672">-match</span> &lt;ETag&gt; --distribution-config file<span style="color:#960050;background-color:#1e0010">:</span>//dist-config.json
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Wait until status = Disabled (check console every 5 min)</span>
+</span></span><span style="display:flex;"><span>aws cloudfront delete-distribution --id $distId --if<span style="color:#f92672">-match</span> &lt;new-ETag&gt;
+</span></span></code></pre></div><p><strong>3. Làm rỗng &amp; xóa S3 Bucket:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$bucket = <span style="color:#e6db74">&#34;smartdocai-storage-623035187993&#34;</span>
+</span></span><span style="display:flex;"><span>aws s3 rm s3<span style="color:#960050;background-color:#1e0010">:</span>//$bucket --recursive --region us-east-<span style="color:#ae81ff">1</span>  <span style="color:#75715e"># Empty bucket</span>
+</span></span><span style="display:flex;"><span>aws s3api delete-bucket --bucket $bucket --region us-east-<span style="color:#ae81ff">1</span>  <span style="color:#75715e"># Delete bucket</span>
+</span></span></code></pre></div><p><strong>4. Xóa Lambda Function:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>aws lambda delete-function --function-name smartdocai --region us-east-<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p><strong>5. Xóa bảng DynamoDB (có backup):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Optional: Backup first</span>
+</span></span><span style="display:flex;"><span>aws dynamodb scan --table-name smartdocai-user-profiles --region us-east-<span style="color:#ae81ff">1</span> &gt; backup.json
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Delete table</span>
+</span></span><span style="display:flex;"><span>aws dynamodb delete-table --table-name smartdocai-user-profiles --region us-east-<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p><strong>6. Xóa Cognito User Pool:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>aws cognito-idp delete-user-pool --user-pool-id us-east-1_3oq5wIiuu --region us-east-<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p><strong>7. Xóa CloudWatch Alarms + SNS Topic:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Xóa 4 alarms</span>
+</span></span><span style="display:flex;"><span>aws cloudwatch delete-alarms --alarm-names smartdocai-lambda-errors smartdocai-lambda-duration smartdocai-lambda-throttles smartdocai-apigateway-5xx --region us-east-<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Xóa SNS topic (tự động xóa luôn các subscription đính kèm)</span>
+</span></span><span style="display:flex;"><span>aws sns delete-topic --topic-arn arn<span style="color:#960050;background-color:#1e0010">:</span>aws<span style="color:#960050;background-color:#1e0010">:</span>sns<span style="color:#960050;background-color:#1e0010">:</span>us-east-<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">623035187993</span><span style="color:#960050;background-color:#1e0010">:</span>smartdocai-alerts --region us-east-<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p><strong>Toàn bộ danh sách lệnh:</strong> Tham khảo AWS Documentation hoặc file <code>CLEANUP_GUIDE.md</code> trong source code</p>
+<hr>
+<h2 id="kiểm-tra-xác-nhận-đã-dọn-dẹp-xong">Kiểm tra xác nhận đã dọn dẹp xong</h2>
+<p><strong>Danh sách kiểm tra:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># 1. EventBridge</span>
+</span></span><span style="display:flex;"><span>aws events list-rules --region us-east-<span style="color:#ae81ff">1</span> | Select-String <span style="color:#e6db74">&#34;smartdocai&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Expected: No results</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. CloudFront</span>
+</span></span><span style="display:flex;"><span>aws cloudfront list-distributions --query <span style="color:#e6db74">&#34;DistributionList.Items[?contains(Comment, &#39;smartdocai&#39;)]&#34;</span> --output table
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Expected: Empty</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. API Gateway</span>
+</span></span><span style="display:flex;"><span>aws apigateway get-rest-apis --region us-east-<span style="color:#ae81ff">1</span> | Select-String <span style="color:#e6db74">&#34;smartdocai&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Expected: No results</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. Lambda</span>
+</span></span><span style="display:flex;"><span>aws lambda list-functions --region us-east-<span style="color:#ae81ff">1</span> | Select-String <span style="color:#e6db74">&#34;smartdocai&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Expected: No results</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 5. ECR</span>
+</span></span><span style="display:flex;"><span>aws ecr describe-repositories --region us-east-<span style="color:#ae81ff">1</span> | Select-String <span style="color:#e6db74">&#34;smartdocai&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Expected: No results</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 6. S3</span>
+</span></span><span style="display:flex;"><span>aws s3 ls | Select-String <span style="color:#e6db74">&#34;smartdocai&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Expected: No results</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 7. DynamoDB</span>
+</span></span><span style="display:flex;"><span>aws dynamodb list-tables --region us-east-<span style="color:#ae81ff">1</span> | Select-String <span style="color:#e6db74">&#34;smartdocai&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Expected: No results</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 8. Cognito</span>
+</span></span><span style="display:flex;"><span>aws cognito-idp list-user-pools --max-results <span style="color:#ae81ff">60</span> --region us-east-<span style="color:#ae81ff">1</span> | Select-String <span style="color:#e6db74">&#34;smartdocai&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Expected: No results</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 9. CloudWatch Logs</span>
+</span></span><span style="display:flex;"><span>aws logs describe-log-groups --region us-east-<span style="color:#ae81ff">1</span> | Select-String <span style="color:#e6db74">&#34;smartdocai&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Expected: No results</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 10. IAM Roles</span>
+</span></span><span style="display:flex;"><span>aws iam list-roles | Select-String <span style="color:#e6db74">&#34;smartdocai&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Expected: No results</span>
+</span></span></code></pre></div><p><strong>Trạng thái cuối cùng mong đợi:</strong> Tất cả các lệnh trên trả về kết quả rỗng/không tìm thấy</p>
+<hr>
+<h2 id="ước-tính-chi-phí-sau-khi-dọn-dẹp">Ước tính chi phí sau khi dọn dẹp</h2>
+<p><strong>Các khoản phí còn lại (nếu có):</strong></p>
+<ul>
+<li>CloudFront distribution (nếu chưa xóa): ~$0.01/ngày</li>
+<li>CloudWatch Logs (nếu chưa xóa): ~$0.001/ngày mỗi GB lưu trữ</li>
+<li>S3 Glacier transitions (nếu có lifecycle policy): Tùy thuộc</li>
+</ul>
+<p><strong>Không phát sinh chi phí sau khi dọn dẹp hoàn tất:</strong></p>
+<ul>
+<li>Lambda: Đã xóa (không còn invocation)</li>
+<li>API Gateway: Đã xóa (không còn request)</li>
+<li>S3: Đã xóa (không còn lưu trữ)</li>
+<li>DynamoDB: Đã xóa (không còn read/write capacity)</li>
+<li>Bedrock: Tính phí theo mức dùng (không tốn phí khi rảnh)</li>
+<li>ECR: Đã xóa (không còn lưu trữ image)</li>
+<li>CodePipeline: Đã xóa (không còn pipeline hoạt động)</li>
+<li>CodeBuild: Đã xóa (không còn build)</li>
+</ul>
+<p><strong>Kiểm tra hóa đơn cuối cùng sau 24-48 giờ:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># View current month billing</span>
+</span></span><span style="display:flex;"><span>aws ce get-cost<span style="color:#f92672">-and</span>-usage `
+</span></span><span style="display:flex;"><span>  --time-period Start=$(Get-Date -Format yyyy-MM-<span style="color:#ae81ff">01</span>),<span style="color:#66d9ef">End</span>=$(Get-Date -Format yyyy-MM-dd) `
+</span></span><span style="display:flex;"><span>  --granularity MONTHLY `
+</span></span><span style="display:flex;"><span>  --metrics BlendedCost `
+</span></span><span style="display:flex;"><span>  --region us-east-<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><hr>
+<h2 id="xử-lý-sự-cố-thường-gặp">Xử lý sự cố thường gặp</h2>
+<h3 id="sự-cố-1-cannot-delete-s3-bucket---not-empty">Sự cố 1: &ldquo;Cannot delete S3 bucket - not empty&rdquo;</h3>
+<p><strong>Cách xử lý:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Force empty bucket (including versioned objects)</span>
+</span></span><span style="display:flex;"><span>aws s3api delete-objects `
+</span></span><span style="display:flex;"><span>  --bucket smartdocai-storage-<span style="color:#ae81ff">623035187993</span> `
+</span></span><span style="display:flex;"><span>  --delete <span style="color:#e6db74">&#34;</span>$(aws s3api list-object-versions --bucket smartdocai-storage-<span style="color:#ae81ff">623035187993</span> --query <span style="color:#e6db74">&#39;{Objects: Versions[].{Key:Key,VersionId:VersionId}}&#39;</span> --output json)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Then delete bucket</span>
+</span></span><span style="display:flex;"><span>aws s3api delete-bucket --bucket smartdocai-storage-<span style="color:#ae81ff">623035187993</span> --region us-east-<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="sự-cố-2-cannot-delete-iam-role---policy-still-attached">Sự cố 2: &ldquo;Cannot delete IAM role - policy still attached&rdquo;</h3>
+<p><strong>Cách xử lý:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># List attached policies</span>
+</span></span><span style="display:flex;"><span>aws iam list-attached-role-policies --role-name smartdocai-lambda-role
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Detach each policy</span>
+</span></span><span style="display:flex;"><span>aws iam detach-role-policy `
+</span></span><span style="display:flex;"><span>  --role-name smartdocai-lambda-role `
+</span></span><span style="display:flex;"><span>  --policy-arn arn<span style="color:#960050;background-color:#1e0010">:</span>aws<span style="color:#960050;background-color:#1e0010">:</span>iam::aws<span style="color:#960050;background-color:#1e0010">:</span>policy/service-role/AWSLambdaBasicExecutionRole
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Delete inline policies (nếu có)</span>
+</span></span><span style="display:flex;"><span>aws iam list-role-policies --role-name smartdocai-lambda-role
+</span></span><span style="display:flex;"><span>aws iam delete-role-policy --role-name smartdocai-lambda-role --policy-name policy-name
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Then delete role</span>
+</span></span><span style="display:flex;"><span>aws iam delete-role --role-name smartdocai-lambda-role
+</span></span></code></pre></div><h3 id="sự-cố-3-cloudfront-distribution-still-deploying">Sự cố 3: &ldquo;CloudFront distribution still deploying&rdquo;</h3>
+<p><strong>Cách xử lý:</strong></p>
+<ul>
+<li>Đợi 5-10 phút cho distribution status = &ldquo;Deployed&rdquo;</li>
+<li>Không thể disable khi status = &ldquo;In Progress&rdquo;</li>
+<li>Sau khi disabled, đợi thêm 15-30 phút mới có thể delete</li>
+</ul>
+<h3 id="sự-cố-4-eventbridge-rule-has-targets">Sự cố 4: &ldquo;EventBridge rule has targets&rdquo;</h3>
+<p><strong>Cách xử lý:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># Remove targets first</span>
+</span></span><span style="display:flex;"><span>aws events remove-targets `
+</span></span><span style="display:flex;"><span>  --rule smartdocai-cleanup-unconfirmed `
+</span></span><span style="display:flex;"><span>  --ids <span style="color:#e6db74">&#34;1&#34;</span> `
+</span></span><span style="display:flex;"><span>  --region us-east-<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Then delete rule</span>
+</span></span><span style="display:flex;"><span>aws events delete-rule --name smartdocai-cleanup-unconfirmed --region us-east-<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><hr>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/vi/5-workshop/5.6-conclusion/5.6.1-summary-cost/" title="Tổng kết Workshop &amp; Chi phí"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/vi/5-workshop/5.6-conclusion/5.6.3-next-steps/" title="Bước tiếp theo &amp; Tài liệu tham khảo" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1784976127"></script>
+    <script src="/js/perfect-scrollbar.min.js?1784976127"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1784976127"></script>
+    <script src="/js/jquery.sticky.js?1784976127"></script>
+    <script src="/js/featherlight.min.js?1784976127"></script>
+    <script src="/js/highlight.pack.js?1784976127"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1784976127"></script>
+    <script src="/js/learn.js?1784976127"></script>
+    <script src="/js/hugo-learn.js?1784976127"></script>
+
+    <link href="/mermaid/mermaid.css?1784976127" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1784976127"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function (i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    ((i[r] =
+      i[r] ||
+      function () {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date()));
+    ((a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]));
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "https://www.google-analytics.com/analytics.js",
+    "ga",
+  );
+
+  ga("create", "UA-158079754-2", "auto");
+  ga("send", "pageview");
+</script>
+
+  </body>
+</html>
