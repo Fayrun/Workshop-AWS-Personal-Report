@@ -15,21 +15,21 @@
     <title>Tổng kết Workshop &amp; Chi phí :: Báo cáo thực tập</title>
 
     
-    <link href="/css/nucleus.css?1784976127" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1784976127" rel="stylesheet">
-    <link href="/css/hybrid.css?1784976127" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1784976127" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1784976127" rel="stylesheet">
-    <link href="/css/auto-complete.css?1784976127" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1784976127" rel="stylesheet">
-    <link href="/css/theme.css?1784976127" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1784976127" rel="stylesheet">
+    <link href="/css/nucleus.css?1784979269" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1784979269" rel="stylesheet">
+    <link href="/css/hybrid.css?1784979269" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1784979269" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1784979269" rel="stylesheet">
+    <link href="/css/auto-complete.css?1784979269" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1784979269" rel="stylesheet">
+    <link href="/css/theme.css?1784979269" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1784979269" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1784976127" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1784979269" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1784976127"></script>
+    <script src="/js/jquery-3.3.1.min.js?1784979269"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -59,14 +59,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1784976127"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1784976127"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1784979269"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1784979269"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1784976127"></script>
+<script type="text/javascript" src="/js/search.js?1784979269"></script>
  
   </div>
 
@@ -1237,7 +1237,14 @@
             <i class="fas fa-language fa-fw"></i>
             <div class="select-style">
               <select id="select-language" onchange="location = this.value;">
-                         
+                       
+                <option
+                  id="en"
+                  value="http://localhost:1313/5-workshop/5.6-conclusion/5.6.1-summary-cost/"
+                >
+                  English
+                </option>
+                            
                 <option
                   id="vi"
                   value="http://localhost:1313/vi/5-workshop/5.6-conclusion/5.6.1-summary-cost/"
@@ -1361,7 +1368,7 @@
     </li>
     <li><a href="#tổng-chi-phí">Tổng chi phí</a>
       <ul>
-        <li><a href="#chi-phí-thực-tế-đã-phát-sinh-trong-suốt-thời-gian-workshop">Chi phí thực tế đã phát sinh (trong suốt thời gian workshop)</a></li>
+        <li><a href="#chi-phí-ước-tính-giả-định-mức-sử-dụng-trong-thời-gian-workshop">Chi phí ước tính (giả định mức sử dụng trong thời gian workshop)</a></li>
       </ul>
     </li>
   </ul>
@@ -1395,7 +1402,6 @@
 <li>Deploy FastAPI application lên Lambda với Docker container</li>
 <li>Sử dụng API Gateway làm HTTP endpoint public</li>
 <li>Tận dụng CloudFront CDN cho static assets và API caching</li>
-<li>Thiết kế kiến trúc 3 tầng (Presentation → Application → Data)</li>
 </ul>
 <h4 id="2-xác-thực--phân-quyền">2. <strong>Xác thực &amp; Phân quyền</strong></h4>
 <ul>
@@ -1444,7 +1450,7 @@
 </ul>
 <hr>
 <h2 id="tổng-chi-phí">Tổng chi phí</h2>
-<h3 id="chi-phí-thực-tế-đã-phát-sinh-trong-suốt-thời-gian-workshop">Chi phí thực tế đã phát sinh (trong suốt thời gian workshop)</h3>
+<h3 id="chi-phí-ước-tính-giả-định-mức-sử-dụng-trong-thời-gian-workshop">Chi phí ước tính (giả định mức sử dụng trong thời gian workshop)</h3>
 <p>Giả sử workshop chạy trong <strong>7 ngày</strong> với mức độ test vừa phải:</p>
 <table>
 	<thead>
@@ -1548,6 +1554,9 @@
 			</tr>
 	</tbody>
 </table>
+<blockquote>
+<p><strong>Lưu ý:</strong> Bảng trên là <strong>số liệu ước tính</strong> dựa trên giả định mức sử dụng, chưa phải số liệu thật lấy từ AWS Cost Explorer/Billing (do cần quyền root/billing access để xem). Sẽ cập nhật số liệu thật khi có quyền truy cập, kèm ảnh chụp Cost Explorer để đối chiếu.</p>
+</blockquote>
 <p><strong>Ghi chú:</strong></p>
 <ul>
 <li>Chi phí workshop: <strong>Dưới $2</strong> (rất thấp)</li>
@@ -2621,19 +2630,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1784976127"></script>
-    <script src="/js/perfect-scrollbar.min.js?1784976127"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1784976127"></script>
-    <script src="/js/jquery.sticky.js?1784976127"></script>
-    <script src="/js/featherlight.min.js?1784976127"></script>
-    <script src="/js/highlight.pack.js?1784976127"></script>
+    <script src="/js/clipboard.min.js?1784979269"></script>
+    <script src="/js/perfect-scrollbar.min.js?1784979269"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1784979269"></script>
+    <script src="/js/jquery.sticky.js?1784979269"></script>
+    <script src="/js/featherlight.min.js?1784979269"></script>
+    <script src="/js/highlight.pack.js?1784979269"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1784976127"></script>
-    <script src="/js/learn.js?1784976127"></script>
-    <script src="/js/hugo-learn.js?1784976127"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1784979269"></script>
+    <script src="/js/learn.js?1784979269"></script>
+    <script src="/js/hugo-learn.js?1784979269"></script>
 
-    <link href="/mermaid/mermaid.css?1784976127" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1784976127"></script>
+    <link href="/mermaid/mermaid.css?1784979269" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1784979269"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
