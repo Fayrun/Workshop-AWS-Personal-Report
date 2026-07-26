@@ -79,6 +79,7 @@ phases:
   - Select: Chọn **AWS CodeBuild**
   - Project name: Chọn nút **Create project**
 ![add-build-stage](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/add-build-stage.png)
+
 **Bước 3: Tạo CodeBuild BE**
 - Trong giao diện Create build project:
   - Project name: Nhập ```smartdocai-be-build```
@@ -98,6 +99,7 @@ phases:
 ![buildspec-name](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/buildspec-name.png)
   - Cuộn đến cuối trang và nhấn nút **Continue to CodePipeline**
 ![continue-to-codepipeline](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/continue-to-codepipeline.png)
+
 **Bước 4: Tiếp tục tạo CodePipeline**
 - Tại giao diện Add build stage - optional
   - Project name: Chọn **CodeBuild** vừa tạo: **smartdocai-be-build**
@@ -113,6 +115,7 @@ phases:
   - Xem lại thông tin cấu hình Pipeline
 ![review-pipeline](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/review-pipeline.png)
   - Cuộn đến cuối trang và nhấn nút **Create pipeline**
+
 **Bước 5: Tạo quyền ECR cho IAM Role của CodeBuild**
 - Truy cập IAM > Roles:
   - Chọn **codebuild-smartdocai-be-service-role**
