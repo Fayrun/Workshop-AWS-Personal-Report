@@ -19,7 +19,7 @@ Dự án được xây dựng nhằm giải quyết nhu cầu tìm kiếm, tríc
 - **Tên dự án:** SmartDocAI (AWS Deployment)
 - **Kiến trúc chính:** Serverless Container Architecture (FastAPI + React SPA + AWS Services)
 - **Repository:** https://github.com/TakunKenjo/SmartdocAI-AWS
-- **Môi trường triển khai:** AWS Region `us-east-1` (Account ID: `623035187993`)
+- **Môi trường triển khai:** AWS Region `us-east-1`
 - **Domain Production:** 
   - Frontend CDN (CloudFront): `https://dutf3c70nnjzl.cloudfront.net`
   - Backend API Gateway: `https://d60866voq5.execute-api.us-east-1.amazonaws.com/prod`
@@ -33,7 +33,7 @@ Dự án được xây dựng nhằm giải quyết nhu cầu tìm kiếm, tríc
 
 2. **Tối ưu hóa Khả năng Hỏi đáp Tri thức (Advanced RAG):**
    - Hỗ trợ 3 chế độ hỏi đáp nâng cao:
-     - **Standard RAG:** Phân tích ngữ nghĩa nhanh chóng qua FAISS vector store.
+     - **Standard RAG:** Phân tích ngữ nghĩa nhanh chóng qua FAISS vector store, tìm kiếm từ khoá theo BM25, sử dụng thuật toán Hybrid Search kết hợp cả hai phương pháp để tối ưu hóa khả năng tìm kiếm.
      - **Self-RAG:** Tự động tái cấu trúc câu hỏi, lọc nhiễu văn bản và tự chấm điểm độ chính xác (grounding check) trước khi phản hồi.
      - **Co-RAG (Multi-Agent RAG):** Phối hợp song song 3 Agent độc lập (Semantic, Keyword, Conceptual) và hợp nhất kết quả theo cơ chế bỏ phiếu (voting), nâng cao chất lượng câu trả lời đối với câu hỏi phức tạp.
 
@@ -55,95 +55,48 @@ Dự án được xây dựng nhằm giải quyết nhu cầu tìm kiếm, tríc
 - **Giới hạn của các mô hình LLM truyền thống:** Các công cụ chat AI thông thường không có quyền truy cập vào kho tài liệu nội bộ, đồng thời thường xuyên gặp tình trạng câu trả lời bị sai lệch (hallucination) do không có nguồn đối chiếu.
 - **Rủi ro rò rỉ dữ liệu (Data Privacy & Isolation):** Nhiều dịch vụ SaaS bên thứ ba không cam kết phân lập dữ liệu người dùng, gây nguy cơ rò rỉ thông tin nhạy cảm.
 - **Chi phí hạ tầng máy chủ 24/7 đắt đỏ:** Triển khai các cụm server GPU/EC2 cố định tốn kém chi phí duy trì lớn ngay cả khi không có lượt truy cập.
-- **Nghẽn tải payload khi upload file lớn:** Các dịch vụ API Gateway truyền thống thường bị giới hạn kích thước request (10 MB), gây thất bại khi người dùng tải lên tài liệu dung lượng lớn.
+- **Nghẽn tải payload khi upload file lớn:** Các dịch vụ API Gateway truyền thống thường bị giới hạn kích thước request (10 MB), gây thất bại khi người dùng tải lên tài liệu.
+### 4. KIẾN TRÚC GIẢI PHÁP
 
-#### 3.2. Giải pháp của SmartDocAI
+#### Sơ đồ Kiến trúc Tổng quan Hệ thống (Overall AWS Architecture)
 
-- **Sử dụng RAG trên nền tảng AWS Bedrock:** Kết hợp **Amazon Titan Embeddings V2** (1024 chiều) và **Qwen 3 Next 80B A3B (`qwen.qwen3-next-80b-a3b`)** để tổng hợp tri thức chính xác kèm dẫn chứng vị trí trang/dòng cụ thể.
-- **Cơ chế Upload S3 Presigned URL 3 bước:** Trình duyệt tải file trực tiếp lên S3 bucket bỏ qua API Gateway, hỗ trợ file tài liệu dung lượng lên tới **5 GB**.
-- **Mô hình Phân lập Per-User Isolation:** Sử dụng Cognito `sub` (User ID) làm chìa khóa phân lập đường dẫn S3 và partition key DynamoDB, ngăn chặn triệt để nguy cơ truy cập chéo dữ liệu.
-- **Kiến trúc Serverless tối ưu chi phí:** Loại bỏ chi phí duy trì máy chủ rảnh rỗi, chi phí vận hành hàng tháng chỉ phát sinh dựa trên lưu lượng thực tế.
+![Sơ đồ Kiến trúc Tổng quan SmartDocAI trên AWS](/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/architecture-diagram.png)
 
 ---
 
-### 4. KIẾN TRÚC GIẢI PHÁP
+#### Danh sách & Vai trò Chi tiết các Dịch vụ AWS Sử dụng
 
-Hệ thống được thiết kế theo mô hình **Serverless Container Architecture** trên AWS với sơ đồ luồng hoạt động tổng quan như sau:
-
-```text
-+-----------------------------------------------------------------------------------------+
-|                                TRÌNH DUYỆT NGƯỜI DÙNG                                    |
-|                         (React + Vite SPA trên AWS CloudFront)                          |
-+--------------------------------------------+--------------------------------------------+
-                                             |
-                                             v
-+-----------------------------------------------------------------------------------------+
-|                              XÁC THỰC & ĐĂNG NHẬP (AUTH)                                 |
-|            AWS Cognito User Pool <---> Hosted UI (Google OAuth 2.0)                     |
-|                                            |                                            |
-|                  PreSignUp Lambda Trigger (Liên kết tài khoản Google & Native)          |
-+--------------------------------------------+--------------------------------------------+
-                                             |
-                              Xác thực JWT Token thành công
-                                             |
-                                             v
-+-----------------------------------------------------------------------------------------+
-|                               API & COMPUTE LAYER (BACKEND)                             |
-|                           Amazon API Gateway (HTTP REST Endpoint)                       |
-|                                            |                                            |
-|                     AWS Lambda Function: smartdocai (FastAPI Container)                 |
-+------+---------------------+-----------------------+----------------------+-------------+
-       |                     |                       |                      |
-       v                     v                       v                      v
-+--------------+     +---------------+     +------------------+     +-------------------+
-|  AWS BEDROCK |     |   AMAZON S3   |     |  AMAZON DYNAMODB |     |   DEVOPS & ALERT  |
-|  - Titan V2  |     | - Upload File |     | - User Profiles  |     | - CodePipeline    |
-|  - Qwen3 80B |     | - FAISS Index |     | - KMS Encrypted  |     | - EventBridge     |
-|  - FAISS RAG |     | - Chat Log    |     |   At-Rest        |     | - CloudWatch Alarms|
-+--------------+     +---------------+     +------------------+     +-------------------+
-```
-
-#### Các thành phần chính trong kiến trúc:
-
-1. **Frontend Layer:**
-   - **React + Vite SPA:** Giao diện người dùng hiện đại, phản hồi nhanh.
-   - **AWS CloudFront (CDN):** Phân phối ứng dụng React toàn cầu qua HTTPS, tối ưu tốc độ tải trang (`https://dutf3c70nnjzl.cloudfront.net`).
-
-2. **Identity Layer:**
-   - **Amazon Cognito User Pool (`us-east-1_3oq5wIiuu`):** Quản lý đăng ký, đăng nhập, cấp phát JWT (ID & Access Tokens).
-   - **Cognito Hosted UI & Google Identity Provider:** Cho phép đăng nhập bằng Google OAuth 2.0.
-   - **PreSignUp Lambda Trigger (`smartdocai-presignup-check`):** Tự động liên kết tài khoản Google với tài khoản Email/Password nếu trùng email (`AdminLinkProviderForUser`).
-
-3. **API & Compute Layer:**
-   - **Amazon API Gateway:** Tiếp nhận HTTP REST requests từ Frontend, chuyển tiếp an toàn tới Lambda backend (`https://d60866voq5.execute-api.us-east-1.amazonaws.com/prod`).
-   - **AWS Lambda (`smartdocai`):** Chạy ứng dụng FastAPI thông qua Mangum adapter. Được đóng gói dưới dạng Docker Container lưu tại AWS ECR (Memory: 3008 MB, Timeout: 300s).
-
-4. **Storage & Data Layer:**
-   - **Amazon S3 (`smartdocai-storage-623035187993`):** Lưu trữ file tài liệu thô, các file chỉ mục FAISS vector store, lịch sử trò chuyện. Đã cấu hình **S3 Intelligent-Tiering** tự động tối ưu chi phí lưu trữ lâu dài.
-   - **Amazon DynamoDB (`smartdocai-user-profiles`):** Cơ sở dữ liệu NoSQL lưu thông tin profile người dùng, mã hóa dữ liệu at-rest bằng **AWS Managed KMS Key** (`alias/aws/dynamodb`).
-
-5. **AI Services Layer (AWS Bedrock):**
-   - **Amazon Titan Embeddings V2 (`amazon.titan-embed-text-v2:0`):** Tạo vector 1024 chiều (xử lý song song 12 threads).
-   - **Qwen 3 Next 80B A3B (`qwen.qwen3-next-80b-a3b`):** Mô hình ngôn ngữ lớn thực hiện suy luận RAG.
-   - **FAISS Vector Store:** Cơ sở dữ liệu vector lưu trực tiếp trên S3 per-user, tải vào bộ nhớ tạm `/tmp` của Lambda để tìm kiếm tương đồng cực nhanh.
-
-6. **DevOps, Automation & Hardening Layer:**
-   - **AWS CodePipeline & CodeBuild:** Tự động kích hoạt khi push code lên nhánh `main`. Chạy unit test (`pytest` ~60 test cases) và linter (`flake8`) trước khi build Docker Image và cập nhật Lambda.
-   - **AWS EventBridge (`smartdocai-cleanup-unconfirmed`):** Tự động gọi Lambda mỗi 5 phút để dọn dẹp các user đăng ký chưa confirm quá 5 phút.
-   - **CloudWatch Alarms & SNS Topic (`smartdocai-alerts`):** Theo dõi 4 thông số trọng yếu (Lambda Errors, Duration >25s, Throttles, API Gateway 5xx) và gửi cảnh báo qua email.
+| Dịch vụ AWS | Loại hình Dịch vụ | Vai trò & Chức năng trong Hệ thống SmartDocAI |
+|---|---|---|
+| **AWS CloudFront** | Content Delivery Network (CDN) | Phân phối ứng dụng React + Vite Frontend toàn cầu qua giao thức HTTPS (`https://dutf3c70nnjzl.cloudfront.net`), tối ưu tốc độ tải trang và giảm độ trễ cho người dùng. |
+| **AWS Cognito** | Identity & Access Management | Quản lý đăng ký, đăng nhập (User Pool `us-east-1_3oq5wIiuu`), cấp phát JWT Token, tích hợp Hosted UI **Google OAuth 2.0** và PreSignUp Trigger tự động ghép tài khoản trùng email (`AdminLinkProviderForUser`). |
+| **Amazon API Gateway** | RESTful API Gateway | Cổng REST API tập trung (`https://d60866voq5.execute-api.us-east-1.amazonaws.com/prod`), tiếp nhận HTTP Request từ Frontend, xác thực với Cognito Authorizer và chuyển tiếp an toàn (AWS_PROXY) tới AWS Lambda. Hỗ trợ xử lý CORS preflight (`OPTIONS`). |
+| **AWS Lambda** | Serverless Compute | Môi trường thực thi serverless chạy FastAPI backend đóng gói dạng Docker Container (Memory: 3008 MB, Timeout: 300s). Xử lý toàn bộ logic RAG, embedding, trao đổi Bedrock, đọc/ghi S3 và DynamoDB. |
+| **Amazon ECR** | Container Registry | Kho lưu trữ các Docker Container Images của Backend FastAPI. Cung cấp image cho AWS Lambda cập nhật tự động khi có bản build mới từ CI/CD. |
+| **Amazon S3** | Object Storage | Lưu trữ file tài liệu gốc (`uploads/{user_id}/`), bộ chỉ mục FAISS Vector Store (`vectorstore/{user_id}/`), lịch sử chat (`chat_history/`) và avatar. Cấu hình **S3 Intelligent-Tiering** tự động tối ưu chi phí lưu trữ lâu dài và cấp **Presigned URLs** để upload an toàn. |
+| **Amazon DynamoDB** | NoSQL Database | Lưu trữ hồ sơ chi tiết người dùng (`smartdocai-user-profiles`) bao gồm: Họ tên, Email, Số điện thoại, Ngày sinh, gói dịch vụ, hạn mức tài liệu. Đảm bảo tốc độ truy vấn miligiây với mô hình On-Demand. |
+| **AWS KMS** | Key Management Service | Mã hóa dữ liệu at-rest trên Amazon DynamoDB bằng **AWS Managed KMS Key** (`alias/aws/dynamodb`), bảo vệ an toàn thông tin cá nhân của người dùng. |
+| **Amazon Bedrock** | Generative AI Platform | Phân tích và sinh phản hồi tri thức AI: <br>- **Titan Embeddings V2 (`amazon.titan-embed-text-v2:0`):** Tạo vector nhúng 1024 chiều (xử lý đa luồng 12 threads).<br>- **Qwen 3 Next 80B A3B (`qwen.qwen3-next-80b-a3b`):** Mô hình LLM suy luận RAG và sinh câu trả lời kèm trích dẫn nguồn. |
+| **AWS CodePipeline** | CI/CD Orchestration | Tự động hóa luồng triển khai liên tục. Tự động kích hoạt khi push code lên nhánh GitHub `main`, phối hợp cùng CodeBuild để kiểm thử và deploy. |
+| **AWS CodeBuild** | Automated Build & Test | Môi trường thực thi build container. Tự động chạy linter (`flake8`) và bộ unit test (~60 test cases với `pytest`) theo chính sách **Hard Fail** trước khi build Docker Image và cập nhật Lambda. |
+| **Amazon EventBridge** | Event Bus & Scheduling | Cron job định thời tự động gọi Lambda mỗi 5 phút để dọn dẹp các tài khoản đăng ký rác chưa xác thực email quá 5 phút (`smartdocai-cleanup-unconfirmed`). |
+| **Amazon CloudWatch** | Monitoring & Observability | Thu thập log toàn hệ thống (CloudWatch Logs) và quản lý 4 Alarms giám sát chỉ số sinh tử: Lambda Errors > 0, Duration > 25s, Throttles > 0, API Gateway 5xx Errors > 0. |
+| **Amazon SNS** | Push Notification Service | Kênh phát thông báo cảnh báo sự cố khẩn cấp (`smartdocai-alerts`). Khi CloudWatch Alarm bị vi phạm, SNS tự động gửi email cảnh báo tức thì tới quản trị viên. |
 
 ---
 
 ### 5. TIMELINE
 
-Dự án được triển khai thành công qua 4 giai đoạn chính từ Tháng 6/2026 đến Tháng 7/2026:
+Dự án được triển khai thành công qua 6 giai đoạn chính từ Tháng 6/2026 đến Tháng 8/2026:
 
 | Giai đoạn | Thời gian | Hạng mục công việc chính | Trạng thái |
 |---|---|---|---|
-| **Giai đoạn 1: Nghiên cứu & Thiết kế** | 22/06/2026 - 27/06/2026 | - Phân tích yêu cầu bài toán RAG.<br>- Khảo sát LLM trên AWS Bedrock (Titan V2, qwen3-next-80b-a3b).<br>- Lập sơ đồ kiến trúc Serverless Container & thiết kế Per-User Isolation. | Hoàn thành |
+| **Giai đoạn 1: Nghiên cứu & Thiết kế** | 22/06/2026 - 27/06/2026 | - Phân tích yêu cầu bài toán RAG.<br>- Khảo sát LLM trên AWS Bedrock (Titan V2, qwen3-next-80b-a3b).<br>- Lập sơ đồ kiến trúc Serverless Container & thiết kế Per-User Isolation.<br>- Thiết kế giao diện | Hoàn thành |
 | **Giai đoạn 2: Backend Core & Auth** | 29/06/2026 - 04/07/2026 | - Xây dựng Backend FastAPI, tích hợp FAISS vector store & Bedrock API.<br>- Cấu hình Cognito User Pool, Hosted UI & PreSignUp Lambda trigger ghép tài khoản.<br>- Triển khai luồng upload tài liệu 3 bước bằng S3 Presigned URL. | Hoàn thành |
-| **Giai đoạn 3: Advanced RAG & Frontend** | 06/07/2026 - 11/07/2026 | - Hoàn thiện giao diện React + Vite SPA, kết nối CloudFront CDN.<br>- Triển khai quản lý Profile người dùng trên DynamoDB. | Hoàn thành |
-| **Giai đoạn 4: Production Hardening** | 13/07/2026 - 16/07/2026 | - Xây dựng CodePipeline/CodeBuild CI/CD với bộ unit test ~60 test cases (hard-fail).<br>- Triển khai EventBridge dọn dẹp tài khoản chưa xác thực tự động.<br>- Production Hardening: DynamoDB KMS Encryption, OAuth CSRF State UUID, S3 Intelligent-Tiering, CloudWatch Alarms & SNS Topic Cảnh báo. | Hoàn thành |
+| **Giai đoạn 3: Advanced RAG & Frontend** | 06/07/2026 - 11/07/2026 | - Hoàn thiện giao diện React + Vite SPA, tạo static website hosting.<br>- Triển khai quản lý Profile người dùng trên DynamoDB. | Hoàn thành |
+| **Giai đoạn 4: Production Hardening** | 13/07/2026 - 18/07/2026 | - Kết nối CloudFront CDN.<br>- Xây dựng CodePipeline/CodeBuild CI/CD với bộ unit test ~60 test cases (hard-fail).<br>- Triển khai EventBridge dọn dẹp tài khoản chưa xác thực tự động.<br>- Production Hardening: DynamoDB KMS Encryption, OAuth CSRF State UUID, S3 Intelligent-Tiering, CloudWatch Alarms & SNS Topic Cảnh báo. | Hoàn thành |
+| **Giai đoạn 5: System Testing & Optimization** | 20/07/2026 - 25/07/2026 | - Kiểm thử toàn diện hệ thống (End-to-End System Testing), đo đạc latency và xử lý cold start AWS Lambda.<br>- Tối ưu hóa các chiến thuật RAG (Self-RAG, Co-RAG, Re-ranking) và khả năng trích dẫn nguồn.<br>- Xử lý ngoại lệ, đồng bộ dữ liệu per-user và hoàn thiện trải nghiệm UI/UX. | Hoàn thành |
+| **Giai đoạn 6: Documentation & Workshop Report** | 27/07/2026 - 01/08/2026 | - Xây dựng bộ tài liệu báo cáo Workshop trên nền tảng Hugo (song ngữ Việt - Anh).<br>- Trích xuất đặc tả chi tiết kiến trúc Backend AWS, Cognito, DynamoDB, S3, Lambda, API Gateway và giao diện hệ thống.<br>- Tổng kết kết quả, nghiệm thu và hoàn thiện tài liệu dự án. | Hoàn thành |
 
 ---
 
@@ -167,7 +120,6 @@ Hệ thống tận dụng tối đa mô hình **AWS Free Tier** và **Serverless
 | **EventBridge & CloudWatch Alarms** | 4 Alarms, 1 Rule, SNS email alerts | **$0.10** |
 | **TỔNG CHI PHÍ DỰ KIẾN** | **Vận hành hệ thống thực tế** | **~$0.56 - $1.65 USD / tháng** |
 
-> **Nhận xét:** So với chi phí thuê máy chủ cố định (EC2/VPS GPU tốn từ $30 - $100/tháng), giải pháp Serverless của SmartDocAI sử dụng mô hình Qwen 3 Next 80B A3B trên AWS Bedrock giúp **tiết kiệm hơn 95% chi phí**, hoàn toàn phù hợp cho môi trường thử nghiệm, nghiên cứu và sản xuất quy mô vừa.
 
 ---
 
@@ -186,8 +138,35 @@ Hệ thống tận dụng tối đa mô hình **AWS Free Tier** và **Serverless
 
 ---
 
-### 8. KẾT QUẢ KỲ VỌNG
+### 8. KẾT QUẢ KỲ VỌNG VỀ TÍNH NĂNG VẬN HÀNH
 
-1. **Hiệu năng & Trải nghiệm:** Người dùng có thể trích xuất thông tin từ tài liệu PDF/Word dài hàng trăm trang chỉ trong vài giây với độ chính xác cao và có trích dẫn nguồn minh bạch.
-2. **Khả năng mở rộng:** Hệ thống Serverless có khả năng phục vụ đồng thời hàng ngàn người dùng mà không cần thay đổi kiến trúc hoặc can thiệp hạ tầng thủ công.
-3. **Độ tin cậy & Bảo mật:** Đạt tiêu chuẩn bảo mật cho ứng dụng đám mây với cơ chế phân lập dữ liệu tuyệt đối, mã hóa dữ liệu KMS và chống tấn công CSRF.
+#### 1. Nhóm Chức năng Xác thực & Bảo mật Tài khoản (Authentication & Security)
+- **Đăng ký 2 bước linh hoạt:** Tiếp nhận thông tin người dùng mới, tự động gửi mã OTP 6 chữ số qua Email để kích hoạt tài khoản trên AWS Cognito.
+- **Đa phương thức đăng nhập:** Hỗ trợ đăng nhập truyền thống (Email/Password) và Đăng nhập nhanh SSO bằng tài khoản Google (OAuth 2.0 / OIDC qua Cognito Hosted UI).
+- **Tự động liên kết tài khoản (Account Linking):** PreSignUp Lambda Trigger tự động hợp nhất tài khoản Google với tài khoản Email/Password nếu trùng địa chỉ email (`AdminLinkProviderForUser`).
+- **Tự động xử lý Username (Automatic Username Resolution):** Tự động tra cứu username thật khi người dùng đăng nhập bằng Email thay cho Cognito internal username (`Google_...`), thực hiện tự động thử lại (retry) mượt mà.
+- **Bảo mật phiên làm việc:** Lưu trữ JWT Token an toàn tại `sessionStorage`, bảo vệ chống tấn công CSRF OAuth với tham số `state` UUID và mã hóa dữ liệu DynamoDB at-rest bằng AWS KMS Key.
+
+#### 2. Nhóm Chức năng Quản lý & Xử lý Tài liệu (Document Management & Ingestion)
+- **Tải lên tài liệu trực tiếp:** Cho phép kéo & thả hoặc chọn các file tài liệu định dạng PDF, DOCX. Tải lên trực tiếp từ Frontend tới S3 qua cơ chế Presigned URL.
+- **Tự động trích xuất & Đánh chỉ mục:** Hệ thống tự động phân tách văn bản (Chunking), tạo Vector nhúng với **Amazon Titan Embeddings V2** và xây dựng bộ chỉ mục FAISS Vector Store lưu trên S3 per-user.
+- **Quản lý danh sách tài liệu:** Hiển thị danh sách file đã xử lý thành công (kèm định dạng, số trang, số chunk, dung lượng), cho phép xóa từng file hoặc xóa toàn bộ kho chỉ mục vector.
+
+#### 3. Nhóm Chức năng Hỏi đáp & Tra cứu Tri thức AI (Advanced RAG Engine)
+- **Tùy chỉnh 3 Chế độ RAG Nâng cao:**
+  - **Standard RAG:** Phản hồi nhanh chóng với cơ chế **Hybrid Search** (kết hợp 60% FAISS Vector Search + 40% BM25 Keyword Search) và tái xếp hạng ngữ cảnh bằng Cross-Encoder Re-ranker (`ms-marco-MiniLM-L-12-v2`).
+  - **Self-RAG:** Tự động sửa lại câu hỏi (Query Rewriting), lọc ngữ cảnh nhiễu và tự chấm điểm độ chính xác (grounding check) trước khi đưa ra câu trả lời.
+  - **Co-RAG (Multi-Agent):** Phối hợp 3 Agent chuyên biệt (Semantic, Keyword, Conceptual) và hợp nhất kết quả theo cơ chế bỏ phiếu (voting) cho các truy vấn phức tạp.
+- **Lọc tài liệu truy vấn (File Filter):** Giới hạn không gian tìm kiếm tri thức trong một hoặc nhiều tài liệu cụ thể do người dùng tick chọn.
+- **Minh bạch Nguồn trích dẫn (Source Citations Viewer):** Đi kèm với câu trả lời từ LLM (Qwen 3 Next 80B A3B trên Bedrock), hiển thị chính xác tên file gốc, trang số bao nhiêu và đoạn văn bản trích dẫn tương ứng.
+- **Hiển thị tiến trình suy luận (Thinking Process):** Cho phép xem các bước AI truy xuất thông tin (Retrieval & Reasoning steps).
+
+#### 4. Nhóm Chức năng Lịch sử Hội thoại & Quản lý Profile (Chat History & User Profile)
+- **Quản lý phiên hội thoại:** Tự động lưu trữ lịch sử hỏi đáp per-user (`chat_history/{user_id}.json`), hỗ trợ xem lại các cuộc hội thoại cũ hoặc xóa lịch sử chat.
+- **Phản hồi phong phú (Rich Text Response):** Định dạng câu trả lời AI dưới dạng Markdown, Code Block có nút Copy mã nguồn, Công thức toán LaTeX và Bảng dữ liệu.
+- **Quản lý Profile cá nhân:** Xem và cập nhật thông tin cá nhân (Họ tên, Số điện thoại, Ngày sinh), đổi mật khẩu và cập nhật Ảnh đại diện (Avatar) có hỗ trợ nén ảnh & lưu trữ linh hoạt (DynamoDB / S3).
+
+#### 5. Nhóm Chức năng Tự động hóa & Giám sát Hệ thống (Automation & Monitoring)
+- **Tự động dọn dẹp tài khoản rác:** EventBridge định thời 5 phút/lần gọi Lambda để dọn dẹp các user đăng ký chưa xác thực email Quá 5 phút.
+- **Tự động triển khai CI/CD:** CodePipeline & CodeBuild tự động chạy bộ unit test (~60 test cases) và linter trước khi build Docker Image và deploy Lambda.
+- **Giám sát & Cảnh báo sự cố:** CloudWatch Alarms theo dõi 4 chỉ số sinh tử của hệ thống và tự động gửi cảnh báo qua email thông qua AWS SNS Topic.

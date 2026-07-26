@@ -5,27 +5,58 @@ weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Secure Hybrid Access to S3 using VPC Endpoints
+### Overview
 
-#### Overview
+This chapter details the step-by-step process of building, configuring, deploying, testing, and automating the complete SmartDocAI application on AWS Serverless infrastructure.
 
-**AWS PrivateLink** provides private connectivity to AWS services from VPCs and your on-premises networks, without exposing your traffic to the Public Internet.
+The system combines a Serverless Container Architecture using AWS Lambda (FastAPI Container), Amazon API Gateway, AWS Cognito, Amazon DynamoDB, Amazon S3, AWS CloudFront, and advanced Generative AI models from Amazon Bedrock (Titan Embeddings V2 & Qwen 3 Next 80B A3B).
 
-In this lab, you will learn how to create, configure, and test VPC endpoints that enable your workloads to reach AWS services without traversing the Public Internet.
+Learners will practice from resource preparation, Docker Container packaging, cloud service configuration, IAM security permission setup, CI/CD automation pipeline integration via AWS CodePipeline/CodeBuild, to load testing and resource cleanup.
 
-You will create two types of endpoints to access Amazon S3: a Gateway VPC endpoint, and an Interface VPC endpoint. These two types of VPC endpoints offer different benefits depending on if you are accessing Amazon S3 from the cloud or your on-premises location
-+ **Gateway** - Create a gateway endpoint to send traffic to Amazon S3 or DynamoDB using private IP addresses.You route traffic from your VPC to the gateway endpoint using route tables.
-+ **Interface** - Create an interface endpoint to send traffic to endpoint services that use a Network Load Balancer to distribute traffic. Traffic destined for the endpoint service is resolved using DNS.
+---
 
-#### Content
+#### Detailed Workshop Guide Table of Contents
 
-1. [Workshop overview](5.1-Workshop-overview)
-2. [Prerequiste](5.2-Prerequiste/)
-3. [Access S3 from VPC](5.3-S3-vpc/)
-4. [Access S3 from On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (Bonus)](5.5-Policy/)
-6. [Clean up](5.6-Cleanup/)
+1. **[Workshop Overview](5.1-Workshop-overview/)**
+   - 5.1.1 [Frontend Architecture Specification](5.1-Workshop-overview/5.1.1%20-frontend-architecture/)
+   - 5.1.2 [Backend Architecture & RAG Pipeline Specification](5.1-Workshop-overview/5.1.2%20-backend-architecture/)
+   - 5.1.3 [Overall AWS Architecture Diagram](5.1-Workshop-overview/5.1.3%20-overall-aws-architecture/)
+   - 5.1.4 [AWS Services Summary](5.1-Workshop-overview/5.1.4%20-aws-services-used/)
+   - 5.1.5 [UI Specification & System Functionality](5.1-Workshop-overview/5.1.5%20-ui-function/)
+
+2. **[Prerequisites](5.2-Prerequiste/)**
+   - 5.2.1 [Source Code Preparation](5.2-Prerequiste/5.2.1-source-code-preparation/)
+   - 5.2.2 [AWS Account & Amazon Bedrock Access Setup](5.2-Prerequiste/5.2.2-aws-account-preparation/)
+   - 5.2.3 [IAM User Creation & AWS CLI Configuration](5.2-Prerequiste/5.2.3-creating-an-IAM-user/)
+
+3. **[Frontend SPA Deployment](5.3-Frontend-deployment/)**
+   - 5.3.1 [Create S3 Bucket for Static Website Hosting](5.3-Frontend-deployment/5.3.1-create-S3-bucket/)
+   - 5.3.2 [Enable Static Website Hosting Feature](5.3-Frontend-deployment/5.3.2-enable-static-web-hosting/)
+   - 5.3.3 [Configure Block Public Access Settings](5.3-Frontend-deployment/5.3.3-config-block-public-access-settings/)
+   - 5.3.4 [Configure S3 Bucket Policy for Public Read Permission](5.3-Frontend-deployment/5.3.4-config-bucket-policy-public-read/)
+   - 5.3.5 [Verify Static Website Deployment](5.3-Frontend-deployment/5.3.5-website-verification/)
+   - 5.3.6 [Accelerate Performance & Security with AWS CloudFront (CDN)](5.3-Frontend-deployment/5.3.6-accelerating-website-performance-with-cloudfront/)
+   - 5.3.7 [Automate Frontend Deployment with AWS CodePipeline](5.3-Frontend-deployment/5.3.7-codepipeline-to-S3-frontend/)
+
+4. **[AWS Backend Infrastructure Deployment](5.4-Backend-deployment/)**
+   - 5.4.1 [Create Amazon Cognito User Pool & Bind Hosted UI Domain](5.4-Backend-deployment/5.4.1-creating-amazon-cognito/)
+   - 5.4.2 [Create Amazon DynamoDB NoSQL Tables](5.4-Backend-deployment/5.4.2-creating-amazon-dynamoDB/)
+   - 5.4.3 [Create Amazon S3 Document Bucket & Configure CORS](5.4-Backend-deployment/5.4.3-creating-amazon-S3-for-document-storage/)
+   - 5.4.4 [Package Docker Container & Deploy AWS Lambda Engine](5.4-Backend-deployment/5.4.4-creating-AWS-lambda/)
+   - 5.4.5 [Create Amazon API Gateway REST API & Cognito Authorizer](5.4-Backend-deployment/5.4.5-creating-API-gateway/)
+   - 5.4.6 [Routing & Integrating Frontend CloudFront to API Gateway](5.4-Backend-deployment/5.4.6-implementing-frontend-API-gateway-integration/)
+   - 5.4.7 [Automate Lambda Deployment with AWS CodePipeline & CodeBuild](5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/)
+
+5. **[System Testing & Validation](5.5-System-testing/)**
+   - 5.5.1 [Authentication & Account Management Testing](5.5-System-testing/5.5.1-Authentication/)
+   - 5.5.2 [Document RAG Engine & 3 Modes Testing](5.5-System-testing/5.5.2-Document-RAG/)
+   - 5.5.3 [Security & Multi-Tenancy Isolation Testing](5.5-System-testing/5.5.3-Security/)
+   - 5.5.4 [Profile Management & Avatar Upload Testing](5.5-System-testing/5.5.4-Profile/)
+   - 5.5.5 [Monitoring, CloudWatch Alarms & SNS Alert Testing](5.5-System-testing/5.5.5-Monitoring/)
+   - 5.5.6 [CI/CD Pipeline Automation Testing](5.5-System-testing/5.5.6-CICD/)
+
+6. **[Conclusion & Next Steps](5.6-Conclusion/)**
+   - 5.6.1 [Summary & Real-World Operating Cost Analysis](5.6-Conclusion/5.6.1-Summary-Cost/)
+   - 5.6.2 [Resource Cleanup Protocol](5.6-Conclusion/5.6.2-Cleanup/)
+   - 5.6.3 [Future Roadmap & Advanced Enhancements](5.6-Conclusion/5.6.3-Next-Steps/)
