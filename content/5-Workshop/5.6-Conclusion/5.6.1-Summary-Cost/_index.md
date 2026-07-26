@@ -6,8 +6,6 @@ chapter : false
 pre : " <b> 5.6.1 </b> "
 ---
 
-Congratulations! You have completed deploying and testing the **SmartDocAI** system on AWS with a full serverless architecture.
-
 ### What we learned
 
 #### 1. **Serverless Architecture & Microservices**
