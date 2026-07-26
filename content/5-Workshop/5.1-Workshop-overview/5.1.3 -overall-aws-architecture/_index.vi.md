@@ -16,17 +16,16 @@ Sau khi tìm hiểu riêng kiến trúc Frontend và Backend ở 2 phần trư�
 
 | # | Luồng | # | Luồng |
 |---|---|---|---|
-| 1 | Users → CloudFront | 10 | CodePipeline → CodeBuild |
-| 2 | CloudFront → S3 Frontend Bucket | 11 | CodeBuild → Amazon ECR |
-| 3 | CloudFront → API Gateway (proxy `/api/*`) | 12 | ECR → Lambda (deploy container mới) |
-| 4 | API Gateway → Lambda | 13 | Lambda → CloudWatch (ghi log) |
-| 5 | Lambda → Cognito User Pool (validate JWT) | 14 | CloudWatch → SNS Topic |
-| 6 | Lambda → Data Storage (DynamoDB + S3) | 15 | Cognito ↔ Google Identity Provider (OAuth) |
-| 7 | Lambda → Amazon Bedrock (LLM + Embeddings) | 16 | Cognito ↔ Lambda presignup-check (merge account) |
-| 8 | EventBridge → Lambda (cleanup định kỳ 5 phút) | 17 | API Gateway → CloudWatch (metric 5xxError) |
-| 9 | GitHub Repository → CodePipeline | 18 | SNS Topic → Email Notification (Admin) |
+| 1 | Users → CloudFront | 9 | GitHub Repository → CodePipeline (Backend) |
+| 2 | CloudFront → S3 Frontend Bucket | 10 | CodePipeline (Backend) → CodeBuild |
+| 3 | CloudFront → API Gateway (proxy `/api/*`) | 11 | CodeBuild → Amazon ECR |
+| 4 | API Gateway → Lambda | 12 | ECR → Lambda (deploy container mới) |
+| 5 | Lambda → Cognito User Pool (validate JWT) | 13 | GitHub Repository → CodePipeline (Frontend) |
+| 6 | Lambda → Data Storage (DynamoDB + S3) | 14 | CodePipeline (Frontend) → S3 Frontend Bucket |
+| 7 | Lambda → Amazon Bedrock (LLM + Embeddings) | 15 | Cognito ↔ Google Identity Provider (OAuth) |
+| 8 | EventBridge → Lambda (cleanup định kỳ 5 phút) | 16 | Cognito ↔ Lambda presignup-check (merge account) |
 
-> Đường 12 (tím), 13 (cam), 17 (xanh dương) đi theo 3 kênh riêng biệt trong ảnh để tránh chồng chéo — đây là các kết nối "xuyên băng" giữa luồng request runtime và phần vận hành nền (CI/CD + Monitoring).
+> Sơ đồ được tách thành **2 CodePipeline riêng biệt**: CodePipeline (Backend) trong khung "CI/CD Pipeline (backend)" xử lý build/test/deploy Lambda; CodePipeline (Frontend) đặt ngay trong khung "Frontend (CDN + Static Hosting)", deploy thẳng lên S3 Frontend Bucket. Cả hai đều nhận code từ cùng 1 GitHub repository (2 mũi tên 9 và 13). Sơ đồ cũng được bọc trong khung **Region: us-east-1**, và có thêm khung **Generic Group (Account-wide)** chứa IAM Roles + AWS KMS — các thành phần dùng chung toàn tài khoản, không thuộc riêng tầng nào.
 
 SmartDocAI được xây dựng theo mô hình **Serverless Container Architecture** kết hợp **Managed Identity (Cognito)**, gồm các thành phần chính:
 
@@ -41,13 +40,14 @@ SmartDocAI được xây dựng theo mô hình **Serverless Container Architectu
 | File & Index storage | S3 | `smartdocai-storage-623035187993` (Intelligent-Tiering) |
 | LLM | Bedrock | `qwen.qwen3-next-80b-a3b` |
 | Embeddings | Bedrock | `amazon.titan-embed-text-v2:0` (1024 chiều) |
-| CI/CD | CodePipeline | `smartdocai-be-pipeline`, `smartdocsai-fe-pipeline` |
+| CI/CD | 2 CodePipeline riêng biệt | `smartdocai-be-pipeline` (Backend), `smartdocsai-fe-pipeline` (Frontend) |
 | Tác vụ định kỳ | EventBridge | Rule dọn user chưa xác thực (rate 5 phút) |
-| Giám sát | CloudWatch | Alarms cho Lambda Errors/Duration/Throttles + API Gateway 5xx |
+| Giám sát | CloudWatch + SNS | Alarms cho Lambda Errors/Duration/Throttles + API Gateway 5xx, cảnh báo qua email (chi tiết xem mục 5.5.5) |
+| Phân quyền & mã hóa | IAM + KMS | IAM Roles cho Lambda/CodeBuild, KMS key mã hóa DynamoDB |
 
 ### 2. Cấu trúc lưu trữ dữ liệu (Storage Structure)
 
-<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/storage-structure.png" width="90%" style="max-width:900px">
+<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/storage-structure.png" width="110%" style="max-width:900px">
 
 Toàn bộ dữ liệu được thiết kế **cô lập theo từng user** (`user_id` = Cognito `sub`), tránh rò rỉ dữ liệu chéo giữa các tài khoản:
 
@@ -59,7 +59,7 @@ Toàn bộ dữ liệu được thiết kế **cô lập theo từng user** (`us
 
 ### 3. Module hóa Backend (Lambda Modules)
 
-<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/lambda-modules.png" width="90%" style="max-width:900px">
+<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/lambda-modules.png" width="110%" style="max-width:1300px">
 
 `app_api.py` đóng vai trò entry point chính (FastAPI + Mangum adapter), điều hướng request tới các module chuyên biệt trong `modules/`: `auth_service.py` (xác thực), `document_processor.py` + `vector_store.py` (xử lý & lập chỉ mục tài liệu), `rag_chain.py` + `self_rag.py` + `co_rag.py` (3 chế độ RAG), `profile_service.py` (hồ sơ cá nhân).
 
@@ -67,4 +67,7 @@ Toàn bộ dữ liệu được thiết kế **cô lập theo từng user** (`us
 
 <img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/cicd-pipeline.png" width="100%" style="max-width:1100px">
 
-Mỗi lần push code lên nhánh `main` trên GitHub, CodePipeline tự động kích hoạt CodeBuild: cài dependencies → lint bằng flake8 → chạy pytest (hard-fail nếu test không qua) → build Docker image → đẩy lên ECR → cập nhật Lambda function. Cơ chế này đảm bảo code lỗi không thể lọt vào production.
+Hệ thống có **2 CodePipeline tách biệt**, cùng nhận code từ 1 GitHub repository:
+
+- **CodePipeline (Backend)** `smartdocai-be-pipeline`: Mỗi lần push code lên nhánh `main`, tự động kích hoạt CodeBuild: cài dependencies → lint bằng flake8 → chạy pytest (hard-fail nếu test không qua) → build Docker image → đẩy lên ECR → cập nhật Lambda function. Cơ chế này đảm bảo code lỗi không thể lọt vào production.
+- **CodePipeline (Frontend)** `smartdocsai-fe-pipeline`: build ứng dụng React/Vite và deploy thẳng kết quả lên S3 Frontend Bucket, không qua bước test/CodeBuild riêng vì chỉ là static file.

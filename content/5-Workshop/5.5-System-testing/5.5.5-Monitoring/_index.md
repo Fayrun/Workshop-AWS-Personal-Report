@@ -31,6 +31,8 @@ This section explains how to monitor the health of the SmartDocAI system via Clo
 2024-03-15T10:30:50.999Z REPORT RequestId: abc123 Duration: 5234 ms Memory: 2048 MB Max Used: 1234 MB
 ```
 
+<img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/cloudwatch-tail-logs-realtime.png" width="90%" style="max-width:900px">
+
 ---
 
 ### 2. CloudWatch Insights Queries
@@ -42,6 +44,8 @@ This section explains how to monitor the health of the SmartDocAI system via Clo
 | **Top 10 Slowest Invocations** | Find performance bottlenecks | `fields @timestamp, @duration, @message`<br/>`\| filter @type = "REPORT"`<br/>`\| sort @duration desc`<br/>`\| limit 10` | List of longest-running requests (cold starts: 2-3s) |
 | **Cleanup Results** | EventBridge cleanup stats | `fields @timestamp, @message`<br/>`\| filter @message like /Deleted.*users/`<br/>`\| parse @message "Deleted * users" as deleted_count`<br/>`\| stats sum(deleted_count) as total_deleted by bin(1d)` | Daily count of unconfirmed users deleted |
 | **Most Active Users** | User activity ranking | `fields @message`<br/>`\| filter @message like /User login:/`<br/>`\| parse @message "User login: *" as email`<br/>`\| stats count() as login_count by email`<br/>`\| sort login_count desc \| limit 10` | Top 10 users by login frequency |
+
+<img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/cloudwatch-logs-insights-query.png" width="90%" style="max-width:900px">
 
 ---
 

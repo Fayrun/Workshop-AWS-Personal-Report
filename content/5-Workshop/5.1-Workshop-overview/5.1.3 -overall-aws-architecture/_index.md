@@ -16,17 +16,16 @@ After exploring the Frontend and Backend architecture separately in the previous
 
 | # | Flow | # | Flow |
 |---|---|---|---|
-| 1 | Users → CloudFront | 10 | CodePipeline → CodeBuild |
-| 2 | CloudFront → S3 Frontend Bucket | 11 | CodeBuild → Amazon ECR |
-| 3 | CloudFront → API Gateway (proxy `/api/*`) | 12 | ECR → Lambda (deploy new container) |
-| 4 | API Gateway → Lambda | 13 | Lambda → CloudWatch (write logs) |
-| 5 | Lambda → Cognito User Pool (validate JWT) | 14 | CloudWatch → SNS Topic |
-| 6 | Lambda → Data Storage (DynamoDB + S3) | 15 | Cognito ↔ Google Identity Provider (OAuth) |
-| 7 | Lambda → Amazon Bedrock (LLM + Embeddings) | 16 | Cognito ↔ Lambda presignup-check (merge account) |
-| 8 | EventBridge → Lambda (cleanup every 5 minutes) | 17 | API Gateway → CloudWatch (5xxError metric) |
-| 9 | GitHub Repository → CodePipeline | 18 | SNS Topic → Email Notification (Admin) |
+| 1 | Users → CloudFront | 9 | GitHub Repository → CodePipeline (Backend) |
+| 2 | CloudFront → S3 Frontend Bucket | 10 | CodePipeline (Backend) → CodeBuild |
+| 3 | CloudFront → API Gateway (proxy `/api/*`) | 11 | CodeBuild → Amazon ECR |
+| 4 | API Gateway → Lambda | 12 | ECR → Lambda (deploy new container) |
+| 5 | Lambda → Cognito User Pool (validate JWT) | 13 | GitHub Repository → CodePipeline (Frontend) |
+| 6 | Lambda → Data Storage (DynamoDB + S3) | 14 | CodePipeline (Frontend) → S3 Frontend Bucket |
+| 7 | Lambda → Amazon Bedrock (LLM + Embeddings) | 15 | Cognito ↔ Google Identity Provider (OAuth) |
+| 8 | EventBridge → Lambda (cleanup every 5 minutes) | 16 | Cognito ↔ Lambda presignup-check (merge account) |
 
-> Arrows 12 (purple), 13 (orange), and 17 (blue) are routed through 3 separate channels in the diagram to avoid overlapping — these are the "cross-band" connections between the runtime request flow and the background operations (CI/CD + Monitoring).
+> The diagram is split into **2 separate CodePipelines**: CodePipeline (Backend) inside the "CI/CD Pipeline (backend)" group handles build/test/deploy to Lambda; CodePipeline (Frontend) sits inside the "Frontend (CDN + Static Hosting)" group and deploys straight to the S3 Frontend Bucket. Both receive code from the same GitHub repository (arrows 9 and 13). The diagram is also wrapped in a **Region: us-east-1** boundary, plus a **Generic Group (Account-wide)** box containing IAM Roles + AWS KMS — account-wide components that don't belong to any single tier.
 
 SmartDocAI is built on a **Serverless Container Architecture** combined with **Managed Identity (Cognito)**, consisting of the following main components:
 
@@ -41,13 +40,14 @@ SmartDocAI is built on a **Serverless Container Architecture** combined with **M
 | File & Index storage | S3 | `smartdocai-storage-623035187993` (Intelligent-Tiering) |
 | LLM | Bedrock | `qwen.qwen3-next-80b-a3b` |
 | Embeddings | Bedrock | `amazon.titan-embed-text-v2:0` (1024 dimensions) |
-| CI/CD | CodePipeline | `smartdocai-be-pipeline`, `smartdocsai-fe-pipeline` |
+| CI/CD | 2 separate CodePipelines | `smartdocai-be-pipeline` (Backend), `smartdocsai-fe-pipeline` (Frontend) |
 | Scheduled task | EventBridge | Rule to clean up unconfirmed users (rate 5 minutes) |
-| Monitoring | CloudWatch | Alarms for Lambda Errors/Duration/Throttles + API Gateway 5xx |
+| Monitoring | CloudWatch + SNS | Alarms for Lambda Errors/Duration/Throttles + API Gateway 5xx, email alerting (see section 5.5.5) |
+| Access & encryption | IAM + KMS | IAM Roles for Lambda/CodeBuild, KMS key encrypting DynamoDB |
 
 ### 2. Data Storage Structure
 
-<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/storage-structure.png" width="90%" style="max-width:900px">
+<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/storage-structure.png" width="110%" style="max-width:900px">
 
 All data is designed to be **isolated per user** (`user_id` = Cognito `sub`), preventing cross-account data leaks:
 
@@ -59,7 +59,7 @@ All data is designed to be **isolated per user** (`user_id` = Cognito `sub`), pr
 
 ### 3. Backend Modularization (Lambda Modules)
 
-<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/lambda-modules.png" width="90%" style="max-width:900px">
+<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/lambda-modules.png" width="110%" style="max-width:1300px">
 
 `app_api.py` serves as the main entry point (FastAPI + Mangum adapter), routing requests to specialized modules under `modules/`: `auth_service.py` (authentication), `document_processor.py` + `vector_store.py` (document processing & indexing), `rag_chain.py` + `self_rag.py` + `co_rag.py` (3 RAG modes), `profile_service.py` (user profile).
 
@@ -67,4 +67,7 @@ All data is designed to be **isolated per user** (`user_id` = Cognito `sub`), pr
 
 <img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/cicd-pipeline.png" width="100%" style="max-width:1100px">
 
-Every time code is pushed to the `main` branch on GitHub, CodePipeline automatically triggers CodeBuild: install dependencies → lint with flake8 → run pytest (hard-fail if tests do not pass) → build Docker image → push to ECR → update the Lambda function. This mechanism ensures that broken code cannot make it into production.
+The system has **2 separate CodePipelines**, both receiving code from the same GitHub repository:
+
+- **CodePipeline (Backend)** `smartdocai-be-pipeline`: Every time code is pushed to the `main` branch, it automatically triggers CodeBuild: install dependencies → lint with flake8 → run pytest (hard-fail if tests do not pass) → build Docker image → push to ECR → update the Lambda function. This mechanism ensures that broken code cannot make it into production.
+- **CodePipeline (Frontend)** `smartdocsai-fe-pipeline`: builds the React/Vite application and deploys the result straight to the S3 Frontend Bucket, without a separate test/CodeBuild step since it's just static files.

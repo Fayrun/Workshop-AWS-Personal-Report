@@ -15,21 +15,21 @@
     <title>Tổng kết Workshop &amp; Chi phí :: Báo cáo thực tập</title>
 
     
-    <link href="/css/nucleus.css?1785048841" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1785048841" rel="stylesheet">
-    <link href="/css/hybrid.css?1785048841" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1785048841" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1785048841" rel="stylesheet">
-    <link href="/css/auto-complete.css?1785048841" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1785048841" rel="stylesheet">
-    <link href="/css/theme.css?1785048841" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1785048841" rel="stylesheet">
+    <link href="/css/nucleus.css?1785061233" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1785061233" rel="stylesheet">
+    <link href="/css/hybrid.css?1785061233" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1785061233" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1785061233" rel="stylesheet">
+    <link href="/css/auto-complete.css?1785061233" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1785061233" rel="stylesheet">
+    <link href="/css/theme.css?1785061233" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1785061233" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1785048841" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1785061233" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1785048841"></script>
+    <script src="/js/jquery-3.3.1.min.js?1785061233"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -59,14 +59,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1785048841"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1785048841"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1785061233"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1785061233"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1785048841"></script>
+<script type="text/javascript" src="/js/search.js?1785061233"></script>
  
   </div>
 
@@ -479,7 +479,7 @@
             
 <li
   data-nav-id="/vi/5-workshop/5.1-workshop-overview/"
-  title="Giới thiệu"
+  title="Giới thiệu "
   class="dd-item 
         
         
@@ -487,7 +487,7 @@
         "
 >
   <a href="/vi/5-workshop/5.1-workshop-overview/">
-     <b> 5.1. </b> Giới thiệu 
+     <b> 5.1. </b> Giới thiệu  
     <i class="fas fa-check read-icon"></i>
     
   </a>
@@ -1363,12 +1363,14 @@
   <ul>
     <li>
       <ul>
+        <li><a href="#những-gì-đã-thực-hiện">Những gì đã thực hiện</a></li>
         <li><a href="#những-gì-đã-học-được">Những gì đã học được</a></li>
       </ul>
     </li>
     <li><a href="#tổng-chi-phí">Tổng chi phí</a>
       <ul>
-        <li><a href="#chi-phí-ước-tính-giả-định-mức-sử-dụng-trong-thời-gian-workshop">Chi phí ước tính (giả định mức sử dụng trong thời gian workshop)</a></li>
+        <li><a href="#chi-phí-thực-tế-theo-aws-cost-explorer-27062026---26072026-30-ngày">Chi phí thực tế (theo AWS Cost Explorer, 27/06/2026 - 26/07/2026, 30 ngày)</a></li>
+        <li><a href="#so-sánh-với-chi-phí-dự-tính-ở-mục-2---đề-xuất">So sánh với chi phí dự tính ở mục 2 - Đề xuất</a></li>
       </ul>
     </li>
   </ul>
@@ -1395,9 +1397,49 @@
 
 
 
-	<p>Xin chúc mừng! Bạn đã hoàn thành việc triển khai và kiểm thử hệ thống <strong>SmartDocAI</strong> trên AWS với kiến trúc serverless đầy đủ.</p>
+	<h3 id="những-gì-đã-thực-hiện">Những gì đã thực hiện</h3>
+<h4 id="1-51---giới-thiệu--kiến-trúc">1. <strong>5.1 - Giới thiệu &amp; Kiến trúc</strong></h4>
+<ul>
+<li>Đặc tả kiến trúc Frontend, kiến trúc Backend &amp; RAG Pipeline</li>
+<li>Vẽ sơ đồ kiến trúc tổng thể trên AWS</li>
+<li>Liệt kê đầy đủ các dịch vụ AWS sử dụng</li>
+<li>Mô tả giao diện và chức năng hệ thống</li>
+</ul>
+<h4 id="2-52---chuẩn-bị">2. <strong>5.2 - Chuẩn bị</strong></h4>
+<ul>
+<li>Chuẩn bị mã nguồn dự án</li>
+<li>Tạo và cấu hình tài khoản AWS</li>
+<li>Tạo IAM User riêng để quản lý quyền truy cập thay vì dùng root user</li>
+</ul>
+<h4 id="3-53---triển-khai-frontend">3. <strong>5.3 - Triển khai Frontend</strong></h4>
+<ul>
+<li>Tạo S3 Bucket lưu trữ file tĩnh</li>
+<li>Bật Static Website Hosting</li>
+<li>Cấu hình Bucket Policy/Block Public Access</li>
+<li>Tăng tốc truy cập bằng CloudFront</li>
+<li>Tự động hóa deploy bằng CodePipeline (GitHub → S3)</li>
+</ul>
+<h4 id="4-54---triển-khai-backend">4. <strong>5.4 - Triển khai Backend</strong></h4>
+<ul>
+<li>Khởi tạo Cognito (xác thực người dùng)</li>
+<li>Khởi tạo DynamoDB (hồ sơ người dùng)</li>
+<li>Khởi tạo S3 (lưu tài liệu + FAISS index)</li>
+<li>Đóng gói RAG Engine chạy trên Lambda (Docker container qua ECR)</li>
+<li>Tạo API Gateway</li>
+<li>Tích hợp Frontend gọi API qua CloudFront</li>
+<li>Tự động hóa CI/CD backend bằng CodePipeline</li>
+</ul>
+<h4 id="5-55---kiểm-thử-hệ-thống">5. <strong>5.5 - Kiểm thử hệ thống</strong></h4>
+<ul>
+<li>Authentication (đăng ký/đăng nhập/JWT)</li>
+<li>Document Upload &amp; RAG (3 chế độ Standard/Self-RAG/Co-RAG)</li>
+<li>Security (validate đầu vào, CORS/JWT, CSRF OAuth state)</li>
+<li>Profile (CRUD hồ sơ + avatar)</li>
+<li>Monitoring (CloudWatch Logs/Insights/Alarms + SNS)</li>
+<li>CI/CD (pytest tự động, cơ chế hard-fail)</li>
+</ul>
 <h3 id="những-gì-đã-học-được">Những gì đã học được</h3>
-<h4 id="1-kiến-trúc-serverless--vi-dịch-vụ">1. <strong>Kiến trúc Serverless &amp; Vi dịch vụ</strong></h4>
+<h4 id="1-kiến-trúc-serverless--vi-dịch-vụ-microservices">1. <strong>Kiến trúc Serverless &amp; Vi dịch vụ (Microservices)</strong></h4>
 <ul>
 <li>Deploy FastAPI application lên Lambda với Docker container</li>
 <li>Sử dụng API Gateway làm HTTP endpoint public</li>
@@ -1446,123 +1488,174 @@
 <li>DynamoDB tính phí on-demand (không tốn phí khi rảnh)</li>
 <li>S3 presigned URL (bỏ qua Lambda khi upload)</li>
 <li>CloudFront Free Tier (1 TB/tháng)</li>
-<li><strong>Chi phí ước tính:</strong> $7-15/tháng cho mức sử dụng vừa phải</li>
+<li><strong>Chi phí thực tế:</strong> ~$1.65 trong 30 ngày phát triển (27/06 - 26/07/2026) — xem chi tiết bên dưới</li>
 </ul>
 <hr>
 <h2 id="tổng-chi-phí">Tổng chi phí</h2>
-<h3 id="chi-phí-ước-tính-giả-định-mức-sử-dụng-trong-thời-gian-workshop">Chi phí ước tính (giả định mức sử dụng trong thời gian workshop)</h3>
-<p>Giả sử workshop chạy trong <strong>7 ngày</strong> với mức độ test vừa phải:</p>
+<h3 id="chi-phí-thực-tế-theo-aws-cost-explorer-27062026---26072026-30-ngày">Chi phí thực tế (theo AWS Cost Explorer, 27/06/2026 - 26/07/2026, 30 ngày)</h3>
+<p>Số liệu dưới đây lấy trực tiếp từ AWS Cost Explorer, tổng hợp đúng <strong>30 ngày</strong> trong giai đoạn phát triển + kiểm thử workshop:</p>
 <table>
 	<thead>
 			<tr>
 					<th>Dịch vụ</th>
-					<th>Mức sử dụng</th>
-					<th>Chi phí (7 ngày)</th>
-					<th>Chi phí ước tính (theo tháng)</th>
+					<th>Chi phí thực tế (USD)</th>
+					<th>Tỷ trọng</th>
 			</tr>
 	</thead>
 	<tbody>
 			<tr>
-					<td>Lambda</td>
-					<td>5K invocations, 2GB RAM, 5s avg</td>
-					<td>$0.20</td>
-					<td>$0.85</td>
+					<td>Amazon ECR (lưu trữ Docker image)</td>
+					<td>$0.5977</td>
+					<td>36.3%</td>
 			</tr>
 			<tr>
-					<td>API Gateway</td>
-					<td>5K requests</td>
-					<td>$0.02</td>
-					<td>$0.08</td>
+					<td>AWS CodePipeline</td>
+					<td>$0.4440</td>
+					<td>26.9%</td>
 			</tr>
 			<tr>
-					<td>S3 (Frontend)</td>
-					<td>2 GB storage, 5 GB transfer</td>
-					<td>$0.10</td>
-					<td>$0.35</td>
+					<td>Amazon Bedrock (LLM + Embeddings)</td>
+					<td>$0.3453</td>
+					<td>20.9%</td>
 			</tr>
 			<tr>
-					<td>S3 (Storage)</td>
-					<td>10 GB storage, 10 GB transfer</td>
-					<td>$0.35</td>
-					<td>$1.20</td>
+					<td>AWS CodeBuild</td>
+					<td>$0.2250</td>
+					<td>13.7%</td>
 			</tr>
 			<tr>
-					<td>DynamoDB</td>
-					<td>2K reads, 1K writes</td>
-					<td>$0.05</td>
-					<td>$0.15</td>
+					<td>Amazon S3</td>
+					<td>$0.0197</td>
+					<td>1.2%</td>
 			</tr>
 			<tr>
-					<td>Cognito</td>
-					<td>50 users (MAU)</td>
-					<td>Free</td>
-					<td>Free</td>
+					<td>Amazon API Gateway</td>
+					<td>$0.0140</td>
+					<td>0.9%</td>
 			</tr>
 			<tr>
-					<td>CloudFront</td>
-					<td>20 GB transfer (Free tier)</td>
-					<td>$0.00</td>
-					<td>$0.00</td>
+					<td>Amazon DynamoDB</td>
+					<td>$0.0021</td>
+					<td>0.1%</td>
 			</tr>
 			<tr>
-					<td>Bedrock (LLM)</td>
-					<td>200K input tokens, 50K output tokens</td>
-					<td>$0.13</td>
-					<td>$0.45</td>
+					<td>Amazon SES</td>
+					<td>$0.0003</td>
+					<td>&lt;0.1%</td>
 			</tr>
 			<tr>
-					<td>Bedrock (Embeddings)</td>
-					<td>1M tokens</td>
-					<td>$0.10</td>
-					<td>$0.35</td>
+					<td>AWS Secrets Manager</td>
+					<td>$0.00002</td>
+					<td>&lt;0.1%</td>
 			</tr>
 			<tr>
-					<td>CodePipeline</td>
-					<td>1 active pipeline</td>
-					<td>Free</td>
-					<td>Free</td>
+					<td>Amazon CloudFront</td>
+					<td>$0.0000052</td>
+					<td>~0%</td>
 			</tr>
 			<tr>
-					<td>CodeBuild</td>
-					<td>5 builds, 5 min each</td>
-					<td>$0.02</td>
-					<td>$0.08</td>
+					<td>AWS Lambda</td>
+					<td>$0.00 (Free Tier)</td>
+					<td>0%</td>
 			</tr>
 			<tr>
-					<td>ECR</td>
-					<td>1.5 GB storage</td>
-					<td>$0.15</td>
-					<td>$0.20</td>
+					<td>Amazon Cognito</td>
+					<td>$0.00 (Free Tier)</td>
+					<td>0%</td>
 			</tr>
 			<tr>
-					<td>EventBridge</td>
-					<td>2016 events (every 5min × 7 days)</td>
-					<td>Free</td>
-					<td>Free</td>
+					<td>Amazon EventBridge</td>
+					<td>$0.00 (Free Tier)</td>
+					<td>0%</td>
 			</tr>
 			<tr>
-					<td>CloudWatch Logs</td>
-					<td>0.5 GB ingested</td>
-					<td>$0.25</td>
-					<td>$1.00</td>
+					<td>Amazon CloudWatch</td>
+					<td>$0.00 (Free Tier)</td>
+					<td>0%</td>
 			</tr>
 			<tr>
-					<td><strong>TOTAL</strong></td>
-					<td></td>
-					<td><strong>~$1.37</strong></td>
-					<td><strong>~$4.71</strong></td>
+					<td>Amazon SNS</td>
+					<td>$0.00 (Free Tier)</td>
+					<td>0%</td>
+			</tr>
+			<tr>
+					<td><strong>TỔNG (30 ngày)</strong></td>
+					<td><strong>~$1.6481</strong></td>
+					<td>100%</td>
 			</tr>
 	</tbody>
 </table>
-<blockquote>
-<p><strong>Lưu ý:</strong> Bảng trên là <strong>số liệu ước tính</strong> dựa trên giả định mức sử dụng, chưa phải số liệu thật lấy từ AWS Cost Explorer/Billing (do cần quyền root/billing access để xem). Sẽ cập nhật số liệu thật khi có quyền truy cập, kèm ảnh chụp Cost Explorer để đối chiếu.</p>
-</blockquote>
+<h3 id="so-sánh-với-chi-phí-dự-tính-ở-mục-2---đề-xuất">So sánh với chi phí dự tính ở mục 2 - Đề xuất</h3>
+<p>Ở <a href="/vi/2-proposal/">mục 2 - Đề xuất</a>, nhóm đã ước tính tổng chi phí hạ tầng hàng tháng vào khoảng <strong>$0.56 - $1.65 USD/tháng</strong>. Chi phí thực tế trong đúng 30 ngày là <strong>~$1.65/tháng</strong> — <strong>nằm sát ngay biên trên của khoảng đã dự tính ban đầu</strong>, cho thấy ước tính tổng thể khá chính xác.</p>
+<p>Tuy nhiên, khi so sánh chi tiết theo từng dịch vụ, cơ cấu chi phí thực tế lệch khá nhiều so với giả định ban đầu:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Dịch vụ</th>
+					<th>Ước tính (mục 2)</th>
+					<th>Thực tế</th>
+					<th>Nhận xét</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Amazon ECR</strong></td>
+					<td><em>(không có trong bảng ước tính)</em></td>
+					<td>$0.5977</td>
+					<td><strong>Khoản chi lớn nhất thực tế nhưng bị bỏ sót hoàn toàn khi ước tính</strong> — mỗi lần CodePipeline chạy sẽ build &amp; push 1 Docker image mới lên ECR, các image cũ không tự xóa (chưa cấu hình lifecycle policy) nên dung lượng tích lũy dần theo thời gian</td>
+			</tr>
+			<tr>
+					<td><strong>CodePipeline &amp; CodeBuild</strong></td>
+					<td>$0.05 - $0.15</td>
+					<td>$0.6690</td>
+					<td>Cao hơn ước tính <strong>4-13 lần</strong>, do giai đoạn phát triển có rất nhiều lần push/sửa lỗi/build lại (không giống giả định &ldquo;~30 phút build/tháng&rdquo; của hệ thống đã ổn định)</td>
+			</tr>
+			<tr>
+					<td><strong>Amazon Bedrock</strong></td>
+					<td>$0.25 - $0.95</td>
+					<td>$0.3453</td>
+					<td>Nằm trong khoảng ước tính</td>
+			</tr>
+			<tr>
+					<td><strong>Amazon S3</strong></td>
+					<td>$0.15 - $0.30</td>
+					<td>$0.0197</td>
+					<td>Thấp hơn nhiều so với ước tính — dung lượng tài liệu test thực tế còn ít</td>
+			</tr>
+			<tr>
+					<td><strong>API Gateway</strong></td>
+					<td>$0.01 - $0.05</td>
+					<td>$0.0140</td>
+					<td>Nằm trong khoảng ước tính</td>
+			</tr>
+			<tr>
+					<td><strong>DynamoDB</strong></td>
+					<td>$0.00 (Free Tier)</td>
+					<td>$0.0021</td>
+					<td>Gần như khớp, vẫn gần như miễn phí</td>
+			</tr>
+			<tr>
+					<td><strong>Lambda, Cognito, CloudFront, EventBridge, CloudWatch</strong></td>
+					<td>$0.00 - $0.10</td>
+					<td>$0.00</td>
+					<td>Free Tier phát huy đúng như kỳ vọng</td>
+			</tr>
+			<tr>
+					<td><strong>Amazon SES, Secrets Manager</strong></td>
+					<td><em>(không có trong bảng ước tính)</em></td>
+					<td>$0.0003 + $0.00004</td>
+					<td>Phát sinh nhỏ, không đáng kể, nhưng cho thấy có dùng thêm 2 dịch vụ ngoài kiến trúc đã liệt kê ban đầu</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>Kết luận:</strong> Tổng chi phí thực tế khớp khá sát với ước tính ban đầu, nhưng <strong>CI/CD (CodePipeline + CodeBuild + ECR) mới là nhóm chi phí lớn nhất trong thực tế (~77% tổng chi phí)</strong> thay vì Bedrock/S3 như dự đoán ban đầu — điều này hợp lý vì đây là giai đoạn phát triển tích cực (nhiều lần build/deploy), không phải giai đoạn vận hành ổn định. Nếu đưa hệ thống lên production lâu dài, nên cấu hình <strong>ECR lifecycle policy</strong> để tự động xoá image cũ, tránh chi phí lưu trữ tích lũy không cần thiết.</p>
+<hr>
 <p><strong>Ghi chú:</strong></p>
 <ul>
-<li>Chi phí workshop: <strong>Dưới $2</strong> (rất thấp)</li>
-<li>Free Tier: Cognito, EventBridge, CodePipeline, CloudFront (1 TB) đều miễn phí</li>
-<li>Lambda provisioned concurrency (tùy chọn): +$4/tháng nếu bật</li>
-<li>Chi phí production với traffic cao hơn: $15-50/tháng</li>
+<li>Chi phí thực tế trong giai đoạn phát triển/workshop: <strong>dưới $1.7</strong> (rất thấp)</li>
+<li>Free Tier: Lambda, Cognito, EventBridge, CloudWatch, SNS đều đạt $0.00 nhờ mức sử dụng nằm trong hạn mức miễn phí</li>
+<li>Nhóm chi phí lớn nhất thực tế: CI/CD pipeline (ECR + CodePipeline + CodeBuild), không phải AI/Bedrock như dự đoán ban đầu</li>
+<li>Chi phí production với traffic cao hơn và nhiều lần build/deploy hơn: có thể cao hơn đáng kể, cần theo dõi qua CloudWatch Budget Alerts</li>
 </ul>
 <hr>
 
@@ -2630,19 +2723,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1785048841"></script>
-    <script src="/js/perfect-scrollbar.min.js?1785048841"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1785048841"></script>
-    <script src="/js/jquery.sticky.js?1785048841"></script>
-    <script src="/js/featherlight.min.js?1785048841"></script>
-    <script src="/js/highlight.pack.js?1785048841"></script>
+    <script src="/js/clipboard.min.js?1785061233"></script>
+    <script src="/js/perfect-scrollbar.min.js?1785061233"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1785061233"></script>
+    <script src="/js/jquery.sticky.js?1785061233"></script>
+    <script src="/js/featherlight.min.js?1785061233"></script>
+    <script src="/js/highlight.pack.js?1785061233"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1785048841"></script>
-    <script src="/js/learn.js?1785048841"></script>
-    <script src="/js/hugo-learn.js?1785048841"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1785061233"></script>
+    <script src="/js/learn.js?1785061233"></script>
+    <script src="/js/hugo-learn.js?1785061233"></script>
 
-    <link href="/mermaid/mermaid.css?1785048841" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1785048841"></script>
+    <link href="/mermaid/mermaid.css?1785061233" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1785061233"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
