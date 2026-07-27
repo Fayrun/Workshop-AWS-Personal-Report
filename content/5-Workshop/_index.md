@@ -56,7 +56,7 @@ Learners will practice from resource preparation, Docker Container packaging, cl
    - 5.5.5 [Monitoring, CloudWatch Alarms & SNS Alert Testing](5.5-System-testing/5.5.5-Monitoring/)
    - 5.5.6 [CI/CD Pipeline Automation Testing](5.5-System-testing/5.5.6-CICD/)
 
-6. **[Conclusion & Next Steps](5.6-Conclusion/)**
-   - 5.6.1 [Summary & Real-World Operating Cost Analysis](5.6-Conclusion/5.6.1-Summary-Cost/)
-   - 5.6.2 [Resource Cleanup Protocol](5.6-Conclusion/5.6.2-Cleanup/)
-   - 5.6.3 [Future Roadmap & Advanced Enhancements](5.6-Conclusion/5.6.3-Next-Steps/)
+6. **[Conclusion](5.6-Conclusion/)**
+   - 5.6.1 [Workshop Summary & Cost](5.6-Conclusion/5.6.1-Summary-Cost/)
+   - 5.6.2 [Resource Cleanup](5.6-Conclusion/5.6.2-Cleanup/)
+   - 5.6.3 [Next Steps & References](5.6-Conclusion/5.6.3-Next-Steps/)
