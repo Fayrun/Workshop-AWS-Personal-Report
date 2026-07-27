@@ -127,13 +127,13 @@ Main Dashboard layout is divided into 2 main functional areas: **Navigation & Do
 
 - **Header and Logo Interface**:
 
-![rId68.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId68.png)
+![header_logo.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/header_logo.png)
 
   - *Functional description*: Displays brand name "SmartDocAI", Sidebar collapse toggle, Light/Dark theme toggle button.
 
 - **System Status Interface**:
 
-![rId69.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId69.png)
+![rId68.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId68.png)
 
   - *Functional description*: Displays green/red indicator light showing connection status to AI service (Cloud LLM / Bedrock).
 
@@ -141,17 +141,17 @@ Main Dashboard layout is divided into 2 main functional areas: **Navigation & Do
 
   - *Before file upload*:
 
-![rId70.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId70.png)
+![rId69.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId69.png)
 
   - *After file upload*:
 
-![rId71.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId71.png)
+![rId70.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId70.png)
 
   - *Functional description*: Cards displaying overview metrics: Uploaded file count, Total pages (`totalPages`), Total text chunks (`totalChunks`).
 
 - **Chunking Configuration Interface**:
 
-![rId72.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId72.png)
+![rId71.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId71.png)
 
   - *Functional description*: Slider control: Chunk Size (text chunk size, default 500-1000 tokens) and Chunk Overlap (overlap size, default 100-200 tokens).
 
@@ -159,11 +159,11 @@ Main Dashboard layout is divided into 2 main functional areas: **Navigation & Do
 
   - *Before file upload*:
 
-![rId73.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId73.png)
+![rId72.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId72.png)
 
   - *After file upload*:
 
-![rId74.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId74.png)
+![rId73.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId73.png)
 
   - *Functional description*: Drag & Drop zone or click to select files. Supports PDF, DOCX formats up to size limit.
 
@@ -171,28 +171,35 @@ Main Dashboard layout is divided into 2 main functional areas: **Navigation & Do
 
   - *Before document processing*:
 
-![rId75.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId75.png)
+![rId74.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId74.png)
 
   - *After document processing*:
 
-![rId76.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId76.png)
+![rId75.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId75.png)
 
   - *Functional description*: Displays list of successfully processed documents, along with format info, page count, and individual delete buttons.
 
 - **Action Buttons Interface**:
+
+![rId76.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId76.png)
+
   - *Functional description*: Clears total session conversation history and deletes all uploaded documents from the system.
 
 - **Chat History List Interface**:
 
   - *Before user asks question*:
 
-![rId78.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId78.png)
+![rId77.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId77.png)
 
   - *After user asks question*:
 
-![rId79.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId79.png)
+![rId78.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId78.png)
 
-  - *Functional description*: Lists past chat sessions, allowing session selection or deletion.
+  - *Chat history detail*:
+
+![chat_history_detail.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/chat_history_detail.png)
+
+  - *Functional description*: Lists past chat sessions, allowing selection to view question/answer details or deletion.
 
 ##### 3.3.2. AI Chat & Q&A Workspace (ChatArea)
 
@@ -226,7 +233,7 @@ Main Dashboard layout is divided into 2 main functional areas: **Navigation & Do
 
   - *Functional description*: Multi-line auto-expanding textarea, Send button (SendIcon).
 
-#### 3.3. Search Strategy Rules & Customization
+#### 3.4. Search Strategy Rules & Customization
 
 The `SearchSettings` control panel allows users to toggle advanced RAG technologies per search scenario:
 
@@ -238,7 +245,7 @@ The `SearchSettings` control panel allows users to toggle advanced RAG technolog
 | Self-RAG | 3-step AI self-reflection loop: Query Rewriting, Relevance Filtering, Answer Grading. | Complex questions requiring AI to rewrite query if initial search info is insufficient. |
 | Co-RAG (Multi-Agent) | Multi-agent collaboration: Semantic Agent (Vector), Keyword Agent (BM25), Conceptual Agent (LLM Concept). Merges results via voting, union, or intersection strategies. | Demands deep multi-perspective knowledge synthesis across documents. |
 
-#### 3.4. State Handling & Exceptions on Main Page
+#### 3.5. State Handling & Exceptions on Main Page
 - **No Document Uploaded**: Chat area displays welcome screen `WelcomeHero` with step-by-step guidance. Advanced RAG toggles in `SearchSettings` automatically switch to `disabled` status.
 - **Corrupted File Processing Error**: System pops up Toast error warning immediately, preserving current UI state.
 - **Data Isolation & Security (Per-User Isolation)**: All documents and chat history are bound to `user_id` (Cognito `sub`). User A cannot view or query User B's documents on S3/Vector Index.
