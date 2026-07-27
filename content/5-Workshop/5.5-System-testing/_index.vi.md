@@ -12,9 +12,9 @@ Khác với các chương triển khai hạ tầng (tạo tài nguyên qua giao 
 
 ### Nội dung thực hiện
 
-1. [Kiểm thử xác thực (Authentication)](5.5.1-Authentication/)
-2. [Kiểm thử tải lên tài liệu & RAG (Document Upload & RAG)](5.5.2-Document-RAG/)
-3. [Kiểm thử bảo mật (Security)](5.5.3-Security/)
-4. [Kiểm thử hồ sơ cá nhân (Profile)](5.5.4-Profile/)
-5. [Giám sát & Nhật ký hệ thống (Monitoring & Logging)](5.5.5-Monitoring/)
+1. [Kiểm thử xác thực](5.5.1-Authentication/)
+2. [Kiểm thử tải lên tài liệu & RAG](5.5.2-Document-RAG/)
+3. [Kiểm thử bảo mật](5.5.3-Security/)
+4. [Kiểm thử hồ sơ cá nhân](5.5.4-Profile/)
+5. [Giám sát & Nhật ký hệ thống](5.5.5-Monitoring/)
 6. [Kiểm thử tự động CI/CD](5.5.6-CICD/)

@@ -48,15 +48,15 @@ Learners will practice from resource preparation, Docker Container packaging, cl
    - 5.4.6 [Routing & Integrating Frontend CloudFront to API Gateway](5.4-Backend-deployment/5.4.6-implementing-frontend-API-gateway-integration/)
    - 5.4.7 [Automate Lambda Deployment with AWS CodePipeline & CodeBuild](5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/)
 
-5. **[System Testing & Validation](5.5-System-testing/)**
-   - 5.5.1 [Authentication & Account Management Testing](5.5-System-testing/5.5.1-Authentication/)
-   - 5.5.2 [Document RAG Engine & 3 Modes Testing](5.5-System-testing/5.5.2-Document-RAG/)
-   - 5.5.3 [Security & Multi-Tenancy Isolation Testing](5.5-System-testing/5.5.3-Security/)
-   - 5.5.4 [Profile Management & Avatar Upload Testing](5.5-System-testing/5.5.4-Profile/)
-   - 5.5.5 [Monitoring, CloudWatch Alarms & SNS Alert Testing](5.5-System-testing/5.5.5-Monitoring/)
-   - 5.5.6 [CI/CD Pipeline Automation Testing](5.5-System-testing/5.5.6-CICD/)
+5. **[System Testing](5.5-System-testing/)**
+   - 5.5.1 [Authentication Testing](5.5-System-testing/5.5.1-Authentication/)
+   - 5.5.2 [Document Upload & RAG Testing](5.5-System-testing/5.5.2-Document-RAG/)
+   - 5.5.3 [Security Testing](5.5-System-testing/5.5.3-Security/)
+   - 5.5.4 [Profile Testing](5.5-System-testing/5.5.4-Profile/)
+   - 5.5.5 [Monitoring & Logging](5.5-System-testing/5.5.5-Monitoring/)
+   - 5.5.6 [CI/CD Automated Testing](5.5-System-testing/5.5.6-CICD/)
 
-6. **[Conclusion & Next Steps](5.6-Conclusion/)**
-   - 5.6.1 [Summary & Real-World Operating Cost Analysis](5.6-Conclusion/5.6.1-Summary-Cost/)
-   - 5.6.2 [Resource Cleanup Protocol](5.6-Conclusion/5.6.2-Cleanup/)
-   - 5.6.3 [Future Roadmap & Advanced Enhancements](5.6-Conclusion/5.6.3-Next-Steps/)
+6. **[Conclusion](5.6-Conclusion/)**
+   - 5.6.1 [Workshop Summary & Cost](5.6-Conclusion/5.6.1-Summary-Cost/)
+   - 5.6.2 [Resource Cleanup](5.6-Conclusion/5.6.2-Cleanup/)
+   - 5.6.3 [Next Steps & References](5.6-Conclusion/5.6.3-Next-Steps/)
