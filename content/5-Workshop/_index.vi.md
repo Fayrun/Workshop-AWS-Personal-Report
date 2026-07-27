@@ -48,13 +48,13 @@ Người học sẽ được thực hành từ khâu chuẩn bị tài nguyên, 
    - 5.4.6 [Định tuyến & Tích hợp Frontend CloudFront sang API Gateway](5.4-Backend-deployment/5.4.6-implementing-frontend-API-gateway-integration/)
    - 5.4.7 [Tự động hóa Triển khai Backend Lambda với AWS CodePipeline & CodeBuild](5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/)
 
-5. **[Kiểm thử Hệ thống & Đánh giá (System Testing)](5.5-System-testing/)**
-   - 5.5.1 [Kiểm thử Xác thực & Quản lý Tài khoản](5.5-System-testing/5.5.1-Authentication/)
-   - 5.5.2 [Kiểm thử Xử lý Tài liệu & Triển khai 3 Chế độ RAG](5.5-System-testing/5.5.2-Document-RAG/)
-   - 5.5.3 [Kiểm thử Bảo mật & Phân lập Dữ liệu Multi-Tenancy](5.5-System-testing/5.5.3-Security/)
-   - 5.5.4 [Kiểm thử Quản lý Profile & Cập nhật Avatar](5.5-System-testing/5.5.4-Profile/)
-   - 5.5.5 [Kiểm thử Giám sát & Cảnh báo Sự cố](5.5-System-testing/5.5.5-Monitoring/)
-   - 5.5.6 [Kiểm thử Đường ống Tự động hóa CI/CD](5.5-System-testing/5.5.6-CICD/)
+5. **[Kiểm thử hệ thống (System Testing)](5.5-System-testing/)**
+   - 5.5.1 [Kiểm thử xác thực](5.5-System-testing/5.5.1-Authentication/)
+   - 5.5.2 [Kiểm thử tải lên tài liệu & RAG](5.5-System-testing/5.5.2-Document-RAG/)
+   - 5.5.3 [Kiểm thử bảo mật](5.5-System-testing/5.5.3-Security/)
+   - 5.5.4 [Kiểm thử hồ sơ cá nhân](5.5-System-testing/5.5.4-Profile/)
+   - 5.5.5 [Giám sát & Nhật ký hệ thống](5.5-System-testing/5.5.5-Monitoring/)
+   - 5.5.6 [Kiểm thử tự động CI/CD](5.5-System-testing/5.5.6-CICD/)
 
 6. **[Tổng kết (Conclusion)](5.6-Conclusion/)**
    - 5.6.1 [Tổng kết Workshop & Chi phí](5.6-Conclusion/5.6.1-Summary-Cost/)
