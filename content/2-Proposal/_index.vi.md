@@ -115,10 +115,11 @@ Hệ thống tận dụng tối đa mô hình **AWS Free Tier** và **Serverless
 | **Amazon Cognito** | < 1,000 MAUs (Monthly Active Users) | **$0.00** (Free Tier cho 50,000 MAUs) |
 | **AWS CloudFront** | < 50 GB Data Transfer Out | **$0.00** (Free Tier cho 1 TB) |
 | **AWS CodePipeline & CodeBuild** | ~30 build minutes / tháng | **$0.05 - $0.15** |
+| **Amazon ECR** | ~1-2 GB lưu trữ Docker image | **$0.10 - $0.20** |
 | **Amazon Bedrock - Titan Embeddings V2** | ~5,000,000 tokens / tháng ($0.00002 / 1k tokens) | **$0.10 - $0.20** |
 | **Amazon Bedrock - Qwen 3 Next 80B A3B (`qwen.qwen3-next-80b-a3b`)** | ~1,000,000 input & 1,000,000 output tokens | **$0.15 - $0.75** |
 | **EventBridge & CloudWatch Alarms** | 4 Alarms, 1 Rule, SNS email alerts | **$0.10** |
-| **TỔNG CHI PHÍ DỰ KIẾN** | **Vận hành hệ thống thực tế** | **~$0.56 - $1.65 USD / tháng** |
+| **TỔNG CHI PHÍ DỰ KIẾN** | **Vận hành hệ thống thực tế** | **~$0.66 - $1.85 USD / tháng** |
 
 
 ---

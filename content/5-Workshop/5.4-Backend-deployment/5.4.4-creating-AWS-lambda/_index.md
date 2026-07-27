@@ -101,6 +101,48 @@ Open PowerShell and execute command
 ![image37.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image37.png)
 
 
+### 3.1. Configure ECR Lifecycle Policy (storage cost optimization)
+
+To optimize Amazon ECR storage costs long-term, configure a Lifecycle Policy that automatically cleans up old images on the `smartdocai` repository:
+
+```json
+{
+  "rules": [
+    {
+      "rulePriority": 1,
+      "description": "Expire untagged images older than 1 day",
+      "selection": {
+        "tagStatus": "untagged",
+        "countType": "sinceImagePushed",
+        "countUnit": "days",
+        "countNumber": 1
+      },
+      "action": { "type": "expire" }
+    },
+    {
+      "rulePriority": 2,
+      "description": "Keep only the last 5 tagged images",
+      "selection": {
+        "tagStatus": "tagged",
+        "tagPrefixList": ["latest"],
+        "countType": "imageCountMoreThan",
+        "countNumber": 5
+      },
+      "action": { "type": "expire" }
+    }
+  ]
+}
+```
+
+Apply it with:
+
+```powershell
+aws ecr put-lifecycle-policy --repository-name smartdocai --region us-east-1 --lifecycle-policy-text file://ecr-lifecycle-policy.json
+```
+
+> **Note:** Since `buildspec.yml` always builds/pushes with the fixed tag `latest`, there is usually only 1 image carrying that tag at any given time — the "keep 5 tagged images" rule rarely has any real effect. The rule that actually matters is expiring `untagged` images after 1 day, which cleans up old images that get replaced on every deploy.
+
+
 ### 4. Authenticate Docker CLI to Amazon ECR (AUTHENTICATION)
 
 Since Amazon ECR requires temporary security token authentication (valid for 12 hours), fetch a temporary password from AWS ECR and pipe directly to Docker Login

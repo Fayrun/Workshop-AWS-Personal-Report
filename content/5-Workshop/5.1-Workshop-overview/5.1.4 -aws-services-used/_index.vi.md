@@ -14,7 +14,7 @@ Phần này liệt kê chi tiết từng dịch vụ AWS mà SmartDocAI sử d�
 |---|---|---|
 | **AWS Lambda** | Function `smartdocai`, Docker container image, region `us-east-1` | Chạy toàn bộ backend FastAPI (auth, upload, RAG, profile) theo mô hình serverless — chỉ tính phí khi có request, tự động scale |
 | **Amazon API Gateway** | HTTP API, stage `/prod`, endpoint `d60866voq5.execute-api...` | Cổng vào duy nhất cho mọi request từ Frontend, proxy trực tiếp sang Lambda |
-| **Amazon ECR** | Repository `smartdocai` | Lưu trữ Docker image của Lambda function, được CodePipeline tự động cập nhật mỗi lần deploy |
+| **Amazon ECR** | Repository `smartdocai`, Lifecycle Policy (xóa image untagged sau 1 ngày, giữ tối đa 5 image tagged) | Lưu trữ Docker image của Lambda function, được CodePipeline tự động cập nhật mỗi lần deploy |
 
 ### 2. Storage
 

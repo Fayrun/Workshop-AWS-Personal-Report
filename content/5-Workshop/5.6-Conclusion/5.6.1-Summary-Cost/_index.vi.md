@@ -118,13 +118,13 @@ Số liệu dưới đây lấy trực tiếp từ AWS Cost Explorer, tổng h�
 
 ### So sánh với chi phí dự tính ở mục 2 - Đề xuất
 
-Ở [mục 2 - Đề xuất](/2-proposal/), nhóm đã ước tính tổng chi phí hạ tầng hàng tháng vào khoảng **$0.56 - $1.65 USD/tháng**. Chi phí thực tế trong đúng 30 ngày là **~$1.65/tháng** — **nằm sát ngay biên trên của khoảng đã dự tính ban đầu**, cho thấy ước tính tổng thể khá chính xác.
+Ở [mục 2 - Đề xuất](/2-proposal/), nhóm đã ước tính tổng chi phí hạ tầng hàng tháng vào khoảng **$0.66 - $1.85 USD/tháng**. Chi phí thực tế trong đúng 30 ngày là **~$1.65/tháng** — **nằm trong khoảng đã dự tính ban đầu**, cho thấy ước tính tổng thể khá chính xác.
 
 Tuy nhiên, khi so sánh chi tiết theo từng dịch vụ, cơ cấu chi phí thực tế lệch khá nhiều so với giả định ban đầu:
 
 | Dịch vụ | Ước tính (mục 2) | Thực tế | Nhận xét |
 |---------|-------------------|---------|----------|
-| **Amazon ECR** | *(không có trong bảng ước tính)* | $0.5977 | **Khoản chi lớn nhất thực tế nhưng bị bỏ sót hoàn toàn khi ước tính** — mỗi lần CodePipeline chạy sẽ build & push 1 Docker image mới lên ECR, các image cũ không tự xóa (chưa cấu hình lifecycle policy) nên dung lượng tích lũy dần theo thời gian |
+| **Amazon ECR** | $0.10 - $0.20 | $0.5977 | **Khoản chi lớn nhất thực tế**, cao hơn ước tính đáng kể do đang trong giai đoạn phát triển với tần suất build/push liên tục, chưa phải giai đoạn vận hành ổn định |
 | **CodePipeline & CodeBuild** | $0.05 - $0.15 | $0.6690 | Cao hơn ước tính **4-13 lần**, do giai đoạn phát triển có rất nhiều lần push/sửa lỗi/build lại (không giống giả định "~30 phút build/tháng" của hệ thống đã ổn định) |
 | **Amazon Bedrock** | $0.25 - $0.95 | $0.3453 | Nằm trong khoảng ước tính |
 | **Amazon S3** | $0.15 - $0.30 | $0.0197 | Thấp hơn nhiều so với ước tính — dung lượng tài liệu test thực tế còn ít |
