@@ -49,14 +49,14 @@ Người học sẽ được thực hành từ khâu chuẩn bị tài nguyên, 
    - 5.4.7 [Tự động hóa Triển khai Backend Lambda với AWS CodePipeline & CodeBuild](5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/)
 
 5. **[Kiểm thử Hệ thống & Đánh giá (System Testing)](5.5-System-testing/)**
-   - 5.5.1 [Kiểm thử Xác thực & Quản lý Tài khoản (Authentication Testing)](5.5-System-testing/5.5.1-Authentication/)
-   - 5.5.2 [Kiểm thử Xử lý Tài liệu & Triển khai 3 Chế độ RAG (Document RAG Testing)](5.5-System-testing/5.5.2-Document-RAG/)
-   - 5.5.3 [Kiểm thử Bảo mật & Phân lập Dữ liệu Multi-Tenancy (Security Testing)](5.5-System-testing/5.5.3-Security/)
-   - 5.5.4 [Kiểm thử Quản lý Profile & Cập nhật Avatar (Profile Testing)](5.5-System-testing/5.5.4-Profile/)
-   - 5.5.5 [Kiểm thử Giám sát & Cảnh báo Sự cố (CloudWatch & SNS Testing)](5.5-System-testing/5.5.5-Monitoring/)
-   - 5.5.6 [Kiểm thử Đường ống Tự động hóa CI/CD (CI/CD Testing)](5.5-System-testing/5.5.6-CICD/)
+   - 5.5.1 [Kiểm thử Xác thực & Quản lý Tài khoản](5.5-System-testing/5.5.1-Authentication/)
+   - 5.5.2 [Kiểm thử Xử lý Tài liệu & Triển khai 3 Chế độ RAG](5.5-System-testing/5.5.2-Document-RAG/)
+   - 5.5.3 [Kiểm thử Bảo mật & Phân lập Dữ liệu Multi-Tenancy](5.5-System-testing/5.5.3-Security/)
+   - 5.5.4 [Kiểm thử Quản lý Profile & Cập nhật Avatar](5.5-System-testing/5.5.4-Profile/)
+   - 5.5.5 [Kiểm thử Giám sát & Cảnh báo Sự cố](5.5-System-testing/5.5.5-Monitoring/)
+   - 5.5.6 [Kiểm thử Đường ống Tự động hóa CI/CD](5.5-System-testing/5.5.6-CICD/)
 
-6. **[Tổng kết & Hướng phát triển (Conclusion & Next Steps)](5.6-Conclusion/)**
-   - 5.6.1 [Tổng kết & Phân tích Chi phí Vận hành Thực tế (Summary & Cost Analysis)](5.6-Conclusion/5.6.1-Summary-Cost/)
-   - 5.6.2 [Quy trình Dọn dẹp Tài nguyên An toàn (Resource Cleanup Protocol)](5.6-Conclusion/5.6.2-Cleanup/)
-   - 5.6.3 [Định hướng Đột phá & Nâng cấp Tiếp theo (Next Steps & Future Work)](5.6-Conclusion/5.6.3-Next-Steps/)
+6. **[Tổng kết (Conclusion)](5.6-Conclusion/)**
+   - 5.6.1 [Tổng kết Workshop & Chi phí](5.6-Conclusion/5.6.1-Summary-Cost/)
+   - 5.6.2 [Dọn dẹp tài nguyên](5.6-Conclusion/5.6.2-Cleanup/)
+   - 5.6.3 [Bước tiếp theo & Tài liệu tham khảo](5.6-Conclusion/5.6.3-Next-Steps/)
