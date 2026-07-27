@@ -53,11 +53,11 @@ Nút "Đăng nhập" lập tức chuyển sang trạng thái `disabled` và bậ
 Thiết kế dạng 2 bước trên cùng 1 giao diện:
 - **Bước 1 ( Register )**: Nhập thông tin cá nhân và mật khẩu
 
-![image57.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/image57.png)
+  ![image57.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/image57.png)
 
 - **Bước 2 : ( Confirm OTP )**: Nhập mã xác thực 6 chữ số gửi tự động qua Email để kích hoạt tài khoản.
 
-![image58.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/image58.png)
+  ![image58.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/image58.png)
 
 #### 2.1.Tổng quan giao diện
 Giao diện Đăng ký tài khoản (`/register`) đóng vai trò là điểm tiếp nhận thông tin người dùng mới vào hệ thống **SmartDocAI**. Giao diện được thiết kế theo phong cách giao diện tối (Dark Mode) hiện đại, trực quan, tuân thủ các quy chuẩn UX/UI nhằm tối ưu hóa trải nghiệm người dùng.
@@ -127,13 +127,13 @@ Bố cục Trang chủ được chia thành 2 khu vực chức năng chính: **T
 
 - **Giao diện Header và logo**:
 
-![header_logo.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/header_logo.png)
+  ![header_logo.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/header_logo.png)
 
   - *Mô tả chức năng*: Hiển thị tên thương hiệu "SmartDocAI", nút Thu gọn/Mở rộng Sidebar (Collapse), nút Chuyển đổi giao diện Sáng/Tối.
 
 - **Giao diện trạng thái hệ thống**:
 
-![rId68.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId68.png)
+  ![rId68.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId68.png)
 
   - *Mô tả chức năng*: Hiển thị đèn báo xanh/đỏ thể hiện kết nối tới dịch vụ AI (Cloud LLM / Bedrock).
 
@@ -141,17 +141,17 @@ Bố cục Trang chủ được chia thành 2 khu vực chức năng chính: **T
 
   - *Trước khi đăng tải file*:
 
-![rId69.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId69.png)
+    ![rId69.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId69.png)
 
   - *Sau khi đăng tải file*:
 
-![rId70.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId70.png)
+    ![rId70.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId70.png)
 
   - *Mô tả chức năng*: Thẻ hiển thị các chỉ số tổng quan: Số file đã tải lên, Tổng số trang (`totalPages`), Tổng số đoạn văn bản (`totalChunks`).
 
 - **Giao diện cấu hình phân đoạn**:
 
-![rId71.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId71.png)
+  ![rId71.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId71.png)
 
   - *Mô tả chức năng*: Điều chỉnh thanh trượt: Chunk Size (kích thước đoạn văn bản, mặc định 500-1000 tokens) và Chunk Overlap (độ chồng lấp, mặc định 100-200 tokens).
 
@@ -159,11 +159,11 @@ Bố cục Trang chủ được chia thành 2 khu vực chức năng chính: **T
 
   - *Trước khi tải file*:
 
-![rId72.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId72.png)
+    ![rId72.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId72.png)
 
   - *Sau khi tải file*:
 
-![rId73.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId73.png)
+    ![rId73.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId73.png)
 
   - *Mô tả chức năng*: Khung Kéo & Thả (Drag & Drop) hoặc bấm chọn file. Hỗ trợ định dạng PDF, DOCX với kích thước tối đa quy định.
 
@@ -171,17 +171,17 @@ Bố cục Trang chủ được chia thành 2 khu vực chức năng chính: **T
 
   - *Trước khi xử lí tài liệu*:
 
-![rId74.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId74.png)
+    ![rId74.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId74.png)
 
   - *Sau khi xử lí tài liệu*:
 
-![rId75.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId75.png)
+    ![rId75.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId75.png)
 
   - *Mô tả chức năng*: Hiển thị danh sách các tài liệu đã xử lý thành công, kèm thông tin định dạng, số trang và nút Xóa từng tài liệu.
 
 - **Giao diện các nút thao tác**:
 
-![rId76.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId76.png)
+  ![rId76.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId76.png)
 
   - *Mô tả chức năng*: Xóa toàn bộ lịch sử của các đoạn hội thoại và xóa toàn bộ tài liệu đã đăng tải lên hệ thống.
 
@@ -189,15 +189,15 @@ Bố cục Trang chủ được chia thành 2 khu vực chức năng chính: **T
 
   - *Trước khi người dùng chưa đặt câu hỏi*:
 
-![rId77.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId77.png)
+    ![rId77.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId77.png)
 
   - *Sau khi người dùng đặt câu hỏi*:
 
-![rId78.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId78.png)
+    ![rId78.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId78.png)
 
   - *Chi tiết lịch sử hội thoại*:
 
-![chat_history_detail.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/chat_history_detail.png)
+    ![chat_history_detail.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/chat_history_detail.png)
 
   - *Mô tả chức năng*: Liệt kê các phiên thảo luận trước đó, cho phép chọn phiên làm việc để xem chi tiết câu hỏi/câu trả lời hoặc xóa lịch sử chat.
 
@@ -205,31 +205,31 @@ Bố cục Trang chủ được chia thành 2 khu vực chức năng chính: **T
 
 - **Giao diện khi người dùng chưa sử dụng**:
 
-![rId79.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId79.png)
+  ![rId79.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId79.png)
 
   - *Mô tả chức năng*: Hiển thị khi chưa có cuộc hội thoại nào. Hướng dẫn 3 bước sử dụng: 1. Tải tài liệu → 2. Hệ thống xử lý → 3. Đặt câu hỏi.
 
 - **Giao diện khi người dùng đã tiến hành đặt câu hỏi**:
 
-![rId80.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId80.png)
+  ![rId80.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId80.png)
 
   - *Mô tả chức năng*: Khung hiển thị chuỗi câu hỏi (User) và câu trả lời (SmartDocAI).
 
 - **Giao diện trích dẫn nguồn**:
 
-![rId81.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId81.png)
+  ![rId81.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId81.png)
 
   - *Mô tả chức năng*: Khối hiển thị dưới mỗi câu trả lời AI, chỉ rõ nguồn tài liệu tham khảo (Tên file, Trang số bao nhiêu, và đoạn nội dung gốc tương ứng).
 
 - **Giao diện bảng tìm kiếm nâng cao**:
 
-![rId82.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId82.png)
+  ![rId82.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId82.png)
 
   - *Mô tả chức năng*: Panel mở rộng (Expander) cho phép cấu hình các thuật toán RAG: Lọc file, Hybrid Search, Re-ranking, Self-RAG, Co-RAG.
 
 - **Giao diện thanh nhập câu hỏi**:
 
-![rId83.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId83.png)
+  ![rId83.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId83.png)
 
   - *Mô tả chức năng*: Khung nhập liệu đa dòng (Textarea tự động co giãn theo văn bản), nút Gửi tin nhắn (SendIcon).
 
@@ -258,14 +258,13 @@ Bảng điều khiển `SearchSettings` cho phép người dùng linh hoạt b�
 
 - **Giao diện thay đổi thông tin người dùng**:
 
-![rId84.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId84.png)
+  ![rId84.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId84.png)
 
 - **Giao diện đổi mật khẩu**:
 
-![rId85.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId85.png)
+  ![rId85.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId85.png)
 
 Giao diện Thông tin cá nhân (`Profile Settings`) cho phép người dùng xem và cập nhật hồ sơ cá nhân trong hệ thống **SmartDocAI**:
-- **Phong cách thiết kế**: Theo chuẩn Dark Mode với bảng màu xám/xanh tím đậm chủ đạo (Deep Dark Theme), giao diện dạng Card viền mỏng hiện đại.
 - **Thanh điều hướng Tab (Tab Bar)**:
   - **Tab Thông tin cá nhân (Active)**: Giao diện cập nhật hình ảnh đại diện và các thông tin hồ sơ.
   - **Tab Bảo mật**: Giao diện dành cho các thiết lập bảo mật và đổi mật khẩu tài khoản.
