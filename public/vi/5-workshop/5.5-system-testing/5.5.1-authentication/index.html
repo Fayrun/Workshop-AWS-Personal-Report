@@ -3,7 +3,7 @@
   <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.163.0">
+    <meta name="generator" content="Hugo 0.159.2">
     <meta
   name="description"
   content=""
@@ -15,21 +15,21 @@
     <title>Kiểm thử xác thực :: Báo cáo thực tập</title>
 
     
-    <link href="/css/nucleus.css?1785117998" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1785117998" rel="stylesheet">
-    <link href="/css/hybrid.css?1785117998" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1785117998" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1785117998" rel="stylesheet">
-    <link href="/css/auto-complete.css?1785117998" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1785117998" rel="stylesheet">
-    <link href="/css/theme.css?1785117998" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1785117998" rel="stylesheet">
+    <link href="/css/nucleus.css?1785132335" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1785132335" rel="stylesheet">
+    <link href="/css/hybrid.css?1785132335" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1785132335" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1785132335" rel="stylesheet">
+    <link href="/css/auto-complete.css?1785132335" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1785132335" rel="stylesheet">
+    <link href="/css/theme.css?1785132335" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1785132335" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1785117998" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1785132335" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1785117998"></script>
+    <script src="/js/jquery-3.3.1.min.js?1785132335"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -59,14 +59,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1785117998"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1785117998"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1785132335"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1785132335"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1785117998"></script>
+<script type="text/javascript" src="/js/search.js?1785132335"></script>
  
   </div>
 
@@ -1395,150 +1395,150 @@
 	<p>Phần này kiểm tra toàn bộ luồng xác thực người dùng của SmartDocAI: đăng ký tài khoản, xác nhận email, đăng nhập lấy JWT token, và cơ chế tự động dọn dẹp tài khoản chưa xác nhận qua EventBridge. Các test case dưới đây được thực hiện trực tiếp trên môi trường production qua <code>curl</code> và AWS CLI.</p>
 <h3 id="1-bảng-tổng-hợp-test-case">1. Bảng tổng hợp test case</h3>
 <table>
-	<thead>
-			<tr>
-					<th>#</th>
-					<th>Test Case</th>
-					<th>Input</th>
-					<th>Expected Result</th>
-					<th>Status</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><strong>REGISTRATION</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>1.1</td>
-					<td>Valid registration</td>
-					<td>email: <a href="mailto:test@example.com">test@example.com</a><br/>password: SecurePass123!<br/>fullname: Nguyen Van Test<br/>phone: 0901234567<br/>dob: 1990-01-15</td>
-					<td>200 OK, confirmation email sent<br/>Return: user_id + email</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>1.2</td>
-					<td>Invalid phone format</td>
-					<td>phone: &ldquo;123456&rdquo; (wrong format)</td>
-					<td>400 Bad Request<br/>Error: &ldquo;Invalid phone format&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>1.3</td>
-					<td>Invalid DOB</td>
-					<td>dob: &ldquo;2050-01-01&rdquo; (future date)</td>
-					<td>400 Bad Request<br/>Error: &ldquo;DOB must be between 1900-01-01 and 2026-12-31&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>1.4</td>
-					<td>XSS attempt</td>
-					<td>fullname: <code>&lt;script&gt;alert(1)&lt;/script&gt;</code></td>
-					<td>400 Bad Request<br/>Error: &ldquo;Fullname contains invalid characters&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td><strong>EMAIL CONFIRMATION</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>2.1</td>
-					<td>Valid confirmation</td>
-					<td>email + 6-digit code (from email)</td>
-					<td>200 OK<br/>Message: &ldquo;Email confirmed. You can now login&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>2.2</td>
-					<td>Invalid code</td>
-					<td>email + wrong code &ldquo;999999&rdquo;</td>
-					<td>400 Bad Request<br/>Error: &ldquo;Invalid or expired code&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td><strong>LOGIN</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>3.1</td>
-					<td>Successful login</td>
-					<td>email + correct password</td>
-					<td>200 OK<br/>Return: JWT tokens (ID + Access + Refresh)</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>3.2</td>
-					<td>Wrong password</td>
-					<td>email + wrong password</td>
-					<td>401 Unauthorized<br/>Error: &ldquo;Incorrect username or password&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>3.3</td>
-					<td>Unconfirmed user</td>
-					<td>email not confirmed yet</td>
-					<td>401 Unauthorized<br/>Error: &ldquo;User not confirmed&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td><strong>JWT TOKEN</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>4.1</td>
-					<td>Valid JWT</td>
-					<td>Include Bearer token in Authorization header</td>
-					<td>API returns user data</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>4.2</td>
-					<td>Missing JWT</td>
-					<td>No Authorization header</td>
-					<td>401 Unauthorized<br/>Error: &ldquo;Missing Authorization header&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>4.3</td>
-					<td>Invalid JWT</td>
-					<td>Bearer token with wrong signature</td>
-					<td>401 Unauthorized<br/>Error: &ldquo;Invalid JWT token&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>4.4</td>
-					<td>Expired JWT</td>
-					<td>Token with exp &lt; current time</td>
-					<td>401 Unauthorized<br/>Error: &ldquo;JWT token has expired&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td><strong>EVENTBRIDGE CLEANUP</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>5.1</td>
-					<td>Auto-delete unconfirmed users</td>
-					<td>Wait &gt;5 minutes after registration</td>
-					<td>User deleted from Cognito<br/>CloudWatch log: &ldquo;Deleted user X&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-	</tbody>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>Test Case</th>
+          <th>Input</th>
+          <th>Expected Result</th>
+          <th>Status</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>REGISTRATION</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>1.1</td>
+          <td>Valid registration</td>
+          <td>email: <a href="mailto:test@example.com">test@example.com</a><br/>password: SecurePass123!<br/>fullname: Nguyen Van Test<br/>phone: 0901234567<br/>dob: 1990-01-15</td>
+          <td>200 OK, confirmation email sent<br/>Return: user_id + email</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>1.2</td>
+          <td>Invalid phone format</td>
+          <td>phone: &ldquo;123456&rdquo; (wrong format)</td>
+          <td>400 Bad Request<br/>Error: &ldquo;Invalid phone format&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>1.3</td>
+          <td>Invalid DOB</td>
+          <td>dob: &ldquo;2050-01-01&rdquo; (future date)</td>
+          <td>400 Bad Request<br/>Error: &ldquo;DOB must be between 1900-01-01 and 2026-12-31&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>1.4</td>
+          <td>XSS attempt</td>
+          <td>fullname: <code>&lt;script&gt;alert(1)&lt;/script&gt;</code></td>
+          <td>400 Bad Request<br/>Error: &ldquo;Fullname contains invalid characters&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td><strong>EMAIL CONFIRMATION</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2.1</td>
+          <td>Valid confirmation</td>
+          <td>email + 6-digit code (from email)</td>
+          <td>200 OK<br/>Message: &ldquo;Email confirmed. You can now login&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>2.2</td>
+          <td>Invalid code</td>
+          <td>email + wrong code &ldquo;999999&rdquo;</td>
+          <td>400 Bad Request<br/>Error: &ldquo;Invalid or expired code&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td><strong>LOGIN</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>3.1</td>
+          <td>Successful login</td>
+          <td>email + correct password</td>
+          <td>200 OK<br/>Return: JWT tokens (ID + Access + Refresh)</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>3.2</td>
+          <td>Wrong password</td>
+          <td>email + wrong password</td>
+          <td>401 Unauthorized<br/>Error: &ldquo;Incorrect username or password&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>3.3</td>
+          <td>Unconfirmed user</td>
+          <td>email not confirmed yet</td>
+          <td>401 Unauthorized<br/>Error: &ldquo;User not confirmed&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td><strong>JWT TOKEN</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>4.1</td>
+          <td>Valid JWT</td>
+          <td>Include Bearer token in Authorization header</td>
+          <td>API returns user data</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>4.2</td>
+          <td>Missing JWT</td>
+          <td>No Authorization header</td>
+          <td>401 Unauthorized<br/>Error: &ldquo;Missing Authorization header&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>4.3</td>
+          <td>Invalid JWT</td>
+          <td>Bearer token with wrong signature</td>
+          <td>401 Unauthorized<br/>Error: &ldquo;Invalid JWT token&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>4.4</td>
+          <td>Expired JWT</td>
+          <td>Token with exp &lt; current time</td>
+          <td>401 Unauthorized<br/>Error: &ldquo;JWT token has expired&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td><strong>EVENTBRIDGE CLEANUP</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>5.1</td>
+          <td>Auto-delete unconfirmed users</td>
+          <td>Wait &gt;5 minutes after registration</td>
+          <td>User deleted from Cognito<br/>CloudWatch log: &ldquo;Deleted user X&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+  </tbody>
 </table>
 <p><strong>Quy tắc validate dữ liệu:</strong></p>
 <ul>
@@ -2715,19 +2715,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1785117998"></script>
-    <script src="/js/perfect-scrollbar.min.js?1785117998"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1785117998"></script>
-    <script src="/js/jquery.sticky.js?1785117998"></script>
-    <script src="/js/featherlight.min.js?1785117998"></script>
-    <script src="/js/highlight.pack.js?1785117998"></script>
+    <script src="/js/clipboard.min.js?1785132335"></script>
+    <script src="/js/perfect-scrollbar.min.js?1785132335"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1785132335"></script>
+    <script src="/js/jquery.sticky.js?1785132335"></script>
+    <script src="/js/featherlight.min.js?1785132335"></script>
+    <script src="/js/highlight.pack.js?1785132335"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1785117998"></script>
-    <script src="/js/learn.js?1785117998"></script>
-    <script src="/js/hugo-learn.js?1785117998"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1785132335"></script>
+    <script src="/js/learn.js?1785132335"></script>
+    <script src="/js/hugo-learn.js?1785132335"></script>
 
-    <link href="/mermaid/mermaid.css?1785117998" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1785117998"></script>
+    <link href="/mermaid/mermaid.css?1785132335" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1785132335"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

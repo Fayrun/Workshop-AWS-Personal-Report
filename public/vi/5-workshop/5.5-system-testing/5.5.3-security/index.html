@@ -3,7 +3,7 @@
   <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.163.0">
+    <meta name="generator" content="Hugo 0.159.2">
     <meta
   name="description"
   content=""
@@ -15,21 +15,21 @@
     <title>Kiểm thử bảo mật :: Báo cáo thực tập</title>
 
     
-    <link href="/css/nucleus.css?1785117998" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1785117998" rel="stylesheet">
-    <link href="/css/hybrid.css?1785117998" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1785117998" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1785117998" rel="stylesheet">
-    <link href="/css/auto-complete.css?1785117998" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1785117998" rel="stylesheet">
-    <link href="/css/theme.css?1785117998" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1785117998" rel="stylesheet">
+    <link href="/css/nucleus.css?1785132335" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1785132335" rel="stylesheet">
+    <link href="/css/hybrid.css?1785132335" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1785132335" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1785132335" rel="stylesheet">
+    <link href="/css/auto-complete.css?1785132335" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1785132335" rel="stylesheet">
+    <link href="/css/theme.css?1785132335" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1785132335" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1785117998" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1785132335" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1785117998"></script>
+    <script src="/js/jquery-3.3.1.min.js?1785132335"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -59,14 +59,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1785117998"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1785117998"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1785132335"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1785132335"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1785117998"></script>
+<script type="text/javascript" src="/js/search.js?1785132335"></script>
  
   </div>
 
@@ -1397,34 +1397,34 @@
 <h3 id="1-kiểm-thử-tính-hợp-lệ-dữ-liệu-đầu-vào">1. Kiểm thử tính hợp lệ dữ liệu đầu vào</h3>
 <p><strong>Bảng quy tắc kiểm tra dữ liệu đầu vào:</strong></p>
 <table>
-	<thead>
-			<tr>
-					<th>Trường</th>
-					<th>Ví dụ hợp lệ</th>
-					<th>Ví dụ không hợp lệ</th>
-					<th>Thông báo lỗi</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><strong>Phone</strong></td>
-					<td>0901234567 → +84901234567<br/>+84901234567 (E.164)</td>
-					<td>&ldquo;123456&rdquo; (too short)<br/>&quot;+1234567890&quot; (non-VN)<br/>&ldquo;abcdefghij&rdquo; (non-digit)</td>
-					<td>&ldquo;Invalid phone format&rdquo;<br/>&ldquo;Only Vietnam (+84) supported&rdquo;<br/>&ldquo;Phone must contain digits&rdquo;</td>
-			</tr>
-			<tr>
-					<td><strong>DOB</strong></td>
-					<td>1990-01-15<br/>1900-01-01 (minimum)<br/>2026-12-31 (maximum)</td>
-					<td>2027-01-01 (future)<br/>1899-12-31 (too old)<br/>1990-13-45 (invalid date)</td>
-					<td>&ldquo;DOB cannot be in the future&rdquo;<br/>&ldquo;DOB must be after 1900&rdquo;<br/>&ldquo;Invalid date format&rdquo;</td>
-			</tr>
-			<tr>
-					<td><strong>Fullname</strong></td>
-					<td>&ldquo;Nguyen Van A&rdquo;<br/>&ldquo;Trần Thị Bích Ngọc&rdquo; (unicode)<br/>&ldquo;John Doe&rdquo;</td>
-					<td>&ldquo;A&rdquo; (&lt; 2 chars)<br/><code>&lt;script&gt;alert(1)&lt;/script&gt;</code> (XSS)<br/>&ldquo;x&rdquo; × 101 (&gt; 100 chars)<br/>&quot;&quot; (empty)</td>
-					<td>&ldquo;Min 2 chars&rdquo;<br/>&ldquo;XSS prevention&rdquo;<br/>&ldquo;Max 100 chars&rdquo;<br/>&ldquo;Fullname required&rdquo;</td>
-			</tr>
-	</tbody>
+  <thead>
+      <tr>
+          <th>Trường</th>
+          <th>Ví dụ hợp lệ</th>
+          <th>Ví dụ không hợp lệ</th>
+          <th>Thông báo lỗi</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Phone</strong></td>
+          <td>0901234567 → +84901234567<br/>+84901234567 (E.164)</td>
+          <td>&ldquo;123456&rdquo; (too short)<br/>&quot;+1234567890&quot; (non-VN)<br/>&ldquo;abcdefghij&rdquo; (non-digit)</td>
+          <td>&ldquo;Invalid phone format&rdquo;<br/>&ldquo;Only Vietnam (+84) supported&rdquo;<br/>&ldquo;Phone must contain digits&rdquo;</td>
+      </tr>
+      <tr>
+          <td><strong>DOB</strong></td>
+          <td>1990-01-15<br/>1900-01-01 (minimum)<br/>2026-12-31 (maximum)</td>
+          <td>2027-01-01 (future)<br/>1899-12-31 (too old)<br/>1990-13-45 (invalid date)</td>
+          <td>&ldquo;DOB cannot be in the future&rdquo;<br/>&ldquo;DOB must be after 1900&rdquo;<br/>&ldquo;Invalid date format&rdquo;</td>
+      </tr>
+      <tr>
+          <td><strong>Fullname</strong></td>
+          <td>&ldquo;Nguyen Van A&rdquo;<br/>&ldquo;Trần Thị Bích Ngọc&rdquo; (unicode)<br/>&ldquo;John Doe&rdquo;</td>
+          <td>&ldquo;A&rdquo; (&lt; 2 chars)<br/><code>&lt;script&gt;alert(1)&lt;/script&gt;</code> (XSS)<br/>&ldquo;x&rdquo; × 101 (&gt; 100 chars)<br/>&quot;&quot; (empty)</td>
+          <td>&ldquo;Min 2 chars&rdquo;<br/>&ldquo;XSS prevention&rdquo;<br/>&ldquo;Max 100 chars&rdquo;<br/>&ldquo;Fullname required&rdquo;</td>
+      </tr>
+  </tbody>
 </table>
 <p><strong>Độ phủ unit test:</strong></p>
 <ul>
@@ -1442,80 +1442,80 @@
 <h3 id="2-kiểm-thử-cors--jwt">2. Kiểm thử CORS &amp; JWT</h3>
 <p><strong>Bảng tổng hợp test case:</strong></p>
 <table>
-	<thead>
-			<tr>
-					<th>#</th>
-					<th>Test Case</th>
-					<th>Input</th>
-					<th>Expected Result</th>
-					<th>Status</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><strong>CORS VALIDATION</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>3.1</td>
-					<td>Allowed origin (CloudFront)</td>
-					<td>Origin: <a href="https://dutf3c70nnjzl.cloudfront.net">https://dutf3c70nnjzl.cloudfront.net</a></td>
-					<td>200 OK + CORS headers<br/><code>Access-Control-Allow-Origin: https://dutf3c...</code></td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>3.2</td>
-					<td>Disallowed origin</td>
-					<td>Origin: <a href="https://evil.com">https://evil.com</a></td>
-					<td>403 Forbidden (no CORS header)</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>3.3</td>
-					<td>OPTIONS preflight</td>
-					<td>OPTIONS request with CORS headers</td>
-					<td>200 OK + Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td><strong>JWT AUTHENTICATION</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>3.4</td>
-					<td>Missing JWT token</td>
-					<td>No Authorization header</td>
-					<td>401 Unauthorized<br/>Error: &ldquo;Missing Authorization header&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>3.5</td>
-					<td>Invalid JWT format</td>
-					<td>Bearer invalid_token_xyz</td>
-					<td>401 Unauthorized<br/>Error: &ldquo;Invalid JWT token&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>3.6</td>
-					<td>Expired JWT token</td>
-					<td>JWT with exp &lt; current time</td>
-					<td>401 Unauthorized<br/>Error: &ldquo;JWT token has expired&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>3.7</td>
-					<td>JWT from different pool</td>
-					<td>JWT signed by wrong Cognito pool</td>
-					<td>401 Unauthorized<br/>Error: &ldquo;Invalid JWT issuer&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-	</tbody>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>Test Case</th>
+          <th>Input</th>
+          <th>Expected Result</th>
+          <th>Status</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>CORS VALIDATION</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>3.1</td>
+          <td>Allowed origin (CloudFront)</td>
+          <td>Origin: <a href="https://dutf3c70nnjzl.cloudfront.net">https://dutf3c70nnjzl.cloudfront.net</a></td>
+          <td>200 OK + CORS headers<br/><code>Access-Control-Allow-Origin: https://dutf3c...</code></td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>3.2</td>
+          <td>Disallowed origin</td>
+          <td>Origin: <a href="https://evil.com">https://evil.com</a></td>
+          <td>403 Forbidden (no CORS header)</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>3.3</td>
+          <td>OPTIONS preflight</td>
+          <td>OPTIONS request with CORS headers</td>
+          <td>200 OK + Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td><strong>JWT AUTHENTICATION</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>3.4</td>
+          <td>Missing JWT token</td>
+          <td>No Authorization header</td>
+          <td>401 Unauthorized<br/>Error: &ldquo;Missing Authorization header&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>3.5</td>
+          <td>Invalid JWT format</td>
+          <td>Bearer invalid_token_xyz</td>
+          <td>401 Unauthorized<br/>Error: &ldquo;Invalid JWT token&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>3.6</td>
+          <td>Expired JWT token</td>
+          <td>JWT with exp &lt; current time</td>
+          <td>401 Unauthorized<br/>Error: &ldquo;JWT token has expired&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>3.7</td>
+          <td>JWT from different pool</td>
+          <td>JWT signed by wrong Cognito pool</td>
+          <td>401 Unauthorized<br/>Error: &ldquo;Invalid JWT issuer&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+  </tbody>
 </table>
 <p><strong>Luồng xác thực JWT trong Lambda:</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># modules/auth_service.py</span>
@@ -1537,52 +1537,52 @@
 <p>Luồng đăng nhập Google qua Cognito Hosted UI trước đây không có tham số <code>state</code>, cho phép attacker dụ nạn nhân click 1 link chứa authorization code do attacker tạo sẵn (Login CSRF). Đã bổ sung <code>state = crypto.randomUUID()</code> sinh ở Frontend, lưu tạm <code>sessionStorage</code>, verify khi Cognito redirect về <code>/auth/callback</code>.</p>
 <p><strong>Test case đã thực hiện trên production:</strong></p>
 <table>
-	<thead>
-			<tr>
-					<th>#</th>
-					<th>Test Case</th>
-					<th>Cách thực hiện</th>
-					<th>Kết quả mong đợi</th>
-					<th>Status</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>1</td>
-					<td>Login Google bình thường</td>
-					<td>Đăng nhập qua tab ẩn danh</td>
-					<td>Vào <code>/app</code> thành công</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>2</td>
-					<td><code>state</code> xuất hiện trong URL</td>
-					<td>DevTools Network → check request <code>/oauth2/authorize</code></td>
-					<td>Có <code>state=&lt;UUID&gt;</code></td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>3</td>
-					<td><code>state</code> sai (giả lập CSRF)</td>
-					<td>Sửa tay <code>state</code> trong URL callback</td>
-					<td>Redirect <code>/login</code> + báo lỗi, không gọi tới Cognito</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>4</td>
-					<td><code>state</code> đúng nhưng <code>code</code> giả</td>
-					<td>Dùng đúng <code>state</code> thật + <code>code</code> giả</td>
-					<td>Qua được tầng 1 (state), bị Cognito từ chối ở tầng 2 (invalid_grant)</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>5</td>
-					<td>sessionStorage tự dọn dẹp</td>
-					<td>Kiểm tra <code>oauth_state</code> sau mỗi lần verify</td>
-					<td>Key bị xóa (chống replay)</td>
-					<td>PASS</td>
-			</tr>
-	</tbody>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>Test Case</th>
+          <th>Cách thực hiện</th>
+          <th>Kết quả mong đợi</th>
+          <th>Status</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Login Google bình thường</td>
+          <td>Đăng nhập qua tab ẩn danh</td>
+          <td>Vào <code>/app</code> thành công</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td><code>state</code> xuất hiện trong URL</td>
+          <td>DevTools Network → check request <code>/oauth2/authorize</code></td>
+          <td>Có <code>state=&lt;UUID&gt;</code></td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td><code>state</code> sai (giả lập CSRF)</td>
+          <td>Sửa tay <code>state</code> trong URL callback</td>
+          <td>Redirect <code>/login</code> + báo lỗi, không gọi tới Cognito</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td><code>state</code> đúng nhưng <code>code</code> giả</td>
+          <td>Dùng đúng <code>state</code> thật + <code>code</code> giả</td>
+          <td>Qua được tầng 1 (state), bị Cognito từ chối ở tầng 2 (invalid_grant)</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>sessionStorage tự dọn dẹp</td>
+          <td>Kiểm tra <code>oauth_state</code> sau mỗi lần verify</td>
+          <td>Key bị xóa (chống replay)</td>
+          <td>PASS</td>
+      </tr>
+  </tbody>
 </table>
 <p><strong>Cơ chế 2 tầng bảo vệ độc lập:</strong></p>
 <pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart LR
@@ -1596,85 +1596,85 @@
 <h3 id="4-rà-soát-checklist-bảo-mật">4. Rà soát checklist bảo mật</h3>
 <p>Tham khảo: <code>SECURITY_CONSIDERATIONS.md</code></p>
 <table>
-	<thead>
-			<tr>
-					<th>Hạng mục bảo mật</th>
-					<th>Trạng thái</th>
-					<th>Ghi chú</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><strong>Xác thực (Authentication)</strong></td>
-					<td><strong>Đã triển khai</strong></td>
-					<td>Cognito JWT token</td>
-			</tr>
-			<tr>
-					<td><strong>Phân quyền (Authorization)</strong></td>
-					<td><strong>Đã triển khai</strong></td>
-					<td>Cô lập dữ liệu theo từng user</td>
-			</tr>
-			<tr>
-					<td><strong>Validate đầu vào</strong></td>
-					<td><strong>Đã triển khai</strong></td>
-					<td>Validator cho phone, DOB, fullname</td>
-			</tr>
-			<tr>
-					<td><strong>Chống XSS</strong></td>
-					<td><strong>Đã triển khai</strong></td>
-					<td>Chặn thẻ <code>&lt;script&gt;</code> trong fullname</td>
-			</tr>
-			<tr>
-					<td><strong>Giới hạn CORS</strong></td>
-					<td><strong>Đã fix</strong></td>
-					<td>Đã bỏ wildcard</td>
-			</tr>
-			<tr>
-					<td><strong>CSRF protection (OAuth state)</strong></td>
-					<td><strong>Đã triển khai</strong></td>
-					<td>Xem mục 3 phía trên</td>
-			</tr>
-			<tr>
-					<td><strong>Mã hóa DynamoDB (KMS)</strong></td>
-					<td><strong>Đã triển khai</strong></td>
-					<td>SSE-KMS, key <code>alias/aws/dynamodb</code></td>
-			</tr>
-			<tr>
-					<td><strong>Chỉ dùng HTTPS</strong></td>
-					<td><strong>Bắt buộc</strong></td>
-					<td>TLS 1.2+ trên CloudFront/API Gateway</td>
-			</tr>
-			<tr>
-					<td><strong>SQL injection</strong></td>
-					<td><strong>Không áp dụng</strong></td>
-					<td>Không dùng SQL database (DynamoDB)</td>
-			</tr>
-			<tr>
-					<td><strong>Rate limiting</strong></td>
-					<td><strong>Chưa triển khai</strong></td>
-					<td>Cognito đã có throttling/lockout built-in miễn phí; AWS WAF (~$5-10/tháng) chưa tương xứng với quy mô demo/thực tập hiện tại — khuyến nghị bổ sung khi lên production với traffic lớn hơn</td>
-			</tr>
-			<tr>
-					<td><strong>Mã hóa dữ liệu lưu trữ</strong></td>
-					<td><strong>Đã triển khai (một phần)</strong></td>
-					<td>DynamoDB đã bật SSE-KMS; S3 giữ SSE-S3 mặc định (đã tự động mã hóa từ 2023)</td>
-			</tr>
-			<tr>
-					<td><strong>Cô lập VPC</strong></td>
-					<td><strong>Chưa cấu hình</strong></td>
-					<td>Lambda chạy ngoài VPC (public)</td>
-			</tr>
-			<tr>
-					<td><strong>OAuth state parameter</strong></td>
-					<td><strong>Đã triển khai</strong></td>
-					<td>Đã thêm state chống CSRF cho luồng Google OAuth</td>
-			</tr>
-			<tr>
-					<td><strong>MFA</strong></td>
-					<td><strong>Chưa bật</strong></td>
-					<td>Có thể bật trong Cognito ở giai đoạn sau</td>
-			</tr>
-	</tbody>
+  <thead>
+      <tr>
+          <th>Hạng mục bảo mật</th>
+          <th>Trạng thái</th>
+          <th>Ghi chú</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Xác thực (Authentication)</strong></td>
+          <td><strong>Đã triển khai</strong></td>
+          <td>Cognito JWT token</td>
+      </tr>
+      <tr>
+          <td><strong>Phân quyền (Authorization)</strong></td>
+          <td><strong>Đã triển khai</strong></td>
+          <td>Cô lập dữ liệu theo từng user</td>
+      </tr>
+      <tr>
+          <td><strong>Validate đầu vào</strong></td>
+          <td><strong>Đã triển khai</strong></td>
+          <td>Validator cho phone, DOB, fullname</td>
+      </tr>
+      <tr>
+          <td><strong>Chống XSS</strong></td>
+          <td><strong>Đã triển khai</strong></td>
+          <td>Chặn thẻ <code>&lt;script&gt;</code> trong fullname</td>
+      </tr>
+      <tr>
+          <td><strong>Giới hạn CORS</strong></td>
+          <td><strong>Đã fix</strong></td>
+          <td>Đã bỏ wildcard</td>
+      </tr>
+      <tr>
+          <td><strong>CSRF protection (OAuth state)</strong></td>
+          <td><strong>Đã triển khai</strong></td>
+          <td>Xem mục 3 phía trên</td>
+      </tr>
+      <tr>
+          <td><strong>Mã hóa DynamoDB (KMS)</strong></td>
+          <td><strong>Đã triển khai</strong></td>
+          <td>SSE-KMS, key <code>alias/aws/dynamodb</code></td>
+      </tr>
+      <tr>
+          <td><strong>Chỉ dùng HTTPS</strong></td>
+          <td><strong>Bắt buộc</strong></td>
+          <td>TLS 1.2+ trên CloudFront/API Gateway</td>
+      </tr>
+      <tr>
+          <td><strong>SQL injection</strong></td>
+          <td><strong>Không áp dụng</strong></td>
+          <td>Không dùng SQL database (DynamoDB)</td>
+      </tr>
+      <tr>
+          <td><strong>Rate limiting</strong></td>
+          <td><strong>Chưa triển khai</strong></td>
+          <td>Cognito đã có throttling/lockout built-in miễn phí; AWS WAF (~$5-10/tháng) chưa tương xứng với quy mô demo/thực tập hiện tại — khuyến nghị bổ sung khi lên production với traffic lớn hơn</td>
+      </tr>
+      <tr>
+          <td><strong>Mã hóa dữ liệu lưu trữ</strong></td>
+          <td><strong>Đã triển khai (một phần)</strong></td>
+          <td>DynamoDB đã bật SSE-KMS; S3 giữ SSE-S3 mặc định (đã tự động mã hóa từ 2023)</td>
+      </tr>
+      <tr>
+          <td><strong>Cô lập VPC</strong></td>
+          <td><strong>Chưa cấu hình</strong></td>
+          <td>Lambda chạy ngoài VPC (public)</td>
+      </tr>
+      <tr>
+          <td><strong>OAuth state parameter</strong></td>
+          <td><strong>Đã triển khai</strong></td>
+          <td>Đã thêm state chống CSRF cho luồng Google OAuth</td>
+      </tr>
+      <tr>
+          <td><strong>MFA</strong></td>
+          <td><strong>Chưa bật</strong></td>
+          <td>Có thể bật trong Cognito ở giai đoạn sau</td>
+      </tr>
+  </tbody>
 </table>
 <p><strong>Khuyến nghị cho production:</strong></p>
 <ol>
@@ -2752,19 +2752,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1785117998"></script>
-    <script src="/js/perfect-scrollbar.min.js?1785117998"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1785117998"></script>
-    <script src="/js/jquery.sticky.js?1785117998"></script>
-    <script src="/js/featherlight.min.js?1785117998"></script>
-    <script src="/js/highlight.pack.js?1785117998"></script>
+    <script src="/js/clipboard.min.js?1785132335"></script>
+    <script src="/js/perfect-scrollbar.min.js?1785132335"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1785132335"></script>
+    <script src="/js/jquery.sticky.js?1785132335"></script>
+    <script src="/js/featherlight.min.js?1785132335"></script>
+    <script src="/js/highlight.pack.js?1785132335"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1785117998"></script>
-    <script src="/js/learn.js?1785117998"></script>
-    <script src="/js/hugo-learn.js?1785117998"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1785132335"></script>
+    <script src="/js/learn.js?1785132335"></script>
+    <script src="/js/hugo-learn.js?1785132335"></script>
 
-    <link href="/mermaid/mermaid.css?1785117998" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1785117998"></script>
+    <link href="/mermaid/mermaid.css?1785132335" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1785132335"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
