@@ -3,7 +3,7 @@
   <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.159.2">
+    <meta name="generator" content="Hugo 0.163.0">
     <meta
   name="description"
   content=""
@@ -15,21 +15,21 @@
     <title>Kiểm thử tự động CI/CD :: Báo cáo thực tập</title>
 
     
-    <link href="/css/nucleus.css?1785133411" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1785133411" rel="stylesheet">
-    <link href="/css/hybrid.css?1785133411" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1785133411" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1785133411" rel="stylesheet">
-    <link href="/css/auto-complete.css?1785133411" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1785133411" rel="stylesheet">
-    <link href="/css/theme.css?1785133411" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1785133411" rel="stylesheet">
+    <link href="/css/nucleus.css?1785135215" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1785135215" rel="stylesheet">
+    <link href="/css/hybrid.css?1785135215" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1785135215" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1785135215" rel="stylesheet">
+    <link href="/css/auto-complete.css?1785135215" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1785135215" rel="stylesheet">
+    <link href="/css/theme.css?1785135215" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1785135215" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1785133411" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1785135215" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1785133411"></script>
+    <script src="/js/jquery-3.3.1.min.js?1785135215"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -59,14 +59,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1785133411"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1785133411"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1785135215"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1785135215"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1785133411"></script>
+<script type="text/javascript" src="/js/search.js?1785135215"></script>
  
   </div>
 
@@ -1401,35 +1401,35 @@
 </ul>
 <p><strong>Bảng lệnh Pytest:</strong></p>
 <table>
-  <thead>
-      <tr>
-          <th>Lệnh</th>
-          <th>Mục đích</th>
-          <th>Kết quả ví dụ</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>pytest test_*_unit.py -v</code></td>
-          <td>Chạy toàn bộ unit test (verbose)</td>
-          <td><code>60 passed in 3.45s</code></td>
-      </tr>
-      <tr>
-          <td><code>pytest test_*_unit.py --cov=modules --cov-report=term-missing</code></td>
-          <td>Chạy kèm báo cáo code coverage</td>
-          <td>Hiển thị % coverage mỗi module + dòng chưa được test</td>
-      </tr>
-      <tr>
-          <td><code>pytest test_validators_unit.py::TestPhoneValidation -v</code></td>
-          <td>Chạy riêng 1 class test</td>
-          <td><code>15 passed in 1.2s</code></td>
-      </tr>
-      <tr>
-          <td><code>pytest test_validators_unit.py::TestPhoneValidation::test_vn_mobile_format -v</code></td>
-          <td>Chạy riêng 1 method test</td>
-          <td><code>1 passed in 0.5s</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Lệnh</th>
+					<th>Mục đích</th>
+					<th>Kết quả ví dụ</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>pytest test_*_unit.py -v</code></td>
+					<td>Chạy toàn bộ unit test (verbose)</td>
+					<td><code>60 passed in 3.45s</code></td>
+			</tr>
+			<tr>
+					<td><code>pytest test_*_unit.py --cov=modules --cov-report=term-missing</code></td>
+					<td>Chạy kèm báo cáo code coverage</td>
+					<td>Hiển thị % coverage mỗi module + dòng chưa được test</td>
+			</tr>
+			<tr>
+					<td><code>pytest test_validators_unit.py::TestPhoneValidation -v</code></td>
+					<td>Chạy riêng 1 class test</td>
+					<td><code>15 passed in 1.2s</code></td>
+			</tr>
+			<tr>
+					<td><code>pytest test_validators_unit.py::TestPhoneValidation::test_vn_mobile_format -v</code></td>
+					<td>Chạy riêng 1 method test</td>
+					<td><code>1 passed in 0.5s</code></td>
+			</tr>
+	</tbody>
 </table>
 <p><strong>Tóm tắt độ phủ test:</strong></p>
 <ul>
@@ -1443,58 +1443,58 @@
 <h3 id="2-tích-hợp-với-cicd-pipeline">2. Tích hợp với CI/CD Pipeline</h3>
 <p><strong>Các giai đoạn trong buildspec.yml:</strong></p>
 <table>
-  <thead>
-      <tr>
-          <th>Giai đoạn</th>
-          <th>Lệnh</th>
-          <th>Mục đích</th>
-          <th>Hành vi khi lỗi</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>pre_build</strong></td>
-          <td><code>pip install pytest pytest-cov flake8</code></td>
-          <td>Cài đặt dependency cho test</td>
-          <td>FAIL toàn bộ build</td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>flake8 backend/ --exclude=manual_test_*.py --exit-zero</code></td>
-          <td>Lint code (kiểm tra style)</td>
-          <td>Chỉ cảnh báo (exit-zero)</td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>pytest backend/test_*_unit.py -v --tb=short --strict-markers</code></td>
-          <td><strong>Chạy unit test</strong></td>
-          <td><strong>HARD FAIL</strong> → Chặn deploy</td>
-      </tr>
-      <tr>
-          <td><strong>build</strong></td>
-          <td><code>docker build -t smartdocai backend/</code></td>
-          <td>Build Docker image</td>
-          <td>FAIL toàn bộ build</td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>docker tag smartdocai:latest $ECR_REPO_URI:latest</code></td>
-          <td>Tag image để push ECR</td>
-          <td>FAIL toàn bộ build</td>
-      </tr>
-      <tr>
-          <td><strong>post_build</strong></td>
-          <td><code>docker push $ECR_REPO_URI:latest</code></td>
-          <td>Push image lên ECR</td>
-          <td>FAIL toàn bộ build</td>
-      </tr>
-      <tr>
-          <td></td>
-          <td><code>aws lambda update-function-code --function-name smartdocai --image-uri $ECR_REPO_URI:latest</code></td>
-          <td>Deploy lên Lambda</td>
-          <td>FAIL toàn bộ build</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Giai đoạn</th>
+					<th>Lệnh</th>
+					<th>Mục đích</th>
+					<th>Hành vi khi lỗi</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>pre_build</strong></td>
+					<td><code>pip install pytest pytest-cov flake8</code></td>
+					<td>Cài đặt dependency cho test</td>
+					<td>FAIL toàn bộ build</td>
+			</tr>
+			<tr>
+					<td></td>
+					<td><code>flake8 backend/ --exclude=manual_test_*.py --exit-zero</code></td>
+					<td>Lint code (kiểm tra style)</td>
+					<td>Chỉ cảnh báo (exit-zero)</td>
+			</tr>
+			<tr>
+					<td></td>
+					<td><code>pytest backend/test_*_unit.py -v --tb=short --strict-markers</code></td>
+					<td><strong>Chạy unit test</strong></td>
+					<td><strong>HARD FAIL</strong> → Chặn deploy</td>
+			</tr>
+			<tr>
+					<td><strong>build</strong></td>
+					<td><code>docker build -t smartdocai backend/</code></td>
+					<td>Build Docker image</td>
+					<td>FAIL toàn bộ build</td>
+			</tr>
+			<tr>
+					<td></td>
+					<td><code>docker tag smartdocai:latest $ECR_REPO_URI:latest</code></td>
+					<td>Tag image để push ECR</td>
+					<td>FAIL toàn bộ build</td>
+			</tr>
+			<tr>
+					<td><strong>post_build</strong></td>
+					<td><code>docker push $ECR_REPO_URI:latest</code></td>
+					<td>Push image lên ECR</td>
+					<td>FAIL toàn bộ build</td>
+			</tr>
+			<tr>
+					<td></td>
+					<td><code>aws lambda update-function-code --function-name smartdocai --image-uri $ECR_REPO_URI:latest</code></td>
+					<td>Deploy lên Lambda</td>
+					<td>FAIL toàn bộ build</td>
+			</tr>
+	</tbody>
 </table>
 <p><strong>Điểm nổi bật của pipeline:</strong></p>
 <ul>
@@ -2587,19 +2587,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1785133411"></script>
-    <script src="/js/perfect-scrollbar.min.js?1785133411"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1785133411"></script>
-    <script src="/js/jquery.sticky.js?1785133411"></script>
-    <script src="/js/featherlight.min.js?1785133411"></script>
-    <script src="/js/highlight.pack.js?1785133411"></script>
+    <script src="/js/clipboard.min.js?1785135215"></script>
+    <script src="/js/perfect-scrollbar.min.js?1785135215"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1785135215"></script>
+    <script src="/js/jquery.sticky.js?1785135215"></script>
+    <script src="/js/featherlight.min.js?1785135215"></script>
+    <script src="/js/highlight.pack.js?1785135215"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1785133411"></script>
-    <script src="/js/learn.js?1785133411"></script>
-    <script src="/js/hugo-learn.js?1785133411"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1785135215"></script>
+    <script src="/js/learn.js?1785135215"></script>
+    <script src="/js/hugo-learn.js?1785135215"></script>
 
-    <link href="/mermaid/mermaid.css?1785133411" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1785133411"></script>
+    <link href="/mermaid/mermaid.css?1785135215" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1785135215"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

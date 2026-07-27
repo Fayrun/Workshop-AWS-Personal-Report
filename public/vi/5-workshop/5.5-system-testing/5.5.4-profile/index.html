@@ -3,7 +3,7 @@
   <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.159.2">
+    <meta name="generator" content="Hugo 0.163.0">
     <meta
   name="description"
   content=""
@@ -15,21 +15,21 @@
     <title>Kiểm thử hồ sơ cá nhân :: Báo cáo thực tập</title>
 
     
-    <link href="/css/nucleus.css?1785133411" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1785133411" rel="stylesheet">
-    <link href="/css/hybrid.css?1785133411" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1785133411" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1785133411" rel="stylesheet">
-    <link href="/css/auto-complete.css?1785133411" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1785133411" rel="stylesheet">
-    <link href="/css/theme.css?1785133411" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1785133411" rel="stylesheet">
+    <link href="/css/nucleus.css?1785135215" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1785135215" rel="stylesheet">
+    <link href="/css/hybrid.css?1785135215" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1785135215" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1785135215" rel="stylesheet">
+    <link href="/css/auto-complete.css?1785135215" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1785135215" rel="stylesheet">
+    <link href="/css/theme.css?1785135215" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1785135215" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1785133411" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1785135215" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1785133411"></script>
+    <script src="/js/jquery-3.3.1.min.js?1785135215"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -59,14 +59,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1785133411"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1785133411"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1785135215"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1785135215"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1785133411"></script>
+<script type="text/javascript" src="/js/search.js?1785135215"></script>
  
   </div>
 
@@ -1393,172 +1393,172 @@
 	<p>Phần này kiểm tra đầy đủ 4 thao tác CRUD (Create/Read/Update/Delete) trên hồ sơ người dùng: xem thông tin, cập nhật thông tin cá nhân, tải ảnh đại diện qua presigned URL, và xóa tài khoản (bao gồm dọn dẹp toàn bộ dữ liệu liên quan trên Cognito, DynamoDB và S3).</p>
 <h3 id="1-bảng-tổng-hợp-test-case">1. Bảng tổng hợp test case</h3>
 <table>
-  <thead>
-      <tr>
-          <th>#</th>
-          <th>Operation</th>
-          <th>Endpoint</th>
-          <th>Input</th>
-          <th>Expected Result</th>
-          <th>Verification</th>
-          <th>Status</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>READ</strong></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>4.1</td>
-          <td>Get user profile</td>
-          <td>GET /profile</td>
-          <td>JWT token</td>
-          <td>200 OK<br/>Return: user_id, email, fullname, phone, dob, avatar_url, timestamps</td>
-          <td>Profile data matches Cognito attributes</td>
-          <td>PASS</td>
-      </tr>
-      <tr>
-          <td>4.2</td>
-          <td>Get profile without JWT</td>
-          <td>GET /profile</td>
-          <td>No token</td>
-          <td>401 Unauthorized<br/>Error: &ldquo;Missing Authorization header&rdquo;</td>
-          <td>-</td>
-          <td>PASS</td>
-      </tr>
-      <tr>
-          <td><strong>UPDATE</strong></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>4.3</td>
-          <td>Update fullname + phone</td>
-          <td>PUT /profile</td>
-          <td>JWT + fullname: &ldquo;Nguyen Van Updated&rdquo;<br/>+ phone: &ldquo;0987654321&rdquo;</td>
-          <td>200 OK<br/>Return: updated_fields, new updated_at timestamp</td>
-          <td>DynamoDB record updated</td>
-          <td>PASS</td>
-      </tr>
-      <tr>
-          <td>4.4</td>
-          <td>Update with invalid phone</td>
-          <td>PUT /profile</td>
-          <td>phone: &ldquo;123456&rdquo; (invalid format)</td>
-          <td>400 Bad Request<br/>Error: &ldquo;Invalid phone format&rdquo;</td>
-          <td>No changes to DynamoDB</td>
-          <td>PASS</td>
-      </tr>
-      <tr>
-          <td>4.5</td>
-          <td>Update DOB</td>
-          <td>PUT /profile</td>
-          <td>dob: &ldquo;1995-06-20&rdquo;</td>
-          <td>200 OK</td>
-          <td>Cognito custom:dob + DynamoDB updated</td>
-          <td>PASS</td>
-      </tr>
-      <tr>
-          <td><strong>AVATAR UPLOAD</strong></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>4.6</td>
-          <td>Get avatar presigned URL</td>
-          <td>GET /profile/avatar-upload-url</td>
-          <td>JWT token</td>
-          <td>200 OK<br/>Return: upload_url (1h expiry) to S3 path: users/{id}/avatar/</td>
-          <td>-</td>
-          <td>PASS</td>
-      </tr>
-      <tr>
-          <td>4.7</td>
-          <td>Upload avatar to S3</td>
-          <td>PUT to presigned URL</td>
-          <td>avatar.jpg + Content-Type: image/jpeg</td>
-          <td>200 OK (direct S3 upload)</td>
-          <td>File appears in S3 bucket</td>
-          <td>PASS</td>
-      </tr>
-      <tr>
-          <td>4.8</td>
-          <td>Verify avatar_url updated</td>
-          <td>GET /profile</td>
-          <td>JWT token (after upload)</td>
-          <td>Profile contains avatar_url: &ldquo;https://s3&hellip;/users/{id}/avatar/avatar.jpg&rdquo;</td>
-          <td>-</td>
-          <td>PASS</td>
-      </tr>
-      <tr>
-          <td><strong>DELETE</strong></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>4.9</td>
-          <td>Delete account</td>
-          <td>DELETE /profile</td>
-          <td>JWT + confirm: true</td>
-          <td>200 OK<br/>Return: deleted_items (cognito_user, dynamodb_profile, s3_documents count, s3_avatar)</td>
-          <td>All resources cleaned up</td>
-          <td>PASS</td>
-      </tr>
-      <tr>
-          <td>4.10</td>
-          <td>Verify Cognito user deleted</td>
-          <td>AWS CLI: list-users</td>
-          <td>Filter by email</td>
-          <td>Empty list (user not found)</td>
-          <td>-</td>
-          <td>PASS</td>
-      </tr>
-      <tr>
-          <td>4.11</td>
-          <td>Verify DynamoDB record deleted</td>
-          <td>AWS CLI: get-item</td>
-          <td>Key: user_id</td>
-          <td>Empty Item</td>
-          <td>-</td>
-          <td>PASS</td>
-      </tr>
-      <tr>
-          <td>4.12</td>
-          <td>Verify S3 objects deleted</td>
-          <td>AWS CLI: s3 ls</td>
-          <td>Path: uploads/{user_id}/, vectorstore/{user_id}/</td>
-          <td>Empty (no objects)</td>
-          <td>-</td>
-          <td>PASS</td>
-      </tr>
-      <tr>
-          <td>4.13</td>
-          <td>Verify FAISS cleared</td>
-          <td>POST /api/chat sau khi xóa</td>
-          <td>JWT token (user mới)</td>
-          <td>Không còn vector của user cũ</td>
-          <td>Per-user isolation hoạt động đúng</td>
-          <td>PASS</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>#</th>
+					<th>Operation</th>
+					<th>Endpoint</th>
+					<th>Input</th>
+					<th>Expected Result</th>
+					<th>Verification</th>
+					<th>Status</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>READ</strong></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>4.1</td>
+					<td>Get user profile</td>
+					<td>GET /profile</td>
+					<td>JWT token</td>
+					<td>200 OK<br/>Return: user_id, email, fullname, phone, dob, avatar_url, timestamps</td>
+					<td>Profile data matches Cognito attributes</td>
+					<td>PASS</td>
+			</tr>
+			<tr>
+					<td>4.2</td>
+					<td>Get profile without JWT</td>
+					<td>GET /profile</td>
+					<td>No token</td>
+					<td>401 Unauthorized<br/>Error: &ldquo;Missing Authorization header&rdquo;</td>
+					<td>-</td>
+					<td>PASS</td>
+			</tr>
+			<tr>
+					<td><strong>UPDATE</strong></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>4.3</td>
+					<td>Update fullname + phone</td>
+					<td>PUT /profile</td>
+					<td>JWT + fullname: &ldquo;Nguyen Van Updated&rdquo;<br/>+ phone: &ldquo;0987654321&rdquo;</td>
+					<td>200 OK<br/>Return: updated_fields, new updated_at timestamp</td>
+					<td>DynamoDB record updated</td>
+					<td>PASS</td>
+			</tr>
+			<tr>
+					<td>4.4</td>
+					<td>Update with invalid phone</td>
+					<td>PUT /profile</td>
+					<td>phone: &ldquo;123456&rdquo; (invalid format)</td>
+					<td>400 Bad Request<br/>Error: &ldquo;Invalid phone format&rdquo;</td>
+					<td>No changes to DynamoDB</td>
+					<td>PASS</td>
+			</tr>
+			<tr>
+					<td>4.5</td>
+					<td>Update DOB</td>
+					<td>PUT /profile</td>
+					<td>dob: &ldquo;1995-06-20&rdquo;</td>
+					<td>200 OK</td>
+					<td>Cognito custom:dob + DynamoDB updated</td>
+					<td>PASS</td>
+			</tr>
+			<tr>
+					<td><strong>AVATAR UPLOAD</strong></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>4.6</td>
+					<td>Get avatar presigned URL</td>
+					<td>GET /profile/avatar-upload-url</td>
+					<td>JWT token</td>
+					<td>200 OK<br/>Return: upload_url (1h expiry) to S3 path: users/{id}/avatar/</td>
+					<td>-</td>
+					<td>PASS</td>
+			</tr>
+			<tr>
+					<td>4.7</td>
+					<td>Upload avatar to S3</td>
+					<td>PUT to presigned URL</td>
+					<td>avatar.jpg + Content-Type: image/jpeg</td>
+					<td>200 OK (direct S3 upload)</td>
+					<td>File appears in S3 bucket</td>
+					<td>PASS</td>
+			</tr>
+			<tr>
+					<td>4.8</td>
+					<td>Verify avatar_url updated</td>
+					<td>GET /profile</td>
+					<td>JWT token (after upload)</td>
+					<td>Profile contains avatar_url: &ldquo;https://s3&hellip;/users/{id}/avatar/avatar.jpg&rdquo;</td>
+					<td>-</td>
+					<td>PASS</td>
+			</tr>
+			<tr>
+					<td><strong>DELETE</strong></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>4.9</td>
+					<td>Delete account</td>
+					<td>DELETE /profile</td>
+					<td>JWT + confirm: true</td>
+					<td>200 OK<br/>Return: deleted_items (cognito_user, dynamodb_profile, s3_documents count, s3_avatar)</td>
+					<td>All resources cleaned up</td>
+					<td>PASS</td>
+			</tr>
+			<tr>
+					<td>4.10</td>
+					<td>Verify Cognito user deleted</td>
+					<td>AWS CLI: list-users</td>
+					<td>Filter by email</td>
+					<td>Empty list (user not found)</td>
+					<td>-</td>
+					<td>PASS</td>
+			</tr>
+			<tr>
+					<td>4.11</td>
+					<td>Verify DynamoDB record deleted</td>
+					<td>AWS CLI: get-item</td>
+					<td>Key: user_id</td>
+					<td>Empty Item</td>
+					<td>-</td>
+					<td>PASS</td>
+			</tr>
+			<tr>
+					<td>4.12</td>
+					<td>Verify S3 objects deleted</td>
+					<td>AWS CLI: s3 ls</td>
+					<td>Path: uploads/{user_id}/, vectorstore/{user_id}/</td>
+					<td>Empty (no objects)</td>
+					<td>-</td>
+					<td>PASS</td>
+			</tr>
+			<tr>
+					<td>4.13</td>
+					<td>Verify FAISS cleared</td>
+					<td>POST /api/chat sau khi xóa</td>
+					<td>JWT token (user mới)</td>
+					<td>Không còn vector của user cũ</td>
+					<td>Per-user isolation hoạt động đúng</td>
+					<td>PASS</td>
+			</tr>
+	</tbody>
 </table>
 <p><strong>Điểm cuối API:</strong> <code>https://d60866voq5.execute-api.us-east-1.amazonaws.com/prod/api/profile</code></p>
 <p><strong>Sơ đồ dữ liệu hồ sơ (DynamoDB + Cognito):</strong></p>
@@ -2648,19 +2648,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1785133411"></script>
-    <script src="/js/perfect-scrollbar.min.js?1785133411"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1785133411"></script>
-    <script src="/js/jquery.sticky.js?1785133411"></script>
-    <script src="/js/featherlight.min.js?1785133411"></script>
-    <script src="/js/highlight.pack.js?1785133411"></script>
+    <script src="/js/clipboard.min.js?1785135215"></script>
+    <script src="/js/perfect-scrollbar.min.js?1785135215"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1785135215"></script>
+    <script src="/js/jquery.sticky.js?1785135215"></script>
+    <script src="/js/featherlight.min.js?1785135215"></script>
+    <script src="/js/highlight.pack.js?1785135215"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1785133411"></script>
-    <script src="/js/learn.js?1785133411"></script>
-    <script src="/js/hugo-learn.js?1785133411"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1785135215"></script>
+    <script src="/js/learn.js?1785135215"></script>
+    <script src="/js/hugo-learn.js?1785135215"></script>
 
-    <link href="/mermaid/mermaid.css?1785133411" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1785133411"></script>
+    <link href="/mermaid/mermaid.css?1785135215" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1785135215"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

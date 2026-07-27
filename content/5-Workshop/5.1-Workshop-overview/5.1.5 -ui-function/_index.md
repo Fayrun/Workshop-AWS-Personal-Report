@@ -53,11 +53,11 @@ The "Login" button immediately switches to `disabled` status with an active Spin
 Designed as a 2-step flow on a single screen:
 - **Step 1 (Register)**: Input personal details and password.
 
-![image57.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/image57.png)
+  ![image57.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/image57.png)
 
 - **Step 2 (Confirm OTP)**: Enter 6-digit verification code sent via Email to activate account.
 
-![image58.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/image58.png)
+  ![image58.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/image58.png)
 
 #### 2.1. Interface Overview
 The Account Registration interface (`/register`) serves as the entry point for new users into the **SmartDocAI** system, designed with a modern, intuitive Dark Mode interface following UX/UI standards.
@@ -127,13 +127,13 @@ Main Dashboard layout is divided into 2 main functional areas: **Navigation & Do
 
 - **Header and Logo Interface**:
 
-![header_logo.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/header_logo.png)
+  ![header_logo.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/header_logo.png)
 
   - *Functional description*: Displays brand name "SmartDocAI", Sidebar collapse toggle, Light/Dark theme toggle button.
 
 - **System Status Interface**:
 
-![rId68.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId68.png)
+  ![rId68.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId68.png)
 
   - *Functional description*: Displays green/red indicator light showing connection status to AI service (Cloud LLM / Bedrock).
 
@@ -141,17 +141,17 @@ Main Dashboard layout is divided into 2 main functional areas: **Navigation & Do
 
   - *Before file upload*:
 
-![rId69.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId69.png)
+    ![rId69.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId69.png)
 
   - *After file upload*:
 
-![rId70.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId70.png)
+    ![rId70.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId70.png)
 
   - *Functional description*: Cards displaying overview metrics: Uploaded file count, Total pages (`totalPages`), Total text chunks (`totalChunks`).
 
 - **Chunking Configuration Interface**:
 
-![rId71.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId71.png)
+  ![rId71.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId71.png)
 
   - *Functional description*: Slider control: Chunk Size (text chunk size, default 500-1000 tokens) and Chunk Overlap (overlap size, default 100-200 tokens).
 
@@ -159,11 +159,11 @@ Main Dashboard layout is divided into 2 main functional areas: **Navigation & Do
 
   - *Before file upload*:
 
-![rId72.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId72.png)
+    ![rId72.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId72.png)
 
   - *After file upload*:
 
-![rId73.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId73.png)
+    ![rId73.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId73.png)
 
   - *Functional description*: Drag & Drop zone or click to select files. Supports PDF, DOCX formats up to size limit.
 
@@ -171,17 +171,17 @@ Main Dashboard layout is divided into 2 main functional areas: **Navigation & Do
 
   - *Before document processing*:
 
-![rId74.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId74.png)
+    ![rId74.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId74.png)
 
   - *After document processing*:
 
-![rId75.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId75.png)
+    ![rId75.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId75.png)
 
   - *Functional description*: Displays list of successfully processed documents, along with format info, page count, and individual delete buttons.
 
 - **Action Buttons Interface**:
 
-![rId76.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId76.png)
+  ![rId76.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId76.png)
 
   - *Functional description*: Clears total session conversation history and deletes all uploaded documents from the system.
 
@@ -189,15 +189,15 @@ Main Dashboard layout is divided into 2 main functional areas: **Navigation & Do
 
   - *Before user asks question*:
 
-![rId77.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId77.png)
+    ![rId77.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId77.png)
 
   - *After user asks question*:
 
-![rId78.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId78.png)
+    ![rId78.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId78.png)
 
   - *Chat history detail*:
 
-![chat_history_detail.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/chat_history_detail.png)
+    ![chat_history_detail.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/chat_history_detail.png)
 
   - *Functional description*: Lists past chat sessions, allowing selection to view question/answer details or deletion.
 
@@ -205,31 +205,31 @@ Main Dashboard layout is divided into 2 main functional areas: **Navigation & Do
 
 - **Unused State Interface**:
 
-![rId79.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId79.png)
+  ![rId79.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId79.png)
 
   - *Functional description*: Displays when no active conversation exists. Guides 3-step usage: 1. Upload doc → 2. System processing → 3. Ask questions.
 
 - **Active Q&A Interface**:
 
-![rId80.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId80.png)
+  ![rId80.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId80.png)
 
   - *Functional description*: Message stream container displaying user questions and AI answers (SmartDocAI).
 
 - **Citations Viewer Interface**:
 
-![rId81.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId81.png)
+  ![rId81.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId81.png)
 
   - *Functional description*: Block displayed below AI answers highlighting reference sources (Filename, Page Number, and corresponding text snippet).
 
 - **Advanced Search Settings Panel**:
 
-![rId82.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId82.png)
+  ![rId82.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId82.png)
 
   - *Functional description*: Expandable panel allowing configuration of RAG algorithms: File Filter, Hybrid Search, Re-ranking, Self-RAG, Co-RAG.
 
 - **Question Input Bar Interface**:
 
-![rId83.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId83.png)
+  ![rId83.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId83.png)
 
   - *Functional description*: Multi-line auto-expanding textarea, Send button (SendIcon).
 
@@ -258,14 +258,13 @@ The `SearchSettings` control panel allows users to toggle advanced RAG technolog
 
 - **User Info Modification Interface**:
 
-![rId84.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId84.png)
+  ![rId84.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId84.png)
 
 - **Change Password Interface**:
 
-![rId85.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId85.png)
+  ![rId85.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId85.png)
 
 Profile Settings interface (`Profile Settings`) allows users to view and update personal profile details within **SmartDocAI**:
-- **Design Style**: Follows Dark Mode standards with deep dark gray/purple-blue palette (Deep Dark Theme) and modern thin-bordered Card layout.
 - **Tab Bar Navigation**:
   - **Personal Info Tab (Active)**: Interface for updating avatar image and profile fields.
   - **Security Tab**: Interface for security settings and account password changes.
