@@ -133,7 +133,7 @@ Tuy nhiên, khi so sánh chi tiết theo từng dịch vụ, cơ cấu chi phí 
 | **Lambda, Cognito, CloudFront, EventBridge, CloudWatch** | $0.00 - $0.10 | $0.00 | Free Tier phát huy đúng như kỳ vọng |
 | **Amazon SES, Secrets Manager** | *(không có trong bảng ước tính)* | $0.0003 + $0.00004 | Phát sinh nhỏ, không đáng kể, nhưng cho thấy có dùng thêm 2 dịch vụ ngoài kiến trúc đã liệt kê ban đầu |
 
-**Kết luận:** Tổng chi phí thực tế khớp khá sát với ước tính ban đầu, nhưng **CI/CD (CodePipeline + CodeBuild + ECR) mới là nhóm chi phí lớn nhất trong thực tế (~77% tổng chi phí)** thay vì Bedrock/S3 như dự đoán ban đầu — điều này hợp lý vì đây là giai đoạn phát triển tích cực (nhiều lần build/deploy), không phải giai đoạn vận hành ổn định. Nếu đưa hệ thống lên production lâu dài, nên cấu hình **ECR lifecycle policy** để tự động xoá image cũ, tránh chi phí lưu trữ tích lũy không cần thiết.
+**Kết luận:** Tổng chi phí thực tế khớp khá sát với ước tính ban đầu, nhưng **CI/CD (CodePipeline + CodeBuild + ECR) mới là nhóm chi phí lớn nhất trong thực tế (~77% tổng chi phí)** thay vì Bedrock/S3 như dự đoán ban đầu — điều này hợp lý vì đây là giai đoạn phát triển tích cực (nhiều lần build/deploy), không phải giai đoạn vận hành ổn định.
 
 ---
 

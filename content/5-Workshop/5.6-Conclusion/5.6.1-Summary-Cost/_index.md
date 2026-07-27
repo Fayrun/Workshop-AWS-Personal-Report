@@ -133,7 +133,7 @@ However, when comparing service by service, the actual cost breakdown deviates q
 | **Lambda, Cognito, CloudFront, EventBridge, CloudWatch** | $0.00 - $0.10 | $0.00 | Free Tier performed exactly as expected |
 | **Amazon SES, Secrets Manager** | *(not in the estimate table)* | $0.0003 + $0.00004 | Small, negligible amounts, but show 2 extra services being used beyond the originally listed architecture |
 
-**Conclusion:** The total actual cost matches the original estimate fairly closely, but **CI/CD (CodePipeline + CodeBuild + ECR) turns out to be the largest cost group in practice (~77% of total cost)** instead of Bedrock/S3 as originally predicted — which makes sense since this is an active development phase (many builds/deploys), not a stable operating phase. If the system moves to long-term production, an **ECR lifecycle policy** should be configured to automatically delete old images and avoid unnecessary accumulated storage costs.
+**Conclusion:** The total actual cost matches the original estimate fairly closely, but **CI/CD (CodePipeline + CodeBuild + ECR) turns out to be the largest cost group in practice (~77% of total cost)** instead of Bedrock/S3 as originally predicted — which makes sense since this is an active development phase (many builds/deploys), not a stable operating phase.
 
 ---
 
