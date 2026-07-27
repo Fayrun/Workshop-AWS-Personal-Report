@@ -14,7 +14,7 @@ This section lists in detail each AWS service used by SmartDocAI, its specific c
 |---|---|---|
 | **AWS Lambda** | Function `smartdocai`, Docker container image, region `us-east-1` | Runs the entire FastAPI backend (auth, upload, RAG, profile) in a serverless model — billed only when there is a request, auto-scales |
 | **Amazon API Gateway** | HTTP API, stage `/prod`, endpoint `d60866voq5.execute-api...` | The single entry point for every request from the Frontend, proxying directly to Lambda |
-| **Amazon ECR** | Repository `smartdocai` | Stores the Lambda function's Docker image, automatically updated by CodePipeline on every deploy |
+| **Amazon ECR** | Repository `smartdocai`, Lifecycle Policy (expire untagged images after 1 day, keep up to 5 tagged images) | Stores the Lambda function's Docker image, automatically updated by CodePipeline on every deploy |
 
 ### 2. Storage
 

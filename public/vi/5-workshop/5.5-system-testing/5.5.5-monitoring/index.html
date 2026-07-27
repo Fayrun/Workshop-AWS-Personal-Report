@@ -3,7 +3,7 @@
   <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.163.0">
+    <meta name="generator" content="Hugo 0.159.2">
     <meta
   name="description"
   content=""
@@ -1416,81 +1416,81 @@
 <hr>
 <h3 id="2-truy-vấn-cloudwatch-insights">2. Truy vấn CloudWatch Insights</h3>
 <table>
-	<thead>
-			<tr>
-					<th>Tên truy vấn</th>
-					<th>Mục đích</th>
-					<th>Câu lệnh</th>
-					<th>Kết quả mong đợi</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><strong>Error Count (24h)</strong></td>
-					<td>Đếm lỗi theo giờ</td>
-					<td><code>fields @timestamp, @message</code><br/><code>| filter @message like /ERROR/</code><br/><code>| stats count() as error_count by bin(1h)</code><br/><code>| sort @timestamp desc</code></td>
-					<td>Biểu đồ lỗi theo giờ (nên &lt;1% tổng số lần gọi)</td>
-			</tr>
-			<tr>
-					<td><strong>Average Lambda Duration</strong></td>
-					<td>Chỉ số hiệu năng</td>
-					<td><code>fields @duration</code><br/><code>| stats avg(@duration) as avg_ms,</code><br/><code>max(@duration) as max_ms,</code><br/><code>pct(@duration, 99) as p99_ms</code></td>
-					<td>avg: 500-5000ms, max: &lt;10s, p99: &lt;8s</td>
-			</tr>
-			<tr>
-					<td><strong>Top 10 Slowest Invocations</strong></td>
-					<td>Tìm điểm nghẽn hiệu năng</td>
-					<td><code>fields @timestamp, @duration, @message</code><br/><code>| filter @type = &quot;REPORT&quot;</code><br/><code>| sort @duration desc</code><br/><code>| limit 10</code></td>
-					<td>Danh sách request chạy lâu nhất (cold start: 2-3s)</td>
-			</tr>
-			<tr>
-					<td><strong>Cleanup Results</strong></td>
-					<td>Thống kê dọn dẹp EventBridge</td>
-					<td><code>fields @timestamp, @message</code><br/><code>| filter @message like /Deleted.*users/</code><br/><code>| parse @message &quot;Deleted * users&quot; as deleted_count</code><br/><code>| stats sum(deleted_count) as total_deleted by bin(1d)</code></td>
-					<td>Số lượng user chưa xác thực bị xóa mỗi ngày</td>
-			</tr>
-			<tr>
-					<td><strong>Most Active Users</strong></td>
-					<td>Xếp hạng hoạt động người dùng</td>
-					<td><code>fields @message</code><br/><code>| filter @message like /User login:/</code><br/><code>| parse @message &quot;User login: *&quot; as email</code><br/><code>| stats count() as login_count by email</code><br/><code>| sort login_count desc | limit 10</code></td>
-					<td>Top 10 user đăng nhập nhiều nhất</td>
-			</tr>
-	</tbody>
+  <thead>
+      <tr>
+          <th>Tên truy vấn</th>
+          <th>Mục đích</th>
+          <th>Câu lệnh</th>
+          <th>Kết quả mong đợi</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Error Count (24h)</strong></td>
+          <td>Đếm lỗi theo giờ</td>
+          <td><code>fields @timestamp, @message</code><br/><code>| filter @message like /ERROR/</code><br/><code>| stats count() as error_count by bin(1h)</code><br/><code>| sort @timestamp desc</code></td>
+          <td>Biểu đồ lỗi theo giờ (nên &lt;1% tổng số lần gọi)</td>
+      </tr>
+      <tr>
+          <td><strong>Average Lambda Duration</strong></td>
+          <td>Chỉ số hiệu năng</td>
+          <td><code>fields @duration</code><br/><code>| stats avg(@duration) as avg_ms,</code><br/><code>max(@duration) as max_ms,</code><br/><code>pct(@duration, 99) as p99_ms</code></td>
+          <td>avg: 500-5000ms, max: &lt;10s, p99: &lt;8s</td>
+      </tr>
+      <tr>
+          <td><strong>Top 10 Slowest Invocations</strong></td>
+          <td>Tìm điểm nghẽn hiệu năng</td>
+          <td><code>fields @timestamp, @duration, @message</code><br/><code>| filter @type = &quot;REPORT&quot;</code><br/><code>| sort @duration desc</code><br/><code>| limit 10</code></td>
+          <td>Danh sách request chạy lâu nhất (cold start: 2-3s)</td>
+      </tr>
+      <tr>
+          <td><strong>Cleanup Results</strong></td>
+          <td>Thống kê dọn dẹp EventBridge</td>
+          <td><code>fields @timestamp, @message</code><br/><code>| filter @message like /Deleted.*users/</code><br/><code>| parse @message &quot;Deleted * users&quot; as deleted_count</code><br/><code>| stats sum(deleted_count) as total_deleted by bin(1d)</code></td>
+          <td>Số lượng user chưa xác thực bị xóa mỗi ngày</td>
+      </tr>
+      <tr>
+          <td><strong>Most Active Users</strong></td>
+          <td>Xếp hạng hoạt động người dùng</td>
+          <td><code>fields @message</code><br/><code>| filter @message like /User login:/</code><br/><code>| parse @message &quot;User login: *&quot; as email</code><br/><code>| stats count() as login_count by email</code><br/><code>| sort login_count desc | limit 10</code></td>
+          <td>Top 10 user đăng nhập nhiều nhất</td>
+      </tr>
+  </tbody>
 </table>
 <img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/cloudwatch-logs-insights-query.png" width="90%" style="max-width:900px">
 <hr>
 <h3 id="3-chỉ-số-lambda-metrics">3. Chỉ số Lambda (Metrics)</h3>
 <p><strong>Bảng các chỉ số CloudWatch:</strong></p>
 <table>
-	<thead>
-			<tr>
-					<th>Chỉ số</th>
-					<th>Lệnh AWS CLI</th>
-					<th>Giá trị mong đợi (hệ thống khỏe mạnh)</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><strong>Invocations</strong></td>
-					<td><code>aws cloudwatch get-metric-statistics</code><br/><code>--namespace AWS/Lambda --metric-name Invocations</code><br/><code>--dimensions Name=FunctionName,Value=smartdocai</code><br/><code>--start-time &lt;1h ago&gt; --period 300 --statistics Sum</code></td>
-					<td>100-1000/giờ (tùy lưu lượng)</td>
-			</tr>
-			<tr>
-					<td><strong>Errors</strong></td>
-					<td><code>aws cloudwatch get-metric-statistics</code><br/><code>--namespace AWS/Lambda --metric-name Errors</code><br/><code>--dimensions Name=FunctionName,Value=smartdocai</code><br/><code>--start-time &lt;1h ago&gt; --period 300 --statistics Sum</code></td>
-					<td>&lt;1% tổng số lần gọi</td>
-			</tr>
-			<tr>
-					<td><strong>Throttles</strong></td>
-					<td><code>aws cloudwatch get-metric-statistics</code><br/><code>--namespace AWS/Lambda --metric-name Throttles</code><br/><code>--dimensions Name=FunctionName,Value=smartdocai</code><br/><code>--start-time &lt;1h ago&gt; --period 300 --statistics Sum</code></td>
-					<td>0 (không nên bị throttle khi có provisioned concurrency)</td>
-			</tr>
-			<tr>
-					<td><strong>Duration</strong></td>
-					<td><code>aws cloudwatch get-metric-statistics</code><br/><code>--namespace AWS/Lambda --metric-name Duration</code><br/><code>--dimensions Name=FunctionName,Value=smartdocai</code><br/><code>--start-time &lt;1h ago&gt; --period 300 --statistics Average,Max</code></td>
-					<td>Trung bình: 500ms-5s<br/>Cold start: 2-3s<br/>Warm: &lt;1s</td>
-			</tr>
-	</tbody>
+  <thead>
+      <tr>
+          <th>Chỉ số</th>
+          <th>Lệnh AWS CLI</th>
+          <th>Giá trị mong đợi (hệ thống khỏe mạnh)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Invocations</strong></td>
+          <td><code>aws cloudwatch get-metric-statistics</code><br/><code>--namespace AWS/Lambda --metric-name Invocations</code><br/><code>--dimensions Name=FunctionName,Value=smartdocai</code><br/><code>--start-time &lt;1h ago&gt; --period 300 --statistics Sum</code></td>
+          <td>100-1000/giờ (tùy lưu lượng)</td>
+      </tr>
+      <tr>
+          <td><strong>Errors</strong></td>
+          <td><code>aws cloudwatch get-metric-statistics</code><br/><code>--namespace AWS/Lambda --metric-name Errors</code><br/><code>--dimensions Name=FunctionName,Value=smartdocai</code><br/><code>--start-time &lt;1h ago&gt; --period 300 --statistics Sum</code></td>
+          <td>&lt;1% tổng số lần gọi</td>
+      </tr>
+      <tr>
+          <td><strong>Throttles</strong></td>
+          <td><code>aws cloudwatch get-metric-statistics</code><br/><code>--namespace AWS/Lambda --metric-name Throttles</code><br/><code>--dimensions Name=FunctionName,Value=smartdocai</code><br/><code>--start-time &lt;1h ago&gt; --period 300 --statistics Sum</code></td>
+          <td>0 (không nên bị throttle khi có provisioned concurrency)</td>
+      </tr>
+      <tr>
+          <td><strong>Duration</strong></td>
+          <td><code>aws cloudwatch get-metric-statistics</code><br/><code>--namespace AWS/Lambda --metric-name Duration</code><br/><code>--dimensions Name=FunctionName,Value=smartdocai</code><br/><code>--start-time &lt;1h ago&gt; --period 300 --statistics Average,Max</code></td>
+          <td>Trung bình: 500ms-5s<br/>Cold start: 2-3s<br/>Warm: &lt;1s</td>
+      </tr>
+  </tbody>
 </table>
 <p><strong>Lưu ý:</strong> Thay <code>&lt;1h ago&gt;</code> bằng timestamp thực tế theo định dạng: <code>$(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%S)</code></p>
 <hr>
@@ -1500,40 +1500,40 @@
 </blockquote>
 <p><strong>SNS Topic:</strong> <code>arn:aws:sns:us-east-1:623035187993:smartdocai-alerts</code> — gửi email cảnh báo tới địa chỉ đã đăng ký mỗi khi 1 trong 4 Alarm bên dưới chuyển sang trạng thái <code>ALARM</code>.</p>
 <table>
-	<thead>
-			<tr>
-					<th>Alarm Name</th>
-					<th>Metric</th>
-					<th>Ngưỡng</th>
-					<th>Ý nghĩa</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><code>smartdocai-lambda-errors</code></td>
-					<td>Lambda <code>Errors</code></td>
-					<td>&gt; 5 lỗi / 5 phút</td>
-					<td>Backend đang lỗi bất thường</td>
-			</tr>
-			<tr>
-					<td><code>smartdocai-lambda-duration</code></td>
-					<td>Lambda <code>Duration</code></td>
-					<td>&gt; 25000ms / 5 phút</td>
-					<td>Gần chạm timeout 30s (rủi ro user gặp lỗi)</td>
-			</tr>
-			<tr>
-					<td><code>smartdocai-lambda-throttles</code></td>
-					<td>Lambda <code>Throttles</code></td>
-					<td>≥ 1 lần / 5 phút</td>
-					<td>Vượt concurrency limit, cần tăng reserved concurrency</td>
-			</tr>
-			<tr>
-					<td><code>smartdocai-apigateway-5xx</code></td>
-					<td>API Gateway <code>5xxError</code></td>
-					<td>&gt; 5 lỗi / 5 phút</td>
-					<td>Lỗi server phía API Gateway/Lambda integration</td>
-			</tr>
-	</tbody>
+  <thead>
+      <tr>
+          <th>Alarm Name</th>
+          <th>Metric</th>
+          <th>Ngưỡng</th>
+          <th>Ý nghĩa</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>smartdocai-lambda-errors</code></td>
+          <td>Lambda <code>Errors</code></td>
+          <td>&gt; 5 lỗi / 5 phút</td>
+          <td>Backend đang lỗi bất thường</td>
+      </tr>
+      <tr>
+          <td><code>smartdocai-lambda-duration</code></td>
+          <td>Lambda <code>Duration</code></td>
+          <td>&gt; 25000ms / 5 phút</td>
+          <td>Gần chạm timeout 30s (rủi ro user gặp lỗi)</td>
+      </tr>
+      <tr>
+          <td><code>smartdocai-lambda-throttles</code></td>
+          <td>Lambda <code>Throttles</code></td>
+          <td>≥ 1 lần / 5 phút</td>
+          <td>Vượt concurrency limit, cần tăng reserved concurrency</td>
+      </tr>
+      <tr>
+          <td><code>smartdocai-apigateway-5xx</code></td>
+          <td>API Gateway <code>5xxError</code></td>
+          <td>&gt; 5 lỗi / 5 phút</td>
+          <td>Lỗi server phía API Gateway/Lambda integration</td>
+      </tr>
+  </tbody>
 </table>
 <img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/cloudwatch-alarms-status.png" width="90%" style="max-width:900px">
 <p><strong>Xác nhận email đã confirm nhận cảnh báo từ SNS:</strong></p>

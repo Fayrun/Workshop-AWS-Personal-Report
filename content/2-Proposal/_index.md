@@ -118,10 +118,11 @@ The system maximizes **AWS Free Tier** benefits and **Serverless Pay-As-You-Go**
 | **Amazon Cognito** | < 1,000 MAUs (Monthly Active Users) | **$0.00** (Free Tier for 50,000 MAUs) |
 | **AWS CloudFront** | < 50 GB Data Transfer Out | **$0.00** (Free Tier for 1 TB) |
 | **AWS CodePipeline & CodeBuild** | ~30 build minutes / month | **$0.05 - $0.15** |
+| **Amazon ECR** | ~1-2 GB Docker image storage | **$0.10 - $0.20** |
 | **Amazon Bedrock - Titan Embeddings V2** | ~5,000,000 tokens / month ($0.00002 / 1k tokens) | **$0.10 - $0.20** |
 | **Amazon Bedrock - Qwen 3 Next 80B A3B (`qwen.qwen3-next-80b-a3b`)** | ~1,000,000 input & 1,000,000 output tokens | **$0.15 - $0.75** |
 | **EventBridge & CloudWatch Alarms** | 4 Alarms, 1 Rule, SNS email alerts | **$0.10** |
-| **TOTAL ESTIMATED COST** | **Actual System Operation** | **~$0.56 - $1.65 USD / month** |
+| **TOTAL ESTIMATED COST** | **Actual System Operation** | **~$0.66 - $1.85 USD / month** |
 
 ---
 

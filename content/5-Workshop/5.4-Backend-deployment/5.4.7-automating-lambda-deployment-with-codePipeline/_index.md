@@ -8,11 +8,11 @@ pre : " <b> 5.4.7 </b> "
 
 ### 1. Check Lambda Function
 - Search for `Lambda` in the **AWS Console** search bar.
-![find-lambda](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/find-lambda.png)
+![find-lambda](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/22.png)
 - Verify that the previously created **smartdocai Function** exists, then click on that function.
-![function](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/function.png)
+![function](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/23.png)
 - Check the **Image URI**.
-![image-URI](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/image-URI.png)
+![image-URI](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/24.png)
 
 ### 2. Create CodePipeline to Connect to Lambda
 **Step 1: Create backend/buildspec.yml (CI/CD Automated Testing & Hard Fail Workflow)**
@@ -56,89 +56,90 @@ phases:
       - aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --image-uri $REPOSITORY_URI:$IMAGE_TAG
 ```
 
-![file-buildspec](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/file-buildspec.png)
+![file-buildspec](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/25.png)
 
 **Step 2: Create CodePipeline**
 - Access **CodePipeline** and click the **Create pipeline** button.
-![codepipeline](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/codepipeline.png)
+![codepipeline](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/26.png)
 - In the Choose creation option UI:
   - Select **Build custom pipeline**
   - Click **Next**
-![choose-creation-option](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/choose-creation-option.png)
+![choose-creation-option](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/27.png)
 - In the Choose pipeline setting UI:
   - Pipeline name: Enter `smartdocai-be-pipeline`
   - Role name: Enter `AWSCodePipelineServiceRole-us-east-1-smartdocai-be-pipeline`
-![choose-pipeline-setting](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/choose-pipeline-setting.png)
+![choose-pipeline-setting](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/28.png)
 - In the Add source stage UI:
   - Source provider: Select **GitHub (via GitHub App)**
   - Connection: Select the **connection** created during CodePipeline connection to S3-Frontend
   - Repository: Select **repo TakunKenjo/SmartdocAI-AWS**
   - Default branch: Select **main**
   - Output artifact format: Select **CodePipeline default**
-![add-source-stage1](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/add-source-stage1.png)
+![add-source-stage1](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/29.png)
   - Scroll to the bottom of the page and select **Next**
-![add-source-stage2](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/add-source-stage2.png)
+![add-source-stage2](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/30.png)
 - In the Add build stage - optional UI:
   - Build provider: Select **Other build providers**
   - Select: Select **AWS CodeBuild**
   - Project name: Click the **Create project** button
-![add-build-stage](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/add-build-stage.png)
+![add-build-stage](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/31.png)
 
 **Step 3: Create CodeBuild BE**
 - In the Create build project UI:
   - Project name: Enter `smartdocai-be-build`
   - Project type: Select **Default project**
-![create-build-project](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/create-build-project.png)
+![create-build-project](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/32.png)
   - Operating system: Select **Ubuntu**
   - Runtime(s): Select **Standard**
   - Image: Select **aws/codebuild/standard:8.0**
-![envi](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/envi.png)
+![envi](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/33.png)
   - Service role: Select **New service role**
   - Role name: Enter `codebuild-smartdocai-be-build-service-role`
-![service-role](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/service-role.png)
+![service-role](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/3
+4.png)
   - Privileged: Check **Enable this flag…**
-![privi](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/privi.png)
+![privi](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/35.png)
   - Build specifications: Select **Use a buildspec file**
   - Buildspec name - optional: Enter `backend/buildspec.yml`
-![buildspec-name](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/buildspec-name.png)
+![buildspec-name](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/36.png)
   - Scroll to the bottom of the page and click **Continue to CodePipeline**
-![continue-to-codepipeline](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/continue-to-codepipeline.png)
+![continue-to-codepipeline](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/37.png)
 
 **Step 4: Continue Creating CodePipeline**
 - In the Add build stage - optional UI:
   - Project name: Select the newly created **CodeBuild**: `smartdocai-be-build`
   - Scroll to the bottom of the page and click **Next**
-![add-build-stage-final](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/add-build-stage-final.png)
+![add-build-stage-final](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/38.png)
 - In the Add test stage - optional UI:
   - Click **Skip test stage**
-![add-test-stage](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/add-test-stage.png)
+![add-test-stage](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/39.png)
 - In the Add deploy stage UI:
   - Click **Skip deploy stage**
-![add-deploy-stage](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/add-deploy-stage.png)
+![add-deploy-stage](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/40.png)
 - In the Review UI:
   - Review Pipeline configuration details
-![review-pipeline](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/review-pipeline.png)
+![review-pipeline](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/41.png)
   - Scroll to the bottom of the page and click **Create pipeline**
 
 **Step 5: Grant ECR Permissions to CodeBuild IAM Role**
 - Navigate to IAM > Roles:
   - Select `codebuild-smartdocai-be-service-role`
-![IAM-role](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/IAM-role.png)
+![IAM-role](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/1.png)
   - In the Permissions tab: Click **Add permissions**
-![tab-permission](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/tab-permission.png)
+![tab-permission](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/2.png)
   - Select **Attach policies**
-![attach-policy](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/attach-policy.png)
+![attach-policy](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/3.png)
 - Search for: `AmazonEC2ContainerRegistryPowerUser`
   - Check **AmazonEC2ContainerRegistryPowerUser**
   - Click **Add permissions**
-![add-permission](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/add-permission.png)
+![add-permission](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/4.png)
 - Permission policy creation result
-![permission-policy-success](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/permission-policy-success.png)
+![permission-policy-success](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/5.png)
 
 **Step 6: Add lambda:UpdateFunctionCode**
 - After adding ECR, this role also requires: **lambda:UpdateFunctionCode**
 - Click **Add permissions** and select **Create inline policy**
-![create-inline-policy](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/create-inline-policy.png)
+![create-inline-policy](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/6.png)
 - In the Specify permissions page:
   - Select **JSON**
   - Enter code as shown below:
@@ -157,16 +158,16 @@ phases:
 }
 ```
 
-![json](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/json.png)
+![json](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/7.png)
   - Scroll to the bottom of the page and click **Next**
-![json-next](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/json-next.png)
+![json-next](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/8.png)
 - In the Review and create UI:
   - Policy name: Enter `smartdocai-be-codebuild-ecr-lambda-policy`
   - Click **Create policy**
-![create-inline-policy2](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/create-inline-policy2.png)
+![create-inline-policy2](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/9.png)
 - Permission policy creation confirmation
-![permission-policy-inline-success](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/permission-policy-inline-success.png)
+![permission-policy-inline-success](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/10.png)
 
 **Step 7: Verify CodePipeline**
 - Select `smartdocai-be-pipeline` and verify build pipeline success
-![pipeline-be-success](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/pipeline-be-success.png)
+![pipeline-be-success](/images/5-Workshop/5.4-Backend-deployment/5.4.7-automating-lambda-deployment-with-codePipeline/11.png)

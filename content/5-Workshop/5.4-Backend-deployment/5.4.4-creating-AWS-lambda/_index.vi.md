@@ -101,6 +101,48 @@ Mở PowerShell và thực hiện lệnh
 ![image37.png](/images/5-Workshop/5.4-Backend-deployment/5.4.4-creating-AWS-lambda/image37.png)
 
 
+### 3.1. Cấu hình ECR Lifecycle Policy (tối ưu chi phí lưu trữ)
+
+Để tối ưu chi phí lưu trữ Amazon ECR về lâu dài, cấu hình Lifecycle Policy tự động dọn dẹp image cũ cho repository `smartdocai`:
+
+```json
+{
+  "rules": [
+    {
+      "rulePriority": 1,
+      "description": "Expire untagged images older than 1 day",
+      "selection": {
+        "tagStatus": "untagged",
+        "countType": "sinceImagePushed",
+        "countUnit": "days",
+        "countNumber": 1
+      },
+      "action": { "type": "expire" }
+    },
+    {
+      "rulePriority": 2,
+      "description": "Keep only the last 5 tagged images",
+      "selection": {
+        "tagStatus": "tagged",
+        "tagPrefixList": ["latest"],
+        "countType": "imageCountMoreThan",
+        "countNumber": 5
+      },
+      "action": { "type": "expire" }
+    }
+  ]
+}
+```
+
+Áp dụng bằng lệnh:
+
+```powershell
+aws ecr put-lifecycle-policy --repository-name smartdocai --region us-east-1 --lifecycle-policy-text file://ecr-lifecycle-policy.json
+```
+
+> **Lưu ý:** Do `buildspec.yml` luôn build/push với tag cố định `latest`, tại một thời điểm thường chỉ có 1 image mang tag này — rule "giữ 5 image tagged" gần như không phát huy tác dụng. Rule thực sự hữu ích là xóa image `untagged` sau 1 ngày, giúp dọn các image cũ bị tag đè mỗi lần deploy.
+
+
 ### 4. Đăng nhập Docker CLI vào Amazon ECR ( AUTHENTICATION )
 
 Do Amazon ECR yêu cầu xác thực bảo mậtToken (có hiệu lực trong 12 giờ), ta dùng lệnh lấy mật khẩu tạm thời từ AWS ECR truyền trực tiếp vào Docker Login

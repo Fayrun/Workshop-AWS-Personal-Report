@@ -3,7 +3,7 @@
   <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.163.0">
+    <meta name="generator" content="Hugo 0.159.2">
     <meta
   name="description"
   content=""
@@ -1393,162 +1393,162 @@
 	<p>Phần này kiểm tra luồng nghiệp vụ cốt lõi của SmartDocAI: tải tài liệu lên qua S3 presigned URL (bỏ qua giới hạn 10MB của API Gateway), lập chỉ mục vector bằng Bedrock Titan Embeddings, và truy vấn RAG ở 3 chế độ khác nhau (Standard, Self-RAG, Co-RAG). Đây là tính năng quan trọng nhất của hệ thống nên được kiểm thử kỹ cả về chức năng lẫn hiệu năng.</p>
 <h3 id="1-bảng-tổng-hợp-test-case">1. Bảng tổng hợp test case</h3>
 <table>
-	<thead>
-			<tr>
-					<th>#</th>
-					<th>Test Case</th>
-					<th>Endpoint</th>
-					<th>Input</th>
-					<th>Expected Result</th>
-					<th>Status</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td><strong>PRESIGNED URL</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>2.1</td>
-					<td>Get S3 presigned URL</td>
-					<td>POST /api/upload-url</td>
-					<td>JWT token + <code>{&quot;filename&quot;:&quot;test.pdf&quot;,&quot;content_type&quot;:&quot;application/pdf&quot;}</code></td>
-					<td>200 OK<br/>Return: upload_url (1h expiry) + s3_key</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>2.2</td>
-					<td>Presigned URL requires auth</td>
-					<td>POST /api/upload-url</td>
-					<td>No JWT token</td>
-					<td>401 Unauthorized<br/>Error: &ldquo;Thiếu Authorization Bearer Token&rdquo;</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td><strong>S3 UPLOAD</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>2.3</td>
-					<td>Upload PDF to S3</td>
-					<td>PUT to presigned URL</td>
-					<td>PDF file + Content-Type: application/pdf</td>
-					<td>200 OK (direct S3 upload, bypass Lambda)</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>2.4</td>
-					<td>CORS allowed origin</td>
-					<td>PUT to presigned URL</td>
-					<td>Origin: <a href="https://dutf3c70nnjzl.cloudfront.net">https://dutf3c70nnjzl.cloudfront.net</a></td>
-					<td>200 OK + CORS headers</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>2.5</td>
-					<td>CORS blocked origin</td>
-					<td>PUT to presigned URL</td>
-					<td>Origin: <a href="https://evil.com">https://evil.com</a></td>
-					<td>403 Forbidden (no CORS header)</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td><strong>DOCUMENT INDEXING</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>2.6</td>
-					<td>Index uploaded document</td>
-					<td>POST /api/process</td>
-					<td>JWT + <code>{&quot;filename&quot;:&quot;...&quot;,&quot;s3_key&quot;:&quot;...&quot;}</code></td>
-					<td>200 OK<br/>Return: status + số trang + số chunks</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>2.7</td>
-					<td>Verify backend processing</td>
-					<td>Check CloudWatch logs</td>
-					<td>Sau khi gọi POST /api/process</td>
-					<td>Log: trích xuất văn bản → chia chunk → tạo vector qua Bedrock Titan (12 threads song song)</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td><strong>RAG QUERY - STANDARD MODE</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>2.8</td>
-					<td>Standard RAG query</td>
-					<td>POST /api/chat</td>
-					<td>JWT + <code>{&quot;message&quot;:&quot;...&quot;,&quot;use_self_rag&quot;:false,&quot;use_co_rag&quot;:false}</code></td>
-					<td>200 OK<br/>Return: answer + sources</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>2.9</td>
-					<td>Query without documents</td>
-					<td>POST /api/chat</td>
-					<td>User chưa upload tài liệu nào</td>
-					<td>200 OK<br/>Return: thông báo chưa có tài liệu</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td><strong>RAG QUERY - SELF-RAG MODE</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>2.10</td>
-					<td>Self-RAG with relevance grading</td>
-					<td>POST /api/chat</td>
-					<td><code>{&quot;message&quot;:&quot;...&quot;,&quot;use_self_rag&quot;:true,&quot;use_co_rag&quot;:false}</code></td>
-					<td>200 OK<br/>Return: answer + sources đã lọc theo relevance</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td>2.11</td>
-					<td>Self-RAG filters low relevance</td>
-					<td>POST /api/chat</td>
-					<td>Câu hỏi không liên quan tới tài liệu</td>
-					<td>Return: sources rỗng + thông báo không tìm thấy ngữ cảnh liên quan</td>
-					<td>PASS</td>
-			</tr>
-			<tr>
-					<td><strong>RAG QUERY - CO-RAG MODE</strong></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-			</tr>
-			<tr>
-					<td>2.12</td>
-					<td>Co-RAG collaborative retrieval</td>
-					<td>POST /api/chat</td>
-					<td><code>{&quot;message&quot;:&quot;...&quot;,&quot;use_self_rag&quot;:false,&quot;use_co_rag&quot;:true}</code></td>
-					<td>200 OK<br/>Return: answer + sources (3 agent song song: semantic/keyword/conceptual)</td>
-					<td>PASS</td>
-			</tr>
-	</tbody>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>Test Case</th>
+          <th>Endpoint</th>
+          <th>Input</th>
+          <th>Expected Result</th>
+          <th>Status</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>PRESIGNED URL</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2.1</td>
+          <td>Get S3 presigned URL</td>
+          <td>POST /api/upload-url</td>
+          <td>JWT token + <code>{&quot;filename&quot;:&quot;test.pdf&quot;,&quot;content_type&quot;:&quot;application/pdf&quot;}</code></td>
+          <td>200 OK<br/>Return: upload_url (1h expiry) + s3_key</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>2.2</td>
+          <td>Presigned URL requires auth</td>
+          <td>POST /api/upload-url</td>
+          <td>No JWT token</td>
+          <td>401 Unauthorized<br/>Error: &ldquo;Thiếu Authorization Bearer Token&rdquo;</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td><strong>S3 UPLOAD</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2.3</td>
+          <td>Upload PDF to S3</td>
+          <td>PUT to presigned URL</td>
+          <td>PDF file + Content-Type: application/pdf</td>
+          <td>200 OK (direct S3 upload, bypass Lambda)</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>2.4</td>
+          <td>CORS allowed origin</td>
+          <td>PUT to presigned URL</td>
+          <td>Origin: <a href="https://dutf3c70nnjzl.cloudfront.net">https://dutf3c70nnjzl.cloudfront.net</a></td>
+          <td>200 OK + CORS headers</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>2.5</td>
+          <td>CORS blocked origin</td>
+          <td>PUT to presigned URL</td>
+          <td>Origin: <a href="https://evil.com">https://evil.com</a></td>
+          <td>403 Forbidden (no CORS header)</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td><strong>DOCUMENT INDEXING</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2.6</td>
+          <td>Index uploaded document</td>
+          <td>POST /api/process</td>
+          <td>JWT + <code>{&quot;filename&quot;:&quot;...&quot;,&quot;s3_key&quot;:&quot;...&quot;}</code></td>
+          <td>200 OK<br/>Return: status + số trang + số chunks</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>2.7</td>
+          <td>Verify backend processing</td>
+          <td>Check CloudWatch logs</td>
+          <td>Sau khi gọi POST /api/process</td>
+          <td>Log: trích xuất văn bản → chia chunk → tạo vector qua Bedrock Titan (12 threads song song)</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td><strong>RAG QUERY - STANDARD MODE</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2.8</td>
+          <td>Standard RAG query</td>
+          <td>POST /api/chat</td>
+          <td>JWT + <code>{&quot;message&quot;:&quot;...&quot;,&quot;use_self_rag&quot;:false,&quot;use_co_rag&quot;:false}</code></td>
+          <td>200 OK<br/>Return: answer + sources</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>2.9</td>
+          <td>Query without documents</td>
+          <td>POST /api/chat</td>
+          <td>User chưa upload tài liệu nào</td>
+          <td>200 OK<br/>Return: thông báo chưa có tài liệu</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td><strong>RAG QUERY - SELF-RAG MODE</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2.10</td>
+          <td>Self-RAG with relevance grading</td>
+          <td>POST /api/chat</td>
+          <td><code>{&quot;message&quot;:&quot;...&quot;,&quot;use_self_rag&quot;:true,&quot;use_co_rag&quot;:false}</code></td>
+          <td>200 OK<br/>Return: answer + sources đã lọc theo relevance</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td>2.11</td>
+          <td>Self-RAG filters low relevance</td>
+          <td>POST /api/chat</td>
+          <td>Câu hỏi không liên quan tới tài liệu</td>
+          <td>Return: sources rỗng + thông báo không tìm thấy ngữ cảnh liên quan</td>
+          <td>PASS</td>
+      </tr>
+      <tr>
+          <td><strong>RAG QUERY - CO-RAG MODE</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2.12</td>
+          <td>Co-RAG collaborative retrieval</td>
+          <td>POST /api/chat</td>
+          <td><code>{&quot;message&quot;:&quot;...&quot;,&quot;use_self_rag&quot;:false,&quot;use_co_rag&quot;:true}</code></td>
+          <td>200 OK<br/>Return: answer + sources (3 agent song song: semantic/keyword/conceptual)</td>
+          <td>PASS</td>
+      </tr>
+  </tbody>
 </table>
 <p><strong>Điểm cuối API gốc:</strong> <code>https://d60866voq5.execute-api.us-east-1.amazonaws.com/prod</code></p>
 <p><strong>Các bước xử lý ở Backend (lập chỉ mục tài liệu):</strong></p>
@@ -1564,34 +1564,34 @@
 <p><strong>So sánh hiệu năng giữa các chế độ RAG (đo thật trên production):</strong></p>
 <p>Test với cùng 1 câu hỏi trên tài liệu 3 file/94 trang/143 chunks đã upload sẵn:</p>
 <table>
-	<thead>
-			<tr>
-					<th>Metric</th>
-					<th>Standard RAG</th>
-					<th>Self-RAG</th>
-					<th>Co-RAG</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>Thời gian phản hồi</td>
-					<td>13.89s</td>
-					<td>13.43s</td>
-					<td>17.39s</td>
-			</tr>
-			<tr>
-					<td>Số sources trả về</td>
-					<td>10</td>
-					<td>10</td>
-					<td>10</td>
-			</tr>
-			<tr>
-					<td>Số agent xử lý song song</td>
-					<td>1</td>
-					<td>1 (rewrite + grade)</td>
-					<td>3 (semantic/keyword/conceptual)</td>
-			</tr>
-	</tbody>
+  <thead>
+      <tr>
+          <th>Metric</th>
+          <th>Standard RAG</th>
+          <th>Self-RAG</th>
+          <th>Co-RAG</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Thời gian phản hồi</td>
+          <td>13.89s</td>
+          <td>13.43s</td>
+          <td>17.39s</td>
+      </tr>
+      <tr>
+          <td>Số sources trả về</td>
+          <td>10</td>
+          <td>10</td>
+          <td>10</td>
+      </tr>
+      <tr>
+          <td>Số agent xử lý song song</td>
+          <td>1</td>
+          <td>1 (rewrite + grade)</td>
+          <td>3 (semantic/keyword/conceptual)</td>
+      </tr>
+  </tbody>
 </table>
 <hr>
 

@@ -118,13 +118,13 @@ The figures below come directly from AWS Cost Explorer, covering exactly **30 da
 
 ### Comparison with the Estimated Cost in Section 2 - Proposal
 
-In [Section 2 - Proposal](/2-proposal/), the team estimated the total monthly infrastructure cost at around **$0.56 - $1.65 USD/month**. The actual cost over exactly 30 days is **~$1.65/month** — **sitting right at the upper edge of the originally estimated range**, showing the overall estimate was fairly accurate.
+In [Section 2 - Proposal](/2-proposal/), the team estimated the total monthly infrastructure cost at around **$0.66 - $1.85 USD/month**. The actual cost over exactly 30 days is **~$1.65/month** — **falling within the originally estimated range**, showing the overall estimate was fairly accurate.
 
 However, when comparing service by service, the actual cost breakdown deviates quite a bit from the original assumptions:
 
 | Service | Estimate (Section 2) | Actual | Notes |
 |---------|-------------------|---------|----------|
-| **Amazon ECR** | *(not in the estimate table)* | $0.5977 | **The largest actual expense, but completely missed in the original estimate** — every CodePipeline run builds & pushes a new Docker image to ECR, and old images aren't auto-deleted (no lifecycle policy configured), so storage accumulates over time |
+| **Amazon ECR** | $0.10 - $0.20 | $0.5977 | **The largest actual expense**, significantly higher than estimated due to being in an active development phase with frequent builds/pushes, not yet a stable operating phase |
 | **CodePipeline & CodeBuild** | $0.05 - $0.15 | $0.6690 | **4-13x higher** than estimated, due to the development phase having many pushes/bug fixes/rebuilds (unlike the "~30 build minutes/month" assumption for an already-stable system) |
 | **Amazon Bedrock** | $0.25 - $0.95 | $0.3453 | Within the estimated range |
 | **Amazon S3** | $0.15 - $0.30 | $0.0197 | Much lower than estimated — actual test document volume is still small |
@@ -133,7 +133,7 @@ However, when comparing service by service, the actual cost breakdown deviates q
 | **Lambda, Cognito, CloudFront, EventBridge, CloudWatch** | $0.00 - $0.10 | $0.00 | Free Tier performed exactly as expected |
 | **Amazon SES, Secrets Manager** | *(not in the estimate table)* | $0.0003 + $0.00004 | Small, negligible amounts, but show 2 extra services being used beyond the originally listed architecture |
 
-**Conclusion:** The total actual cost matches the original estimate fairly closely, but **CI/CD (CodePipeline + CodeBuild + ECR) turns out to be the largest cost group in practice (~77% of total cost)** instead of Bedrock/S3 as originally predicted — which makes sense since this is an active development phase (many builds/deploys), not a stable operating phase. If the system moves to long-term production, an **ECR lifecycle policy** should be configured to automatically delete old images and avoid unnecessary accumulated storage costs.
+**Conclusion:** The total actual cost matches the original estimate fairly closely, but **CI/CD (CodePipeline + CodeBuild + ECR) turns out to be the largest cost group in practice (~77% of total cost)** instead of Bedrock/S3 as originally predicted — which makes sense since this is an active development phase (many builds/deploys), not a stable operating phase.
 
 ---
 
