@@ -127,13 +127,13 @@ Bố cục Trang chủ được chia thành 2 khu vực chức năng chính: **T
 
 - **Giao diện Header và logo**:
 
-![rId68.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId68.png)
+![header_logo.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/header_logo.png)
 
   - *Mô tả chức năng*: Hiển thị tên thương hiệu "SmartDocAI", nút Thu gọn/Mở rộng Sidebar (Collapse), nút Chuyển đổi giao diện Sáng/Tối.
 
 - **Giao diện trạng thái hệ thống**:
 
-![rId69.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId69.png)
+![rId68.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId68.png)
 
   - *Mô tả chức năng*: Hiển thị đèn báo xanh/đỏ thể hiện kết nối tới dịch vụ AI (Cloud LLM / Bedrock).
 
@@ -141,17 +141,17 @@ Bố cục Trang chủ được chia thành 2 khu vực chức năng chính: **T
 
   - *Trước khi đăng tải file*:
 
-![rId70.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId70.png)
+![rId69.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId69.png)
 
   - *Sau khi đăng tải file*:
 
-![rId71.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId71.png)
+![rId70.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId70.png)
 
   - *Mô tả chức năng*: Thẻ hiển thị các chỉ số tổng quan: Số file đã tải lên, Tổng số trang (`totalPages`), Tổng số đoạn văn bản (`totalChunks`).
 
 - **Giao diện cấu hình phân đoạn**:
 
-![rId72.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId72.png)
+![rId71.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId71.png)
 
   - *Mô tả chức năng*: Điều chỉnh thanh trượt: Chunk Size (kích thước đoạn văn bản, mặc định 500-1000 tokens) và Chunk Overlap (độ chồng lấp, mặc định 100-200 tokens).
 
@@ -159,11 +159,11 @@ Bố cục Trang chủ được chia thành 2 khu vực chức năng chính: **T
 
   - *Trước khi tải file*:
 
-![rId73.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId73.png)
+![rId72.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId72.png)
 
   - *Sau khi tải file*:
 
-![rId74.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId74.png)
+![rId73.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId73.png)
 
   - *Mô tả chức năng*: Khung Kéo & Thả (Drag & Drop) hoặc bấm chọn file. Hỗ trợ định dạng PDF, DOCX với kích thước tối đa quy định.
 
@@ -171,28 +171,35 @@ Bố cục Trang chủ được chia thành 2 khu vực chức năng chính: **T
 
   - *Trước khi xử lí tài liệu*:
 
-![rId75.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId75.png)
+![rId74.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId74.png)
 
   - *Sau khi xử lí tài liệu*:
 
-![rId76.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId76.png)
+![rId75.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId75.png)
 
   - *Mô tả chức năng*: Hiển thị danh sách các tài liệu đã xử lý thành công, kèm thông tin định dạng, số trang và nút Xóa từng tài liệu.
 
 - **Giao diện các nút thao tác**:
+
+![rId76.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId76.png)
+
   - *Mô tả chức năng*: Xóa toàn bộ lịch sử của các đoạn hội thoại và xóa toàn bộ tài liệu đã đăng tải lên hệ thống.
 
 - **Giao diện lịch sử hội thoại**:
 
   - *Trước khi người dùng chưa đặt câu hỏi*:
 
-![rId78.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId78.png)
+![rId77.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId77.png)
 
   - *Sau khi người dùng đặt câu hỏi*:
 
-![rId79.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId79.png)
+![rId78.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/rId78.png)
 
-  - *Mô tả chức năng*: Liệt kê các phiên thảo luận trước đó, cho phép chọn phiên làm việc hoặc xóa lịch sử chat.
+  - *Chi tiết lịch sử hội thoại*:
+
+![chat_history_detail.png](/images/5-Workshop/5.1-Workshop-overview/5.1.5-ui-function/chat_history_detail.png)
+
+  - *Mô tả chức năng*: Liệt kê các phiên thảo luận trước đó, cho phép chọn phiên làm việc để xem chi tiết câu hỏi/câu trả lời hoặc xóa lịch sử chat.
 
 ##### 3.3.2. Khu vực Trò chuyện & Hỏi đáp AI (ChatArea)
 
@@ -226,7 +233,7 @@ Bố cục Trang chủ được chia thành 2 khu vực chức năng chính: **T
 
   - *Mô tả chức năng*: Khung nhập liệu đa dòng (Textarea tự động co giãn theo văn bản), nút Gửi tin nhắn (SendIcon).
 
-#### 3.3.Quy tắc và tùy chỉnh chiến lược tìm kiếm 
+#### 3.4.Quy tắc và tùy chỉnh chiến lược tìm kiếm 
 
 Bảng điều khiển `SearchSettings` cho phép người dùng linh hoạt bật/tắt các công nghệ RAG nâng cao theo từng bài toán tìm kiếm:
 
@@ -238,7 +245,7 @@ Bảng điều khiển `SearchSettings` cho phép người dùng linh hoạt b�
 | Self-RAG | Quy trình AI tự phản hồi & đánh giá gồm 3 bước: Query Rewriting (Viết lại câu hỏi), Relevance Filtering (Lọc độ liên quan), Answer Grading (Chấm điểm câu trả lời). | Dùng cho các câu hỏi phức tạp, yêu cầu AI tự sửa lại câu hỏi nếu thông tin tìm kiếm ban đầu không đủ. |
 | Co-RAG (Multi-Agent) | Kiến trúc đa tác tử hợp lực: Semantic Agent (Vector), Keyword Agent (BM25), Conceptual Agent (LLM Concept). Gộp kết quả theo các chiến lược: voting, union, intersection. | Yêu cầu mức độ tổng hợp tri thức chuyên sâu từ nhiều khía cạnh khác nhau trong tài liệu. |
 
-#### 3.4.Xử lí trạng thái và ngoại lệ trên trang chủ 
+#### 3.5.Xử lí trạng thái và ngoại lệ trên trang chủ 
 - **Chưa có tài liệu được chọn/tải lên**: Khung chat hiển thị màn hình chào mừng WelcomeHero với các gợi ý từng bước. Nút kích hoạt các chế độ RAG nâng cao trong SearchSettings tự động chuyển sang trạng thái disabled.
 - **Quá trình xử lý file bị lỗi (File Corrupted / Format Mismatch)**: Hệ thống lập tức bắn thông báo Toast cảnh báo lỗi, giữ nguyên giao diện không làm đứt quãng trải nghiệm.
 - **Phân quyền & Cách ly dữ liệu (Per-User Isolation)**: Mọi tài liệu và lịch sử chat đều gắn liền với user_id (Cognito sub). Người dùng A không thể xem hoặc truy vấn tài liệu của Người dùng B trên S3/Vector Index.
