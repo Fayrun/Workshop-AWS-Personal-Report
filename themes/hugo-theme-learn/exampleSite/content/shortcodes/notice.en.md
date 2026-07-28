@@ -17,7 +17,7 @@ renders as
 
 {{% notice note %}}
 A notice disclaimer
-{{% /notice %}}
+
 
 ### Info
 
@@ -31,7 +31,7 @@ renders as
 
 {{% notice info %}}
 An information disclaimer
-{{% /notice %}}
+
 
 ### Tip
 
@@ -45,7 +45,7 @@ renders as
 
 {{% notice tip %}}
 A tip disclaimer
-{{% /notice %}}
+
 
 ### Warning
 
@@ -57,6 +57,6 @@ A warning disclaimer
 
 renders as
 
-{{% notice warning %}}
+
 A warning disclaimer
-{{% /notice %}}
+

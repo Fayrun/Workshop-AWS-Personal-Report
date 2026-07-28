@@ -33,7 +33,7 @@ Without further delay, let us go over the main elements of Markdown and what the
 
 {{% notice info %}}
 <i class="fas fa-bookmark"></i> Bookmark this page for easy future reference!
-{{% /notice %}}
+
 
 ## Headings
 
@@ -239,7 +239,7 @@ Renders to:
 
 {{% notice note %}}
 The old mechanism for notices overriding the block quote syntax (`>>>`) has been deprecated. Notices are now handled via a dedicated plugin called [Markdown Notices](https://github.com/getgrav/grav-plugin-markdown-notices)
-{{% /notice %}}
+
 
 ## Lists
 

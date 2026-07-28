@@ -49,11 +49,11 @@ Then, for each new page, append the _id_ of the language to the file.
 
 {{% notice info %}}
 Be aware that only translated pages are displayed in menu. It's not replaced with default language content.
-{{% /notice %}}
+
 
 {{% notice tip %}}
 Use [slug](https://gohugo.io/content-management/multilingual/#translate-your-content) Front Matter parameter to translate urls too.
-{{% /notice %}}
+
 
 ## Overwrite translation strings
 

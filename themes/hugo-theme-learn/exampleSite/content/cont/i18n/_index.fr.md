@@ -49,11 +49,11 @@ Puis, pour chaque nouvelle page, ajoutez _l'id_ de la langue du fichier.
 
 {{% notice info %}}
 Attention, seulement les pages traduites sont affichées dans le menu. Le contenu n'est pas remplacé par les pages de la langue par défaut.
-{{% /notice %}}
+
 
 {{% notice tip %}}
 Utilisez le paramètre du Front Matter [slug](https://gohugo.io/content-management/multilingual/#translate-your-content) pour traduire également les URLs.
-{{% /notice %}}
+
 
 ## Surcharger les _translation strings_
 

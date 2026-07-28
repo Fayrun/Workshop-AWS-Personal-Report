@@ -9,7 +9,7 @@ title: "Learn Theme for Hugo"
 Ce thème est un portage partiel du [thème Learn](http://learn.getgrav.org/) de [Grav](https://getgrav.org/), un CMS modern écrit en PHP.
 
 {{% notice tip %}}Le thème Learn fonctionne grâce à la structure de page aborescentes pour organiser le contenu: tous les contenus sont des pages qui appartiennent à d'autres pages. [Plus d'infos]({{%relref "cont/pages/_index.md"%}})
-{{% /notice %}}
+
 
 ## Fonctionnalités principales
 
@@ -32,7 +32,7 @@ N'hésitez pas à mettre à jour ce contenu en cliquant sur le lien **Modifier c
 
 {{% notice info %}}
 Votre modification sera déployée automatiquement quand elle sera mergée.
-{{% /notice %}}
+
 
 ## Site de documentation
 
@@ -40,4 +40,4 @@ Cette documentation statique a été générée avec Hugo avec une simple comman
 
 {{% notice note %}}
 Le site est auomatiquement publié et hébergé par [Netlify](https://www.netlify.com/). Plus d'infos sur le [déploiement de site Hugo avec Netlify](https://www.netlify.com/blog/2015/07/30/hosting-hugo-on-netlifyinsanely-fast-deploys/)(En anglais)
-{{% /notice %}}
+

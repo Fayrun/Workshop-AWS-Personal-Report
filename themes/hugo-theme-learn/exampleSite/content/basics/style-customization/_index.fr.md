@@ -29,7 +29,7 @@ Vous pourriez utiliser une balise HTML `img` et référencer une image créée d
 
 {{% notice note %}}
 La taille du logo va s'adapter automatiquement
-{{% /notice %}}
+
 
 ## Changer le favicon
 

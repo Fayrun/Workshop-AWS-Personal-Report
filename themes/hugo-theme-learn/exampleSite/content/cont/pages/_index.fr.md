@@ -36,7 +36,7 @@ Organisez votre site comme n'importe quel autre [projet Hugo](https://gohugo.io/
 
 {{% notice note %}}
 Le fichier `_index.md` est obligatoire dans chaque dossier, c'est en quelque sorte votre page d'accueil pour le dossier.
-{{% /notice %}}
+
 
 ## Types
 

@@ -17,7 +17,7 @@ s'affiche comme
 
 {{% notice note %}}
 Une notice de type _note_
-{{% /notice %}}
+
 
 ### Info
 
@@ -31,7 +31,7 @@ s'affiche comme
 
 {{% notice info %}}
 Une notice de type _info_
-{{% /notice %}}
+
 
 ### Tip
 
@@ -45,7 +45,7 @@ s'affiche comme
 
 {{% notice tip %}}
 Une notice de type _tip_
-{{% /notice %}}
+
 
 ### Warning
 
@@ -57,6 +57,6 @@ Une notice de type *warning*
 
 s'affiche comme
 
-{{% notice warning %}}
+
 Une notice de type _warning_
-{{% /notice %}}
+
