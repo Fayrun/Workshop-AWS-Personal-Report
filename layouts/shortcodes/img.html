@@ -1,11 +1,3 @@
-{{/*
-  Custom {{< img src="..." width="..." style="..." alt="..." >}} shortcode.
-  Raw <img> HTML tags in Markdown bypass Goldmark's image render hook entirely,
-  so this shortcode exists to give hand-written <img> tags the same relURL-based
-  path handling as render-image.html (see that file for why TrimPrefix is needed
-  before relURL). External URLs (http://, https://, //) are left untouched.
-  Also preserves optional width/style/alt attributes from the original tags.
-*/}}
 {{- $src := .Get "src" -}}
 {{- if not (or (hasPrefix $src "http://") (hasPrefix $src "https://") (hasPrefix $src "//")) -}}
   {{- $src = strings.TrimPrefix "/" $src -}}
