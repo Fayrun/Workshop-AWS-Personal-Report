@@ -20,7 +20,7 @@ Việc xóa tài nguyên trong hướng dẫn này là **không thể hoàn tác
 
 **Sơ đồ:** 3 giai đoạn dọn dẹp (Dừng traffic → Gỡ compute → Xóa dữ liệu)
 
-<img src="/images/5-Workshop/5.6-Conclusion/5.6.2-Cleanup/cleanup-resources-flow.png" width="75%" style="max-width:1000px">
+{{< img src="/images/5-Workshop/5.6-Conclusion/5.6.2-Cleanup/cleanup-resources-flow.png" width="75%" style="max-width:1000px" >}}
 
 **Tóm tắt các giai đoạn:**
 

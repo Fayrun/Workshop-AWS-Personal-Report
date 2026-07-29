@@ -10,7 +10,7 @@ After exploring the Frontend and Backend architecture separately in the previous
 
 ### 1. Overall Architecture Diagram
 
-<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/architecture-diagram.png" width="100%" style="max-width:1100px">
+{{< img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/architecture-diagram.png" width="100%" style="max-width:1100px" >}}
 
 **Flow legend (numbered in the diagram):**
 
@@ -45,7 +45,7 @@ SmartDocAI is built on a **Serverless Container Architecture** combined with **M
 
 ### 2. Data Storage Structure
 
-<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/storage-structure.png" width="110%" style="max-width:900px">
+{{< img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/storage-structure.png" width="110%" style="max-width:900px" >}}
 
 All data is designed to be **isolated per user** (`user_id` = Cognito `sub`), preventing cross-account data leaks:
 
@@ -57,13 +57,13 @@ All data is designed to be **isolated per user** (`user_id` = Cognito `sub`), pr
 
 ### 3. Backend Modularization (Lambda Modules)
 
-<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/lambda-modules.png" width="110%" style="max-width:1300px">
+{{< img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/lambda-modules.png" width="110%" style="max-width:1300px" >}}
 
 `app_api.py` serves as the main entry point (FastAPI + Mangum adapter), routing requests to specialized modules under `modules/`: `auth_service.py` (authentication), `document_processor.py` + `vector_store.py` (document processing & indexing), `rag_chain.py` + `self_rag.py` + `co_rag.py` (3 RAG modes), `profile_service.py` (user profile).
 
 ### 4. CI/CD Pipeline
 
-<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/cicd-pipeline.png" width="100%" style="max-width:1100px">
+{{< img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/cicd-pipeline.png" width="100%" style="max-width:1100px" >}}
 
 The system has **2 separate CodePipelines**, both receiving code from the same GitHub repository:
 

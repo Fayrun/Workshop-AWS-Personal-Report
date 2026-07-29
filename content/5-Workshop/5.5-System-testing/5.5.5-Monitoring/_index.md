@@ -31,7 +31,7 @@ This section explains how to monitor the health of the SmartDocAI system via Clo
 2024-03-15T10:30:50.999Z REPORT RequestId: abc123 Duration: 5234 ms Memory: 2048 MB Max Used: 1234 MB
 ```
 
-<img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/cloudwatch-tail-logs-realtime.png" width="90%" style="max-width:900px">
+{{< img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/cloudwatch-tail-logs-realtime.png" width="90%" style="max-width:900px" >}}
 
 ---
 
@@ -45,7 +45,7 @@ This section explains how to monitor the health of the SmartDocAI system via Clo
 | **Cleanup Results** | EventBridge cleanup stats | `fields @timestamp, @message`<br/>`\| filter @message like /Deleted.*users/`<br/>`\| parse @message "Deleted * users" as deleted_count`<br/>`\| stats sum(deleted_count) as total_deleted by bin(1d)` | Daily count of unconfirmed users deleted |
 | **Most Active Users** | User activity ranking | `fields @message`<br/>`\| filter @message like /User login:/`<br/>`\| parse @message "User login: *" as email`<br/>`\| stats count() as login_count by email`<br/>`\| sort login_count desc \| limit 10` | Top 10 users by login frequency |
 
-<img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/cloudwatch-logs-insights-query.png" width="90%" style="max-width:900px">
+{{< img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/cloudwatch-logs-insights-query.png" width="90%" style="max-width:900px" >}}
 
 ---
 
@@ -77,11 +77,11 @@ This section explains how to monitor the health of the SmartDocAI system via Clo
 | `smartdocai-lambda-throttles` | Lambda `Throttles` | ≥ 1 time / 5 minutes | Exceeded the concurrency limit, need to increase reserved concurrency |
 | `smartdocai-apigateway-5xx` | API Gateway `5xxError` | > 5 errors / 5 minutes | Server error on the API Gateway/Lambda integration side |
 
-<img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/cloudwatch-alarms-status.png" width="90%" style="max-width:900px">
+{{< img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/cloudwatch-alarms-status.png" width="90%" style="max-width:900px" >}}
 
 **Confirming the email has confirmed the SNS subscription:**
 
-<img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/sns-subscription-confirmed.png" width="90%" style="max-width:900px">
+{{< img src="/images/5-Workshop/5.5-System-testing/5.5.5-Monitoring/sns-subscription-confirmed.png" width="90%" style="max-width:900px" >}}
 
 **Verify via CLI:**
 ```powershell
