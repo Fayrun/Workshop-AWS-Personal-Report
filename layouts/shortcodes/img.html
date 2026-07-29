@@ -1,6 +1,0 @@
-{{- $src := .Get "src" -}}
-{{- if not (or (hasPrefix $src "http://") (hasPrefix $src "https://") (hasPrefix $src "//")) -}}
-  {{- $src = strings.TrimPrefix "/" $src -}}
-  {{- $src = $src | relURL -}}
-{{- end -}}
-<img src="{{ $src | safeURL }}"{{ with .Get "width" }} width="{{ . }}"{{ end }}{{ with .Get "style" }} style="{{ . }}"{{ end }}{{ with .Get "alt" }} alt="{{ . }}"{{ end }}>
