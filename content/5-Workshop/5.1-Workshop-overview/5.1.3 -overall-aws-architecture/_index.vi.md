@@ -25,8 +25,6 @@ Sau khi tìm hiểu riêng kiến trúc Frontend và Backend ở 2 phần trư�
 | 7 | Lambda → Amazon Bedrock (LLM + Embeddings) | 15 | Cognito ↔ Google Identity Provider (OAuth) |
 | 8 | EventBridge → Lambda (cleanup định kỳ 5 phút) | 16 | Cognito ↔ Lambda presignup-check (merge account) |
 
-Sơ đồ được tách thành **2 CodePipeline riêng biệt**: CodePipeline (Backend) trong khung "CI/CD Pipeline (backend)" xử lý build/test/deploy Lambda; CodePipeline (Frontend) đặt ngay trong khung "Frontend (CDN + Static Hosting)", build ứng dụng bằng CodeBuild rồi mới deploy lên S3 Frontend Bucket. Cả hai đều nhận code từ cùng 1 GitHub repository (2 mũi tên 9 và 13). Sơ đồ cũng được bọc trong khung **Region: us-east-1**, và có thêm khung **Generic Group (Account-wide)** chứa IAM Roles + AWS KMS — các thành phần dùng chung toàn tài khoản, không thuộc riêng tầng nào.
-
 SmartDocAI được xây dựng theo mô hình **Serverless Container Architecture** kết hợp **Managed Identity (Cognito)**, gồm các thành phần chính:
 
 | Thành phần | Dịch vụ AWS | Giá trị cụ thể |
