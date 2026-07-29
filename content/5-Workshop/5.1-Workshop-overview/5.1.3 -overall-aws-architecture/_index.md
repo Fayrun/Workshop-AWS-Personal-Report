@@ -25,8 +25,6 @@ After exploring the Frontend and Backend architecture separately in the previous
 | 7 | Lambda → Amazon Bedrock (LLM + Embeddings) | 15 | Cognito ↔ Google Identity Provider (OAuth) |
 | 8 | EventBridge → Lambda (cleanup every 5 minutes) | 16 | Cognito ↔ Lambda presignup-check (merge account) |
 
-> The diagram is split into **2 separate CodePipelines**: CodePipeline (Backend) inside the "CI/CD Pipeline (backend)" group handles build/test/deploy to Lambda; CodePipeline (Frontend) sits inside the "Frontend (CDN + Static Hosting)" group and deploys straight to the S3 Frontend Bucket. Both receive code from the same GitHub repository (arrows 9 and 13). The diagram is also wrapped in a **Region: us-east-1** boundary, plus a **Generic Group (Account-wide)** box containing IAM Roles + AWS KMS — account-wide components that don't belong to any single tier.
-
 SmartDocAI is built on a **Serverless Container Architecture** combined with **Managed Identity (Cognito)**, consisting of the following main components:
 
 | Component | AWS Service | Specific Value |
@@ -70,4 +68,4 @@ All data is designed to be **isolated per user** (`user_id` = Cognito `sub`), pr
 The system has **2 separate CodePipelines**, both receiving code from the same GitHub repository:
 
 - **CodePipeline (Backend)** `smartdocai-be-pipeline`: Every time code is pushed to the `main` branch, it automatically triggers CodeBuild: install dependencies → lint with flake8 → run pytest (hard-fail if tests do not pass) → build Docker image → push to ECR → update the Lambda function. This mechanism ensures that broken code cannot make it into production.
-- **CodePipeline (Frontend)** `smartdocsai-fe-pipeline`: builds the React/Vite application and deploys the result straight to the S3 Frontend Bucket, without a separate test/CodeBuild step since it's just static files.
+- **CodePipeline (Frontend)** `smartdocsai-fe-pipeline`: has 3 stages, **Source → Build → Deploy**. The Build stage uses **AWS CodeBuild** (project `smartdocsai-fe-build`, driven by a `buildspec.yml`) to install dependencies and build the React/Vite app, packaging the output as `smartdocsai-fe.zip`; the Deploy stage then pushes that file straight to the S3 Frontend Bucket (auto-extracted). When the pipeline was created, the Test stage was set to **Skip test stage** since the frontend doesn't have its own automated test suite yet, unlike the Backend pipeline where pytest is a mandatory gate.

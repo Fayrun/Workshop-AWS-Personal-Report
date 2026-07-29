@@ -25,8 +25,6 @@ Sau khi tìm hiểu riêng kiến trúc Frontend và Backend ở 2 phần trư�
 | 7 | Lambda → Amazon Bedrock (LLM + Embeddings) | 15 | Cognito ↔ Google Identity Provider (OAuth) |
 | 8 | EventBridge → Lambda (cleanup định kỳ 5 phút) | 16 | Cognito ↔ Lambda presignup-check (merge account) |
 
-> Sơ đồ được tách thành **2 CodePipeline riêng biệt**: CodePipeline (Backend) trong khung "CI/CD Pipeline (backend)" xử lý build/test/deploy Lambda; CodePipeline (Frontend) đặt ngay trong khung "Frontend (CDN + Static Hosting)", deploy thẳng lên S3 Frontend Bucket. Cả hai đều nhận code từ cùng 1 GitHub repository (2 mũi tên 9 và 13). Sơ đồ cũng được bọc trong khung **Region: us-east-1**, và có thêm khung **Generic Group (Account-wide)** chứa IAM Roles + AWS KMS — các thành phần dùng chung toàn tài khoản, không thuộc riêng tầng nào.
-
 SmartDocAI được xây dựng theo mô hình **Serverless Container Architecture** kết hợp **Managed Identity (Cognito)**, gồm các thành phần chính:
 
 | Thành phần | Dịch vụ AWS | Giá trị cụ thể |
@@ -70,4 +68,4 @@ Toàn bộ dữ liệu được thiết kế **cô lập theo từng user** (`us
 Hệ thống có **2 CodePipeline tách biệt**, cùng nhận code từ 1 GitHub repository:
 
 - **CodePipeline (Backend)** `smartdocai-be-pipeline`: Mỗi lần push code lên nhánh `main`, tự động kích hoạt CodeBuild: cài dependencies → lint bằng flake8 → chạy pytest (hard-fail nếu test không qua) → build Docker image → đẩy lên ECR → cập nhật Lambda function. Cơ chế này đảm bảo code lỗi không thể lọt vào production.
-- **CodePipeline (Frontend)** `smartdocsai-fe-pipeline`: build ứng dụng React/Vite và deploy thẳng kết quả lên S3 Frontend Bucket, không qua bước test/CodeBuild riêng vì chỉ là static file.
+- **CodePipeline (Frontend)** `smartdocsai-fe-pipeline`: gồm 3 stage **Source → Build → Deploy**. Stage Build dùng **AWS CodeBuild** (project `smartdocsai-fe-build`, chạy theo `buildspec.yml`) để cài dependencies và build ứng dụng React/Vite, đóng gói kết quả thành `smartdocsai-fe.zip`; stage Deploy sau đó đẩy thẳng file này lên S3 Frontend Bucket (tự động giải nén). Khi tạo pipeline, stage Test được chọn **Skip test stage** vì frontend chưa có bộ test tự động riêng, khác với Backend luôn bắt buộc pytest phải pass.
