@@ -1,3 +1,11 @@
+{{/*
+  Render hook for Markdown images (![alt](src) syntax).
+  Rewrites root-relative image paths (starting with "/") through relURL so they
+  resolve correctly under the site's baseURL subpath (if any). Hugo's relURL
+  ignores paths that already start with "/", so the leading slash is stripped
+  first via strings.TrimPrefix before calling relURL.
+  External URLs (http://, https://, //) are left untouched.
+*/}}
 {{- $u := .Destination -}}
 {{- if not (or (hasPrefix $u "http://") (hasPrefix $u "https://") (hasPrefix $u "//")) -}}
   {{- $u = strings.TrimPrefix "/" $u -}}
