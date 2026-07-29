@@ -25,7 +25,7 @@ After exploring the Frontend and Backend architecture separately in the previous
 | 7 | Lambda → Amazon Bedrock (LLM + Embeddings) | 15 | Cognito ↔ Google Identity Provider (OAuth) |
 | 8 | EventBridge → Lambda (cleanup every 5 minutes) | 16 | Cognito ↔ Lambda presignup-check (merge account) |
 
-> The diagram is split into **2 separate CodePipelines**: CodePipeline (Backend) inside the "CI/CD Pipeline (backend)" group handles build/test/deploy to Lambda; CodePipeline (Frontend) sits inside the "Frontend (CDN + Static Hosting)" group and deploys straight to the S3 Frontend Bucket. Both receive code from the same GitHub repository (arrows 9 and 13). The diagram is also wrapped in a **Region: us-east-1** boundary, plus a **Generic Group (Account-wide)** box containing IAM Roles + AWS KMS — account-wide components that don't belong to any single tier.
+The diagram is split into **2 separate CodePipelines**: CodePipeline (Backend) inside the "CI/CD Pipeline (backend)" group handles build/test/deploy to Lambda; CodePipeline (Frontend) sits inside the "Frontend (CDN + Static Hosting)" group, builds the app with CodeBuild, then deploys to the S3 Frontend Bucket. Both receive code from the same GitHub repository (arrows 9 and 13). The diagram is also wrapped in a **Region: us-east-1** boundary, plus a **Generic Group (Account-wide)** box containing IAM Roles + AWS KMS — account-wide components that don't belong to any single tier.
 
 SmartDocAI is built on a **Serverless Container Architecture** combined with **Managed Identity (Cognito)**, consisting of the following main components:
 
