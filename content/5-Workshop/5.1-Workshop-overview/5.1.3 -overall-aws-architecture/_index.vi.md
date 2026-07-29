@@ -70,4 +70,4 @@ Toàn bộ dữ liệu được thiết kế **cô lập theo từng user** (`us
 Hệ thống có **2 CodePipeline tách biệt**, cùng nhận code từ 1 GitHub repository:
 
 - **CodePipeline (Backend)** `smartdocai-be-pipeline`: Mỗi lần push code lên nhánh `main`, tự động kích hoạt CodeBuild: cài dependencies → lint bằng flake8 → chạy pytest (hard-fail nếu test không qua) → build Docker image → đẩy lên ECR → cập nhật Lambda function. Cơ chế này đảm bảo code lỗi không thể lọt vào production.
-- **CodePipeline (Frontend)** `smartdocsai-fe-pipeline`: build ứng dụng React/Vite và deploy thẳng kết quả lên S3 Frontend Bucket, không qua bước test/CodeBuild riêng vì chỉ là static file.
+- **CodePipeline (Frontend)** `smartdocsai-fe-pipeline`: gồm 3 stage **Source → Build → Deploy**. Stage Build dùng **AWS CodeBuild** (project `smartdocsai-fe-build`, chạy theo `buildspec.yml`) để cài dependencies và build ứng dụng React/Vite, đóng gói kết quả thành `smartdocsai-fe.zip`; stage Deploy sau đó đẩy thẳng file này lên S3 Frontend Bucket (tự động giải nén). Khi tạo pipeline, stage Test được chọn **Skip test stage** vì frontend chưa có bộ test tự động riêng, khác với Backend luôn bắt buộc pytest phải pass.
