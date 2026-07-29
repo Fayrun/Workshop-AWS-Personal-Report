@@ -20,7 +20,7 @@ Deleting resources in this guide is **irreversible**: all data (user profiles, u
 
 **Diagram:** 3 cleanup phases (Stop traffic → Remove compute → Delete data)
 
-<img src="/images/5-Workshop/5.6-Conclusion/5.6.2-Cleanup/cleanup-resources-flow.png" width="75%" style="max-width:1000px">
+![Cleanup resources flow](/images/5-Workshop/5.6-Conclusion/5.6.2-Cleanup/cleanup-resources-flow.png)
 
 **Phase summary:**
 
