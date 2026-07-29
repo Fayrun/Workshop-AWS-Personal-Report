@@ -16,12 +16,12 @@ After exploring the Frontend and Backend architecture separately in the previous
 
 | # | Flow | # | Flow |
 |---|---|---|---|
-| 1 | Users → CloudFront | 9 | GitHub Repository → CodePipeline (Backend) |
-| 2 | CloudFront → S3 Frontend Bucket | 10 | CodePipeline (Backend) → CodeBuild |
-| 3 | CloudFront → API Gateway (proxy `/api/*`) | 11 | CodeBuild → Amazon ECR |
+| 1 | Users → CloudFront | 9 | GitHub Repository → CodePipeline (Backend) & (Frontend) |
+| 2 | CloudFront → S3 Frontend Bucket | 10 | CodePipeline (Backend) → CodeBuild (pytest) |
+| 3 | CloudFront → API Gateway (proxy `/api/*`) | 11 | CodeBuild (pytest) → Amazon ECR |
 | 4 | API Gateway → Lambda | 12 | ECR → Lambda (deploy new container) |
-| 5 | Lambda → Cognito User Pool (validate JWT) | 13 | GitHub Repository → CodePipeline (Frontend) |
-| 6 | Lambda → Data Storage (DynamoDB + S3) | 14 | CodePipeline (Frontend) → S3 Frontend Bucket |
+| 5 | Lambda → Cognito User Pool (validate JWT) | 13 | CodePipeline (Frontend) → AWS CodeBuild |
+| 6 | Lambda → Data Storage (DynamoDB + S3) | 14 | AWS CodeBuild (Frontend) → S3 Frontend Bucket |
 | 7 | Lambda → Amazon Bedrock (LLM + Embeddings) | 15 | Cognito ↔ Google Identity Provider (OAuth) |
 | 8 | EventBridge → Lambda (cleanup every 5 minutes) | 16 | Cognito ↔ Lambda presignup-check (merge account) |
 
