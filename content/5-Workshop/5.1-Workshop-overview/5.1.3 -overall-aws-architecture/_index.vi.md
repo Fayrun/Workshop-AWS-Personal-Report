@@ -10,18 +10,18 @@ Sau khi tìm hiểu riêng kiến trúc Frontend và Backend ở 2 phần trư�
 
 ### 1. Sơ đồ kiến trúc tổng thể
 
-<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/architecture-diagram.png" width="100%" style="max-width:1100px">
+![Sơ đồ kiến trúc tổng thể](/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/architecture-diagram.png)
 
 **Chú thích luồng theo số thứ tự trong sơ đồ:**
 
 | # | Luồng | # | Luồng |
 |---|---|---|---|
-| 1 | Users → CloudFront | 9 | GitHub Repository → CodePipeline (Backend) |
-| 2 | CloudFront → S3 Frontend Bucket | 10 | CodePipeline (Backend) → CodeBuild |
-| 3 | CloudFront → API Gateway (proxy `/api/*`) | 11 | CodeBuild → Amazon ECR |
+| 1 | Users → CloudFront | 9 | GitHub Repository → CodePipeline (Backend) & (Frontend) |
+| 2 | CloudFront → S3 Frontend Bucket | 10 | CodePipeline (Backend) → CodeBuild (pytest) |
+| 3 | CloudFront → API Gateway (proxy `/api/*`) | 11 | CodeBuild (pytest) → Amazon ECR |
 | 4 | API Gateway → Lambda | 12 | ECR → Lambda (deploy container mới) |
-| 5 | Lambda → Cognito User Pool (validate JWT) | 13 | GitHub Repository → CodePipeline (Frontend) |
-| 6 | Lambda → Data Storage (DynamoDB + S3) | 14 | CodePipeline (Frontend) → S3 Frontend Bucket |
+| 5 | Lambda → Cognito User Pool (validate JWT) | 13 | CodePipeline (Frontend) → AWS CodeBuild |
+| 6 | Lambda → Data Storage (DynamoDB + S3) | 14 | AWS CodeBuild (Frontend) → S3 Frontend Bucket |
 | 7 | Lambda → Amazon Bedrock (LLM + Embeddings) | 15 | Cognito ↔ Google Identity Provider (OAuth) |
 | 8 | EventBridge → Lambda (cleanup định kỳ 5 phút) | 16 | Cognito ↔ Lambda presignup-check (merge account) |
 
@@ -45,7 +45,7 @@ SmartDocAI được xây dựng theo mô hình **Serverless Container Architectu
 
 ### 2. Cấu trúc lưu trữ dữ liệu (Storage Structure)
 
-<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/storage-structure.png" width="110%" style="max-width:900px">
+![Cấu trúc lưu trữ dữ liệu](/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/storage-structure.png)
 
 Toàn bộ dữ liệu được thiết kế **cô lập theo từng user** (`user_id` = Cognito `sub`), tránh rò rỉ dữ liệu chéo giữa các tài khoản:
 
@@ -57,13 +57,13 @@ Toàn bộ dữ liệu được thiết kế **cô lập theo từng user** (`us
 
 ### 3. Module hóa Backend (Lambda Modules)
 
-<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/lambda-modules.png" width="110%" style="max-width:1300px">
+![Module hóa Backend Lambda](/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/lambda-modules.png)
 
 `app_api.py` đóng vai trò entry point chính (FastAPI + Mangum adapter), điều hướng request tới các module chuyên biệt trong `modules/`: `auth_service.py` (xác thực), `document_processor.py` + `vector_store.py` (xử lý & lập chỉ mục tài liệu), `rag_chain.py` + `self_rag.py` + `co_rag.py` (3 chế độ RAG), `profile_service.py` (hồ sơ cá nhân).
 
 ### 4. CI/CD Pipeline
 
-<img src="/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/cicd-pipeline.png" width="100%" style="max-width:1100px">
+![CI/CD Pipeline](/images/5-Workshop/5.1-Workshop-overview/5.1.3-overall-aws-architecture/cicd-pipeline.png)
 
 Hệ thống có **2 CodePipeline tách biệt**, cùng nhận code từ 1 GitHub repository:
 

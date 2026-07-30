@@ -1,0 +1,8 @@
+{{/*
+  Custom render hook for standard Markdown images: ![alt](src).
+  Fixes broken images when the site is deployed under a subpath
+  (e.g. https://username.github.io/RepoName/) by rewriting root-relative
+  paths ("/images/...") through relURL so the subpath prefix gets added.
+*/}}
+{{ $url := .Destination | strings.TrimPrefix "/" }}
+<img src="{{ $url | relURL }}" alt="{{ .Text }}" {{ with .Title }}title="{{ . }}"{{ end }} />
