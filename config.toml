@@ -1,4 +1,4 @@
-baseURL = "baseURL = "https://fayrun.github.io/Workshop-AWS-Personal-Report/"
+baseURL = "https://fayrun.github.io/Workshop-AWS-Personal-Report/"
 relativeURLs = false
 canonifyURLs = false
 defaultContentLanguage = "en"
