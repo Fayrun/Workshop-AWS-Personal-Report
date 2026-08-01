@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Giám sát &amp; Nhật ký hệ thống on Báo cáo thực tập</title>
-		<link>http://localhost:1313/vi/5-workshop/5.5-system-testing/5.5.5-monitoring/</link>
+		<link>http://localhost:1313/Workshop-AWS-Personal-Report/vi/5-workshop/5.5-system-testing/5.5.5-monitoring/</link>
 		<description>Recent content in Giám sát &amp; Nhật ký hệ thống on Báo cáo thực tập</description>
 		<generator>Hugo</generator>
 		<language>vi</language>
@@ -12,6 +12,6 @@
 		
 			<lastBuildDate></lastBuildDate>
 		
-			<atom:link href="http://localhost:1313/vi/5-workshop/5.5-system-testing/5.5.5-monitoring/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="http://localhost:1313/Workshop-AWS-Personal-Report/vi/5-workshop/5.5-system-testing/5.5.5-monitoring/index.xml" rel="self" type="application/rss+xml" />
 	</channel>
 </rss>
