@@ -1,54 +1,34 @@
 ---
 title: "Week 5 Worklog"
 date: 2024-01-01
-weight: 1
+weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
 
-
 ### Week 5 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+- Add proactive monitoring/alerting so the team finds out about backend errors before users do.
+- Cut S3 storage cost and close a real security gap in the Google login flow.
+- Turn on encryption at rest for DynamoDB and make automated tests a hard gate in the deploy pipeline.
+- Take part in the "FCAJ x Agentic AI Build Week powered by GenAI Fund" hackathon with the team.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Start Date | Completion Date | Reference Material                                                                                                                           |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Mon | - Designed and built the CloudWatch Alarm setup: 4 alarms (`lambda-errors`, `lambda-duration`, `lambda-throttles`, `apigateway-5xx`) wired to an SNS Topic that emails on trigger &emsp;+ Picked thresholds against real traffic instead of AWS defaults: errors > 5/5min, duration > 25000ms/5min (~80% of the 30s Lambda timeout, enough headroom to act before a hard timeout), throttles ≥ 1/5min (throttling should never happen silently), API Gateway 5xx > 5/5min &emsp;+ Subscribed my email to the SNS Topic and confirmed the subscription                                                                                                                                                                                                                                      | 20/07/2026 | 20/07/2026      | [Using Amazon CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)                    |
+| Tue | - Looked into S3 storage cost and turned on Intelligent-Tiering on the document bucket&emsp;+ Compared Intelligent-Tiering against manually scheduled lifecycle transitions (Standard-IA/Glacier by fixed age) — went with Intelligent-Tiering since usage patterns for uploaded docs are unpredictable and it moves objects automatically based on actual access &emsp;+ Set the lifecycle rule to transition on day 0 (immediately at upload), noting AWS only tiers objects ≥ 128KB, which covers almost all of the project's PDF/DOCX uploads                                                                                                                                                                                                                                          | 21/07/2026 | 21/07/2026      | [Managing storage costs with S3 Intelligent-Tiering](https://docs.aws.amazon.com/AmazonS3/latest/userguide/intelligent-tiering.html)         |
+| Wed | - Closed a CSRF gap in the Google login flow&emsp;+ Confirmed the actual vulnerability first: the Cognito Hosted UI redirect for Google login had no `state` parameter, so a crafted callback link with someone else's valid authorization code could be replayed against a victim's session &emsp;+ Implemented the fix on the frontend side: generate `state = crypto.randomUUID()` before redirecting to Google, store it in `sessionStorage`, then check it against the returned `state` in a new `verifyOAuthState()` on the callback page — mismatch is rejected before the app even calls Cognito                                                                                                                                                                                   | 22/07/2026 | 22/07/2026      | [CSRF Prevention Cheat Sheet – OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html) |
+| Thu | - Ran through 5 CSRF test cases end to end: normal login, correctly-formatted state, a mismatched-state attack (rejected client-side), a valid state paired with a forged code (rejected by Cognito with`invalid_grant`), and state being cleared right after use so it can't be replayed &emsp;+ The mismatched-state and forged-code cases matter most — they show the fix has two independent layers (app-side check, then Cognito itself) instead of relying on just one - Turned on KMS encryption at rest for the DynamoDB profiles table (switched from the AWS owned key to `alias/aws/dynamodb`) &emsp;+ Went with the AWS managed key over a customer managed key — needed CloudTrail visibility into key usage, but didn't want to own key rotation/policy management ourselves | 23/07/2026 | 23/07/2026      | [DynamoDB encryption at rest](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/EncryptionAtRest.html)                        |
+| Fri | - Added an automated test gate to CodePipeline:`pytest` + `flake8` now run in `backend/buildspec.yml`'s `pre_build` phase before every deploy &emsp;+ Put it in `pre_build` specifically so a failing test stops the pipeline before the Docker image even gets built, instead of wasting a full build cycle &emsp;+ Left `flake8` as advisory (`--exit-zero`) but made `pytest` a hard fail — style issues shouldn't block a deploy, broken logic should                                                                                                                                                                                                                                                                                                                                  | 24/07/2026 | 24/07/2026      | [Build specification reference – CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html)                      |
+| Sat | - Team meeting: Reviewed project progress and received feedback from the team leader - Joined the "FCAJ x Agentic AI Build Week powered by GenAI Fund" hackathon with the rest of the team                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 25/07/2026 | 25/07/2026      |                                                                                                                                              |
 
 ### Week 5 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+- Stood up proactive alerting (4 CloudWatch Alarms + SNS) so backend issues surface to the team automatically instead of through user reports.
+- Cut ongoing storage cost by moving the document bucket onto S3 Intelligent-Tiering.
+- Closed a real CSRF gap in Google login with a 2-layer defense (app-side state check + Cognito), verified across 5 test scenarios including a simulated attack.
+- Turned on KMS encryption at rest for DynamoDB with a full CloudTrail audit trail.
+- Made `pytest` a hard gate in the deploy pipeline, catching broken logic before it reaches production.
+- Attended the "FCAJ x Agentic AI Build Week powered by GenAI Fund" hackathon (25/07/2026).

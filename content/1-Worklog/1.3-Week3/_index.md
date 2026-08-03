@@ -1,54 +1,39 @@
 ---
 title: "Week 3 Worklog"
-date: 2024-01-01
-weight: 1
+date: 2026-07-06
+weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
 
-
 ### Week 3 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+- Review and retest recent teammate work: Trọng's frontend authentication flow (Login/Register/Protected Route) and Nam's Bedrock/RAG optimizations.
+- Draft the registration/authentication flow and a fix plan for the multi-tenancy data leakage bug (design only, no code yet) for implementation next week.
+- Attend the community event “Cloud Architect x Meet Up”.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Start Date | Completion Date | Reference Material                                                                                                                         |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| 2+3 | - Review and test the Frontend authentication features (Register, Login, Logout, Protected Route) <br>&emsp;+ Manually test the account registration, login, logout flows and verify that protected pages are blocked for unauthenticated users <br>&emsp;+ Test behavior across multiple browser tabs by signing in concurrently with different accounts to evaluate session isolation <br>- Document issues and bugs discovered during testing <br>&emsp;+ Note the login state being shared across tabs, analyze the possible cause related to storing tokens in `localStorage`, and record this for follow-up in the next development phase.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 06/07/2026 | 07/07/2026      |                                                                                                                                            |
+| 4   | - Review Smart Docs AI architecture against AWS Well-Architected Framework principles <br>&emsp;+ Evaluate security, scalability, performance, and cost optimization aspects of the system; note improvement opportunities in backend and data storage design <br>- Test the system after updating the Amazon Bedrock model and optimizing the document upload feature <br>&emsp;+ Evaluate response quality after switching to the new model and compare results to the previous model on the same test dataset <br>&emsp;+ Test uploading large files to assess system stability and processing time <br>- Analyze issues related to data storage and user isolation <br>&emsp;+ Identify the risk of data leakage between users when sharing storage paths on Amazon S3 and FAISS; note this as an issue to improve in the next phase <br>&emsp;+ Investigate AWS Lambda execution environment reuse to determine root causes of data or state being reused across invocations <br>- Propose improvements for data storage architecture <br>&emsp;+ Recommend separating stored data by `user_id` and avoiding global state use to ensure data independence and safety <br>- Summarize system performance test results <br>&emsp;+ Record Co-RAG response times across multiple tests, observe inconsistent performance, and save the results for later analysis and optimization. | 08/07/2026 | 08/07/2026      | [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)                                |
+| 5   | - Research and design a user registration and authentication flow using Amazon Cognito and Amazon DynamoDB <br>&emsp;+ Design the process to create a user profile in Amazon DynamoDB only after email verification completes, ensuring data consistency and reducing unverified accounts <br>&emsp;+ Compare this approach with creating the profile immediately after registration; evaluate the trade-offs and note that delaying profile creation reduces handling of incomplete sign-ups <br>&emsp;+ Propose an automatic verification and recovery mechanism for user profiles when creation fails, so the system can self-heal and improve authentication reliability                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 09/07/2026 | 09/07/2026      | [AWS Signing up and confirming user accounts](https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html) |
+| 6   | - Analyze and propose fixes for issues discovered during system testing <br>&emsp;+ Analyze CORS-related errors and identify that backend error responses are not consistently handled, causing browser messages that do not reflect the true cause; propose adding a unified error-handling mechanism for consistent responses <br>&emsp;+ Analyze document filtering issues during data retrieval, note cases where filter conditions were not applied correctly under concurrent task processing, and propose corrective action <br>&emsp;+ Document repeated conversation history bugs in follow-up questions, analyze the initial root cause, and propose adjusting conversation history management so content is stored accurately.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 10/07/2026 | 10/07/2026      |                                                                                                                                            |
+| 7   | - Attend the “Cloud Architect x Meet Up” event                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 11/07/2026 | 11/07/2026      |                                                                                                                                            |
 
 ### Week 3 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+- Reviewed and tested the Frontend user authentication flow including:
+  - Register
+  - Login
+  - Logout
+  - Protected Route access control
 
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+- Performed multi-tab browser testing and identified session management issues for future improvement.
+- Understood the Amazon Cognito user authentication process and Amazon DynamoDB user profile storage, and proposed a flow that ensures data consistency and recovery when profile creation fails.
+- Applied AWS Well-Architected Framework fundamentals to evaluate Smart Docs AI architecture for security, performance, scalability, and cost optimization.
+- Analyzed the risk of data leakage in a multi-tenant environment, investigated AWS Lambda execution environment reuse, and proposed improvements to ensure proper data separation between users.
+- Tested the system after updating the Amazon Bedrock model and document upload functionality, recorded outcomes, and evaluated system stability.
+- Documented issues found during testing (CORS, document filtering, conversation history, and Co-RAG performance) and proposed remediation directions for the next phase.
+- Strengthened skills in system analysis, testing, AWS documentation review, and team collaboration to assess, evaluate, and improve project quality.

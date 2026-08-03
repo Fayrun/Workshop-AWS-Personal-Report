@@ -1,57 +1,34 @@
 ---
 title: "Worklog Tuần 5"
 date: 2024-01-01
-weight: 1
+weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
 
-
-
 ### Mục tiêu tuần 5:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Thêm cảnh báo chủ động để team biết lỗi backend sớm hơn thay vì đợi user báo.
+- Giảm chi phí lưu trữ S3 và vá một lỗ hổng bảo mật thật trong luồng đăng nhập Google.
+- Bật mã hóa at-rest cho DynamoDB và biến automated test thành cổng chặn bắt buộc trong pipeline deploy.
+- Tham gia hackathon "FCAJ x Agentic AI Build Week powered by GenAI Fund" cùng team.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Thứ | Công việc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                                                                                                                               |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2   | - Thiết kế và triển khai bộ CloudWatch Alarm: 4 alarm (`lambda-errors`, `lambda-duration`, `lambda-throttles`, `apigateway-5xx`) nối vào 1 SNS Topic gửi email khi trigger &emsp;+ Chọn threshold dựa trên traffic thực tế thay vì để mặc định: lỗi > 5 lần/5 phút, duration > 25000ms/5 phút (~80% timeout 30s của Lambda, đủ dư để phản ứng trước khi bị timeout hẳn), throttle ≥ 1 lần/5 phút (throttle không nên xảy ra âm thầm), API Gateway 5xx > 5 lần/5 phút &emsp;+ Subscribe email của mình vào SNS Topic và confirm subscription                                                                                                                                             | 20/07/2026   | 20/07/2026      | [Using Amazon CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)                    |
+| 3   | - Tìm hiểu chi phí lưu trữ S3 và bật Intelligent-Tiering cho bucket chứa document&emsp;+ So sánh Intelligent-Tiering với việc tự đặt lifecycle rule chuyển tier theo tuổi file cố định (Standard-IA/Glacier) — chọn Intelligent-Tiering vì pattern truy cập file upload của user khó đoán trước, để AWS tự chuyển tier dựa trên truy cập thật &emsp;+ Đặt lifecycle rule chuyển tier ngay từ ngày 0 (lúc upload), lưu ý AWS chỉ áp dụng cho object ≥ 128KB — hầu hết file PDF/DOCX của dự án đều lớn hơn ngưỡng này nên vẫn được tối ưu                                                                                                                                                 | 21/07/2026   | 21/07/2026      | [Managing storage costs with S3 Intelligent-Tiering](https://docs.aws.amazon.com/AmazonS3/latest/userguide/intelligent-tiering.html)         |
+| 4   | - Vá lỗ hổng CSRF trong luồng đăng nhập Google&emsp;+ Xác nhận lỗ hổng trước khi fix: luồng redirect sang Cognito Hosted UI để đăng nhập Google không có tham số `state`, nên 1 link callback dựng sẵn chứa authorization code hợp lệ của người khác có thể bị replay lên session của nạn nhân &emsp;+ Code phần fix ở frontend: sinh `state = crypto.randomUUID()` trước khi redirect sang Google, lưu vào `sessionStorage`, rồi so khớp với `state` trả về trong hàm `verifyOAuthState()` mới ở trang callback — sai thì chặn ngay trước khi app kịp gọi Cognito                                                                                                                      | 22/07/2026   | 22/07/2026      | [CSRF Prevention Cheat Sheet – OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html) |
+| 5   | - Chạy đủ 5 test case cho CSRF: đăng nhập bình thường, state đúng định dạng, giả lập tấn công với state sai (bị chặn ngay ở phía app), state đúng nhưng code giả (bị Cognito từ chối với lỗi`invalid_grant`), và state bị xóa ngay sau khi dùng để không replay lại được &emsp;+ Hai case state-sai và code-giả quan trọng nhất — chứng minh có 2 lớp bảo vệ độc lập (app check trước, Cognito check sau) chứ không chỉ dựa vào 1 lớp - Bật mã hóa KMS cho bảng DynamoDB profiles (đổi từ AWS owned key sang `alias/aws/dynamodb`) &emsp;+ Chọn AWS managed key thay vì customer managed key — cần xem được log truy cập key qua CloudTrail nhưng không muốn tự quản lý rotation/policy | 23/07/2026   | 23/07/2026      | [DynamoDB encryption at rest](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/EncryptionAtRest.html)                        |
+| 6   | - Thêm cổng test tự động vào CodePipeline:`pytest` và `flake8` chạy trong phase `pre_build` của `backend/buildspec.yml` trước mỗi lần deploy &emsp;+ Đặt ở `pre_build` chứ không phải `build`/`post_build` để test fail thì dừng pipeline ngay từ đầu, khỏi tốn công build Docker image vô ích &emsp;+ Để `flake8` chạy dạng advisory (`--exit-zero`, không chặn build) nhưng `pytest` thì chặn thật — lỗi style không nên chặn deploy, nhưng logic sai thì phải chặn                                                                                                                                                                                                                   | 24/07/2026   | 24/07/2026      | [Build specification reference – CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html)                      |
+| 7   | - Họp team: Rà soát tiến độ và nghe review góp ý từ leader - Tham gia hackathon "FCAJ x Agentic AI Build Week powered by GenAI Fund" cùng cả team                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 25/07/2026   | 25/07/2026      |                                                                                                                                              |
 
 ### Kết quả đạt được tuần 5:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+- Dựng xong hệ thống cảnh báo chủ động (4 CloudWatch Alarm + SNS), lỗi backend giờ tự báo về team thay vì phải đợi user report.
+- Giảm chi phí lưu trữ dài hạn nhờ chuyển bucket document sang S3 Intelligent-Tiering.
+- Vá được lỗ hổng CSRF thật trong luồng Google login với 2 lớp bảo vệ (check state ở app + Cognito), test đủ 5 kịch bản kể cả giả lập tấn công.
+- Bật mã hóa KMS at-rest cho DynamoDB, có audit trail đầy đủ qua CloudTrail.
+- Đưa `pytest` thành cổng chặn bắt buộc trong pipeline deploy, bắt lỗi logic trước khi lên production.
+- Tham gia hackathon "FCAJ x Agentic AI Build Week powered by GenAI Fund" (25/07/2026).

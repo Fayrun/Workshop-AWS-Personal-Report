@@ -1,54 +1,35 @@
 ---
 title: "Week 1 Worklog"
-date: 2024-01-01
+date: 2026-06-22
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
 
-
 ### Week 1 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+- Get acquainted with First Cloud AI Journey (FCAJ) members and understand the internship's workflow and rules.
+- Build a solid foundation in AWS Cloud: global infrastructure, core service categories, and management tools (Console/CLI/SDK).
+- Practice basic account security (MFA), IAM, and networking (VPC).
+- Discuss and finalize the **Smart Docs AI** project idea with the team, then start on the initial frontend scaffolding.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Start Date | Completion Date | Reference Material                                                                                                                                                                                                                                                                                                                 |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2   | - Get acquainted with FCAJ members, carefully read the internship rules and regulations <br>&emsp;+ Introduced myself in the group chat, noted the weekly progress-reporting schedule <br>&emsp;+ Noted the Worklog submission deadlines and the leave-request process - Watched the Kick-off video, the Draw.io architecture guide, and the Workshop report setup guide <br>&emsp;+ Installed Hugo Extended + the `hugo-theme-learn` theme, tested `hugo server -D` locally before writing any real content <br>&emsp;+ Studied the `content/` folder structure (each section has a bilingual `_index.md`/`_index.vi.md` pair)       | 06/22/2026 | 06/22/2026      | [Kick off](https://www.youtube.com/watch?v=AQlsd0nWdZk&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=1) [Draw.io Guide](https://www.youtube.com/watch?v=l8isyDe-GwY&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=2) [Workshop Guide](https://www.youtube.com/watch?v=mXRqgMr_97U&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=3) |
+| 3   | - Learned about cloud computing, AWS's global infrastructure (Region/AZ/Edge Location), and the 3 ways to interact with AWS (Console/CLI/SDK)<br>&emsp;+ Understood why AWS spreads services across multiple Availability Zones within a Region to ensure high availability - Got an overview of the core service categories: Compute/Storage/Networking/Database <br>&emsp;+ Took notes on a few representative services in each category, to use as a reference when designing the architecture for the upcoming project - **Practice:** created an AWS Free Tier account, enabled MFA, set up an AWS Budget cost alert             | 06/23/2026 | 06/23/2026      | [Cloud Concepts](https://www.youtube.com/watch?v=HxYZAK1coOI&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=4) [AWS Free Tier](https://000001.awsstudygroup.com/vi/) [AWS Budgets](https://000007.awsstudygroup.com/vi/)                                                                                                            |
+| 4   | - Learned IAM: the Group/User/Policy/Role concepts and the principle of least privilege<br>&emsp;+ Understood why permissions should be attached to Groups/Roles rather than directly to individual Users - **Practice:** created a dedicated IAM Group/User/Role, tried switching roles <br>&emsp;+ Created a Group with limited permissions and a personal User under that Group instead of using the shared root account - Learned VPC: Subnet/Route Table/Internet Gateway/NAT Gateway/Security Group/NACL - **Practice:** built a test VPC with both a public and a private subnet, and verified connectivity in both directions | 06/24/2026 | 06/24/2026      | [AWS IAM](https://000002.awsstudygroup.com/vi/) [Amazon VPC](https://000003.awsstudygroup.com/vi/)                                                                                                                                                                                                                                 |
+| 5   | - Team discussion to finalize the**Smart Docs AI** project idea — a document Q&A chatbot based on RAG <br>&emsp;+ Considered a few other directions before settling on a RAG chatbot, since it aligns with the GenAI trend and lets us leverage Amazon Bedrock <br>&emsp;+ Agreed on the tech stack: ReactJS (frontend), Python/FastAPI (backend), AWS serverless architecture (Lambda + API Gateway) - Sketched wireframes for the main screens (login, document upload, chat window)                                                                                                                                                | 06/25/2026 | 06/25/2026      |                                                                                                                                                                                                                                                                                                                                    |
+| 6   | - Started coding the initial frontend scaffolding for Smart Docs AI<br>&emsp;+ Bootstrapped the project with Vite + React, built out the skeleton components based on the agreed-upon wireframes - Pushed the source code to the team's shared GitHub repo, agreed on a branching workflow                                                                                                                                                                                                                                                                                                                                            | 06/26/2026 | 06/26/2026      | Project Team GitHub Repository                                                                                                                                                                                                                                                                                                     |
+| 7   | - Learned the basics of Amazon EC2: instance types, AMI, EBS<br>&emsp;+ Compared instance families briefly to pick a suitable one for hands-on practice (prioritizing the free tier) - Got an overview of AWS Cloud9                                                                                                                                                                                                                                                                                                                                                                                                                  | 06/27/2026 | 06/27/2026      | [AWS Cloud9](https://000049.awsstudygroup.com/vi/)                                                                                                                                                                                                                                                                                 |
 
 ### Week 1 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+- Got acquainted with FCAJ members and understood the internship's workflow and schedule.
+- Built a solid foundation in AWS Cloud: global infrastructure (Region, AZ), core service categories, and how to use the Console/CLI.
+- Successfully created an AWS Free Tier account, enabled MFA, and set up AWS Budgets to keep costs under control.
+- Understood the IAM permission model (User/Group/Role/Policy) and built a working VPC with a full set of Subnet/Route Table/Internet Gateway/NAT Gateway/Security Group.
+- Finalized the **Smart Docs AI** project idea and the tech stack to be used throughout the project, together with the team.
+- Completed the initial frontend UI scaffolding and pushed the code to the team's shared GitHub repo.
+- Gained a foundational understanding of Amazon EC2, ready for the following week's content.

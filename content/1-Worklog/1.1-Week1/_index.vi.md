@@ -1,57 +1,35 @@
 ---
 title: "Worklog Tuần 1"
-date: 2024-01-01
+date: 2026-06-22
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
 
-
-
 ### Mục tiêu tuần 1:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Làm quen các thành viên First Cloud AI Journey (FCAJ), nắm rõ quy trình và nội quy làm việc trong kỳ thực tập.
+- Xây dựng nền tảng kiến thức AWS Cloud: hạ tầng toàn cầu, các nhóm dịch vụ chính, công cụ quản lý (Console/CLI/SDK).
+- Thực hành các thao tác bảo mật cơ bản (MFA, IAM) và networking (VPC).
+- Cùng cả nhóm thảo luận, chốt đề tài **Smart Docs AI** và bắt đầu phần khung frontend.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Thứ | Công việc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                                                                                                                                                                                                                                                                                                                             |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 2   | - Làm quen các thành viên FCAJ, đọc kỹ nội quy thực tập<br>&emsp;+ Tự giới thiệu trong nhóm chat chung, nắm lịch báo cáo tiến độ hàng tuần <br>&emsp;+ Ghi chú lại deadline nộp Worklog và quy trình xin nghỉ nếu cần - Xem video Kick off, hướng dẫn vẽ kiến trúc bằng Draw.io, hướng dẫn setup Workshop report <br>&emsp;+ Cài Hugo Extended + theme `hugo-theme-learn`, chạy thử `hugo server -D` ở local để quen thao tác trước khi bắt tay viết nội dung thật <br>&emsp;+ Đọc hiểu cấu trúc thư mục `content/` (mỗi mục có cặp file song ngữ `_index.md`/`_index.vi.md`) | 22/06/2026   | 22/06/2026      | [Kick off](https://www.youtube.com/watch?v=AQlsd0nWdZk&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=1) [Hướng dẫn Draw.io](https://www.youtube.com/watch?v=l8isyDe-GwY&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=2) [Hướng dẫn Workshop](https://www.youtube.com/watch?v=mXRqgMr_97U&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=3) |
+| 3   | - Tìm hiểu điện toán đám mây, hạ tầng toàn cầu AWS (Region/AZ/Edge Location), 3 cách thao tác với AWS (Console/CLI/SDK)<br>&emsp;+ Hiểu vì sao AWS phân bổ dịch vụ theo nhiều Availability Zone trong 1 Region để đảm bảo tính sẵn sàng cao - Nắm tổng quan các nhóm dịch vụ chính: Compute/Storage/Networking/Database <br>&emsp;+ Ghi chú lại vài dịch vụ tiêu biểu mỗi nhóm để làm cơ sở tham khảo khi thiết kế kiến trúc cho project sau này - **Thực hành:** tạo tài khoản AWS Free Tier, bật MFA, thiết lập AWS Budget cảnh báo chi phí                                 | 23/06/2026   | 23/06/2026      | [Khái niệm Cloud](https://www.youtube.com/watch?v=HxYZAK1coOI&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=4) [AWS Free Tier](https://000001.awsstudygroup.com/vi/) [AWS Budgets](https://000007.awsstudygroup.com/vi/)                                                                                                                   |
+| 4   | - Học IAM: khái niệm Group/User/Policy/Role và nguyên tắc least privilege<br>&emsp;+ Hiểu vì sao nên gắn quyền vào Group/Role thay vì gắn trực tiếp vào từng User - **Thực hành:** tạo IAM Group/User/Role riêng, thử switch role <br>&emsp;+ Tạo Group có quyền giới hạn, tạo User cá nhân thuộc Group đó thay vì dùng chung root account - Học VPC: Subnet/Route Table/Internet Gateway/NAT Gateway/Security Group/NACL - **Thực hành:** dựng thử 1 VPC có đủ public subnet và private subnet, kiểm tra kết nối ra vào                                                      | 24/06/2026   | 24/06/2026      | [AWS IAM](https://000002.awsstudygroup.com/vi/) [Amazon VPC](https://000003.awsstudygroup.com/vi/)                                                                                                                                                                                                                                         |
+| 5   | - Cả nhóm họp thảo luận, chốt đề tài**Smart Docs AI** — chatbot hỏi-đáp tài liệu dựa trên RAG <br>&emsp;+ Cân nhắc vài hướng khác trước khi quyết định chọn RAG chatbot, vì phù hợp xu hướng GenAI và tận dụng được Amazon Bedrock <br>&emsp;+ Thống nhất tech stack: ReactJS (frontend), Python/FastAPI (backend), kiến trúc serverless AWS (Lambda + API Gateway) - Phác thảo wireframe các màn hình chính (đăng nhập, upload tài liệu, khung chat)                                                                                                                         | 25/06/2026   | 25/06/2026      |                                                                                                                                                                                                                                                                                                                                            |
+| 6   | - Bắt đầu code khung frontend ban đầu cho Smart Docs AI<br>&emsp;+ Khởi tạo project bằng Vite + React, dựng các component khung theo wireframe đã thống nhất - Đẩy source code lên GitHub chung của nhóm, thống nhất quy tắc làm việc theo nhánh riêng                                                                                                                                                                                                                                                                                                                        | 26/06/2026   | 26/06/2026      | Project Team GitHub Repository                                                                                                                                                                                                                                                                                                             |
+| 7   | - Tìm hiểu Amazon EC2 cơ bản: instance types, AMI, EBS<br>&emsp;+ So sánh sơ bộ các dòng instance để chọn loại phù hợp cho việc thực hành (ưu tiên free tier) - Tìm hiểu tổng quan AWS Cloud9                                                                                                                                                                                                                                                                                                                                                                                 | 27/06/2026   | 27/06/2026      | [AWS Cloud9](https://000049.awsstudygroup.com/vi/)                                                                                                                                                                                                                                                                                         |
 
 ### Kết quả đạt được tuần 1:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+- Làm quen với các thành viên FCAJ, nắm được quy trình và lịch làm việc trong kỳ thực tập.
+- Nắm được kiến thức nền tảng AWS Cloud: hạ tầng toàn cầu (Region, AZ), các nhóm dịch vụ chính, cách dùng Console/CLI.
+- Tạo thành công tài khoản AWS Free Tier, bật MFA, thiết lập AWS Budgets kiểm soát chi phí.
+- Hiểu cơ chế phân quyền IAM (User/Group/Role/Policy) và tự dựng được 1 VPC có đầy đủ Subnet/Route Table/Internet Gateway/NAT Gateway/Security Group.
+- Cùng nhóm chốt được đề tài **Smart Docs AI** và tech stack sử dụng xuyên suốt dự án.
+- Hoàn thành khung giao diện frontend ban đầu, đẩy code lên GitHub chung của nhóm.
+- Có kiến thức nền tảng về Amazon EC2, sẵn sàng cho nội dung tuần tiếp theo.

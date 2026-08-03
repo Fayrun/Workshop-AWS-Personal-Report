@@ -6,14 +6,9 @@ chapter: false
 pre: " <b> 1. </b> "
 ---
 
+Kỳ thực tập của tôi kéo dài 8 tuần, từ 22/06/2026 đến 14/08/2026, theo chương trình First Cloud AI Journey (FCAJ). Xuyên suốt 8 tuần, tôi vừa học các dịch vụ AWS nền tảng, vừa áp dụng trực tiếp vào việc xây dựng Smart Docs AI — một chatbot hỏi-đáp tài liệu (RAG) chạy trên kiến trúc serverless của AWS. Dưới đây là tóm tắt từng tuần:
 
-
-**Trong trang này** bạn sẽ cần giới thiệu worklog của bạn **như thế nào**? Bạn hoàn thành chương trình trong vòng **bao nhiêu tuần**? Bạn **đã làm gì** trong các tuần đó?
-
-
-Thông thường và cũng là tiêu chuẩn, một worklog được thực hiện trong khoảng 3 tháng (trong suốt thời gian thực tập) với nội dung các tuần như sau:
-
-**Tuần 1:** [Làm quen với AWS và các dịch vụ cơ bản trong AWS](1.1-week1/)
+**Tuần 1:** [Tìm hiểu và nghiên cứu các dịch vụ của AWS và chốt đề tài Smart Docs AI](1.1-week1/)
 
 **Tuần 2:** [Làm công việc A...](1.2-week2/)
 
