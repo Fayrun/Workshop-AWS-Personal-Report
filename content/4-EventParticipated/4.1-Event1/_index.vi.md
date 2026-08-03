@@ -6,118 +6,52 @@ chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
+# Cloud Architect x Meet Up
 
+### Mục đích của sự kiện
 
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+- Tạo cơ hội giao lưu giữa các Cloud Architect, kỹ sư và những người đang học tập, làm việc với AWS.
+- Giới thiệu AWS Security Agent và chia sẻ vai trò của bảo mật trong quá trình phát triển hệ thống Cloud.
+- Chia sẻ kinh nghiệm ôn tập và thi các chứng chỉ AWS từ góc nhìn thực tế.
+- Kết nối cộng đồng AWS Study Group và những người yêu thích công nghệ điện toán đám mây.
 
-### Mục Đích Của Sự Kiện
+### Diễn giả
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+Sự kiện có nhiều phần chia sẻ đến từ các chuyên gia AWS. Trong đó, hai nội dung để lại nhiều ấn tượng nhất đối với em là:
 
-### Danh Sách Diễn Giả
+- **Anh Long** – Security Solutions Architect, giới thiệu AWS Security Agent và chia sẻ các vấn đề thường gặp về bảo mật khi phát triển ứng dụng trên AWS.
+- **Anh Huy** – AWS Certified Solutions Architect, chia sẻ kinh nghiệm học tập, ôn luyện và những lưu ý quan trọng khi tham gia kỳ thi chứng chỉ AWS.
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+### Nội dung nổi bật
 
-### Nội Dung Nổi Bật
+#### Phiên chia sẻ về AWS Security Agent
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+- AWS Security Agent có khả năng quét toàn bộ dự án để phát hiện nhiều loại rủi ro bảo mật như thông tin nhạy cảm bị hardcode, thư viện tồn tại lỗ hổng, cấu hình dịch vụ chưa an toàn hoặc dữ liệu chưa được mã hóa.
+- Kết quả kiểm tra được hiển thị thông qua dashboard trực quan và có thể xuất thành báo cáo PDF, giúp nhóm phát triển dễ dàng theo dõi và xử lý các vấn đề bảo mật.
+- Bài chia sẻ cũng nhấn mạnh rằng trong bối cảnh AI hỗ trợ lập trình ngày càng phổ biến, việc kiểm soát và rà soát bảo mật cần được quan tâm ngay từ đầu thay vì chỉ kiểm tra ở giai đoạn cuối.
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+#### Chia sẻ kinh nghiệm thi chứng chỉ AWS
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+- Đề thi AWS chủ yếu sử dụng các câu hỏi tình huống nhằm đánh giá khả năng lựa chọn dịch vụ AWS phù hợp với từng bài toán thực tế.
+- Diễn giả chia sẻ nhiều kinh nghiệm hữu ích về cách phân bổ thời gian làm bài, đánh dấu những câu hỏi khó để quay lại sau và lưu ý đối với dạng câu hỏi yêu cầu chọn nhiều đáp án.
+- Ngoài việc nắm vững kiến thức, việc có chiến lược làm bài phù hợp cũng đóng vai trò quan trọng trong quá trình thi chứng chỉ.
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+### Những điều học được
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+- Bảo mật cần được xem là một phần xuyên suốt của quá trình phát triển phần mềm thay vì chỉ được thực hiện trước khi triển khai hệ thống.
+- Các công cụ kiểm tra bảo mật tự động giúp phát hiện sớm nhiều rủi ro mà quá trình kiểm tra thủ công có thể bỏ sót.
+- Việc chuẩn bị cho chứng chỉ AWS không chỉ yêu cầu kiến thức chuyên môn mà còn cần kinh nghiệm làm bài và hiểu rõ các tình huống thực tế.
 
-#### Domain-Driven Design (DDD)
+### Ứng dụng vào công việc
 
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
+- Áp dụng cơ chế mã hóa KMS cho DynamoDB nhằm nâng cao mức độ bảo vệ dữ liệu.
+- Bổ sung bước kiểm thử tự động bằng pytest vào giai đoạn pre-build của pipeline CI/CD trước khi triển khai hệ thống.
+- Chú trọng hơn đến việc tích hợp các biện pháp bảo mật ngay trong quy trình phát triển phần mềm.
 
-#### Event-Driven Architecture
+### Cảm nhận sau sự kiện
 
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
-
-#### Compute Evolution
-
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
-
-#### Amazon Q Developer
-
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
-
-### Những Gì Học Được
-
-#### Tư Duy Thiết Kế
-
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
-
-#### Kiến Trúc Kỹ Thuật
-
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
-
-#### Chiến Lược Hiện Đại Hóa
-
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
-
-### Ứng Dụng Vào Công Việc
-
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
-
-### Trải nghiệm trong event
-
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
-
-#### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
-
-#### Trải nghiệm kỹ thuật thực tế
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
-
-#### Ứng dụng công cụ hiện đại
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
-
-#### Kết nối và trao đổi
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
-
-#### Bài học rút ra
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
+Buổi meetup giúp em có góc nhìn thực tế hơn về vai trò của bảo mật trong các hệ thống Cloud hiện đại. Những chia sẻ từ các diễn giả không chỉ cung cấp kiến thức chuyên môn mà còn giúp em nhận ra nhiều điểm có thể cải thiện trong dự án đang thực hiện, đặc biệt là việc tăng cường tự động hóa các bước kiểm tra bảo mật và xây dựng quy trình triển khai an toàn hơn. Đây cũng là động lực để em tiếp tục tìm hiểu sâu hơn về các dịch vụ AWS và định hướng chinh phục các chứng chỉ AWS trong tương lai.
 
 #### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
-> Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+
+![Ảnh sự kiện 1](/images/4-EventParticipated/Event-11-07-2026.jpeg)

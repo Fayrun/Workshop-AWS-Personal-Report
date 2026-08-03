@@ -6,118 +6,74 @@ chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
+# Agentic AI Build Week powered by GenAI Fund
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+### Purpose of the Event
 
-### Event Objectives
+- Showcase the outcomes of the FCAJ x Agentic AI Build Week hackathon through project demonstrations and technical presentations.
+- Provide participating teams with an opportunity to present Agentic AI solutions developed on AWS.
+- Share practical experiences gained throughout the 24-hour hackathon, including teamwork, problem solving, system design, and presentation skills.
+- Encourage knowledge sharing and strengthen connections within the AWS Study Group and AI developer community.
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+### Featured Teams
 
-### Speakers
+Several teams presented their projects during the event. The following were the featured solutions:
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+- **One Team** – Conversational food-ordering chatbot.
+- **Long & Co** – AI-powered assistant for AWS Solution Architects.
+- **Team 3K** – Real-time crowd monitoring system using computer vision.
+- **Six Piller** – Adaptive workflow engine supporting Anti-Money Laundering (AML) processes.
 
 ### Key Highlights
 
-#### Identifying the drawbacks of legacy application architecture
+#### One Team – Conversational Food Ordering
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+- Developed a chatbot that allows users to order food through natural language conversations instead of using a traditional mobile application.
+- Demonstrated how Large Language Models can understand user intent and retrieve structured business information.
+- Emphasized that solving real business problems is more valuable than pursuing overly complex technical implementations.
 
-#### Transitioning to modern application architecture – Microservices
+#### Long & Co – AI Assistant for Solution Architects
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+- Built an intelligent assistant capable of generating AWS architecture diagrams, estimating infrastructure costs, and producing Infrastructure as Code from natural language requirements.
+- Demonstrated a workflow that combines AI-generated solutions with human approval before deployment.
+- Highlighted the importance of maintaining AI context consistency and validating generated architectures against organizational standards.
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+#### Team 3K – Intelligent Crowd Monitoring
 
-#### Domain-Driven Design (DDD)
+- Presented a real-time monitoring platform combining computer vision technologies with AWS cloud services.
+- Applied AI to analyze crowd density, detect abnormal situations, and provide operational recommendations through natural language interaction.
+- Shared practical challenges related to real-time video processing and deployment environments.
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
+#### Six Piller – Adaptive AML Workflow Engine
 
-#### Event-Driven Architecture
+- Introduced an AI-assisted workflow for Anti-Money Laundering investigations using multiple specialized AI agents.
+- Combined AWS Step Functions with intelligent decision-making while keeping human reviewers involved before executing critical actions.
+- Demonstrated how explainable AI can improve operational efficiency while maintaining compliance requirements.
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
+#### Lessons from the Hackathon
 
-#### Compute Evolution
+- Successful projects focused on solving practical business problems instead of showcasing technology alone.
+- Effective teamwork, task allocation, and communication were critical factors under tight development deadlines.
+- Building a functional MVP within limited time was more valuable than attempting to implement every possible feature.
+- Real-world project experiences shared by participating teams provided valuable insights beyond technical implementation.
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
+### Knowledge Gained
 
-#### Amazon Q Developer
+- Agentic AI systems are most effective when combined with workflow orchestration and human oversight.
+- AI should enhance human decision-making rather than completely replace it in critical business scenarios.
+- Delivering a stable and usable solution within a limited timeframe is often more important than continuously adding new features.
+- Practical project presentations provided valuable perspectives on system architecture, AI integration, and software engineering best practices.
 
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+### Application to My Project
 
-### Key Takeaways
+- Consider incorporating a human-in-the-loop approval mechanism before allowing AI to perform sensitive operations.
+- Explore workflow orchestration patterns, such as AWS Step Functions, to coordinate multiple specialized AI agents.
+- Prioritize improving system stability, documentation, and existing functionality instead of introducing unnecessary new features before project completion.
 
-#### Design Mindset
+### Personal Reflection
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
+This event provided valuable insights into how Agentic AI can be applied to real-world problems across different domains. Beyond the technical demonstrations, I was particularly impressed by the teams' experiences in balancing development speed, teamwork, and product quality within a limited timeframe. The presentations also gave me new ideas for improving the architecture and development approach of my own project.
 
-#### Technical Architecture
+#### Event Photos
 
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
-
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
-
-### Applying to Work
-
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
-
-### Event Experience
-
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
-
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
-
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
-
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
-
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
-
-#### Some event photos
-*Add your event photos here*  
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+![Event 2](/images/4-EventParticipated/Event-25-07-2026.png)

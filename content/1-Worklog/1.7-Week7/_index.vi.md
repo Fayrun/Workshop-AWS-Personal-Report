@@ -8,43 +8,23 @@ pre: " <b> 1.7. </b> "
 
 ### Mục tiêu tuần 7:
 
-- Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Hoàn thiện workshop AWS cá nhân, bao gồm nội dung, hình ảnh minh chứng và định dạng tài liệu.
+- Hoàn thành báo cáo thực tập và chuẩn bị bản cuối cùng để nộp.
+- Tiếp tục tìm hiểu hệ sinh thái AWS nhằm nâng cao kiến thức về điện toán đám mây và phục vụ cho các dự án trong tương lai.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                            | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                                                                     |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ---------------------------------------------------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                          | 11/08/2025   | 11/08/2025      |                                                                                    |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ&emsp; + Compute &emsp; + Storage &emsp; + Networking &emsp; + Database &emsp; + ...                                               | 12/08/2025   | 12/08/2025      | [https://cloudjourney.awsstudygroup.com/](https://cloudjourney.awsstudygroup.com/) |
-| 4   | - Tạo AWS Free Tier account - Tìm hiểu AWS Console & AWS CLI - **Thực hành:** &emsp; + Tạo AWS account &emsp; + Cài AWS CLI & cấu hình &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | [https://cloudjourney.awsstudygroup.com/](https://cloudjourney.awsstudygroup.com/) |
-| 5   | - Tìm hiểu EC2 cơ bản:&emsp; + Instance types &emsp; + AMI &emsp; + EBS &emsp; + ... - Các cách remote SSH vào EC2 - Tìm hiểu Elastic IP                             | 14/08/2025   | 15/08/2025      | [https://cloudjourney.awsstudygroup.com/](https://cloudjourney.awsstudygroup.com/) |
-| 6   | -**Thực hành:** &emsp; + Tạo EC2 instance &emsp; + Kết nối SSH &emsp; + Gắn EBS volume                                                                               | 15/08/2025   | 15/08/2025      | [https://cloudjourney.awsstudygroup.com/](https://cloudjourney.awsstudygroup.com/) |
+| Thứ | Công việc                                                                                                                                                        | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                                             |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ---------------------------------------------------------- |
+| 2   | - Tiếp tục hoàn thiện workshop AWS.<br>&emsp;+ Chỉnh sửa nội dung, cập nhật hình ảnh minh chứng, kiểm tra kết quả triển khai và hoàn thiện định dạng tài liệu.   | 03/08/2026   | 03/08/2026      |                                                            |
+| 3   | - Hoàn tất workshop AWS.<br>&emsp;+ Rà soát toàn bộ nội dung, xử lý các vấn đề còn tồn tại và chuẩn bị bản hoàn chỉnh để nộp.                                    | 04/08/2026   | 04/08/2026      |                                                            |
+| 4   | - Bắt đầu viết báo cáo thực tập.<br>&emsp;+ Tổng hợp các công việc đã thực hiện, mô tả quá trình triển khai và xây dựng nội dung các chương của báo cáo.         | 05/08/2026   | 05/08/2026      |                                                            |
+| 5   | - Hoàn thiện báo cáo thực tập.<br>&emsp;+ Rà soát nội dung, chỉnh sửa định dạng, kiểm tra tài liệu tham khảo và chuẩn bị bản cuối cùng để nộp.                   | 06/08/2026   | 06/08/2026      |                                                            |
+| 6   | - Tiếp tục tìm hiểu hệ sinh thái AWS.<br>&emsp;+ Nghiên cứu các dịch vụ cốt lõi, kiến trúc AWS và các best practices nhằm nâng cao kiến thức về Cloud Computing. | 07/08/2026   | 07/08/2026      | [AWS Study Group](https://cloudjourney.awsstudygroup.com/) |
 
 ### Kết quả đạt được tuần 7:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- Hoàn thành và hoàn thiện workshop AWS cá nhân.
+- Hoàn tất báo cáo thực tập với đầy đủ nội dung, kết quả thực hiện và quá trình học tập.
+- Mở rộng kiến thức về hệ sinh thái AWS thông qua việc tìm hiểu các dịch vụ cốt lõi, kiến trúc và các phương pháp triển khai phổ biến.
+- Nâng cao kỹ năng xây dựng tài liệu kỹ thuật, viết báo cáo và kiến thức về điện toán đám mây.

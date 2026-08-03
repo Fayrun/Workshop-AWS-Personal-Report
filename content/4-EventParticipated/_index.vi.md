@@ -6,39 +6,26 @@ chapter: false
 pre: " <b> 4. </b> "
 ---
 
+Trong thời gian thực tập, tôi đã có cơ hội tham gia hai sự kiện công nghệ được tổ chức bởi cộng đồng AWS và các đối tác. Đây là những dịp giúp em cập nhật các xu hướng mới trong lĩnh vực Cloud Computing và Generative AI, đồng thời học hỏi kinh nghiệm thực tế từ các chuyên gia cũng như mở rộng kiến thức về kiến trúc hệ thống, bảo mật và các dịch vụ trên nền tảng AWS.
 
+### [Event 1 — Cloud Architect x Meet Up](4.1-Event1/)
 
-> Trong phần này, các bạn cần liệt kê và mô tả chi tiết các sự kiện (event) mà mình đã tham gia trong suốt quá trình thực tập hoặc làm việc. 
-> 
-> Mỗi sự kiện nên được trình bày theo định dạng Event 1, Event 2, Event 3…, kèm theo các thông tin:
-> * Tên sự kiện
-> * Thời gian tổ chức
-> * Địa điểm (nếu có)
-> * Vai trò của bạn trong sự kiện (người tham dự, hỗ trợ tổ chức, diễn giả, v.v.)
-> * Mô tả ngắn gọn nội dung và hoạt động chính trong sự kiện
-> * Kết quả hoặc giá trị đạt được (bài học, kỹ năng mới, đóng góp cho nhóm/dự án)
-> * Việc liệt kê này giúp thể hiện rõ sự tham gia thực tế của bạn, cũng như các kỹ năng mềm và kinh nghiệm bạn đã tích lũy qua từng sự kiện.
+|                      |                                                                                                                                                                                                                   |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Thời gian**        | 09:00 ngày 11/07/2026                                                                                                                                                                                             |
+| **Địa điểm**         | Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh                                                                                                                            |
+| **Vai trò**          | Người tham dự                                                                                                                                                                                                     |
+| **Nội dung**         | Buổi gặp gỡ và giao lưu giữa các Cloud Architect với bốn chủ đề chia sẻ chuyên sâu, tập trung vào bảo mật trên AWS, AWS Security Agent và những kinh nghiệm thực tế trong quá trình học và thi các chứng chỉ AWS. |
+| **Kết quả đạt được** | Tiếp thu nhiều kinh nghiệm về bảo mật trên AWS, từ đó áp dụng vào dự án bằng cách bổ sung cơ chế mã hóa KMS cho DynamoDB và tích hợp bước kiểm thử tự động bằng pytest vào pipeline CI/CD.                        |
 
+---
 
-Trong quá trình thực tập, em đã tham gia 2 events, với mỗi event là một trải nghiệm đáng nhớ với những kiến thức mới, hay và bổ ích, cùng với đó là nhứng món quà và những khoảnh khắc rất tuyệt vời.
+### [Event 2 — FCAJ x Agentic AI Build Week powered by GenAI Fund](4.2-Event2/)
 
-### [Event 1](4.1-Event1/)
-&emsp;**Tên sự kiện:** GenAI-powered App-DB Modernization workshop
-
-&emsp;**Thời gian:** 09:00 ngày 13/08/2025
-
-&emsp;**Địa điểm:** Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh
-
-&emsp;**Vai trò trong sự kiện:** Người tham dự 
-
-
-
-### [Event 2](4.2-Event2/)
-&emsp;**Tên sự kiện:** GenAI-powered App-DB Modernization workshop
-
-&emsp;**Thời gian:** 09:00 ngày 13/08/2025
-
-&emsp;**Địa điểm:** Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh
-
-&emsp;**Vai trò trong sự kiện:** Người tham dự 
-
+|                      |                                                                                                                                                                                                                                                                                                                                                                                                   |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Thời gian**        | 09:00 ngày 25/07/2026                                                                                                                                                                                                                                                                                                                                                                             |
+| **Địa điểm**         | Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh                                                                                                                                                                                                                                                                                                            |
+| **Vai trò**          | Người tham dự                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Nội dung**         | Tham dự buổi Demo Day tổng kết của cuộc thi Agentic AI Build Week kéo dài 24 giờ. Các đội thi đã trình bày nhiều giải pháp ứng dụng Agentic AI trong thực tế như chatbot đặt món ăn, trợ lý Solution Architect, hệ thống giám sát đám đông và quy trình hỗ trợ chống rửa tiền. Chương trình cũng có phần tổng kết, chia sẻ kinh nghiệm và những bài học rút ra sau quá trình phát triển sản phẩm. |
+| **Kết quả đạt được** | Tiếp cận thêm nhiều ý tưởng về thiết kế hệ thống Agentic AI, đặc biệt là cơ chế phê duyệt Human-in-the-loop và mô hình điều phối workflow tương tự AWS Step Functions, từ đó có thêm định hướng để áp dụng vào các dự án AI trong tương lai.                                                                                                                                                      |

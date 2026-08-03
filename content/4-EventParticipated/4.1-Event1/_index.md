@@ -6,118 +6,52 @@ chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
+# Cloud Architect x Meet Up
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+### Purpose of the Event
 
-### Event Objectives
-
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+- Create an environment where cloud engineers and AWS learners could exchange practical experiences.
+- Introduce AWS Security Agent and discuss the growing importance of cloud security in modern software development.
+- Share practical strategies for preparing AWS certification exams.
+- Strengthen networking within the AWS Study Group and the cloud community.
 
 ### Speakers
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+The meetup featured four speakers. The following two sessions were the ones that left the strongest impression on me.
 
-### Key Highlights
-
-#### Identifying the drawbacks of legacy application architecture
-
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
-
-#### Transitioning to modern application architecture – Microservices
-
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
-
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
-
-#### Domain-Driven Design (DDD)
-
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
-
-#### Event-Driven Architecture
-
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
-
-#### Compute Evolution
-
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
-
-#### Amazon Q Developer
-
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+- **Mr. Long** – Security Solutions Architect, introduced **AWS Security Agent** and shared practical security considerations when developing cloud applications.
+- **Mr. Huy** – AWS Certified Solutions Architect, shared his AWS certification journey together with useful exam preparation strategies.
 
 ### Key Takeaways
 
-#### Design Mindset
+#### AWS Security Agent Session
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
+- AWS Security Agent is capable of scanning an entire project to detect security risks beyond simple account misconfigurations. It can identify hardcoded credentials, vulnerable dependencies, overly permissive security configurations, missing encryption, and common application-level vulnerabilities.
+- Instead of producing raw logs, the service provides an intuitive dashboard together with an automatically generated PDF report, making it easier for development teams to review and address security issues.
+- One of the most valuable lessons was the importance of maintaining secure coding practices even when AI-assisted development is becoming increasingly common.
 
-#### Technical Architecture
+#### AWS Certification Experience Sharing
 
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
+- AWS certification exams focus heavily on scenario-based questions that evaluate the ability to choose the most appropriate AWS services rather than programming skills.
+- Practical advice such as time management, flagging difficult questions for later review, and paying attention to multiple-response questions can significantly improve exam performance.
+- The speaker also emphasized the importance of understanding service use cases instead of simply memorizing AWS documentation.
 
-#### Modernization Strategy
+### Knowledge Gained
 
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
+- Security should be considered throughout the entire software development lifecycle rather than only before deployment.
+- Automated security assessment tools can effectively complement manual code reviews by detecting issues that developers may overlook.
+- Preparing for AWS certifications requires both technical knowledge and effective exam strategies based on real testing experiences.
 
-### Applying to Work
+### Application to My Project
 
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
+- Applied stronger security practices by enabling KMS encryption for DynamoDB.
+- Added automated pytest execution during the pre-build stage of the CI/CD pipeline to improve software quality before deployment.
+- Started paying more attention to integrating security validation into the development workflow.
 
-### Event Experience
+### Personal Reflection
 
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
+This meetup gave me a better understanding of how security should be integrated into cloud applications instead of being treated as a separate task after development. The practical experiences shared by the speakers helped me recognize several areas where my own project could be improved, especially regarding security automation and deployment best practices. The event also motivated me to continue studying AWS services and prepare for AWS certification in the future.
 
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
+#### Event Photos
 
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
-
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
-
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
-
-#### Some event photos
-*Add your event photos here*  
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+![Event 1](/images/4-EventParticipated/4.1-Event1/Event-11-07-2026.jpeg)
