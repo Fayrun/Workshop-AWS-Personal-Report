@@ -76,4 +76,4 @@ This event provided valuable insights into how Agentic AI can be applied to real
 
 #### Event Photos
 
-![Event 2](/images/4-EventParticipated/Event-25-07-2026.png)
+![Event 2](/images/4-EventParticipated/Event-25-07-2026.jpeg)
