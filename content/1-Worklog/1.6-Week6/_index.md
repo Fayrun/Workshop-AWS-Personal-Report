@@ -8,43 +8,26 @@ pre: " <b> 1.6. </b> "
 
 ### Week 6 Objectives:
 
-- Connect and get acquainted with members of First Cloud AI Journey.
-- Understand basic AWS services, how to use the console & CLI.
+- Review and revise the Workshop section (section 5) for clarity and consistency.
+- Write and publish the prepared technical blog posts to the AWS Study Group community.
+- Fill in all remaining evidence screenshots for the System Testing section (5.5), and finalize the personal report for submission.
 
 ### Tasks to be carried out this week:
 
-| Day | Task                                                                                                                                                                            | Start Date | Completion Date | Reference Material                                                                 |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ---------------------------------------------------------------------------------- |
-| 2   | - Get acquainted with FCAJ members - Read and take note of internship unit rules and regulations                                                                                | 08/11/2025 | 08/11/2025      |                                                                                    |
-| 3   | - Learn about AWS and its types of services&emsp; + Compute &emsp; + Storage &emsp; + Networking &emsp; + Database &emsp; + ...                                                 | 08/12/2025 | 08/12/2025      | [https://cloudjourney.awsstudygroup.com/](https://cloudjourney.awsstudygroup.com/) |
-| 4   | - Create AWS Free Tier account - Learn about AWS Console & AWS CLI - **Practice:** &emsp; + Create AWS account &emsp; + Install & configure AWS CLI &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | [https://cloudjourney.awsstudygroup.com/](https://cloudjourney.awsstudygroup.com/) |
-| 5   | - Learn basic EC2:&emsp; + Instance types &emsp; + AMI &emsp; + EBS &emsp; + ... - SSH connection methods to EC2 - Learn about Elastic IP                                       | 08/14/2025 | 08/15/2025      | [https://cloudjourney.awsstudygroup.com/](https://cloudjourney.awsstudygroup.com/) |
-| 6   | -**Practice:** &emsp; + Launch an EC2 instance &emsp; + Connect via SSH &emsp; + Attach an EBS volume                                                                           | 08/15/2025 | 08/15/2025      | [https://cloudjourney.awsstudygroup.com/](https://cloudjourney.awsstudygroup.com/) |
+| Day | Task                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Start Date | Completion Date | Reference Material                                                                                   |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+| 2   | - Reviewed and revised the Workshop section for clarity and consistency<br>&emsp;+ Re-read the entire 5-Workshop section, aligned tone and terminology across parts written by different team members<br>&emsp;+ Found and cleaned up leftover sample content from the original template (not yet replaced with real project content)                                                                                                                                                                                                                                                                                       | 07/27/2026 | 07/27/2026      |                                                                                                      |
+| 3   | - Wrote and published 2 technical blog posts to the AWS Study Group Facebook group<br>&emsp;+ Blog 1: analyzed a multi-tenant data leak bug I had encountered, and evaluated AWS's new Lambda Tenant Isolation Mode feature<br>&emsp;+ Blog 2: compared EventBridge Rule vs. EventBridge Scheduler, explaining why I chose Rule for the current cleanup-job use case<br>&emsp;+ Blog 3: shared a teammate's post on the baseline architecture for Amazon Bedrock in an AWS Landing Zone environment — multi-account governance, network isolation, and Bedrock's built-in data security features                            | 07/28/2026 | 07/28/2026      | [https://www.facebook.com/groups/awsstudygroupfcj](https://www.facebook.com/groups/awsstudygroupfcj) |
+| 4   | - Captured the remaining evidence screenshots needed for the System Testing section (5.5)<br>&emsp;+ Captured test results for Authentication, Document/RAG, Security (including the CSRF state-param test for the Google Login flow), and Profile<br>&emsp;+ Captured evidence for CloudWatch Alarms, the SNS subscription, and CloudWatch Logs Insights for the Monitoring section — considered the most important part<br>&emsp;+ Captured local `pytest` run results and CodeBuild logs for the CI/CD section<br>- Cross-checked the captured screenshots against the checklist to confirm nothing required was missing | 07/29/2026 | 07/29/2026      |                                                                                                      |
+| 5   | - Split off a personal copy of the report into its own repository, deployed via GitHub Pages<br>&emsp;+ Reconfigured `baseURL` and the GitHub Actions workflow to match the personal domain<br>&emsp;+ Stopped tracking the `public/` build output folder in Git to avoid conflicts between builds<br>- Verified the personal site rendered correctly end-to-end (layout, avatar, logo) after splitting off the repo                                                                                                                                                                                                        | 07/30/2026 | 07/30/2026      |                                                                                                      |
+| 6   | - Inserted all captured evidence screenshots into their corresponding Markdown files<br>&emsp;+ Rebuilt the site (`hugo --minify`) after each edit to make sure nothing broke                                                                                                                                                                                                                                                                                                                                                                                                                                               | 07/31/2026 | 07/31/2026      |                                                                                                      |
+| 7   | - Did a final full review of the personal report before moving into the Workshop submission week<br>&emsp;+ Double-checked content consistency between my personal working branch and the team's shared branch                                                                                                                                                                                                                                                                                                                                                                                                              | 08/01/2026 | 08/01/2026      |                                                                                                      |
 
 ### Week 6 Achievements:
 
-- Understood what AWS is and mastered the basic service groups:
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Successfully created and configured an AWS Free Tier account.
-- Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-- Installed and configured AWS CLI on the computer, including:
-  - Access Key
-  - Secret Key
-  - Default Region
-  - ...
-
-- Used AWS CLI to perform basic operations such as:
-  - Check account & configuration information
-  - Retrieve the list of regions
-  - View EC2 service
-  - Create and manage key pairs
-  - Check information about running services
-  - ...
-
-- Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-- ...
+- Reviewed and revised the Workshop section (5-Workshop) for clarity and consistency, cleaning up leftover sample content from the original template.
+- Wrote and published 2 technical blog posts to the AWS Study Group Facebook group — see details in sections 3.1–3.2.
+- Filled in all evidence screenshots for the entire System Testing section (5.5), especially Monitoring and Security.
+- Successfully split off and configured a personal report on its own GitHub Pages site, running independently from the team's shared repo.
+- Reviewed, revised, and finalized the personal report before moving into the Workshop submission week.
+- …

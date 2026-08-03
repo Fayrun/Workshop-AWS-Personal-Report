@@ -52,3 +52,7 @@ EventBridge Scheduler is a genuinely powerful upgrade over EventBridge Rule, esp
 
 Official AWS blog post on Amazon EventBridge Scheduler:
 https://aws.amazon.com/blogs/compute/introducing-amazon-eventbridge-scheduler/
+
+## Link to the post in the AWS Study Group
+
+https://www.facebook.com/groups/awsstudygroupfcj/permalink/2226683848096575/

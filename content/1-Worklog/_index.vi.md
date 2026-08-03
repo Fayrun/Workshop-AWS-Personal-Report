@@ -6,28 +6,22 @@ chapter: false
 pre: " <b> 1. </b> "
 ---
 
-Kỳ thực tập của tôi kéo dài 8 tuần, từ 22/06/2026 đến 14/08/2026, theo chương trình First Cloud AI Journey (FCAJ). Xuyên suốt 8 tuần, tôi vừa học các dịch vụ AWS nền tảng, vừa áp dụng trực tiếp vào việc xây dựng Smart Docs AI — một chatbot hỏi-đáp tài liệu (RAG) chạy trên kiến trúc serverless của AWS. Dưới đây là tóm tắt từng tuần:
+Nhật ký công việc này tóm tắt hành trình thực tập từ ngày 22/06/2026 đến 14/08/2026 trong chương trình First Cloud AI Journey. Trong 8 tuần, tôi vừa học các dịch vụ AWS nền tảng, vừa áp dụng trực tiếp vào dự án Smart Docs AI — một chatbot hỏi-đáp tài liệu (RAG) chạy trên kiến trúc serverless của AWS.
 
-**Tuần 1:** [Tìm hiểu và nghiên cứu các dịch vụ của AWS và chốt đề tài Smart Docs AI](1.1-week1/)
+Các nội dung tuần dưới đây phản ánh các hoạt động chính trong suốt quá trình thực tập, bao gồm học tập, phát triển hệ thống, triển khai, kiểm thử, tăng cường bảo mật, giám sát và hoàn thiện báo cáo cuối kỳ.
 
-**Tuần 2:** [Làm công việc A...](1.2-week2/)
+**Tuần 1:** [Làm quen với AWS và xác định đề tài Smart Docs AI](1.1-Week1/)
 
-**Tuần 3:** [Làm công việc B...](1.3-week3/)
+**Tuần 2:** [Học các dịch vụ AWS và xây dựng ý tưởng kiến trúc hệ thống](1.2-Week2/)
 
-**Tuần 4:** [Làm công việc C...](1.4-week4/)
+**Tuần 3:** [Phát triển backend và triển khai ban đầu](1.3-Week3/)
 
-**Tuần 5:** [Làm công việc D...](1.5-week5/)
+**Tuần 4:** [Xây dựng tính năng hồ sơ cá nhân và xác thực người dùng](1.4-Week4/)
 
-**Tuần 6:** [Làm công việc E...](1.6-week6/)
+**Tuần 5:** [Cải thiện giám sát, bảo mật và quy trình CI/CD](1.5-Week5/)
 
-**Tuần 7:** [Làm công việc G...](1.7-week7/)
+**Tuần 6:** [Chuẩn bị nội dung workshop, bài blog và minh chứng kiểm thử](1.6-Week6/)
 
-**Tuần 8:** [Làm công việc H...](1.8-week8/)
+**Tuần 7:** [Hoàn thiện tích hợp hệ thống và tài liệu báo cáo](1.7-Week7/)
 
-**Tuần 9:** [Làm công việc I...](1.9-week9/)
-
-**Tuần 10:** [Làm công việc L...](1.10-week10/)
-
-**Tuần 11:** [Làm công việc M...](1.11-week11/)
-
-**Tuần 12:** [Làm công việc N...](1.12-week12/)
+**Tuần 8:** [Hoàn tất báo cáo cuối kỳ và tài liệu nộp](1.8-Week8/)

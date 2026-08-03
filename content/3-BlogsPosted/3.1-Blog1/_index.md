@@ -62,3 +62,7 @@ Multi-tenancy bugs are among the hardest classes of bugs to catch in serverless,
 
 Official AWS blog post on Lambda Tenant Isolation Mode:
 https://aws.amazon.com/blogs/compute/building-multi-tenant-saas-applications-with-aws-lambdas-new-tenant-isolation-mode/
+
+## Link to the post in the AWS Study Group
+
+https://www.facebook.com/groups/awsstudygroupfcj/permalink/2226685264763100/
