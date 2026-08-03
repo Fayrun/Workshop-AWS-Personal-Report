@@ -54,4 +54,4 @@ This meetup gave me a better understanding of how security should be integrated 
 
 #### Event Photos
 
-![Event 1](/images/4-EventParticipated/Event-11-07-2026.jpeg)
+![Event 1](/images/4-EventParticipated/Event-11-07-2026.png)
